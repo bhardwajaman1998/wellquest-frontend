@@ -1,12 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { GluestackUIProvider } from '@gluestack-ui/themed'
+import { config } from '@gluestack-ui/config'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import AppStack from './components/stacks/AppStack'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>WellQuest App</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+        <GluestackUIProvider config={config}>
+          <AppStack/>
+        </GluestackUIProvider>
+    </SafeAreaProvider>
   );
 }
 
