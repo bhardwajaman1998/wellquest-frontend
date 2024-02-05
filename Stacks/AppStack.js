@@ -25,7 +25,7 @@ const AppStack = () => {
                     }
                 }}
             />
-            <Stack.Screen name="Media" component={MediaScreen} />  {/* //imprt the other screens here like above, same as above but with different names and components */}
+            {/* <Stack.Screen name="Media" component={MediaScreen} />  //imprt the other screens here like above, same as above but with different names and components */}
         </Stack.Navigator>
     </NavigationContainer>
   )
