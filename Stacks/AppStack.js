@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
  // import your main screen component here
+import SearchFoodScreen from "../scanFoodFlow/SearchFoodScreen"
 
 const Stack = createNativeStackNavigator()
 
@@ -14,9 +15,9 @@ const AppStack = () => {
         <Stack.Navigator>
             <Stack.Screen
                 name="Index" // give it a unique name
-                component={IndexScreen} // use that component here by replacing IndexScreen
+                component={SearchFoodScreen} // use that component here by replacing IndexScreen
                 options={{
-                    title:"WellQuest", 
+                    title:"Search", 
                     headerStyle:{
                         backgroundColor:'#2c3e50'
                     },
@@ -25,7 +26,7 @@ const AppStack = () => {
                     }
                 }}
             />
-            <Stack.Screen name="Media" component={MediaScreen} />  {/* //imprt the other screens here like above, same as above but with different names and components */}
+            {/* <Stack.Screen name="Media" component={MediaScreen} />  //imprt the other screens here like above, same as above but with different names and components */}
         </Stack.Navigator>
     </NavigationContainer>
   )
