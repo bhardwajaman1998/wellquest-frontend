@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/poppins": "^0.2.3",
     "@expo/metro-runtime": "^3.1.1",
     "@gluestack-style/react": "^1.0.41",
     "@gluestack-ui/config": "^1.0.13",
@@ -19,6 +20,8 @@
     "axios": "^1.6.5",
     "eslint-plugin-react-native": "^4.1.0",
     "expo": "~50.0.2",
+    "expo-app-loading": "^2.1.1",
+    "expo-font": "~11.10.2",
     "expo-status-bar": "~1.11.1",
     "native-base": "^3.4.28",
     "react": "18.2.0",

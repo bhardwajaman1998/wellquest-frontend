@@ -15,14 +15,13 @@ const SearchBar = ({navigation}) => {
     }
 
     return (
-        <View marginVertical={15} marginHorizontal={40}>
+        <View style={styles.searchBar}>
             <Input 
                 value={searchQuery}
                 placeholder="Search for a food" 
                 width="100%" 
                 borderRadius="4" 
-                py="3" 
-                px="1" 
+                fontFamily={'poppins-regular'}
                 fontSize="14" 
                 InputLeftElement={
                     <Icon 
@@ -44,12 +43,11 @@ const SearchBar = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-    listContainer: {
+    searchBar: {
         width: '100%',
-        margin: 20,
-        height: '65%'
+        paddingTop: 25,
+        paddingHorizontal: 25
     }
   });
-
 
 export default SearchBar
