@@ -1,10 +1,14 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { HStack, Text, Image, View } from "@gluestack-ui/themed"
 import StyledText from "../components/StyledText";
+import { useNavigation } from '@react-navigation/native';
 
 const ScanButton = () => {
 
+    const navigation = useNavigation(); // Get navigation object
+
     const handlePress = () => {
+        navigation.navigate('LogFood');
     }
 
     return (
