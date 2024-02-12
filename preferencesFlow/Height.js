@@ -4,7 +4,7 @@ import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
 import RNPickerSelect from 'react-native-picker-select';
 
-const Height = () => {
+const Height = ({backAction, nextCompName, onPressNext}) => {
   const [selectedHeight, setSelectedHeight] = useState(null);
 
   const HeightOptions = Array.from({ length: 300 }, (_, index) => ({
@@ -14,30 +14,34 @@ const Height = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Whats your height?</Text>
-      <Text style={styles.text}>
-        This helps us create your personalized plan
-      </Text>
-      <View style={styles.pickerContainer}>
-        <RNPickerSelect
-          placeholder={{
-            label: 'Select Height... (CentiMeter)',
-            value: null,
-          }}
-          items={HeightOptions}
-          onValueChange={(value) => setSelectedHeight(value)}
-          style={{
-            inputIOS: styles.pickerInput,
-            inputAndroid: styles.pickerInput,
-            iconContainer: styles.pickerIcon,
-          }}
-          value={selectedHeight}
-          useNativeAndroidPickerStyle={false}
-        />
-        
+      <View style={styles.innerContainer}>
+        <Text style={styles.heading}>Whats your height?</Text>
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            placeholder={{
+              label: 'Select Height... (CentiMeter)',
+              value: null,
+            }}
+            items={HeightOptions}
+            onValueChange={(value) => setSelectedHeight(value)}
+            style={{
+              inputIOS: styles.pickerInput,
+              inputAndroid: styles.pickerInput,
+              iconContainer: styles.pickerIcon,
+            }}
+            value={selectedHeight}
+            useNativeAndroidPickerStyle={false}
+          />
+          
+        </View>
       </View>
-      <BackButton />
-      <NextButton destination="Goal"/>
+      <View style={styles.buttonsContainer}>
+        <BackButton backAction={backAction}  />
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+      </View>
     </View>
   );
 };
@@ -45,11 +49,20 @@ const Height = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "top",
+    justifyContent: "space-between",
     paddingTop: 36,
     alignItems: "center",
     backgroundColor: "#ffffff",
     padding: 20,
+  },
+  innerContainer: {
+    alignItems: "center",
+    justifyContent: 'center'
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    width: '100%',
+    justifyContent: 'flex-end'
   },
   heading: {
     fontSize: 24,

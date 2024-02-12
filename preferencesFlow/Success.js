@@ -6,7 +6,7 @@ const Success = () => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate();
+    // navigation.navigate();
   }
   return (
     <View style={styles.container}>

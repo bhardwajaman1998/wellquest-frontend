@@ -4,11 +4,11 @@ import { ArrowRight } from 'lucide-react-native';
 import { useNavigation } from "@react-navigation/native";
 
 
-const NextButton = ({ destination }) => {
+const NextButton = ({nextCompName, onPressNext }) => {
   const navigation = useNavigation();
   
   const onPress = () => {
-    navigation.navigate(destination);
+      onPressNext(nextCompName);
   }
 
   return (

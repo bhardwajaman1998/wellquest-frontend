@@ -4,7 +4,7 @@ import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
 import RNPickerSelect from 'react-native-picker-select';
 
-const Goal = () => {
+const Goal = ({backAction, nextCompName, onPressNext}) => {
   const [selectedGoal, setSelectedGoal] = useState(null);
 
   const GoalOptions = [
@@ -17,6 +17,7 @@ const Goal = () => {
 
   return (
     <View style={styles.container}>
+       <View style={styles.innerContainer}>
       <Text style={styles.heading}>Whats your Goal?</Text>
       <Text style={styles.text}>
         This helps us create your personalized plan
@@ -39,8 +40,11 @@ const Goal = () => {
         />
         
       </View>
-      <BackButton />
-      <NextButton destination="ActivityLevel"/>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <BackButton backAction={backAction}  />
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+      </View>
     </View>
   );
 };
@@ -48,11 +52,20 @@ const Goal = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "top",
+    justifyContent: "space-between",
     paddingTop: 36,
     alignItems: "center",
     backgroundColor: "#ffffff",
     padding: 20,
+  },
+  innerContainer: {
+    alignItems: "center",
+    justifyContent: 'center'
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    width: '100%',
+    justifyContent: 'flex-end'
   },
   heading: {
     fontSize: 24,

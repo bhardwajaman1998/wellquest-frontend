@@ -4,7 +4,7 @@ import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
 import RNPickerSelect from 'react-native-picker-select';
 
-const ActivityLevel = () => {
+const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
   const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
 
   const ActivityLevelOptions = [
@@ -17,30 +17,33 @@ const ActivityLevel = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Your regular physical activity level</Text>
-      <Text style={styles.text}>
-        This helps us create your personalized plan
-      </Text>
-      <View style={styles.pickerContainer}>
-        <RNPickerSelect
-          placeholder={{
-            label: 'Select ActivityLevel...',
-            value: null,
-          }}
-          items={ActivityLevelOptions}
-          onValueChange={(value) => setSelectedActivityLevel(value)}
-          style={{
-            inputIOS: styles.pickerInput,
-            inputAndroid: styles.pickerInput,
-            iconContainer: styles.pickerIcon,
-          }}
-          value={selectedActivityLevel}
-          useNativeAndroidPickerStyle={false}
-        />
-        
+      <View style={styles.innerContainer}>
+        <Text style={styles.heading}>Your regular physical activity level</Text>
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
+        <View style={styles.pickerContainer}>
+          <RNPickerSelect
+            placeholder={{
+              label: 'Select ActivityLevel...',
+              value: null,
+            }}
+            items={ActivityLevelOptions}
+            onValueChange={(value) => setSelectedActivityLevel(value)}
+            style={{
+              inputIOS: styles.pickerInput,
+              inputAndroid: styles.pickerInput,
+              iconContainer: styles.pickerIcon,
+            }}
+            value={selectedActivityLevel}
+            useNativeAndroidPickerStyle={false}
+          />
+        </View>
       </View>
-      <BackButton />
-      <NextButton destination="Success"/>
+      <View style={styles.buttonsContainer}>
+        <BackButton backAction={backAction}  />
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+      </View>
     </View>
   );
 };
@@ -48,11 +51,20 @@ const ActivityLevel = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "top",
+    justifyContent: "space-between",
     paddingTop: 36,
     alignItems: "center",
     backgroundColor: "#ffffff",
     padding: 20,
+  },
+  innerContainer: {
+    alignItems: "center",
+    justifyContent: 'center'
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    width: '100%',
+    justifyContent: 'flex-end'
   },
   heading: {
     fontSize: 24,

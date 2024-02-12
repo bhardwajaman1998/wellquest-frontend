@@ -6,7 +6,12 @@ const onPress = () => {
 
 }
 
-const BackButton = () => {
+const BackButton = ({backAction}) => {
+
+  const onPress = () => {
+    backAction();
+  }
+
   return (
     <View style={styles.button}>
       <TouchableOpacity onPress={onPress}>
