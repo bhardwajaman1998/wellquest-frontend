@@ -1,8 +1,16 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, navigation} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 export default function AppointmentCard() {
+  const navigation = useNavigation();
+
+  const handleSchedulePress = () => {
+    navigation.navigate('Find Coach'); // Navigate to the 'Find Coach' screen
+  };
+
   return (
+    
     <SafeAreaView style={styles.container}>
         {/* header part  */}
         <View style={styles.header}>
@@ -14,9 +22,9 @@ export default function AppointmentCard() {
         {/* Appointment Card */}
         <View style={styles.card}>
             <Text style={styles.cardText}>You don't have appointments.</Text>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleSchedulePress}>
                 <Icon style={styles.icon} name="user" size={25}/>
-                <Text style={styles.buttonText}>Schedule</Text>
+                <Text style={styles.buttonText} >Schedule</Text>
             </TouchableOpacity>
         </View>
 

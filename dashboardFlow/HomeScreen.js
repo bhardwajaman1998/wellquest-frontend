@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, ScrollView, navigation} from 'react-native';
 // import {DashBoardCard, GoalCard,HomeScreenHeader,IntakeCard,NutritionPlanCard} from "./Cards";
-import AppointmentCard from './Cards/AppointmentCard';
-import NutritionPlanCard from './Cards/NutritionPlanCard';
-import GoalCard from './Cards/GoalCard';
-import HomeScreenHeader from './Cards/HomeScreenHeader';
+import AppointmentCard from './Components/HomeScreen/AppointmentCard';
+import NutritionPlanCard from './Components/HomeScreen/NutritionPlanCard';
+import GoalCard from './Components/HomeScreen/GoalCard';
+import HomeScreenHeader from './Components/HomeScreen/HomeScreenHeader';
 
 const HomeScreen= ()=>{
     return(
@@ -14,7 +14,8 @@ const HomeScreen= ()=>{
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     <GoalCard />
                     <View style={styles.spacing} />
-                    <AppointmentCard />
+                    <AppointmentCard> 
+                    </AppointmentCard>
                     <View style={styles.spacing} />
                     <NutritionPlanCard />
                 </ScrollView>

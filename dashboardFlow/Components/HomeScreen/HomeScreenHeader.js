@@ -25,7 +25,7 @@ const HomeScreenHeader = () => {
 
 const styles=StyleSheet.create({
   container: {
-    paddingTop: 50, 
+    paddingTop: 5, 
     paddingBottom:20,
     flexDirection: 'row',
     justifyContent: 'space-between',

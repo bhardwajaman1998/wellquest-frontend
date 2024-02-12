@@ -1,12 +1,13 @@
 import {React} from 'react';
-import { SafeAreaView, StyleSheet,Text } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function CoachProfile() {
+export default function CoachHeader() {
     
     return(
         <SafeAreaView style={styles.container}>
-            <Text>IN COACH PROFILE</Text>
+            <Icon style={styles.icon} name="arrow-left" size={25}/>
+            <Icon style={styles.icon} name="bell" size={25}/>
         </SafeAreaView>
     );
 };
