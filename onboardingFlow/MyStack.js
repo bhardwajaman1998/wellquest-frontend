@@ -8,12 +8,14 @@ import Landing2 from './Landing2';
 import Path from './Path';
 import SignUp from './SignUp';
 import Login from './Login';
+import ForgotPassword from './ForgotPassword';
 
 
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {
   return (
+    <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen
         name="Splash"
@@ -42,11 +44,13 @@ const MyStack = () => {
       /><Stack.Screen
       name="ForgotPassword"
       component={ForgotPassword}
-    /><Stack.Screen
+      />
+    <Stack.Screen
     name="Path"
     component={Path}
   />
     </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
