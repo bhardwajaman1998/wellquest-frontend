@@ -29,7 +29,7 @@ const AppStack = () => {
                     }
                 }}
             /> */}
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Home Screen" // give it a unique name
                 component={HomeScreen} // use that component here by replacing IndexScreen
                 options={{
@@ -41,8 +41,8 @@ const AppStack = () => {
                         color:'#fff'
                     }
                 }}
-            /> */}
-            <Stack.Screen
+            />
+            {/* <Stack.Screen
                 name="Preferences" // give it a unique name
                 component={PreferencesScreen} // use that component here by replacing IndexScreen
                 options={{
@@ -54,7 +54,7 @@ const AppStack = () => {
                         color:'#fff'
                     }
                 }}
-            />
+            /> */}
             <Stack.Screen
                 name="LogFood" // give it a unique name
                 component={LogFood}
