@@ -2,7 +2,7 @@ import React from 'react';
 import {Text,TouchableOpacity,Image, StyleSheet,View ,navigation} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
 
-const CoachCard  = ({coachImg,coachName, coachDesc}) => {
+const CoachCard  = ({coachImg,coachName, coachDesc,}) => {
     const navigation = useNavigation();
 
     const handlePress = () => {
