@@ -1,5 +1,5 @@
 import React from 'react';
-import Landing2 from './Landing2';
+// import Landing2 from './Landing2';
 import { View, Image, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const Landing1 = ({navigation}) => {
@@ -37,14 +37,15 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 400, 
-    height: 500,
-    borderRadius: 100,
+    height: 400,
+    borderRadius: 200,
   },
   text: {
     marginVertical: 10,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     color: '#333',
+    fontWeight: "bold",
   },
   bottomContainer: {
     position: 'absolute',
@@ -57,39 +58,45 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#7265E3', 
+    backgroundColor: '#FF934E', 
     paddingVertical: 15,
     paddingHorizontal: 30,
-    borderRadius: 10,
+    borderRadius: 50,
+    height: 53,
+    width: 147,
   },
   buttonText: {
     color: '#fff', 
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+    textAlign:"center"
   },
   eclipsesContainer: {
     flexDirection: 'row',
   },
   eclipse: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: 18,
+    height: 18,
+    borderRadius: 25,
     backgroundColor: '#333',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    marginVertical: 10
   },
   eclipse1: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: 18,
+    height: 18,
+    borderRadius: 25,
     backgroundColor: '#40CC7C',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    marginVertical: 10
   },
   eclipse2: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+    width: 18,
+    height: 18,
+    borderRadius: 25,
     backgroundColor: '#333',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
 });
 

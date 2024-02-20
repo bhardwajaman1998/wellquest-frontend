@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.profileImage}>
@@ -49,8 +49,11 @@ const SignUp = () => {
         <Image source={require('../assets/logo-facebook.png')} style={styles.socialIcon} />
         <Image source={require('../assets/logo-apple.png')} style={styles.socialIcon} />
       </View>
-
+      <TouchableOpacity onPress={() =>
+        navigation.navigate('Login', {name: 'Login'})
+      }>
       <Text style={styles.loginLink}>Already have an account? Log in</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -63,13 +66,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  profileImage: {
+  profileImageContainer: {
     marginBottom: 20,
+    width: '100%',
   },
   profileImage: {
-    width: 300,
-    height: 180,
-    
+    width: 400,
+    height: 220,
+    width: '100%',
+    // borderRadius: 50,
   },
   title: {
     fontSize: 24,
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   signUpButton: {
-    backgroundColor: '#7265E3',
+    backgroundColor: '#FF934E',
     padding: 15,
     borderRadius: 50,
     marginTop: 20,
