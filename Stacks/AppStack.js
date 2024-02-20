@@ -16,7 +16,7 @@ const AppStack = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator>
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Index" // give it a unique name
                 component={SearchFoodScreen} // use that component here by replacing IndexScreen
                 options={{
@@ -28,7 +28,7 @@ const AppStack = () => {
                         color:'#fff'
                     }
                 }}
-            /> */}
+            />
             <Stack.Screen
                 name="Home Screen" // give it a unique name
                 component={HomeScreen} // use that component here by replacing IndexScreen

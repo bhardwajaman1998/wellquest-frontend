@@ -4,7 +4,7 @@ import { Select,  } from "native-base";
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-const LogInputField = ({title, isDropDown, dropdownData = []}) => {
+const LogInputField = ({title, isDropDown, dropdownData}) => {
     const [service, setService] = React.useState("");
 
     return (
@@ -13,15 +13,15 @@ const LogInputField = ({title, isDropDown, dropdownData = []}) => {
             <View style={styles.inputView}>
                 {isDropDown ? (
                     <Select 
-                        selectedValue={dropdownData[0]} 
+                        selectedValue={service} 
                         accessibilityLabel="Choose Service"
                         borderColor="transparent"
                         borderWidth={0}
-                        width='100%'
                         height={26}
+                        width="full"
                         _selectedItem={{
                             bg: "teal.600",
-                            endIcon: <CheckIcon size="sm" />
+                            endIcon: <CheckIcon size="xs" />
                         }} mt={1} onValueChange={itemValue => setService(itemValue)}>
                             {dropdownData.map((item) => (
                                 <Select.Item label={item} value={item} key={item} />
@@ -34,8 +34,6 @@ const LogInputField = ({title, isDropDown, dropdownData = []}) => {
                         borderWidth={0}
                         variant="outline"
                         height={30}
-                        width={210}
-                        size="sm"
                         isDisabled={false}
                         isInvalid={false}
                         isReadOnly={false}

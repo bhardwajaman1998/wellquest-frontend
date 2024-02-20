@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 import StyledText from '../components/StyledText'
 
-const MealBox = () => {
+const MealBox = ({isSelected=true}) => {
     return (
         <View style={styles.container}>
             <HStack paddingTop={5} paddingBottom={10} justifyContent='space-between'>
@@ -11,7 +11,14 @@ const MealBox = () => {
                     <StyledText style={styles.heading}>Sandwich</StyledText>
                     <StyledText style={styles.description}>604 cal, 2 sandwiches, Turkey & vegetable sa...</StyledText>
                 </VStack>
-                <ButtonIcon as={CloseCircleIcon} paddingRight={30}/>
+                <Image
+                    size="2xs"
+                    source={ isSelected ? (
+                        require('../assets/icon-tick.png')
+                    ) : (
+                        require('../assets/icon-plus.png')
+                    )}
+                />
             </HStack>
         </View>
     )

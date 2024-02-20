@@ -24,7 +24,7 @@ export default function App() {
     return (
       <SafeAreaProvider>
           <GluestackUIProvider config={config}>
-            <MyStack style={styles.container}/>
+            <AppStack style={styles.container}/>
           </GluestackUIProvider>
       </SafeAreaProvider>
     );
