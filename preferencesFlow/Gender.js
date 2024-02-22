@@ -1,11 +1,20 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import GenderBox from "./components/GenderBox";
-import Mars from "./components/Mars.png";
-import Venus from "./components/Venus.png";
+import male from "./components/male.png";
+import female from "./components/female.png";
+import other from "./components/other.png";
+import maleSelected from "./components/maleSelected.png";
+import femaleSelected from "./components/femaleSelected.png";
+import otherSelected from "./components/otherSelected.png";
 import NextButton from "./components/NextButton";
 
-const Gender = ({nextCompName, onPressNext}) => {
+const Gender = ({ nextCompName, onPressNext }) => {
+  const [selectedGender, setSelectedGender] = useState();
+
+  const click = (gender) => {
+    setSelectedGender(gender);
+  }
 
   return (
     <View style={styles.container}>
@@ -15,12 +24,28 @@ const Gender = ({nextCompName, onPressNext}) => {
           To give you a better experience we need to know your gender
         </Text>
         <View style={styles.gender}>
-          <GenderBox imageSource={Mars} backgroundColor="black" title="Male" />
-          <GenderBox imageSource={Venus} backgroundColor="grey" title="Female" />
+          <GenderBox
+            initialImageSource={male}
+            title="Male" 
+            onClick={(newImageSource) => click("Male", newImageSource)}
+            newImageSource={maleSelected}
+          />
+          <GenderBox
+            initialImageSource={female}
+            title="Female"
+            onClick={(newImageSource) => click("Female", newImageSource)}
+            newImageSource={femaleSelected}
+          />
+          <GenderBox
+            initialImageSource={other}
+            title="Other"
+            onClick={(newImageSource) => click("Other", newImageSource)}
+            newImageSource={otherSelected}
+          />
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext} />
       </View>
     </View>
   );
@@ -30,35 +55,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    paddingTop: 36,
+    paddingTop: 1,
     alignItems: "center",
     backgroundColor: "#ffffff",
     padding: 20,
   },
   innerContainer: {
+    gap: 0,
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
+  },
+
+  gender: {
+    marginTop: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: 'flex-end'
+    width: "100%",
+    justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: "bold",
   },
   text: {
     fontSize: 16,
     fontWeight: "regular",
-    marginTop: 10,
+    marginTop: 12,
     textAlign: "center",
   },
   box: {
     marginTop: 50,
-  },
-  gender: {
-    marginTop: 30
   },
 });
 

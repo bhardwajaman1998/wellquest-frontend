@@ -46,13 +46,13 @@ const AppStack = () => {
                 name="Preferences" // give it a unique name
                 component={PreferencesScreen} // use that component here by replacing IndexScreen
                 options={{
-                    title:"Preferences", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
+                  title:"",
+                  headerStyle:{
+                },
+                headerTitleStyle:{
+                },
+                headerTintColor: "#fff",
+                headerShadowVisible: false,
                 }}
             />
             <Stack.Screen

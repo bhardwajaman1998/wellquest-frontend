@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import BackButton from "./components/BackButton";
-import NextButton from "./components/NextButton";
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect from "react-native-picker-select";
+import { ArrowRight } from 'lucide-react-native';
+import { useNavigation } from "@react-navigation/native";
 
-const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
+const ActivityLevel = ({ backAction, nextCompName }) => {
   const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
 
+
   const ActivityLevelOptions = [
-    { label: 'Rookie', value: 'Rookie' },
-    { label: 'Beginner', value: 'Beginner' },
-    { label: 'Intermediate', value: 'Intermediate' },
-    { label: 'Advance', value: 'Advance' },
-    { label: 'True Beast', value: 'True Beast' }
+    { label: "Rookie", value: "Rookie" },
+    { label: "Beginner", value: "Beginner" },
+    { label: "Intermediate", value: "Intermediate" },
+    { label: "Advance", value: "Advance" },
+    { label: "True Beast", value: "True Beast" },
   ];
+    const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -25,7 +28,7 @@ const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
         <View style={styles.pickerContainer}>
           <RNPickerSelect
             placeholder={{
-              label: 'Select ActivityLevel...',
+              label: "Select ActivityLevel...",
               value: null,
             }}
             items={ActivityLevelOptions}
@@ -41,8 +44,15 @@ const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction}  />
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <BackButton backAction={backAction} />
+        <View style={styles.button}>
+          <TouchableOpacity onPress={onPress}>
+            <View style={styles.iconWrapper}>
+              <Text style={styles.text}>Finishing Up!</Text>
+              <ArrowRight style={styles.arrowRight} />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -59,16 +69,16 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: 'flex-end'
+    width: "100%",
+    justifyContent: "flex-end",
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   text: {
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   pickerContainer: {
-    width: '80%',
+    width: "80%",
   },
   label: {
     fontSize: 18,
@@ -90,16 +100,42 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    color: 'black',
+    borderBottomColor: "gray",
+    color: "black",
   },
   pickerIcon: {
     top: 20,
     right: 10,
   },
+
+  button: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    height: 50,
+    paddingHorizontal: 20, 
+    borderRadius: 25,
+    backgroundColor: "#808080",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center'    
+},
+  text: {
+    color: 'white',
+    fontSize: 18,
+    marginRight: 5
+  },
+  arrowRight: {
+    color: 'white',
+    width: 18,
+    height: 18,
+  }
 });
 
 export default ActivityLevel;
