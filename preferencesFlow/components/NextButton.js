@@ -4,22 +4,26 @@ import { ArrowRight } from 'lucide-react-native';
 import { useNavigation } from "@react-navigation/native";
 
 
-const NextButton = ({nextCompName, onPressNext, selectedGender }) => {
+const NextButton = ({nextCompName, onPressNext, selectedGender, disabled }) => {
   const navigation = useNavigation();
   
   const onPress = () => {
+    if (!disabled && typeof onPressNext === 'function') {
       onPressNext(nextCompName, selectedGender);
       console.log(`Navigating to ${nextCompName} with selected gender: ${selectedGender}`);
+    } else {
 
-  }
+      console.error('onPressNext is not a function or the button is disabled');
+    }
+  };
 
   return (
-    <View style={styles.button}>
-      <TouchableOpacity onPress={onPress}>
-      <View style={styles.iconWrapper}>
-        <Text style={styles.text}>Next</Text>
-        <ArrowRight style={styles.arrowRight}/>
-      </View>      
+    <View style={[styles.button, {backgroundColor: disabled ? 'grey' : '#FF934E'}]}>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
+        <View style={styles.iconWrapper}>
+          <Text style={styles.text}>Next</Text>
+          <ArrowRight style={styles.arrowRight} />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -32,8 +36,8 @@ const styles = StyleSheet.create({
     right: 30,
     height: 50,
     paddingHorizontal: 20, 
+    backgroundColor: '#f8f',
     borderRadius: 25,
-    backgroundColor: "#808080",
     justifyContent: 'center',
     alignItems: 'center',
   },

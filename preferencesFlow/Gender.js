@@ -13,8 +13,14 @@ const Gender = ({ nextCompName, onPressNext }) => {
   const [selectedGender, setSelectedGender] = useState();
 
   const click = (gender) => {
-    setSelectedGender(gender);
-  }
+    setSelectedGender((prevGender) => (prevGender === gender ? null : gender));
+  };
+  
+
+  const isGenderValid =
+    selectedGender !== undefined &&
+    selectedGender !== null &&
+    selectedGender !== "";
 
   return (
     <View style={styles.container}>
@@ -26,11 +32,10 @@ const Gender = ({ nextCompName, onPressNext }) => {
         <View style={styles.gender}>
           <GenderBox
             initialImageSource={male}
-            title="Male" 
+            title="Male"
             onClick={(newImageSource) => click("Male", newImageSource)}
             newImageSource={maleSelected}
             isSelected={selectedGender === "Male"}
-
           />
           <GenderBox
             initialImageSource={female}
@@ -38,7 +43,6 @@ const Gender = ({ nextCompName, onPressNext }) => {
             onClick={(newImageSource) => click("Female", newImageSource)}
             newImageSource={femaleSelected}
             isSelected={selectedGender === "Female"}
-
           />
           <GenderBox
             initialImageSource={other}
@@ -50,7 +54,12 @@ const Gender = ({ nextCompName, onPressNext }) => {
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext} selectedGender={selectedGender}/>
+        <NextButton
+          nextCompName={nextCompName}
+          onPressNext={onPressNext}
+          selectedGender={selectedGender}
+          disabled={!isGenderValid}
+        />
       </View>
     </View>
   );
