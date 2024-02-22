@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
 import RNPickerSelect from 'react-native-picker-select';
+import Toast from "react-native-toast-message";
 
-const Age = ({backAction, nextCompName, onPressNext}) => {
-  
+const Age = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedAge, setSelectedAge] = useState(null);
 
   const ageOptions = Array.from({ length: 100 }, (_, index) => ({
     label: String(index + 1),
     value: String(index + 1),
   }));
+
+  useEffect(()=> {
+    if (selectedAge && parseInt(selectedAge) < 19) {
+      Toast.show({
+        type: 'error',
+        text1: 'Age Requirement',
+        text2: 'The minimum age requirement is 19.',
+        position: 'bottom',
+        bottomOffset: 50,
+        text1Style: styles.toastText1, 
+        text2Style: styles.toastText2,
+      });
+    }
+  }, [selectedAge]);
 
   return (
     <View style={styles.container}>
@@ -40,9 +54,11 @@ const Age = ({backAction, nextCompName, onPressNext}) => {
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction}  />
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <BackButton backAction={backAction} />
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext} />
       </View>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
+
     </View>
   );
 };
@@ -98,6 +114,14 @@ const styles = StyleSheet.create({
   pickerIcon: {
     top: 20,
     right: 10,
+  },
+
+  toastText1: {
+    fontSize: 18, 
+    fontWeight: 'bold', 
+  },
+  toastText2: {
+    fontSize: 15, 
   },
 });
 
