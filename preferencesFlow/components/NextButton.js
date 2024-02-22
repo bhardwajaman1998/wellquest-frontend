@@ -4,11 +4,13 @@ import { ArrowRight } from 'lucide-react-native';
 import { useNavigation } from "@react-navigation/native";
 
 
-const NextButton = ({nextCompName, onPressNext }) => {
+const NextButton = ({nextCompName, onPressNext, selectedGender }) => {
   const navigation = useNavigation();
   
   const onPress = () => {
-      onPressNext(nextCompName);
+      onPressNext(nextCompName, selectedGender);
+      console.log(`Navigating to ${nextCompName} with selected gender: ${selectedGender}`);
+
   }
 
   return (

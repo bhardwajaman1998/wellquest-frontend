@@ -29,23 +29,28 @@ const Gender = ({ nextCompName, onPressNext }) => {
             title="Male" 
             onClick={(newImageSource) => click("Male", newImageSource)}
             newImageSource={maleSelected}
+            isSelected={selectedGender === "Male"}
+
           />
           <GenderBox
             initialImageSource={female}
             title="Female"
             onClick={(newImageSource) => click("Female", newImageSource)}
             newImageSource={femaleSelected}
+            isSelected={selectedGender === "Female"}
+
           />
           <GenderBox
             initialImageSource={other}
             title="Other"
             onClick={(newImageSource) => click("Other", newImageSource)}
             newImageSource={otherSelected}
+            isSelected={selectedGender === "Other"}
           />
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext} />
+        <NextButton nextCompName={nextCompName} onPressNext={onPressNext} selectedGender={selectedGender}/>
       </View>
     </View>
   );

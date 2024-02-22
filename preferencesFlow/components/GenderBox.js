@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-const GenderBox = ({ initialImageSource, title, onClick, newImageSource }) => {
+const GenderBox = ({ initialImageSource, title, onClick, newImageSource, isSelected }) => {
   const [imageSource, setImageSource] = useState(initialImageSource);
   const [borderColor, setBorderColor] = useState("transparent");
   const [textColor, setTextColor] = useState("#fff");
   const [backgroundColor, setBackgroundColor] = useState("#7265E3")
+
+
+  useEffect(()=> {
+    if(isSelected) {
+      setBorderColor("#7265E3");
+      setTextColor("#7265E3");
+      setBackgroundColor("#fff");
+      setImageSource(newImageSource);
+    }
+    else {
+      setBorderColor("transparent");
+      setTextColor("#fff");
+      setBackgroundColor("#7265E3");
+      setImageSource(initialImageSource);
+    }
+  }, [isSelected, initialImageSource, newImageSource])
 
   const handlePress = () => {
     onClick(imageSource === initialImageSource ? newImageSource : initialImageSource);
