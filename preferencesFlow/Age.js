@@ -5,7 +5,7 @@ import NextButton from "./components/NextButton";
 import Toast from "react-native-toast-message";
 import WheelPicker from "react-native-wheely";
 
-const Age = ({ backAction, nextCompName, onPressNext }) => {
+const Age = ({ backAction, nextCompName, onPressNext, selectedGender }) => {
   // WheelPicker
   const [selectedAge, setSelectedAge] = useState(19);
 
@@ -29,6 +29,15 @@ const Age = ({ backAction, nextCompName, onPressNext }) => {
   // Check if age is valid (greater than or equal to 19)
   const isAgeValid = parseInt(selectedAge) >= 19;
 
+  const handlePressNext = () => {
+    if (isAgeValid && typeof onPressNext === 'function') {
+      // Pass both selectedGender and selectedAge to the next screen
+      onPressNext(nextCompName, selectedGender, selectedAge);
+    } else {
+      console.error('onPressNext is not a function or the age is not valid');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -42,13 +51,12 @@ const Age = ({ backAction, nextCompName, onPressNext }) => {
             options={ageOptions}
             onChange={(index) => setSelectedAge(Number(ageOptions[index]))}
             itemTextStyle={{
-              color: "black", // Set the color of the WheelPicker items
-              fontSize: 40, // Adjust the font size as needed
+              color: "black", 
+              fontSize: 40,
             }}
-
             containerStyle={{
-              width: "80%", // Adjust the width as needed
-              alignItems: "center", // Center the WheelPicker horizontally
+              width: "80%", 
+              alignItems: "center", 
             }}
             selectedIndicatorStyle={{
               width: 100,
@@ -59,8 +67,7 @@ const Age = ({ backAction, nextCompName, onPressNext }) => {
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
             }}
-            visibleRest={3} // Adjust the number of visible items in each direction as needed
-            itemHeight={60} // Adjust the height of each item as needed
+            itemHeight={60} 
           />
         </View>
       </View>
@@ -68,7 +75,8 @@ const Age = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={onPressNext}
+          onPressNext={handlePressNext}
+          selectedAge={selectedAge}
           disabled={!isAgeValid}
           style={{ backgroundColor: isAgeValid ? "#FF934E" : "grey" }}
         />

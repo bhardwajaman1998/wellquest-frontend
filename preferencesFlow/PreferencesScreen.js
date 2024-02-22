@@ -36,7 +36,7 @@ const PreferencesScreen = () => {
   return (
     <View style={styles.container}>
       {cardType === 1 && (
-        <Gender backAction={backAction} nextCompName={'Age'} onPressNext={screenSelect} />
+        <Gender backAction={backAction} nextCompName={'Age'}  onPressNext={(name, selectedGender) => screenSelect(name, selectedGender)} />
       )}
       {cardType === 2 && (
         <Age backAction={backAction}  nextCompName={'Height'} onPressNext={screenSelect} />
