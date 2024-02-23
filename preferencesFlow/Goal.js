@@ -2,48 +2,72 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
-import RNPickerSelect from 'react-native-picker-select';
+import WheelPicker from "react-native-wheely";
 
-const Goal = ({backAction, nextCompName, onPressNext}) => {
+const Goal = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedGoal, setSelectedGoal] = useState(null);
 
-  const GoalOptions = [
-    { label: 'Get Fitter', value: 'Get Fitter' },
-    { label: 'Gain Weight', value: 'Gain Weight' },
-    { label: 'Lose Weight', value: 'Lose Weight' },
-    { label: 'Build Muscle', value: 'Build Muscle' },
-    { label: 'Improve Endurance', value: 'Improve Endurance' }
+  const goalOptions = [
+    { label: "Get Fitter", value: "Get Fitter" },
+    { label: "Gain Weight", value: "Gain Weight" },
+    { label: "Lose Weight", value: "Lose Weight" },
+    { label: "Build Muscle", value: "Build Muscle" },
+    { label: "Improve Endurance", value: "Improve Endurance" },
   ];
+  const handleNextPress = () => {
+    onPressNext(selectedGoal);
+  };
 
   return (
     <View style={styles.container}>
-       <View style={styles.innerContainer}>
-      <Text style={styles.heading}>Whats your Goal?</Text>
-      <Text style={styles.text}>
-        This helps us create your personalized plan
-      </Text>
-      <View style={styles.pickerContainer}>
-        <RNPickerSelect
-          placeholder={{
-            label: 'Select Goal...',
-            value: null,
-          }}
-          items={GoalOptions}
-          onValueChange={(value) => setSelectedGoal(value)}
-          style={{
-            inputIOS: styles.pickerInput,
-            inputAndroid: styles.pickerInput,
-            iconContainer: styles.pickerIcon,
-          }}
-          value={selectedGoal}
-          useNativeAndroidPickerStyle={false}
-        />
-        
-      </View>
+      <View style={styles.innerContainer}>
+        <Text style={styles.heading}>Whats your Goal?</Text>
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
+
+        <View style={styles.pickerContainer}>
+          <WheelPicker
+            selectedIndex={
+              selectedGoal
+                ? goalOptions.findIndex(
+                    (option) => option.value === selectedGoal
+                  )
+                : 0
+            }
+            options={goalOptions.map((option) => option.label)}
+            onChange={(index) => {
+              const selectedValue = goalOptions[index]?.value || null;
+              setSelectedGoal(selectedValue);
+            }}
+            itemTextStyle={{
+              color: "black",
+              fontSize: 20,
+            }}
+            containerStyle={{
+              width: "80%",
+              alignItems: "center",
+            }}
+            selectedIndicatorStyle={{
+              width: 200,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderRadius: 0,
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60}
+          />
+        </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction}  />
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <BackButton backAction={backAction} />
+        <NextButton
+          nextCompName={nextCompName}
+          onPressNext={handleNextPress} // Pass the handleNextPress function
+          disabled={!selectedGoal} // Disable the button if no goal is selected
+        />
       </View>
     </View>
   );
@@ -60,16 +84,16 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: 'flex-end'
+    width: "100%",
+    justifyContent: "flex-end",
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   text: {
@@ -77,7 +101,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   pickerContainer: {
-    width: '80%',
+    width: "80%",
   },
   label: {
     fontSize: 18,
@@ -91,11 +115,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    color: 'black',
+    borderBottomColor: "gray",
+    color: "black",
   },
   pickerIcon: {
     top: 20,

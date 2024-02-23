@@ -6,7 +6,6 @@ import Toast from "react-native-toast-message";
 import WheelPicker from "react-native-wheely";
 
 const Age = ({ backAction, nextCompName, onPressNext, selectedGender }) => {
-  // WheelPicker
   const [selectedAge, setSelectedAge] = useState(19);
 
   const ageOptions = Array.from({ length: 100 }, (_, index) =>
@@ -31,7 +30,6 @@ const Age = ({ backAction, nextCompName, onPressNext, selectedGender }) => {
 
   const handlePressNext = () => {
     if (isAgeValid && typeof onPressNext === 'function') {
-      // Pass both selectedGender and selectedAge to the next screen
       onPressNext(nextCompName, selectedGender, selectedAge);
     } else {
       console.error('onPressNext is not a function or the age is not valid');

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
-import RNPickerSelect from "react-native-picker-select";
-import { ArrowRight } from 'lucide-react-native';
-import { useNavigation } from "@react-navigation/native";
+import NextButton from "./components/NextButton";
+import WheelPicker from "react-native-wheely";
 
-const ActivityLevel = ({ backAction, nextCompName }) => {
+const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
-
 
   const ActivityLevelOptions = [
     { label: "Rookie", value: "Rookie" },
@@ -16,7 +14,6 @@ const ActivityLevel = ({ backAction, nextCompName }) => {
     { label: "Advance", value: "Advance" },
     { label: "True Beast", value: "True Beast" },
   ];
-    const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -26,33 +23,46 @@ const ActivityLevel = ({ backAction, nextCompName }) => {
           This helps us create your personalized plan
         </Text>
         <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            placeholder={{
-              label: "Select ActivityLevel...",
-              value: null,
+          <WheelPicker
+            selectedIndex={
+              selectedActivityLevel
+                ? ActivityLevelOptions.findIndex(
+                    (option) => option.value === selectedActivityLevel
+                  )
+                : 0
+            }
+            options={ActivityLevelOptions.map((option) => option.label)}
+            onChange={(index) => {
+              const selectedValue = ActivityLevelOptions[index]?.value || null;
+              setSelectedActivityLevel(selectedValue);
             }}
-            items={ActivityLevelOptions}
-            onValueChange={(value) => setSelectedActivityLevel(value)}
-            style={{
-              inputIOS: styles.pickerInput,
-              inputAndroid: styles.pickerInput,
-              iconContainer: styles.pickerIcon,
+            itemTextStyle={{
+              color: "black",
+              fontSize: 20,
             }}
-            value={selectedActivityLevel}
-            useNativeAndroidPickerStyle={false}
+            containerStyle={{
+              width: "80%",
+              alignItems: "center",
+            }}
+            selectedIndicatorStyle={{
+              width: 200,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderRadius: 0,
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60}
           />
         </View>
       </View>
       <View style={styles.buttonsContainer}>
         <BackButton backAction={backAction} />
-        <View style={styles.button}>
-          <TouchableOpacity onPress={onPress}>
-            <View style={styles.iconWrapper}>
-              <Text style={styles.text}>Finishing Up!</Text>
-              <ArrowRight style={styles.arrowRight} />
-            </View>
-          </TouchableOpacity>
-        </View>
+        <NextButton
+          nextCompName={nextCompName}
+          onPressNext={() => onPressNext(selectedActivityLevel)}
+        />
       </View>
     </View>
   );
@@ -110,32 +120,6 @@ const styles = StyleSheet.create({
     top: 20,
     right: 10,
   },
-
-  button: {
-    position: "absolute",
-    bottom: 30,
-    right: 30,
-    height: 50,
-    paddingHorizontal: 20, 
-    borderRadius: 25,
-    backgroundColor: "#808080",
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center'    
-},
-  text: {
-    color: 'white',
-    fontSize: 18,
-    marginRight: 5
-  },
-  arrowRight: {
-    color: 'white',
-    width: 18,
-    height: 18,
-  }
 });
 
 export default ActivityLevel;

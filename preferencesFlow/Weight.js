@@ -5,36 +5,43 @@ import NextButton from "./components/NextButton";
 import ToggleButton from "./components/ToggleButton";
 import WheelPicker from "react-native-wheely";
 
-const Height = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedHeight, setSelectedHeight] = useState(null);
-  const [selectedUnit, setSelectedUnit] = useState("CM");
+const Weight = ({ backAction, nextCompName, onPressNext }) => {
+  const [selectedWeight, setSelectedWeight] = useState(null);
+  const [selectedUnit, setSelectedUnit] = useState("Kg");
 
-  const getHeightOptions = () => {
-    const startValue = selectedUnit === "CM" ? 101 : 40;
-    const endValue = selectedUnit === "Feet" ? 300 : 215; 
+  const getWeightOptions = () => {
+    const startValue = selectedUnit === "Kg" ? 40 : 90;
+    const endValue = selectedUnit === "Lb" ? 300 : 200;
 
     return Array.from({ length: endValue - startValue + 1 }, (_, index) =>
       String(index + startValue)
     );
   };
-  const initialSelectedIndex = selectedHeight
-    ? getHeightOptions().indexOf(selectedHeight)
+
+  const initialSelectedIndex = selectedWeight
+    ? getWeightOptions().indexOf(selectedWeight)
     : 0;
 
-    const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.heading}>What's your height?</Text>
-        <Text style={styles.text}>This helps us create your personalized plan</Text>
-        <ToggleButton />
+        <Text style={styles.heading}>What's your weight?</Text>
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
+        <ToggleButton
+          onPress={(selectedOption) => setSelectedUnit(selectedOption)}
+        />
         <View style={styles.pickerContainer}>
           <WheelPicker
-            selectedIndex={selectedHeight ? getHeightOptions().indexOf(selectedHeight) : 0}
-            options={getHeightOptions()}
-            onChange={(index) => setSelectedHeight(getHeightOptions()[index])}
+            selectedIndex={selectedIndex}
+            options={getWeightOptions()}
+            onChange={(index) => {
+              setSelectedWeight(getWeightOptions()[index]);
+              setSelectedIndex(index);
+            }}
             itemTextStyle={{
               color: "black",
               fontSize: 40,
@@ -60,17 +67,14 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={() => {
-            console.log("Selected Height:", selectedHeight);
-            onPressNext(selectedHeight);
-          }}
-          selectedHeight={selectedHeight}
+          onPressNext={() => onPressNext(selectedWeight, selectedUnit)}
+          selectedWeight={selectedWeight}
+          selectedUnit={selectedUnit}
         />
       </View>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -106,10 +110,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  selectedHeight: {
+  selectedWeight: {
     fontSize: 20,
     marginTop: 20,
   },
 });
 
-export default Height;
+export default Weight;

@@ -22,6 +22,14 @@ const Gender = ({ nextCompName, onPressNext }) => {
     selectedGender !== null &&
     selectedGender !== "";
 
+    const handleNextPress = () => {
+      if (isGenderValid) {
+        onPressNext(selectedGender);
+      } else {
+        console.warn('Please select a gender before proceeding.');
+      }
+    };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
