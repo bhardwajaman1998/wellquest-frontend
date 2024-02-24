@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
-import RNPickerSelect from 'react-native-picker-select';
+import Toast from "react-native-toast-message";
+import WheelPicker from "react-native-wheely";
 
-const Age = ({backAction, nextCompName, onPressNext}) => {
-  
-  const [selectedAge, setSelectedAge] = useState(null);
+const Age = ({ backAction, nextCompName, onPressNext }) => {
+  const [selectedAge, setSelectedAge] = useState(19);
 
-  const ageOptions = Array.from({ length: 100 }, (_, index) => ({
-    label: String(index + 1),
-    value: String(index + 1),
-  }));
+  const ageOptions = Array.from({ length: 100 }, (_, index) =>
+    String(index + 1)
+  );
+  useEffect(() => {
+    if (selectedAge && parseInt(selectedAge) < 19) {
+      Toast.show({
+        type: "error",
+        text1: "Age Requirement",
+        text2: "The minimum age requirement is 19.",
+        position: "bottom",
+        bottomOffset: 130,
+        text1Style: styles.toastText1,
+        text2Style: styles.toastText2,
+      });
+    }
+  }, [selectedAge]);
+
+  // Check if age is valid (greater than or equal to 19)
+  const isAgeValid = parseInt(selectedAge) >= 19;
+
+  const handlePressNext = () => {
+    if (isAgeValid && typeof onPressNext === 'function') {
+      onPressNext(selectedAge);
+      
+    } else {
+      console.error('onPressNext is not a function or the age is not valid');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -21,27 +45,40 @@ const Age = ({backAction, nextCompName, onPressNext}) => {
           This helps us create your personalized plan
         </Text>
         <View style={styles.pickerContainer}>
-          <Text style={styles.label}>Select an Age:</Text>
-          <RNPickerSelect
-            placeholder={{
-              label: 'Select an Age...',
-              value: null,
+          <WheelPicker
+            selectedIndex={selectedAge - 1}
+            options={ageOptions}
+            onChange={(index) => setSelectedAge(Number(ageOptions[index]))}
+            itemTextStyle={{
+              color: "black", 
+              fontSize: 40,
             }}
-            items={ageOptions}
-            onValueChange={(value) => setSelectedAge(value)}
-            style={{
-              inputIOS: styles.pickerInput,
-              inputAndroid: styles.pickerInput,
-              iconContainer: styles.pickerIcon,
+            containerStyle={{
+              width: "80%", 
+              alignItems: "center", 
             }}
-            value={selectedAge}
-            useNativeAndroidPickerStyle={false}
+            selectedIndicatorStyle={{
+              width: 100,
+              borderTopWidth: 3, 
+              borderBottomWidth: 3,
+              borderRadius: 0, 
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60} 
           />
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction}  />
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <BackButton backAction={backAction} />
+        <NextButton
+          nextCompName={nextCompName}
+          onPressNext={handlePressNext}
+          selectedAge={selectedAge}
+          disabled={!isAgeValid}
+          style={{ backgroundColor: isAgeValid ? "#FF934E" : "grey" }}
+        />
       </View>
     </View>
   );
@@ -58,15 +95,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   text: {
     fontSize: 16,
     marginBottom: 20,
-  },
-  pickerContainer: {
-    width: '80%',
   },
   label: {
     fontSize: 18,
@@ -78,26 +112,30 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: 'flex-end'
+    width: "100%",
+    justifyContent: "flex-end",
   },
   pickerInput: {
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    color: 'black',
+    borderBottomColor: "gray",
+    color: "black",
   },
-  pickerIcon: {
-    top: 20,
-    right: 10,
+
+  toastText1: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  toastText2: {
+    fontSize: 15,
   },
 });
 

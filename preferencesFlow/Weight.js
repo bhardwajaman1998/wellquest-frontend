@@ -2,52 +2,63 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
+import ToggleButton from "./components/ToggleButton";
 import WheelPicker from "react-native-wheely";
 
-const Goal = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedGoal, setSelectedGoal] = useState(null);
+const Weight = ({ backAction, nextCompName, onPressNext }) => {
+  const startWeight = 40;
+  const endWeight = 300;
 
-  const goalOptions = [
-    { label: "Get Fitter", value: "Get Fitter" },
-    { label: "Gain Weight", value: "Gain Weight" },
-    { label: "Lose Weight", value: "Lose Weight" },
-    { label: "Build Muscle", value: "Build Muscle" },
-    { label: "Improve Endurance", value: "Improve Endurance" },
-  ];
+  const getWeightOptions = () => {
+    
+    return Array.from({ length: endWeight - startWeight + 1 }, (_, index) =>
+    String(index + startWeight)
+    );
+  };
 
+  const [selectedWeight, setSelectedWeight] = useState(startWeight);
+  const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
+  
+  const initialSelectedIndex = selectedWeight
+    ? getWeightOptions().indexOf(selectedWeight)
+    : 0;
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.heading}>Whats your Goal?</Text>
+        <Text style={styles.heading}>What's your weight?</Text>
         <Text style={styles.text}>
           This helps us create your personalized plan
         </Text>
+        <ToggleButton
+          onPress={() => {
+            const newWeightUnit = selectedWeightUnit === "Kg" ? "Lb" : "Kg";
+            setSelectedWeightUnit(newWeightUnit);
+            const weightOptions = getWeightOptions();
+            setSelectedWeight(weightOptions[selectedIndex]);
+          }}
+        />
 
         <View style={styles.pickerContainer}>
           <WheelPicker
-            selectedIndex={
-              selectedGoal
-                ? goalOptions.findIndex(
-                    (option) => option.value === selectedGoal
-                  )
-                : 0
-            }
-            options={goalOptions.map((option) => option.label)}
+            selectedIndex={selectedIndex}
+            options={getWeightOptions()}
             onChange={(index) => {
-              const selectedValue = goalOptions[index]?.value || null;
-              setSelectedGoal(selectedValue);
+              setSelectedWeight(getWeightOptions()[index]);
+              setSelectedIndex(index);
             }}
             itemTextStyle={{
               color: "black",
-              fontSize: 20,
+              fontSize: 40,
             }}
             containerStyle={{
               width: "80%",
               alignItems: "center",
             }}
             selectedIndicatorStyle={{
-              width: 200,
+              width: 100,
               borderTopWidth: 3,
               borderBottomWidth: 3,
               borderRadius: 0,
@@ -63,9 +74,9 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={() => onPressNext(selectedGoal)}
-          selectedGoal={selectedGoal}
-          disabled={!selectedGoal} 
+          onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
+          selectedWeight={selectedWeight}
+          selectedWeightUnit={selectedWeightUnit}
         />
       </View>
     </View>
@@ -106,24 +117,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  selectedGoal: {
+  selectedWeight: {
     fontSize: 20,
     marginTop: 20,
   },
-  pickerInput: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    backgroundColor: "transparent",
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: "gray",
-    color: "black",
-  },
-  pickerIcon: {
-    top: 20,
-    right: 10,
-  },
 });
 
-export default Goal;
+export default Weight;

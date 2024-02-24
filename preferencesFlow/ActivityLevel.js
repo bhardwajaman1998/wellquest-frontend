@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./components/BackButton";
 import NextButton from "./components/NextButton";
-import RNPickerSelect from 'react-native-picker-select';
+import WheelPicker from "react-native-wheely";
 
-const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
+const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
 
   const ActivityLevelOptions = [
-    { label: 'Rookie', value: 'Rookie' },
-    { label: 'Beginner', value: 'Beginner' },
-    { label: 'Intermediate', value: 'Intermediate' },
-    { label: 'Advance', value: 'Advance' },
-    { label: 'True Beast', value: 'True Beast' }
+    { label: "Rookie", value: "Rookie" },
+    { label: "Beginner", value: "Beginner" },
+    { label: "Intermediate", value: "Intermediate" },
+    { label: "Advance", value: "Advance" },
+    { label: "True Beast", value: "True Beast" },
   ];
 
   return (
@@ -23,26 +23,47 @@ const ActivityLevel = ({backAction, nextCompName, onPressNext}) => {
           This helps us create your personalized plan
         </Text>
         <View style={styles.pickerContainer}>
-          <RNPickerSelect
-            placeholder={{
-              label: 'Select ActivityLevel...',
-              value: null,
+          <WheelPicker
+            selectedIndex={
+              selectedActivityLevel
+                ? ActivityLevelOptions.findIndex(
+                    (option) => option.value === selectedActivityLevel
+                  )
+                : 0
+            }
+            options={ActivityLevelOptions.map((option) => option.label)}
+            onChange={(index) => {
+              const selectedValue = ActivityLevelOptions[index]?.value || null;
+              setSelectedActivityLevel(selectedValue);
             }}
-            items={ActivityLevelOptions}
-            onValueChange={(value) => setSelectedActivityLevel(value)}
-            style={{
-              inputIOS: styles.pickerInput,
-              inputAndroid: styles.pickerInput,
-              iconContainer: styles.pickerIcon,
+            itemTextStyle={{
+              color: "black",
+              fontSize: 20,
             }}
-            value={selectedActivityLevel}
-            useNativeAndroidPickerStyle={false}
+            containerStyle={{
+              width: "80%",
+              alignItems: "center",
+            }}
+            selectedIndicatorStyle={{
+              width: 200,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderRadius: 0,
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60}
           />
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction}  />
-        <NextButton nextCompName={nextCompName} onPressNext={onPressNext}/>
+        <BackButton backAction={backAction} />
+        <NextButton
+          nextCompName={nextCompName}
+          onPressNext={ ()=> onPressNext(selectedActivityLevel)} 
+          disabled={!selectedActivityLevel} 
+        />
       </View>
     </View>
   );
@@ -59,16 +80,16 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     alignItems: "center",
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   buttonsContainer: {
     flexDirection: "row",
-    width: '100%',
-    justifyContent: 'flex-end'
+    width: "100%",
+    justifyContent: "flex-end",
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   text: {
@@ -76,7 +97,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   pickerContainer: {
-    width: '80%',
+    width: "80%",
   },
   label: {
     fontSize: 18,
@@ -90,11 +111,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 0,
     borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    color: 'black',
+    borderBottomColor: "gray",
+    color: "black",
   },
   pickerIcon: {
     top: 20,

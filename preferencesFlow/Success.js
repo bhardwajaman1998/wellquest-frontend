@@ -1,18 +1,32 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
-
-const Success = () => {
+import successImg from '../assets/success.png'
+const Success = ({nextCompName, onPressNext, formData }) => {
   const navigation = useNavigation();
 
+
+  const gender = formData.gender;
+  const age = formData.age;
+  const weight = formData.weight;
+  const height = formData.height;
+  const goal = formData.goal;
+  const activityLevel = formData.activityLevel;
+
   const onPress = () => {
-    // navigation.navigate();
+    console.log(`You are ready`)
+    console.log(`Gender : ${gender}`)
+    console.log(`Age : ${age}`)
+    console.log(`weight : ${weight}`)
+    console.log(`height : ${height}`)
+    console.log(`goal : ${goal}`)
+    console.log(`activityLevel : ${activityLevel}`)
   }
   return (
     <View style={styles.container}>
-        <Image style={styles.img}></Image>
+        <Image style={styles.img} source={successImg}/>
         <Text style={styles.title}>Welcome</Text>
-        <Text style={styles.body}>You are all set now, let’s reach your goals together with us</Text>
+        <Text style={styles.body}>You are all set now, let’s reach your goals together with us.</Text>
         <TouchableOpacity onPress={onPress} style={styles.button}>
           <Text style={styles.btnText}>Go To Home</Text>
         </TouchableOpacity>
@@ -45,7 +59,8 @@ const styles = StyleSheet.create ({
   body: {
     fontSize: 16,
     marginTop: 15,
-
+    width: 200,
+    textAlign: 'center'
   },
   btnText: {
     color: 'white',
@@ -59,7 +74,7 @@ const styles = StyleSheet.create ({
     width: '100%',
     borderRadius: 25,
     paddingHorizontal: 20, 
-    backgroundColor: "#808080",
+    backgroundColor: "#FF934E",
     justifyContent: 'center',
     alignItems: 'center',
   },

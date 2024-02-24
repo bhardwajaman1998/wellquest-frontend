@@ -1,23 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { ArrowRight } from 'lucide-react-native';
-import { useNavigation } from "@react-navigation/native";
 
-
-const NextButton = ({nextCompName, onPressNext }) => {
-  const navigation = useNavigation();
+const NextButton = ({ nextCompName, onPressNext, disabled }) => {
   
   const onPress = () => {
+    if (!disabled && typeof onPressNext === 'function') {
       onPressNext(nextCompName);
-  }
+    } else {
+      console.error('onPressNext is not a function or the button is disabled');
+    }
+  };
 
   return (
-    <View style={styles.button}>
-      <TouchableOpacity onPress={onPress}>
-      <View style={styles.iconWrapper}>
-        <Text style={styles.text}>Next</Text>
-        <ArrowRight style={styles.arrowRight}/>
-      </View>      
+    <View style={[styles.button, {backgroundColor: disabled ? 'grey' : '#FF934E'}]}>
+      <TouchableOpacity onPress={onPress} disabled={disabled}>
+        <View style={styles.iconWrapper}>
+          <Text style={styles.text}>Next</Text>
+          <ArrowRight style={styles.arrowRight} />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -30,15 +31,15 @@ const styles = StyleSheet.create({
     right: 30,
     height: 50,
     paddingHorizontal: 20, 
+    backgroundColor: '#FF934E',
     borderRadius: 25,
-    backgroundColor: "#808080",
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconWrapper: {
     flexDirection: 'row',
     alignItems: 'center'    
-},
+  },
   text: {
     color: 'white',
     fontSize: 18,

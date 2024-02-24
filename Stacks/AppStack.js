@@ -142,13 +142,13 @@ const AppStack = () => {
                 name="Preferences" 
                 component={PreferencesScreen} 
                 options={{
-                    title:"Preferences", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
+                  title:"",
+                  headerStyle:{
+                },
+                headerTitleStyle:{
+                },
+                headerTintColor: "#fff",
+                headerShadowVisible: false,
                 }}
             />
             
