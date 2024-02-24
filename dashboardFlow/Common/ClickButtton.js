@@ -23,6 +23,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
       borderRadius: 25,
       borderWidth: 1,
       padding: 10,
+      backgroundColor:"#7d7f7c",
     },
     image: {
       width: 30,

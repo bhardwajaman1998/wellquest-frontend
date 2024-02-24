@@ -1,6 +1,8 @@
+//This card is shown in the Dashboard home screen
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, navigation} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import CustomCard from './CustomCard';
 
 export default function AppointmentCard() {
   const navigation = useNavigation();
@@ -9,24 +11,28 @@ export default function AppointmentCard() {
     navigation.navigate('Find Coach'); // Navigate to the 'Find Coach' screen
   };
 
+  const handleSeeAll=()=>{
+    navigation.navigate('AppointmentScreen');
+  }
+
   return (
     
     <SafeAreaView style={styles.container}>
         {/* header part  */}
         <View style={styles.header}>
             <Text style={styles.heading}>Appointments</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleSeeAll}>
                 <Text style={styles.seeAll}>See All{' >'}</Text>
             </TouchableOpacity>
         </View>
         {/* Appointment Card */}
-        <View style={styles.card}>
-            <Text style={styles.cardText}>You don't have appointments.</Text>
-            <TouchableOpacity style={styles.button} onPress={handleSchedulePress}>
-                <Icon style={styles.icon} name="user" size={25}/>
-                <Text style={styles.buttonText} >Schedule</Text>
-            </TouchableOpacity>
-        </View>
+        <CustomCard
+          text="You don't have appointments."
+          buttonText="Schedule"
+          onPress={handleSchedulePress}
+          iconName="user"
+        />
+
 
     </SafeAreaView>
   );
@@ -35,6 +41,7 @@ export default function AppointmentCard() {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
+        margin:20,
         // flex:1,
       },
       header: {
@@ -49,34 +56,5 @@ const styles = StyleSheet.create({
       },
       seeAll: {
         fontSize: 16,
-      },
-      card: {
-        width: 323, 
-        marginLeft: 10,
-        padding: 15, 
-        borderLeftColor:'grey',
-        borderLeftWidth:5,
-        borderRadius:10,
-        backgroundColor:'#fff',
-      },
-      cardText: {
-        fontSize: 16,
-      },
-      button: {
-        flexDirection: 'row',
-        marginTop: 10, 
-        alignItems: 'center',
-        width:149,
-        height:42,
-        borderRadius:20,
-        backgroundColor:'lightgrey',
-      },
-      buttonText: {
-        marginLeft: 20,
-        fontSize: 16,
-        color: 'black',
-      },
-      icon:{
-        marginLeft:15,
       },
 });

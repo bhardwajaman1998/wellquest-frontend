@@ -1,19 +1,22 @@
-//app.js file runned to check the dashboard Content
+to fetch images in Coach Profile screen
+  const [imageUrls, setImageUrls] = useState([]);
+    // Fetch image URLs from MongoDB or API
+    useEffect(() => {
+        // Example fetch function, replace with your actual fetch logic
+        const fetchImageUrls = async () => {
+        try {
+            // Fetch image URLs from your MongoDB database or API
+            const response = await fetch('your_api_endpoint');
+            const data = await response.json();
+            setImageUrls(data.map(item => item.imageUrl)); // Assuming data contains an array of objects with imageUrl property
+        } catch (error) {
+            console.error('Error fetching image URLs:', error);
+        }
+        };
 
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import HomeScreen from './components/HomeScreen';
+        fetchImageUrls();
+    }, []);
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-        <HomeScreen/>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+    const renderItem = ({ item }) => (
+        <Image source={{ uri: item }} style={styles.cardImage} />
+    );

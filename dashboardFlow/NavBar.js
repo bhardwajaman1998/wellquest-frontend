@@ -1,36 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text,View,Image, Platform} from 'react-native';
+import { StyleSheet, Text, View, Image, Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import ProgressScreen from './ProgressScreen';
 import ProfileScreen from './ProfileScreen';
 import ChatPage from './ChatPage';
 import AddCount from './AddCount';
-import AddIcon from "../assets/add-icon.png";
-import {FontAwesome} from '@expo/vector-icons';
+import Images from '../components/Images';
+import addIcon from "../assets/add_icon.png";
+import homeIcon from "../assets/home.png";
+import progressIcon from "../assets/My_progress_nav.png";
+import messageIcon from "../assets/Messages_nav.png";
+import profileIcon from "../assets/Profile_nav.png";
 
 const Tab = createBottomTabNavigator();
 const screenOptions={
     tabBarShowLabel:false,
     headerShown:false,
     tabBarStyle:{
-        position:'absolute',
-        bottom:0,
-        left:0,
-        right:0,
-        elevation:0,
-        height:50,
-        background:'grey',
-
+            // position:'absolute',
+            bottom:0,
+            left:0,
+            right:0,
+            elevation:0,
+            height: Platform.OS === 'ios' ? 90 : 60,
+            backgroundColor:'#000',
+        
     }
+    
 }
 
-// Home, MyProgress, Messages, Profile , + button
-// HomeScreen, ProgressScreen , ChatPage, ProfileScreen
-// HomeScreen, chatScreen, 
 const NavBar =()=>{
     return (
-        <Tab.Navigator screenOptions={screenOptions}>
+        <Tab.Navigator screenOptions={screenOptions} style={Styles.NavStyle}>
             <Tab.Screen 
                 name="Home" 
                 component={HomeScreen}
@@ -39,10 +41,10 @@ const NavBar =()=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={focused ? require('../assets/add-icon.png') : require('../assets/add-icon.png')}
-                                    style={{ width: 24, height: 24, tintColor: focused ? "#808080" : "#000" }}
+                                    source={homeIcon}
+                                    style={{ width: 24, height: 24,color:"#fff" }}
                                 />
-                                <Text style={{fontSize:12,color:"#000"}}>Home</Text>
+                                <Text style={{fontSize:13,color:"#fff"}}>Home</Text>
                             </View>
                         )
                     }
@@ -56,10 +58,10 @@ const NavBar =()=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={focused ? require('../assets/add-icon.png') : require('../assets/add-icon.png')}
-                                    style={{ width: 24, height: 24, tintColor: focused ? "#808080" : "#000" }}
+                                    source={progressIcon}
+                                    style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:12,color:"#000"}}>My Progress</Text>
+                                <Text style={{fontSize:13,color:"#fff"}}>My Progress</Text>
                             </View>
                         )
                     }
@@ -73,19 +75,19 @@ const NavBar =()=>{
                             <View
                                 style={{
                                     top:Platform.OS=="ios"?-30:-20,
-                                    width:Platform.OS=="ios"?60:80,
-                                    height:Platform.OS=="ios"?50:80,
+                                    width:Platform.OS=="ios"?50:50,
+                                    height:Platform.OS=="ios"?40:50,
                                     borderRadius:Platform.OS=="ios"?30:40,
                                     alignItems:"center",
                                     justifyContent:"center",
-                                    backgroundColor:"#16247d",
+                                    backgroundColor:"#D9D9D9",
                                 }}
                             >  
-                            <FontAwesome name='plus' size={24} color="#fff"/>
-                                {/* <Image 
-                                    source={require('../assets/add-icon.png')}
-                                    style={{ width: 20, height: 20, tintColor: focused ? "#000" : "#808080" }}
-                                /> */}
+                            {/* <FontAwesome name='plus' size={24} color="#fff"/> */}
+                                <Image 
+                                    source={addIcon}
+                                    style={{ width: 50, height: 50}}
+                                />
                             </View>
                         )
                     }
@@ -99,10 +101,10 @@ const NavBar =()=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={focused ? require('../assets/add-icon.png') : require('../assets/add-icon.png')}
-                                    style={{ width: 24, height: 24, tintColor: focused ? "#808080" : "#000" }}
+                                    source={messageIcon}
+                                    style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:12,color:"#000"}}>Messages</Text>
+                                <Text style={{fontSize:13,color:"#fff"}}>Messages</Text>
                             </View>
                         )
                     }
@@ -115,10 +117,10 @@ const NavBar =()=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={focused ? require('../assets/add-icon.png') : require('../assets/add-icon.png')}
-                                    style={{ width: 24, height: 24, tintColor: focused ? "#808080" : "#000" }}
+                                    source={profileIcon}
+                                    style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:12,color:"#000"}}>Profile</Text>
+                                <Text style={{fontSize:13,color:"#fff"}}>Profile</Text>
                             </View>
                         )
                     }
@@ -128,10 +130,11 @@ const NavBar =()=>{
 }
 
 const Styles= StyleSheet.create({
-    tabBar:{
-        showLabel:false,
-        backgroundColor:'#000',
-    },
+    
+    NavStyles:{
+        height:50,
+        backgroundColor:"#D9D9D9",
+    }
 });
 
 export default NavBar;

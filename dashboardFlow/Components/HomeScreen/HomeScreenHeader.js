@@ -1,30 +1,20 @@
+//This needs to be changed acc to the updated mockUps NOT USING IT ANYWHERE FOR NOW
 import React from 'react'
 import {TouchableOpacity, Image, Text,View,SafeAreaView, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreenHeader = () => {
-
-  let user="Jessica";
-  const searchIcon = <Icon name="search" size={25} color="#999" />;
-  const notifyIcon = <Icon name="bell" size={25} color="#999" />;
-  const profileIcon = <Icon name="user" size={25} color="#999" />;
-
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.leftContent}></View> */}
-      <Text style={styles.welcomeText}>Welcome {user}</Text>
-
-      <View style={styles.rightContent}>
-        {searchIcon}
-        {notifyIcon}
-        {profileIcon}
-      </View>
+      
     </SafeAreaView>
   )
 };
 
 const styles=StyleSheet.create({
   container: {
+    padding:10,
+    height:50,
     paddingTop: 5, 
     paddingBottom:20,
     flexDirection: 'row',
