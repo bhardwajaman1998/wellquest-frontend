@@ -10,6 +10,11 @@ import HomeScreen from "../dashboardFlow/HomeScreen";
 import FindCoach from "../dashboardFlow/Components/CoachScreen/FindCoach";
 import CoachProfile from "../dashboardFlow/Components/CoachScreen/CoachProfile";
 import ChatPage from "../components/chatPage";
+import ChooseGoal from "../components/chooseGoal";
+import SelectHeight from "../components/selectHeight";
+import SelectWeight from "../components/selectWeight";
+import PlanPage from "../components/planPage";
+import Options from "../components/options";
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
@@ -42,9 +47,74 @@ const AppStack = () => {
                     }
                 }}
             /> */}
+            <Stack.Screen
+                name="Options" 
+                component={Options} 
+                options={{
+                    title:"options", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="PlanPage" 
+                component={PlanPage} 
+                options={{
+                    title:"Plan Page", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="SelectHeight" 
+                component={SelectHeight} 
+                options={{
+                    title:"Select Height", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="SelectWeight" 
+                component={SelectWeight} 
+                options={{
+                    title:"Select Weight", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
+            <Stack.Screen
+                name="ChooseGoal" 
+                component={ChooseGoal} 
+                options={{
+                    title:"Choose Goal", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
               <Stack.Screen
-                name="ChatPage" // give it a unique name
-                component={ChatPage} // use that component here by replacing IndexScreen
+                name="ChatPage" 
+                component={ChatPage} 
                 options={{
                     title:"Chat Page", 
                     headerStyle:{
@@ -56,8 +126,8 @@ const AppStack = () => {
                 }}
             />
             <Stack.Screen
-                name="Preferences" // give it a unique name
-                component={PreferencesScreen} // use that component here by replacing IndexScreen
+                name="Preferences" 
+                component={PreferencesScreen} 
                 options={{
                     title:"Preferences", 
                     headerStyle:{
@@ -69,7 +139,7 @@ const AppStack = () => {
                 }}
             />
             <Stack.Screen
-                name="LogFood" // give it a unique name
+                name="LogFood" 
                 component={LogFood}
                 options={{
                     title:"Log Food", 
