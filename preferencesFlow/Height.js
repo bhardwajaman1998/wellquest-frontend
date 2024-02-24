@@ -71,7 +71,6 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
         <NextButton
           nextCompName={nextCompName}
           onPressNext={() => {
-            console.log("Selected Height:", selectedHeight, selectedHUnit);
             onPressNext(selectedHeight, selectedHUnit);
           }}
           selectedHeight={selectedHeight}
