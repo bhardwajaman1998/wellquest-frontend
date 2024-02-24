@@ -3,22 +3,39 @@ import { HStack, Text, Image, View } from "@gluestack-ui/themed"
 import StyledText from "../components/StyledText";
 import { useNavigation } from '@react-navigation/native';
 
-const ScanButton = () => {
+const ScanButton = ({isForCamera = true}) => {
 
     const navigation = useNavigation(); // Get navigation object
 
     const handlePress = () => {
-        navigation.navigate('LogFood');
+        if  (isForCamera) {
+            navigation.navigate('LogFood');
+        }else{
+            navigation.navigate('LogFood');
+        }
     }
 
     return (
         <View style={styles.container} >
             <TouchableOpacity onPress={handlePress} style={styles.button}>
-                <Image
-                    size="2xs"
-                    source={require('../assets/camera-icon.png')}
-                />
-                <StyledText style={styles.buttonText}>Scan a meal</StyledText>
+            {isForCamera ? (
+                <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center', justifyContent:'space-between'}} >
+                    <Image
+                        size="xs"
+                        tintColor={'rgb(114, 101, 227)'}
+                        source={require('../assets/camera-icon.png')}
+                    />
+                    <StyledText style={styles.buttonText}>Scan meal</StyledText>
+                </View>
+            ) : (
+                <View style={{ flexDirection: 'row', gap: 5, alignItems: 'center', justifyContent:'space-between'}}>
+                    <Image
+                        size="xs"
+                        source={require('../assets/icon-barcode.png')}
+                    />
+                    <StyledText style={styles.buttonText}>Scan barcode</StyledText>
+                </View>
+            )}
             </TouchableOpacity>
         </View>
     )
@@ -47,7 +64,7 @@ const styles = StyleSheet.create({
         height: 45
       },
     buttonText: {
-        fontSize: 14,
+        fontSize: 13,
         fontFamily: 'poppins-regular'
     }
   });

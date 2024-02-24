@@ -9,6 +9,8 @@ import LogFood from "../scanFoodFlow/LogFood"
 import HomeScreen from "../dashboardFlow/HomeScreen";
 import FindCoach from "../dashboardFlow/Components/CoachScreen/FindCoach";
 import CoachProfile from "../dashboardFlow/Components/CoachScreen/CoachProfile";
+import NavBar from "../dashboardFlow/NavBar";
+
 import ChatPage from "../components/chatPage";
 import ChooseGoal from "../components/chooseGoal";
 import SelectHeight from "../components/selectHeight";
@@ -20,6 +22,7 @@ const Stack = createNativeStackNavigator()
 const AppStack = () => {
   return (
     <NavigationContainer>
+     
         <Stack.Navigator>
             {/* <Stack.Screen
                 name="Index" // give it a unique name
@@ -34,6 +37,15 @@ const AppStack = () => {
                     }
                 }}
             /> */}
+          {/* <Stack.Screen
+            name="NavBar"
+            component={NavBar}
+            options={{
+              headerShown:false,
+            } 
+          }
+          /> */}
+            {/* For HomeScreen navigation */}
             {/* <Stack.Screen
                 name="Home Screen" // give it a unique name
                 component={HomeScreen} // use that component here by replacing IndexScreen
@@ -47,6 +59,19 @@ const AppStack = () => {
                     }
                 }}
             /> */}
+            <Stack.Screen
+                name="ChatPage" 
+                component={ChatPage} 
+                options={{
+                    title:"Chat Page", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            />
             <Stack.Screen
                 name="Options" 
                 component={Options} 
@@ -112,19 +137,7 @@ const AppStack = () => {
                     }
                 }}
             />
-              <Stack.Screen
-                name="ChatPage" 
-                component={ChatPage} 
-                options={{
-                    title:"Chat Page", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                }}
-            />
+          
             <Stack.Screen
                 name="Preferences" 
                 component={PreferencesScreen} 
@@ -138,6 +151,7 @@ const AppStack = () => {
                     }
                 }}
             />
+            
             <Stack.Screen
                 name="LogFood" 
                 component={LogFood}
@@ -150,7 +164,9 @@ const AppStack = () => {
                         color:'#fff'
                     }
                 }}
-            />            
+            />        
+
+                {/* for finding the coach in the ddashboard navigation */}
             <Stack.Screen
               name="Find Coach"
               component={FindCoach}
@@ -180,6 +196,7 @@ const AppStack = () => {
               )
             })}
         />
+        {/* for checking the coach profile */}
              <Stack.Screen
               name="Select Coach"
               component={CoachProfile}
@@ -206,3 +223,31 @@ const AppStack = () => {
 }
 
 export default AppStack
+
+ {/* <Stack.Screen
+                name="Index" // give it a unique name
+                component={SearchFoodScreen} // use that component here by replacing IndexScreen
+                options={{
+                    title:"Search Food", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            /> */}
+
+{/* <Stack.Screen
+                name="Preferences" // give it a unique name
+                component={PreferencesScreen} // use that component here by replacing IndexScreen
+                options={{
+                    title:"Preferences", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                }}
+            /> */}

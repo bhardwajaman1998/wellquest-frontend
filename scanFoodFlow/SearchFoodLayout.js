@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar"
 import ScanButton from "./ScanButton"
 import MealTypeButton from "./MealTypeButton"
 import HistoryListView from "./HistoryListView"
+import NoFoodView from "./NoFoodView";
 
 const SearchFoodLayout = () => {
     return (
@@ -13,7 +14,9 @@ const SearchFoodLayout = () => {
             <SearchBar style={styles.search}/>
             <View style={styles.scan}>
                 <ScanButton />
-                <ScanButton />
+                <ScanButton 
+                    isForCamera={false}
+                />
             </View>
             <View style={styles.meals}>
                 <StyledText style={styles.mealtext}>Select a meal</StyledText>
@@ -34,9 +37,9 @@ const SearchFoodLayout = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.historyList}>
+                {/* <NoFoodView/> */}
                 <HistoryListView />
             </View>
-            
         </View>
     )
 }
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
     },
     search: {
         width: '100%'
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
     scan: {
         justifyContent: 'space-between',
         flexDirection: 'row',
+        marginTop: 10,
         padding: 25,
         gap: 30,
         marginHorizontal: 15
@@ -66,14 +70,14 @@ const styles = StyleSheet.create({
     },
     mealtext: {
         fontFamily: 'poppins-semibold',
-        fontSize: 16,
+        fontSize: 18,
         marginLeft: 25
     },
     history: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '85%',
-        marginTop: 30
+        marginTop: 35
     },
     hStack: {
         flexDirection: "row",
@@ -82,12 +86,12 @@ const styles = StyleSheet.create({
     },
     historyText: {
         fontFamily: 'poppins-semibold',
-        fontSize: 16
+        fontSize: 18,
     },
     meals: {
         width: '100%',
         marginTop: 10,
-        gap: 10,
+        gap: 20,
         justifyContent: 'center',
         marginHorizontal: 25
     },

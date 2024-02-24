@@ -32,7 +32,7 @@ export default function FindCoach() {
                 <View style={styles.coachData}>
                     <Text>Recommended for you </Text>
                     <CoachCard coachImg={ProfilePic} coachName="John Doe" coachDesc="Fitness Trainer"></CoachCard>
-                    <CoachCard coachImg={ProfilePic} coachName="John Doe" coachDesc="Fitness Trainer"></CoachCard>
+                    <CoachCard coachImg={ProfilePic} coachName="Jemmy Del" coachDesc="Fitness coach"></CoachCard>
                 </View>
             </View>
         </SafeAreaView>

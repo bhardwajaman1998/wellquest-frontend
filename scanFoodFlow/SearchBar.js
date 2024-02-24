@@ -20,9 +20,10 @@ const SearchBar = ({navigation}) => {
                 value={searchQuery}
                 placeholder="Search for a food" 
                 width="100%" 
-                borderRadius="4" 
+                borderRadius="15" 
                 fontFamily={'poppins-regular'}
                 fontSize="14" 
+                backgroundColor={'rgb(245, 245, 245)'} 
                 InputLeftElement={
                     <Icon 
                         m="2" 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     searchBar: {
         width: '100%',
         paddingTop: 25,
-        paddingHorizontal: 25
+        paddingHorizontal: 25,
     }
   });
 

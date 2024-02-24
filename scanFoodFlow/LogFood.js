@@ -6,6 +6,8 @@ import { View, StyleSheet } from 'react-native';
 import StyledText from "../components/StyledText";
 import LogInputField from "./LogInputField";
 import { NativeBaseProvider } from "native-base";
+import NutritionalContent from "./NutritionalContent";
+import LogButtons from "./LogButtons";
 
 const LogFood = () => {
     const [servingSize, setServingSize] = useState('');
@@ -34,34 +36,26 @@ const LogFood = () => {
                 />
                 <View style={styles.fieldContainer}>
                     <LogInputField style={styles.servingSize} title={'Serving size'}/>
-                    <View style={styles.dropDown}>
-                        <Select
-                            selectedValue={unitArray[0]} 
-                            accessibilityLabel="Choose Service"
-                            borderColor="transparent"
-                            borderWidth={0}
-                            width='100%'
-                            _selectedItem={{
-                                bg: "teal.600",
-                                endIcon: <CheckIcon size="sm" />
-                            }} mt={1} onValueChange={itemValue => setService(itemValue)}>
-                                {unitArray.map((item) => (
-                                    <Select.Item label={item} value={item} key={item} />
-                                ))
-                                }
-                        </Select>
-                    </View>
                 </View>
-
                 <LogInputField title={'Number of serving'}/>
                 <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray}/>
                 <LogInputField title={'Extra calories'}/>
+                <View style={{flexDirection: 'row', justifyContent:'space-between', alignContent: 'center'}}>
+                  <NutritionalContent isCircleView={true}/>
+                  <NutritionalContent/>
+                  <NutritionalContent/>
+                  <NutritionalContent/>
+                </View>
+                <View style={{flexDirection: 'row', justifyContent:'space-between', alignContent: 'center', gap: 40}}>
+                  <LogButtons isForCancel={true}/>
+                  <LogButtons/>
+                </View>
             </View>
         </NativeBaseProvider>
       )
     };
     
-    const styles = StyleSheet.create({
+const styles = StyleSheet.create({
       container: {
         backgroundColor: 'white',
         height: '100%',
@@ -78,9 +72,9 @@ const LogFood = () => {
         fontSize: 20
       },
       fieldContainer: {
-        gap: 10,
-        flexDirection: "row",
-        justifyContent: 'space-between'
+        flexDirection: "column",
+        width: '100%',
+        justifyContent: 'flex-start',
       },
       dropDown: {
         padding: 10,
