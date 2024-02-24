@@ -24,7 +24,7 @@ const Splash = ({navigation}) => {
 
     const timer = setTimeout(() => {
       navigation.replace('Landing');
-    }, 2000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);

@@ -14,12 +14,12 @@ const Path = ({navigation}) => {
         <Text style={styles.pathText}>Choose Your Path</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonE}>
+        <TouchableOpacity onPress={() =>
+        navigation.navigate('Login', {name: 'Login'})
+      } style={styles.buttonE}>
           <Text style={styles.buttonText}>Enthusiast</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() =>
-        navigation.navigate('SignUp', {name: 'SignUp'})
-      } style={styles.buttonC}>
+        <TouchableOpacity  style={styles.buttonC}>
           <Text style={styles.buttonText}>Coach</Text>
         </TouchableOpacity>
       </View>
@@ -35,17 +35,17 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
     logo: {
-      width: 400, 
-      height: 380,
+      width: 500, 
+      height: 500,
       borderRadius: 200,
     },
     pathText:{
-          fontSize: 20,
+          fontSize: 30,
           fontWeight: "bold",
-          marginTop:20,
+          marginBottom:20,
     },
     buttonContainer: {
-      marginTop: 50,
+      marginTop: 20,
     },
     buttonE: {
       backgroundColor: '#7265E3', 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 50,
-        marginBottom: 10,
+        marginBottom: 30,
         textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
