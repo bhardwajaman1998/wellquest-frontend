@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
-
+import successImg from '../assets/success.png'
 const Success = ({nextCompName, onPressNext, formData }) => {
   const navigation = useNavigation();
 
@@ -24,9 +24,9 @@ const Success = ({nextCompName, onPressNext, formData }) => {
   }
   return (
     <View style={styles.container}>
-        <Image style={styles.img}></Image>
+        <Image style={styles.img} source={successImg}/>
         <Text style={styles.title}>Welcome</Text>
-        <Text style={styles.body}>You are all set now, let’s reach your goals together with us</Text>
+        <Text style={styles.body}>You are all set now, let’s reach your goals together with us.</Text>
         <TouchableOpacity onPress={onPress} style={styles.button}>
           <Text style={styles.btnText}>Go To Home</Text>
         </TouchableOpacity>
@@ -59,7 +59,8 @@ const styles = StyleSheet.create ({
   body: {
     fontSize: 16,
     marginTop: 15,
-
+    width: 200,
+    textAlign: 'center'
   },
   btnText: {
     color: 'white',
