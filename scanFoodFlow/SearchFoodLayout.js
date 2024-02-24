@@ -21,10 +21,10 @@ const SearchFoodLayout = () => {
             <View style={styles.meals}>
                 <StyledText style={styles.mealtext}>Select a meal</StyledText>
                 <View style={styles.mealTab}>
-                    <MealTypeButton source={require('../assets/breakfast-icon.png')} />
-                    <MealTypeButton source={require('../assets/lunch-icon.png')} />
-                    <MealTypeButton source={require('../assets/dinner-icon.png')} />
-                    <MealTypeButton source={require('../assets/snack-icon.png')} />
+                    <MealTypeButton source={require('../assets/breakfast_icon.png')} />
+                    <MealTypeButton source={require('../assets/lunch_icon.png')} />
+                    <MealTypeButton source={require('../assets/dinner_icon.png')} />
+                    <MealTypeButton source={require('../assets/snack_icon.png')} />
                 </View>
             </View>
             <View style={styles.history}>

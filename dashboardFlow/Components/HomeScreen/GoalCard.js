@@ -1,3 +1,4 @@
+//This card is shown in the Dashboard screen to show the calories intake
 import React from 'react';
 import { Text, View, SafeAreaView, StyleSheet, Platform } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
@@ -42,7 +43,8 @@ const GoalCard = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
+        padding: 10,
+        margin:20,
     },
     header: {
         marginBottom: 20,

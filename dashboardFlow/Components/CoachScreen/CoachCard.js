@@ -1,3 +1,5 @@
+// this is the Second screen where the user will get the recommendations of the coaches and select one of them to proceeed further
+
 import React from 'react';
 import {Text,TouchableOpacity,Image, StyleSheet,View ,navigation} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
@@ -27,7 +29,7 @@ const CoachCard  = ({coachImg,coachName, coachDesc,}) => {
 
 const styles=StyleSheet.create({
     container: {
-        margin: 20,
+        margin: 10,
       },
       card: {
         flexDirection: 'row',

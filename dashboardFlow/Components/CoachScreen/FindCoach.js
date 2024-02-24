@@ -3,8 +3,9 @@ import { SafeAreaView, StyleSheet , View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import CoachCard from './CoachCard';
-import ProfilePic from '../../../assets/profilePic.jpeg';
-
+import NavBar from '../../NavBar';
+import Images from '../../../components/Images';
+import profileIcon from "../../../assets/profile.png";
 export default function FindCoach() {
     ///for search bar functionality 
     const [search, setSearch] = useState('');
@@ -30,18 +31,19 @@ export default function FindCoach() {
                 </View>
 
                 <View style={styles.coachData}>
-                    <Text>Recommended for you </Text>
-                    <CoachCard coachImg={ProfilePic} coachName="John Doe" coachDesc="Fitness Trainer"></CoachCard>
-                    <CoachCard coachImg={ProfilePic} coachName="Jemmy Del" coachDesc="Fitness coach"></CoachCard>
+                    <Text style={styles.recommendText}>Recommended for you </Text>
+                    <CoachCard coachImg={profileIcon} coachName="John Doe" coachDesc="Fitness Trainer"></CoachCard>
+                    <CoachCard coachImg={profileIcon} coachName="Jemmy Del" coachDesc="Fitness coach"></CoachCard>
                 </View>
             </View>
+            {/* <NavBar/> */}
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        // flex:1,
     },
     header:{
         padding:5,
@@ -65,4 +67,10 @@ const styles = StyleSheet.create({
         paddingRight: 10, 
         margin: 10, 
     },
+    coachData:{
+        margin:20,
+    },
+    recommendText:{
+        fontSize:20,
+    }
 });
