@@ -2,11 +2,25 @@ import React from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 
-const Success = () => {
+const Success = ({nextCompName, onPressNext, formData }) => {
   const navigation = useNavigation();
 
+
+  const gender = formData.gender;
+  const age = formData.age;
+  const weight = formData.weight;
+  const height = formData.height;
+  const goal = formData.goal;
+  const activityLevel = formData.activityLevel;
+
   const onPress = () => {
-    // navigation.navigate();
+    console.log(`You are ready`)
+    console.log(`Gender : ${gender}`)
+    console.log(`Age : ${age}`)
+    console.log(`weight : ${weight}`)
+    console.log(`height : ${height}`)
+    console.log(`goal : ${goal}`)
+    console.log(`activityLevel : ${activityLevel}`)
   }
   return (
     <View style={styles.container}>

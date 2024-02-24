@@ -61,7 +61,8 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={() => onPressNext(selectedActivityLevel)}
+          onPressNext={ ()=> onPressNext(selectedActivityLevel)} 
+          disabled={!selectedActivityLevel} 
         />
       </View>
     </View>

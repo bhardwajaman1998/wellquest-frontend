@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { ArrowRight } from 'lucide-react-native';
-import { useNavigation } from "@react-navigation/native";
 
-const NextButton = ({ nextCompName, onPressNext, selectedGender, selectedAge, disabled }) => {
-  const navigation = useNavigation();
+const NextButton = ({ nextCompName, onPressNext, disabled }) => {
   
   const onPress = () => {
     if (!disabled && typeof onPressNext === 'function') {
-      onPressNext(nextCompName, selectedGender, selectedAge);
+      onPressNext(nextCompName);
     } else {
       console.error('onPressNext is not a function or the button is disabled');
     }

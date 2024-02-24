@@ -14,9 +14,7 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
     { label: "Build Muscle", value: "Build Muscle" },
     { label: "Improve Endurance", value: "Improve Endurance" },
   ];
-  const handleNextPress = () => {
-    onPressNext(selectedGoal);
-  };
+
 
   return (
     <View style={styles.container}>
@@ -65,8 +63,9 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={handleNextPress} // Pass the handleNextPress function
-          disabled={!selectedGoal} // Disable the button if no goal is selected
+          onPressNext={() => onPressNext(selectedGoal)}
+          selectedGoal={selectedGoal}
+          disabled={!selectedGoal} 
         />
       </View>
     </View>

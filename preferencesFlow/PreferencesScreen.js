@@ -1,25 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from "react-native";
 import Gender from "./Gender";
 import Age from "./Age";
-import Weight from "./Weight"
+import Weight from "./Weight";
 import Height from "./Height";
 import Goal from "./Goal";
 import ActivityLevel from "./ActivityLevel";
-import Success from "./Success"
+import Success from "./Success";
 import { BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NextButton from "./components/NextButton";
 
 const PreferencesScreen = () => {
   const [cardType, setCardType] = useState(1);
-  const screenArray = ['Gender', 'Age', 'Weight', 'Height', 'Goal', 'ActivityLevel', 'Success'];
+  const [gender, setGender] = useState(null);
+  const [age, setAge] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [weightUnit, setWeightUnit] = useState(null);
+  const [height, setHeight] = useState(null);
+  const [heightUnit, setHeightUnit] = useState(null);
+  const [goal, setGoal] = useState(null);
+  const [activityLevel, setActivityLevel] = useState(null);
+
+  const screenArray = [
+    "Gender",
+    "Age",
+    "Weight",
+    "Height",
+    "Goal",
+    "ActivityLevel",
+    "Success",
+  ];
 
   const [formData, setFormData] = useState({
     gender: null,
     age: null,
     weight: null,
+    weightUnit: null,
     height: null,
+    heightUnit: null,
     goal: null,
     activityLevel: null,
   });
@@ -36,7 +55,8 @@ const PreferencesScreen = () => {
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", backAction);
-    return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
+    return () =>
+      BackHandler.removeEventListener("hardwareBackPress", backAction);
   }, []);
 
   const screenSelect = (name) => {
@@ -46,9 +66,9 @@ const PreferencesScreen = () => {
 
   const handleFinish = () => {
     console.log("Collected Data:", formData);
-    navigation.navigate('Success'); 
+    console.log("Gender:", gender); // Log the gender state
+    navigation.navigate("Success");
   };
-  
 
   return (
     <View style={styles.container}>
@@ -57,9 +77,12 @@ const PreferencesScreen = () => {
           backAction={backAction}
           nextCompName="Age"
           onPressNext={(selectedGender) => {
-            setFormData((prevData) => ({gender: selectedGender }));
+            setFormData(() => ({ gender: selectedGender }));
+            setGender(selectedGender);
             screenSelect("Age");
           }}
+          gender={gender}
+          setGender={setGender}
         />
       )}
       {cardType === 2 && (
@@ -68,6 +91,7 @@ const PreferencesScreen = () => {
           nextCompName="Weight"
           onPressNext={(selectedAge) => {
             setFormData((prevData) => ({ ...prevData, age: selectedAge }));
+            setAge(selectedAge);
             screenSelect("Weight");
           }}
         />
@@ -76,20 +100,34 @@ const PreferencesScreen = () => {
         <Weight
           backAction={backAction}
           nextCompName="Height"
-          onPressNext={(selectedWeight) => {
-            setFormData((prevData) => ({ ...prevData, weight: selectedWeight }));
+          onPressNext={(selectedWeight, selectedWeightUnit) => {
+            setFormData((prevData) => ({
+              ...prevData,
+              weight: selectedWeight,
+              weightUnit: selectedWeightUnit,
+            }));
+            setWeight(selectedWeight);
+            setWeightUnit(selectedWeightUnit);
             screenSelect("Height");
           }}
         />
       )}
+
       {cardType === 4 && (
         <Height
           backAction={backAction}
           nextCompName="Goal"
-          onPressNext={(selectedHeight) => {
-            setFormData((prevData) => ({ ...prevData, height: selectedHeight }));
+          onPressNext={(selectedHeight, selectedHeightUnit) => {
+            setFormData((prevData) => ({
+              ...prevData,
+              height: selectedHeight,
+              heightUnit: selectedHeightUnit,
+            }));
+            setHeight(selectedHeight);
+            setHeightUnit(selectedHeightUnit);
             screenSelect("Goal");
           }}
+          setHeightUnit={setHeightUnit}
         />
       )}
       {cardType === 5 && (
@@ -98,6 +136,7 @@ const PreferencesScreen = () => {
           nextCompName="ActivityLevel"
           onPressNext={(selectedGoal) => {
             setFormData((prevData) => ({ ...prevData, goal: selectedGoal }));
+            setGoal(setGoal);
             screenSelect("ActivityLevel");
           }}
         />
@@ -108,15 +147,18 @@ const PreferencesScreen = () => {
           nextCompName="Success"
           onPressNext={(selectedActivityLevel) => {
             setFormData((prevData) => ({ ...prevData, activityLevel: selectedActivityLevel }));
+            setActivityLevel(setActivityLevel);
             screenSelect("Success");
           }}
         />
       )}
       {cardType === 7 && (
-        <View style={styles.finishButton}>
-          <NextButton nextCompName="Finish" onPressNext={handleFinish} />
-        </View>
-      )}     
+        <Success
+          backAction={backAction}
+          onPressNext={handleFinish}
+          formData={formData}
+        />
+      )}
     </View>
   );
 };
@@ -124,12 +166,12 @@ const PreferencesScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
   },
   finishButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
   },
 });

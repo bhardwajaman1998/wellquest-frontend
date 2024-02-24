@@ -6,23 +6,24 @@ import ToggleButton from "./components/ToggleButton";
 import WheelPicker from "react-native-wheely";
 
 const Weight = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedWeight, setSelectedWeight] = useState(null);
-  const [selectedUnit, setSelectedUnit] = useState("Kg");
+  const startWeight = 40;
+  const endWeight = 300;
 
   const getWeightOptions = () => {
-    const startValue = selectedUnit === "Kg" ? 40 : 90;
-    const endValue = selectedUnit === "Lb" ? 300 : 200;
-
-    return Array.from({ length: endValue - startValue + 1 }, (_, index) =>
-      String(index + startValue)
+    
+    return Array.from({ length: endWeight - startWeight + 1 }, (_, index) =>
+    String(index + startWeight)
     );
   };
 
+  const [selectedWeight, setSelectedWeight] = useState(startWeight);
+  const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
+  
   const initialSelectedIndex = selectedWeight
     ? getWeightOptions().indexOf(selectedWeight)
     : 0;
 
-  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <View style={styles.container}>
@@ -32,8 +33,14 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
           This helps us create your personalized plan
         </Text>
         <ToggleButton
-          onPress={(selectedOption) => setSelectedUnit(selectedOption)}
+          onPress={() => {
+            const newWeightUnit = selectedWeightUnit === "Kg" ? "Lb" : "Kg";
+            setSelectedWeightUnit(newWeightUnit);
+            const weightOptions = getWeightOptions();
+            setSelectedWeight(weightOptions[selectedIndex]);
+          }}
         />
+
         <View style={styles.pickerContainer}>
           <WheelPicker
             selectedIndex={selectedIndex}
@@ -67,9 +74,9 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={() => onPressNext(selectedWeight, selectedUnit)}
+          onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
           selectedWeight={selectedWeight}
-          selectedUnit={selectedUnit}
+          selectedWeightUnit={selectedWeightUnit}
         />
       </View>
     </View>

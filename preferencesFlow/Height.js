@@ -6,33 +6,43 @@ import ToggleButton from "./components/ToggleButton";
 import WheelPicker from "react-native-wheely";
 
 const Height = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedHeight, setSelectedHeight] = useState(null);
-  const [selectedUnit, setSelectedUnit] = useState("CM");
-
+  const startHeight = 40;
+  const endHeight = 300;
+  
   const getHeightOptions = () => {
-    const startValue = selectedUnit === "CM" ? 101 : 40;
-    const endValue = selectedUnit === "Feet" ? 300 : 215; 
-
-    return Array.from({ length: endValue - startValue + 1 }, (_, index) =>
-      String(index + startValue)
+    
+    return Array.from({ length: endHeight - startHeight + 1 }, (_, index) =>
+    String(index + startHeight)
     );
   };
+
+  const [selectedHeight, setSelectedHeight] = useState(startHeight);
+  const [selectedHUnit, setSelectedHUnit] = useState("CM");
+
   const initialSelectedIndex = selectedHeight
     ? getHeightOptions().indexOf(selectedHeight)
     : 0;
 
-    const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-
+  const [selectedIndex, setSelectedUnit] = useState(0);
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.heading}>What's your height?</Text>
-        <Text style={styles.text}>This helps us create your personalized plan</Text>
-        <ToggleButton />
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
+        <ToggleButton
+          onPress={() => {
+            const newUnit = selectedHUnit === "CM" ? "Feet" : "CM";
+            setSelectedUnit(newUnit);
+            const heightOptions = getHeightOptions();
+            setSelectedHeight(heightOptions[selectedIndex]);
+          }}
+        />
         <View style={styles.pickerContainer}>
           <WheelPicker
-            selectedIndex={selectedHeight ? getHeightOptions().indexOf(selectedHeight) : 0}
+            selectedIndex={selectedIndex}
             options={getHeightOptions()}
             onChange={(index) => setSelectedHeight(getHeightOptions()[index])}
             itemTextStyle={{
@@ -61,8 +71,8 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
         <NextButton
           nextCompName={nextCompName}
           onPressNext={() => {
-            console.log("Selected Height:", selectedHeight);
-            onPressNext(selectedHeight);
+            console.log("Selected Height:", selectedHeight, selectedHUnit);
+            onPressNext(selectedHeight, selectedHUnit);
           }}
           selectedHeight={selectedHeight}
         />
@@ -70,7 +80,6 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {

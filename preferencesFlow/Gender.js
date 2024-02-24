@@ -9,7 +9,7 @@ import femaleSelected from "./components/femaleSelected.png";
 import otherSelected from "./components/otherSelected.png";
 import NextButton from "./components/NextButton";
 
-const Gender = ({ nextCompName, onPressNext }) => {
+const Gender = ({ nextCompName, onPressNext, gender, setGender }) => {
   const [selectedGender, setSelectedGender] = useState();
 
   const click = (gender) => {
@@ -64,7 +64,7 @@ const Gender = ({ nextCompName, onPressNext }) => {
       <View style={styles.buttonsContainer}>
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={onPressNext}
+          onPressNext={handleNextPress}
           selectedGender={selectedGender}
           disabled={!isGenderValid}
         />
