@@ -10,8 +10,6 @@ import SignUp from './SignUp';
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';
 
-
-
 const Stack = createNativeStackNavigator();
 
 const MyStack = () => {

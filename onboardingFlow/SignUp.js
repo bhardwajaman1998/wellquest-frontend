@@ -40,7 +40,7 @@ const SignUp = ({ navigation }) => {
         />
       </View>
 
-      <TouchableOpacity style={styles.signUpButton}>
+      <TouchableOpacity style={styles.signUpButton}  onPress={() => navigation.navigate("Preferences")}>
         <Text style={styles.signUpButtonText}>Sign up</Text>
       </TouchableOpacity>
 

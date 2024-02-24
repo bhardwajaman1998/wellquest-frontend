@@ -12,13 +12,15 @@ import homeIcon from "../assets/home.png";
 import progressIcon from "../assets/My_progress_nav.png";
 import messageIcon from "../assets/Messages_nav.png";
 import profileIcon from "../assets/Profile_nav.png";
+import ChatPageStack from '../Stacks/ChatPageStack';
+import SearchFoodStack from '../Stacks/SearchFoodStack';
 
 const Tab = createBottomTabNavigator();
 const screenOptions={
     tabBarShowLabel:false,
     headerShown:false,
     tabBarStyle:{
-            // position:'absolute',
+            position:'absolute',
             bottom:0,
             left:0,
             right:0,
@@ -47,7 +49,7 @@ const NavBar =()=>{
                                 <Text style={{fontSize:13,color:"#fff"}}>Home</Text>
                             </View>
                         )
-                    }
+                    },
                 }}
                 />
             <Tab.Screen 
@@ -95,7 +97,7 @@ const NavBar =()=>{
                 />
             <Tab.Screen 
                 name="Messages" 
-                component={ChatPage}
+                component={ChatPageStack}
                 options={{
                     tabBarIcon:({focused})=>{
                         return(
@@ -111,7 +113,7 @@ const NavBar =()=>{
                 }}/>
             <Tab.Screen 
                 name="Profile" 
-                component={ProfileScreen}
+                component={SearchFoodStack}
                 options={{
                     tabBarIcon:({focused})=>{
                         return(
@@ -123,7 +125,8 @@ const NavBar =()=>{
                                 <Text style={{fontSize:13,color:"#fff"}}>Profile</Text>
                             </View>
                         )
-                    }
+                    },
+                    headerShown: false
                 }}/>
         </Tab.Navigator>
     );

@@ -2,10 +2,9 @@ import React from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import successImg from '../assets/success.png'
+
 const Success = ({nextCompName, onPressNext, formData }) => {
   const navigation = useNavigation();
-
-
   const gender = formData.gender;
   const age = formData.age;
   const weight = formData.weight;
@@ -21,6 +20,7 @@ const Success = ({nextCompName, onPressNext, formData }) => {
     console.log(`height : ${height}`)
     console.log(`goal : ${goal}`)
     console.log(`activityLevel : ${activityLevel}`)
+    navigation.navigate('Dashboard')
   }
   return (
     <View style={styles.container}>
