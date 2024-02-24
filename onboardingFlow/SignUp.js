@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 220,
     width: '100%',
-    // borderRadius: 50,
+    
   },
   title: {
     fontSize: 24,

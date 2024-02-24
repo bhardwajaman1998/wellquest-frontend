@@ -13,7 +13,7 @@ const Landing2 = ({navigation}) => {
       <Text style={styles.text}>Stay Connected With Your Trainer!</Text>
       <View style={styles.bottomContainer}>
       <TouchableOpacity onPress={() =>
-        navigation.navigate('Login', {name: 'Login'})
+        navigation.navigate('Path', {name: 'Path'})
       } style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', 
   },
   logo: {
-    width: 400, 
-    height: 400,
+    width: 500, 
+    height: 500,
     borderRadius: 200,
   },
   text: {
@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333',
     fontWeight: "bold",
+    marginBottom: 50,
+    paddingBottom: "50%",
   },
   bottomContainer: {
     position: 'absolute',

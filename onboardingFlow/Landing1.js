@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', 
   },
   logo: {
-    width: 400, 
-    height: 400,
+    width: 500, 
+    height: 500,
     borderRadius: 200,
   },
   text: {
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333',
     fontWeight: "bold",
+    paddingBottom: "50%",
   },
   bottomContainer: {
     position: 'absolute',
