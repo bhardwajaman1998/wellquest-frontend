@@ -1,8 +1,7 @@
 
 import SearchFoodScreen from "../scanFoodFlow/SearchFoodScreen"
-import LogFood from "../scanFoodFlow/LogFood"
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import LogFood from "../components/scanFoodComponents/LogFood"
+import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 import {Stack} from './Stack';
 
 const SearchFoodStack = () => {
@@ -12,27 +11,33 @@ const SearchFoodStack = () => {
                     name="SearchFood" // give it a unique name
                     component={SearchFoodScreen} // use that component here by replacing IndexScreen
                     options={{
-                        title:"", 
+                        title:"Search Food", 
                         headerStyle:{
-                            backgroundColor:'#fff'
+                            backgroundColor:'#7265E3'
                         },
-                        headerShown: false,
+                        headerShown: true,
                         headerTitleStyle:{
                             color:'#fff'
                         },
+                        headerLeft: () => (
+                            <GlobalBackButton />
+                        )
                     }}
                 /> 
             <Stack.Screen
                     name="LogFood" 
                     component={LogFood}
                     options={{
-                        title:"", 
+                        title:"Log Food", 
                         headerStyle:{
-                            backgroundColor:'#fff'
+                            backgroundColor:'#7265E3'
                         },
                         headerTitleStyle:{
                             color:'#fff'
                         },
+                        headerLeft: () => (
+                            <GlobalBackButton />
+                        )
                     }}
             />        
             </Stack.Navigator>

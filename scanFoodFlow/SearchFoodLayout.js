@@ -1,12 +1,12 @@
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
 import { StyleSheet, TouchableOpacity } from "react-native";
-import StyledText from "../components/StyledText";
+import StyledText from "../components/globalComponents/StyledText";
 
-import SearchBar from "./SearchBar"
-import ScanButton from "./ScanButton"
-import MealTypeButton from "./MealTypeButton"
-import HistoryListView from "./HistoryListView"
-import NoFoodView from "./NoFoodView";
+import SearchBar from "../components/scanFoodComponents/SearchBar"
+import ScanButton from "../components/scanFoodComponents/ScanButton"
+import MealTypeButton from "../components/scanFoodComponents/MealTypeButton"
+import HistoryListView from "../components/scanFoodComponents/HistoryListView"
+import NoFoodView from "../components/scanFoodComponents/NoFoodView";
 
 const SearchFoodLayout = () => {
     return (

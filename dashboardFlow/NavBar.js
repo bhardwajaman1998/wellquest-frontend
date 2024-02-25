@@ -4,16 +4,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import ProgressScreen from './ProgressScreen';
 import ProfileScreen from './ProfileScreen';
-import ChatPage from './ChatPage';
 import AddCount from './AddCount';
-import Images from '../components/Images';
 import addIcon from "../assets/add_icon.png";
 import homeIcon from "../assets/home.png";
 import progressIcon from "../assets/My_progress_nav.png";
 import messageIcon from "../assets/Messages_nav.png";
 import profileIcon from "../assets/Profile_nav.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
-import SearchFoodStack from '../Stacks/SearchFoodStack';
 
 const Tab = createBottomTabNavigator();
 const screenOptions={
@@ -113,7 +110,7 @@ const NavBar =()=>{
                 }}/>
             <Tab.Screen 
                 name="Profile" 
-                component={SearchFoodStack}
+                component={ProfileScreen}
                 options={{
                     tabBarIcon:({focused})=>{
                         return(

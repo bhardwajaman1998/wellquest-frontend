@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import Gender from "./Gender";
-import Age from "./Age";
-import Weight from "./Weight";
-import Height from "./Height";
-import Goal from "./Goal";
-import ActivityLevel from "./ActivityLevel";
-import Success from "./Success";
+import Gender from "../components/preferencesComponents/Gender";
+import Age from "../components/preferencesComponents/Age";
+import Weight from "../components/preferencesComponents/Weight";
+import Height from "../components/preferencesComponents/Height";
+import Goal from "../components/preferencesComponents/Goal";
+import ActivityLevel from "../components/preferencesComponents/ActivityLevel";
+import Success from "../components/preferencesComponents/Success";
 import { BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import NextButton from "./components/NextButton";
+import NextButton from "../components/preferencesComponents/NextButton";
 
 const PreferencesScreen = () => {
   const [cardType, setCardType] = useState(1);

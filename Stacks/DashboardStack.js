@@ -4,13 +4,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Image } from '@gluestack-ui/themed'
 
 import HomeScreen from "../dashboardFlow/HomeScreen";
-import FindCoach from "../dashboardFlow/Components/CoachScreen/FindCoach";
-import CoachProfile from "../dashboardFlow/Components/CoachScreen/CoachProfile";
+import FindCoach from "../components/dashboardComponents/Components/CoachScreen/FindCoach";
+import CoachProfile from "../components/dashboardComponents/Components/CoachScreen/CoachProfile";
 import NavBar from "../dashboardFlow/NavBar";
-import ScheduleScreen from "../dashboardFlow/Components/Schedule/ScheduleScreen";
+import ScheduleScreen from "../components/dashboardComponents/Components/Schedule/ScheduleScreen";
 import ChatPage from "../dashboardFlow/ChatPage";
 import NotificationScreen from "../dashboardFlow/NotificationScreen";
-import AppointmentScreen from "../dashboardFlow/Components/Schedule/AppointmentScreen";
+import AppointmentScreen from "../components/dashboardComponents/Components/Schedule/AppointmentScreen";
 
 import {Stack} from './Stack';
 

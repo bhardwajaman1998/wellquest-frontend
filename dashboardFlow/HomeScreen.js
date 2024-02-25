@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, ScrollView, navigation} from 'react-native';
-import AppointmentCard from './Components/HomeScreen/AppointmentCard';
-import NutritionPlanCard from './Components/HomeScreen/NutritionPlanCard';
-import GoalCard from './Components/HomeScreen/GoalCard';
+import AppointmentCard from '../components/dashboardComponents/Components/HomeScreen/AppointmentCard';
+import NutritionPlanCard from '../components/dashboardComponents/Components/HomeScreen/NutritionPlanCard';
+import GoalCard from '../components/dashboardComponents/Components/HomeScreen/GoalCard';
 import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen= ()=>{

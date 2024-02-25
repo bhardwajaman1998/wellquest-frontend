@@ -1,10 +1,10 @@
-import AiChatPage from "../components/chatPage";
-import ChooseGoal from "../components/chooseGoal";
-import SelectHeight from "../components/selectHeight";
-import SelectWeight from "../components/selectWeight";
-import PlanPage from "../components/planPage";
-import Options from "../components/options";
-
+import AiChatPage from "../components/chatPageComponents/chatPage";
+import ChooseGoal from "../components/chatPageComponents/chooseGoal";
+import SelectHeight from "../components/chatPageComponents/selectHeight";
+import SelectWeight from "../components/chatPageComponents/selectWeight";
+import PlanPage from "../components/chatPageComponents/planPage";
+import Options from "../components/chatPageComponents/options";
+import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 import {Stack} from './Stack';
 
 const ChatPageStack = () => {
@@ -35,7 +35,10 @@ const ChatPageStack = () => {
                     },
                     headerTitleStyle:{
                         color:'#fff'
-                    }
+                    },
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -48,7 +51,10 @@ const ChatPageStack = () => {
                     },
                     headerTitleStyle:{
                         color:'#fff'
-                    }
+                    },
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -61,7 +67,10 @@ const ChatPageStack = () => {
                     },
                     headerTitleStyle:{
                         color:'#fff'
-                    }
+                    },
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -74,7 +83,10 @@ const ChatPageStack = () => {
                     },
                     headerTitleStyle:{
                         color:'#fff'
-                    }
+                    },
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -87,7 +99,10 @@ const ChatPageStack = () => {
                     },
                     headerTitleStyle:{
                         color:'#fff'
-                    }
+                    },
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
         </Stack.Navigator>

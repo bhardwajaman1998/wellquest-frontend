@@ -5,7 +5,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import AppStack from './Stacks/AppStack';
 
 import * as Font from 'expo-font'
-import MyStack from './onboardingFlow/MyStack';
 import AppLoading from 'expo-app-loading'
 import { useState } from 'react';
 
