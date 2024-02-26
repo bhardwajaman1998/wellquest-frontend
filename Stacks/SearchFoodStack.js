@@ -3,6 +3,7 @@ import SearchFoodScreen from "../scanFoodFlow/SearchFoodScreen"
 import LogFood from "../components/scanFoodComponents/LogFood"
 import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 import {Stack} from './Stack';
+import CameraScreen from "../components/scanFoodComponents/CameraScreen";
 
 const SearchFoodStack = () => {
   return (
@@ -39,7 +40,24 @@ const SearchFoodStack = () => {
                             <GlobalBackButton />
                         )
                     }}
-            />        
+            />   
+            <Stack.Screen
+                    name="CameraScreen" 
+                    component={CameraScreen}
+                    options={{
+                        title:"", 
+                        headerStyle:{
+                            backgroundColor:'#7265E3'
+                        },
+                        headerTitleStyle:{
+                            color:'#fff'
+                        },
+                        headerShown: false,
+                        headerLeft: () => (
+                            <GlobalBackButton />
+                        )
+                    }}
+            />       
             </Stack.Navigator>
   )
 }

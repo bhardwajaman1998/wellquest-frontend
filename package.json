@@ -46,7 +46,8 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^10.0.3",
     "react-native-toast-message": "^2.2.0",
-    "react-native-wheely": "^0.6.0"
+    "react-native-wheely": "^0.6.0",
+    "expo-camera": "~14.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
