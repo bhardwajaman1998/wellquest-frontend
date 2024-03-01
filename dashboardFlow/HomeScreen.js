@@ -1,32 +1,34 @@
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, ScrollView, navigation} from 'react-native';
-// import {DashBoardCard, GoalCard,HomeScreenHeader,IntakeCard,NutritionPlanCard} from "./Cards";
-import AppointmentCard from './Components/HomeScreen/AppointmentCard';
-import NutritionPlanCard from './Components/HomeScreen/NutritionPlanCard';
-import GoalCard from './Components/HomeScreen/GoalCard';
-import HomeScreenHeader from './Components/HomeScreen/HomeScreenHeader';
+import AppointmentCard from '../components/dashboardComponents/Components/HomeScreen/AppointmentCard';
+import NutritionPlanCard from '../components/dashboardComponents/Components/HomeScreen/NutritionPlanCard';
+import GoalCard from '../components/dashboardComponents/Components/HomeScreen/GoalCard';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen= ()=>{
+    const navigation = useNavigation();
+
     return(
         <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <HomeScreenHeader />
-                <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView style={styles.container}>
+                
+                    <Text style={styles.userNameText}>Hello , USER</Text>
+
                     <GoalCard />
-                    <View style={styles.spacing} />
-                    <AppointmentCard> 
-                    </AppointmentCard>
-                    <View style={styles.spacing} />
+
+                    <AppointmentCard />
+                    
                     <NutritionPlanCard />
+                
                 </ScrollView>
-            </View>
+
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     safeArea: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#fff', 
     },
     container: {
@@ -37,13 +39,12 @@ const styles = StyleSheet.create({
         paddingTop: 1000, 
         paddingHorizontal: 10,
     },
-    contentContainer: {
-        // flexGrow: 1,
-        paddingVertical: 10,
-    },
-    spacing: {
-        height: 20,
-    },
-  });
+    userNameText:{
+        fontSize:24,
+        fontWeight:'bold',
+        marginTop:20,
+        marginHorizontal:20,
+    }
+});
 
 export default HomeScreen;
