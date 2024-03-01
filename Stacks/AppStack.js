@@ -24,11 +24,11 @@ const AppStack = () => {
           component={PreferencesStack}
           options = {{headerShown: false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Dashboard"
           component={DashboardStack}
           options = {{headerShown: false}}
-        />
+        /> */}
         {/* <Stack.Screen
           name="AiChat"
           component={ChatPageStack}

@@ -64,9 +64,8 @@ const PreferencesScreen = () => {
 
   const handleFinish = () => {
     console.log("Collected Data:", formData);
-    console.log("Gender:", gender); // Log the gender state
     postData(formData);
-    navigation.navigate("Success");
+    // navigation.navigate("Success");
   };
 
   const postData = async (formData) => {
