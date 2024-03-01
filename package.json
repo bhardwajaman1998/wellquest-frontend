@@ -16,6 +16,7 @@
     "@gluestack-ui/config": "^1.0.13",
     "@gluestack-ui/themed": "^1.0.37",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-picker/picker": "github:react-native-picker/picker",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/material-top-tabs": "^6.6.5",
     "@react-navigation/native": "^6.1.10",
@@ -44,8 +45,9 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "14.1.0",
     "react-native-tab-view": "^3.5.2",
-    "react-native-vector-icons": "^10.0.3",
     "react-native-toast-message": "^2.2.0",
+    "react-native-vector-icons": "^10.0.3",
+    "react-native-wheel-picker": "^1.2.0",
     "react-native-wheely": "^0.6.0"
   },
   "devDependencies": {
