@@ -3,7 +3,9 @@ import { SafeAreaView, StyleSheet , View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import CoachCard from './CoachCard';
-import profileIcon from "../../../../assets/profile.png";
+import profileIcon from "../../../../assets/Maskgroup.png";
+import CustomSearchBar from '../../Common/CustomSearchBar';
+
 export default function FindCoach() {
     ///for search bar functionality 
     const [search, setSearch] = useState('');
@@ -19,13 +21,12 @@ export default function FindCoach() {
             <View style={styles.content}>
                 <View style={styles.searchSide}>        
                 <Text style={styles.header}>Find the best coaches for You..</Text>
-                <SearchBar 
-                    placeholder="Search for recommended coaches.."
-                    onChangeText={updateSearch}
-                    value={search}
-                    inputContainerStyle={styles.searchBarInputContainer}
-                    containerStyle={styles.searchBarContainer}
+                <CustomSearchBar
+                value={search}
+                onChangeText={updateSearch}
+                placeholder="Search for recommended coaches.."
                 />
+
                 </View>
 
                 <View style={styles.coachData}>
@@ -60,10 +61,13 @@ const styles = StyleSheet.create({
     },
     searchBarContainer: {
         backgroundColor: 'transparent',
-        borderBottomColor: 'transparent', 
-        borderTopColor: 'transparent',
         paddingRight: 10, 
         margin: 10, 
+        borderWidth:2,
+        borderColor:'grey',
+    },
+    searchIconContainer:{
+        marginLeft:10,
     },
     coachData:{
         margin:20,

@@ -22,8 +22,8 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
       justifyContent: 'center',
       borderRadius: 25,
       borderWidth: 1,
-      padding: 10,
-      backgroundColor:"#7d7f7c",
+      padding: 8,
+      backgroundColor:"#FF934E",
     },
     image: {
       width: 30,

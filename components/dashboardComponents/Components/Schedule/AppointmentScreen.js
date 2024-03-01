@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity ,styles} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import AppointmentListItem from './AppointmentListItem'; 
+import profilePic from "../../.././../assets/Maskgroup.png";
 
 const ToggleSwitch = ({ onToggle }) => {
-  const [isSelected, setIsSelected] = useState(true);
+  const [isNewSelected, setIsNewSelected] = useState(true);
+  const [isPreviousSelected, setIsPreviousSelected] = useState(false);
 
-  const handleToggle = () => {
-    setIsSelected(!isSelected);
-    onToggle(!isSelected);
+  const handleNewToggle = () => {
+    setIsNewSelected(true);
+    setIsPreviousSelected(false);
+    onToggle(true);
+  };
+
+  const handlePreviousToggle = () => {
+    setIsNewSelected(false);
+    setIsPreviousSelected(true);
+    onToggle(false);
   };
 
   return (
-    <View >
-            <TouchableOpacity onPress={handleToggle} style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{ width: 50, height: 30, borderRadius: 15, backgroundColor: isSelected ? 'blue' : 'lightgray', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ color: isSelected ? 'white' : 'black', fontWeight: 'bold' }}>{isSelected ? 'New' : 'Previous'}</Text>
-            </View>
-            <View style={{ width: 30, height: 30, borderRadius: 15, backgroundColor: isSelected ? 'lightgray' : 'blue', justifyContent: 'center', alignItems: 'center', marginLeft: 10 }}>
-                <Text style={{ color: isSelected ? 'black' : 'white', fontWeight: 'bold' }}>{isSelected ? 'P' : 'N'}</Text>
-            </View>
-            </TouchableOpacity>
+    <View style={styles.toggleContainer}>
+      <TouchableOpacity onPress={handleNewToggle} style={isNewSelected ? styles.toggleButtonSelected : styles.toggleButton}>
+        <Text style={isNewSelected ? styles.toggleButtonTextSelected : styles.toggleButtonText}>Previous</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handlePreviousToggle} style={isPreviousSelected ? styles.toggleButtonSelected : styles.toggleButton}>
+        <Text style={isPreviousSelected ? styles.toggleButtonTextSelected : styles.toggleButtonText}>New</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -32,35 +39,79 @@ const AppointmentScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
+    <View style={styles.container}>
+      <View style={styles.toggleButtonsContainer}>
         <ToggleSwitch onToggle={handleToggle} />
       </View>
-      {showPrevious ? (
-        <>
+      <View style={styles.appointmentListContainer}>
+        {showPrevious ? (
+          <>
+            <AppointmentListItem
+              date="Wed 2024-02-20"
+              time="10:00 AM - 11:00 AM"
+              coachName="John Doe"
+              coachAvatar={profilePic}
+            />
+            <AppointmentListItem
+              date=" Tues 2023-12-20"
+              time="10:00 AM - 11:00 AM"
+              coachName="John Doe"
+              coachAvatar={profilePic}  
+            />
+          </>
+        ) : (
           <AppointmentListItem
-            date="2024-02-20"
-            time="10:00 AM - 11:00 AM"
-            coachName="John Doe"
-            coachAvatar="https://example.com/avatar.jpg"
+            date=" Fri 2024-03-21"
+            time="11:00 AM - 12:00 PM"
+            coachName="Jane Smith"
+            coachAvatar={profilePic}
           />
-          <AppointmentListItem
-            date="2024-02-20"
-            time="10:00 AM - 11:00 AM"
-            coachName="John Doe"
-            coachAvatar="https://example.com/avatar.jpg"
-          />
-        </>
-      ) : (
-        <AppointmentListItem
-          date="2024-02-21"
-          time="11:00 AM - 12:00 PM"
-          coachName="Jane Smith"
-          coachAvatar="https://example.com/avatar.jpg"
-        />
-      )}
+        )}
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  toggleButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  toggleContainer: {
+    flexDirection: 'row',
+  },
+  toggleButton: {
+    width: 100,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'lightgray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  toggleButtonSelected: {
+    width: 100,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  toggleButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  toggleButtonTextSelected: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  appointmentListContainer: {
+    flex: 1,
+  },
+});
 
 export default AppointmentScreen;

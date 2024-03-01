@@ -19,7 +19,7 @@ const GoalCard = () => {
                         percent={(completedCalories / totalCaloriesGoal) * 100}
                         radius={55}
                         borderWidth={8}
-                        color="#999"
+                        color="#FF934E"
                         shadowColor="#d3d3d3"
                         bgColor="#fff"
                     >
@@ -45,20 +45,6 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         margin:20,
-    },
-    header: {
-        marginBottom: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    heading: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    card: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 8,
         backgroundColor: '#fff',
         ...Platform.select({
             ios: {
@@ -71,6 +57,21 @@ const styles = StyleSheet.create({
                 elevation: 4,
             },
         }),
+        borderRadius: 8,
+    },
+    header: {
+        margin: 20,
+        marginBottom:1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    heading: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    card: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     progressContainer: {
         padding: 20,
