@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const ToggleButton = () => {
-  const [selectedButton, setSelectedButton] = useState('Kg');
+const ToggleButton = ({ labels, onPress }) => {
+  const [selectedButton, setSelectedButton] = useState(labels[0]);
 
   const renderButton = (label) => (
     <TouchableOpacity
+      key={label}
       style={[styles.button, selectedButton === label && styles.buttonSelected]}
-      onPress={() => setSelectedButton(label)}
+      onPress={() => handlePress(label) }
     >
       <Text style={styles.title}>{label}</Text>
     </TouchableOpacity>
   );
 
+  const handlePress = (label) => {
+    setSelectedButton(label);
+    onPress(label); 
+  }
+
   return (
     <View style={styles.container}>
-      {renderButton('Kg')}
-      {renderButton('Lb')}
+      {labels.map(renderButton)}
     </View>
   );
 };

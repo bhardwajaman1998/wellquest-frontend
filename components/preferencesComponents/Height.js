@@ -16,7 +16,7 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
     );
   };
 
-  const [selectedHeight, setSelectedHeight] = useState(0);
+  const [selectedHeight, setSelectedHeight] = useState(startHeight);
   const [selectedHeightUnit, setSelectedHeightUnit] = useState("CM");
 
   const initialSelectedIndex = selectedHeight
@@ -33,9 +33,9 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
           This helps us create your personalized plan
         </Text>
         <ToggleButton
-          onPress={() => {
-            const newHeightUnit = selectedHeightUnit === "CM" ? "Feet" : "CM";
-            setSelectedIndex(newHeightUnit);
+          labels={["CM", "Feet"]}
+          onPress={(selectedUnit) => {
+            setSelectedHeightUnit(selectedUnit);
             const heightOptions = getHeightOptions();
             setSelectedHeight(heightOptions[selectedIndex]);
           }}
@@ -71,7 +71,7 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
         <NextButton
           nextCompName={nextCompName}
           onPressNext={() => {
-            onPressNext(selectedHeight, selectedHUnit);
+            onPressNext(selectedHeight, selectedHeightUnit);
           }}
           selectedHeight={selectedHeight}
         />
