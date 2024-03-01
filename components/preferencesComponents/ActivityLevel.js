@@ -15,6 +15,10 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
     { label: "True Beast", value: "True Beast" },
   ];
 
+  const handlePressNext = () => {
+    onPressNext(selectedActivityLevel);
+  };  
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -61,8 +65,8 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
         <BackButton backAction={backAction} />
         <NextButton
           nextCompName={nextCompName}
-          onPressNext={ ()=> onPressNext(selectedActivityLevel)} 
-          disabled={!selectedActivityLevel} 
+          onPressNext={handlePressNext}
+          disabled={!selectedActivityLevel}
         />
       </View>
     </View>
