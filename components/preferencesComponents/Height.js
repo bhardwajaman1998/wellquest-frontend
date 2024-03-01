@@ -16,14 +16,14 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
     );
   };
 
-  const [selectedHeight, setSelectedHeight] = useState(startHeight);
-  const [selectedHUnit, setSelectedHUnit] = useState("CM");
+  const [selectedHeight, setSelectedHeight] = useState(0);
+  const [selectedHeightUnit, setSelectedHeightUnit] = useState("CM");
 
   const initialSelectedIndex = selectedHeight
     ? getHeightOptions().indexOf(selectedHeight)
     : 0;
 
-  const [selectedIndex, setSelectedUnit] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <View style={styles.container}>
@@ -34,8 +34,8 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
         </Text>
         <ToggleButton
           onPress={() => {
-            const newUnit = selectedHUnit === "CM" ? "Feet" : "CM";
-            setSelectedUnit(newUnit);
+            const newHeightUnit = selectedHeightUnit === "CM" ? "Feet" : "CM";
+            setSelectedIndex(newHeightUnit);
             const heightOptions = getHeightOptions();
             setSelectedHeight(heightOptions[selectedIndex]);
           }}

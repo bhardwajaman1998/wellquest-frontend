@@ -123,8 +123,8 @@ const PreferencesScreen = () => {
           onPressNext={(selectedWeight, selectedWeightUnit) => {
             setFormData((prevData) => ({
               ...prevData,
-              weight: selectedWeight,
-              weightUnit: selectedWeightUnit,
+              // weight: selectedWeight + selectedWeightUnit, This doesn't add space between number and its unit
+              weight: `${selectedWeight} ${selectedWeightUnit}`,
             }));
             setWeight(selectedWeight);
             setWeightUnit(selectedWeightUnit);
@@ -140,8 +140,7 @@ const PreferencesScreen = () => {
           onPressNext={(selectedHeight, selectedHeightUnit) => {
             setFormData((prevData) => ({
               ...prevData,
-              height: selectedHeight,
-              heightUnit: selectedHeightUnit,
+              height: `${selectedHeight} ${selectedHeightUnit}`,
             }));
             setHeight(selectedHeight);
             setHeightUnit(selectedHeightUnit);
@@ -174,9 +173,9 @@ const PreferencesScreen = () => {
       )}
       {cardType === 7 && (
         <Success
+          formData={formData}
           backAction={backAction}
           onPressNext={handleFinish}
-          formData={formData}
         />
       )}
     </View>

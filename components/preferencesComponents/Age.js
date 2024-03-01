@@ -6,7 +6,7 @@ import Toast from "react-native-toast-message";
 import WheelPicker from "react-native-wheely";
 import { Picker } from '@react-native-picker/picker';
 
-const Age = ({ backAction, nextCompName, onPressNext }) => {
+const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
   const [selectedAge, setSelectedAge] = useState(19);
 
   const ageOptions = Array.from({ length: 100 }, (_, index) =>
