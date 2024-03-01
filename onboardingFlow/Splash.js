@@ -40,11 +40,7 @@ const Splash = ({navigation}) => {
         style={styles.logo}
         resizeMode="contain"
       />
-      {/* <TouchableOpacity onPress={() =>
-        navigation.navigate('Landing', {name: 'Landing'})
-      } style={styles.button}>
-        <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity> */}
+      
     </View>
   );
 };

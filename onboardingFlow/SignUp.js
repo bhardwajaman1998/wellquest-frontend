@@ -1,36 +1,92 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';  
+import axios from 'axios'
 
 const SignUp = ({ navigation }) => {
+  //let us set the state for user inputs
+  const [email, setEmail] = useState("");
+  const [emailverify, setEmailVerify] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordVerify, setPasswordVerify] = useState(false);
+  const [showPassword, setShowpasswor] = useState(false);
+
+  function handleEmail(e){
+    const emailVar = (e.nativeEvent.text);
+    setEmail(emailVar);
+    setEmailVerify(false);
+    if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
+      setEmail(emailVar);
+    setEmailVerify(true);
+    }
+  }
+  function handlePassword(e){
+    const passwordVar = (e.nativeEvent.text);
+    setPassword(passwordVar);
+    setPasswordVerify(false);
+    if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
+      setPassword(passwordVar);
+    setPasswordVerify(true);
+    }
+  }
+  //using Axios to access the API
+  //You can use fetch also
+  function handleSubmit(){
+    const userData = {
+      email: email,
+      password:password,
+    };
+    axios
+    .post("http://192.168.1.188:5000/register", userData)
+    .then((res)=>console.log(res.data))
+    .catch(e =>console.log(e))
+      }
   return (
+    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
     <View style={styles.container}>
-      <View style={styles.profileImage}>
-        <Image
-          source={require('../assets/Logo.png')}
-          style={styles.profileImage}
-          resizeMode="cover"
-        />
-      </View>
+      
       <Text style={styles.title}>Sign up</Text>
       <View style={styles.inputContainer}>
-        <Text>Email address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-
+      <Text>Email address</Text>
+  <TextInput
+    style={styles.input}
+    placeholder="Enter email"
+    keyboardType="email-address"
+    autoCapitalize="none"
+    onChangeText={(text) => handleEmail({nativeEvent: {text} })}
+  />
+  {email.length < 1 ? null : emailverify ? (
+    <Feather name="check-circle" color="green" size={20} />
+  ) : (
+    <Feather name="x-circle" color="red" size={20} />
+  )}
+</View>
+{email.length < 1 ? null : emailverify ? null : (
+  <Text style={{ marginLeft: 20, color: 'red' }}>
+    Email should be more than 1 character
+  </Text>
+)}
       <View style={styles.inputContainer}>
         <Text>New password</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter password"
-          secureTextEntry
+          onChangeText={(text) => handlePassword({nativeEvent: {text} })}
+          secureTextEntry={showPassword}
         />
+        <TouchableOpacity onPress={()=> setShowpasswor(!showPassword)}> 
+        {password.length<1?null : !showPassword?
+        <Feather name="eye-off" style={marginRight= -10} color={passwordVerify? "green" :"red"} size={20} />
+        :
+        <Feather name="eye" style={marginRight= -10} color={passwordVerify? "green" :"red"} size={20} />
+        }
+        </TouchableOpacity>
       </View>
-
+      {password.length < 1 ? null : passwordVerify ? null : (
+  <Text style={{ marginLeft: 20, color: 'red' }}>
+    Password should contain upper-case and number
+  </Text>
+)}
       <View style={styles.inputContainer}>
         <Text>Confirm password</Text>
         <TextInput
@@ -40,7 +96,7 @@ const SignUp = ({ navigation }) => {
         />
       </View>
 
-      <TouchableOpacity style={styles.signUpButton}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => handleSubmit()}>
         <Text style={styles.signUpButtonText}>Sign up</Text>
       </TouchableOpacity>
 
@@ -55,6 +111,7 @@ const SignUp = ({ navigation }) => {
       <Text style={styles.loginLink}>Already have an account? Log in</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 };
 
@@ -79,12 +136,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 20
+    
   },
   inputContainer: {
     marginBottom: 15,
     width: '100%',
-  },
+      },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',

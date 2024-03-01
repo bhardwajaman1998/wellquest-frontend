@@ -1,16 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 
 const Login = ({ navigation}) => {
   return (
+    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>
     <View style={styles.container}>
-      <View style={styles.profileImageContainer}>
-        <Image
-          source={require('../assets/Logo.png')}
-          style={styles.profileImage}
-          resizeMode="cover"
-        />
-      </View>
+    
       <Text style={styles.title}>Log in</Text>
       <View style={styles.inputContainer}>
         <Text>Email address</Text>
@@ -46,6 +41,7 @@ const Login = ({ navigation}) => {
       <Text style={styles.loginLink}>No account yet? Sign Up</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 };
 
