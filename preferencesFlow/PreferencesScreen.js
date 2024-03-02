@@ -33,14 +33,13 @@ const PreferencesScreen = () => {
   ];
 
   const [formData, setFormData] = useState({
-    gender: null,
-    age: null,
-    weight: null,
-    weightUnit: null,
-    height: null,
-    heightUnit: null,
-    goal: null,
-    activityLevel: null,
+    cust_id:"65cc353cb9be345699d6a69a",
+    gender: "",
+    age: "",
+    weight: "",
+    height: "",
+    goal: "",
+    activityLevel: "",
   });
 
   const backAction = () => {
@@ -66,9 +65,31 @@ const PreferencesScreen = () => {
 
   const handleFinish = () => {
     console.log("Collected Data:", formData);
-    console.log("Gender:", gender); // Log the gender state
-    navigation.navigate("Success");
+    postData(formData);
+    // navigation.navigate("Success");
   };
+
+  const postData = async (formData) => {
+    try {
+      const response = await fetch('http://localhost:3000/api/customer/store_preferences', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log('Data posted successfully:', data);
+    } catch (error) {
+      console.error('Error posting data:', error.message);
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
@@ -103,8 +124,8 @@ const PreferencesScreen = () => {
           onPressNext={(selectedWeight, selectedWeightUnit) => {
             setFormData((prevData) => ({
               ...prevData,
-              weight: selectedWeight,
-              weightUnit: selectedWeightUnit,
+              // weight: selectedWeight + selectedWeightUnit, This doesn't add space between number and its unit
+              weight: `${selectedWeight} ${selectedWeightUnit}`,
             }));
             setWeight(selectedWeight);
             setWeightUnit(selectedWeightUnit);
@@ -120,8 +141,7 @@ const PreferencesScreen = () => {
           onPressNext={(selectedHeight, selectedHeightUnit) => {
             setFormData((prevData) => ({
               ...prevData,
-              height: selectedHeight,
-              heightUnit: selectedHeightUnit,
+              height: `${selectedHeight} ${selectedHeightUnit}`,
             }));
             setHeight(selectedHeight);
             setHeightUnit(selectedHeightUnit);
@@ -154,9 +174,9 @@ const PreferencesScreen = () => {
       )}
       {cardType === 7 && (
         <Success
+          formData={formData}
           backAction={backAction}
           onPressNext={handleFinish}
-          formData={formData}
         />
       )}
     </View>

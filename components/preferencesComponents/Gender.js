@@ -16,7 +16,6 @@ const Gender = ({ nextCompName, onPressNext, gender, setGender }) => {
     setSelectedGender((prevGender) => (prevGender === gender ? null : gender));
   };
   
-
   const isGenderValid =
     selectedGender !== undefined &&
     selectedGender !== null &&

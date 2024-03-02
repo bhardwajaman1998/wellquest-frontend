@@ -3,23 +3,11 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import successImg from '../../assets/success.png'
 
-const Success = ({nextCompName, onPressNext, formData }) => {
+const Success = ({formData }) => {
   const navigation = useNavigation();
-  const gender = formData.gender;
-  const age = formData.age;
-  const weight = formData.weight;
-  const height = formData.height;
-  const goal = formData.goal;
-  const activityLevel = formData.activityLevel;
 
   const onPress = () => {
-    console.log(`You are ready`)
-    console.log(`Gender : ${gender}`)
-    console.log(`Age : ${age}`)
-    console.log(`weight : ${weight}`)
-    console.log(`height : ${height}`)
-    console.log(`goal : ${goal}`)
-    console.log(`activityLevel : ${activityLevel}`)
+    console.log(JSON.stringify(formData))
     navigation.navigate('Dashboard', {screen: 'Back'})
   }
   return (

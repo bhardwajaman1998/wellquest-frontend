@@ -18,18 +18,18 @@ const AppStack = () => {
           name="Onboarding"
           component={OnboardingStack}
           options = {{headerShown: false}}
-        />
+        /> */}
         <Stack.Screen
           name="Preferences"
           component={PreferencesStack}
           options = {{headerShown: false}}
-        /> */}
-        <Stack.Screen
+        /> 
+        {/* <Stack.Screen
           name="Dashboard"
           component={DashboardStack}
           options = {{headerShown: false}}
-        />
-        <Stack.Screen
+        /> */}
+        {/* <Stack.Screen
           name="AiChat"
           component={ChatPageStack}
           options = {{headerShown: false}}
@@ -38,7 +38,7 @@ const AppStack = () => {
           name="SearchFood"
           component={SearchFoodStack}
           options = {{headerShown: false}}
-        />
+        /> */}
     </Stack.Navigator>
   </NavigationContainer>
 

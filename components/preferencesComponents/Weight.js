@@ -33,6 +33,7 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
           This helps us create your personalized plan
         </Text>
         <ToggleButton
+          labels={["Kg", "Lb"]}
           onPress={() => {
             const newWeightUnit = selectedWeightUnit === "Kg" ? "Lb" : "Kg";
             setSelectedWeightUnit(newWeightUnit);
