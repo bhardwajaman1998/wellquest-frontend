@@ -33,8 +33,15 @@ const AppStack = () => {
           name="AiChat"
           component={ChatPageStack}
           options = {{headerShown: false}}
-        />
+        /> */}
         <Stack.Screen
+          name="AiChat"
+          component={ChatPageStack}
+        />
+
+
+        
+        {/* <Stack.Screen
           name="SearchFood"
           component={SearchFoodStack}
           options = {{headerShown: false}}

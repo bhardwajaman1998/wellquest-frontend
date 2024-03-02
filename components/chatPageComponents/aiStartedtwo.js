@@ -1,13 +1,19 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-
-const AiStarted = () => {
+import { useNavigation } from '@react-navigation/native';
+const AiStartedTwo = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Vector.png')} style={styles.image} />
+      <Image source={require('../../assets/Vector1.png')} style={styles.image} />
       <Text style={styles.text}>I can generate a nutrition plan for you</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Let's get Started</Text>
+      <TouchableOpacity style={styles.button}
+      onPress={() =>
+        navigation.navigate('ChooseGoal', {name: 'ChooseGoal'})
+      }
+      
+      >
+        <Text style={styles.buttonText}>LETS'S GET STARTED</Text>
       </TouchableOpacity>
     </View>
   );
@@ -21,7 +27,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 200,
-    height: 200,
+    height: 300,
     marginBottom: 20,
   },
   text: {
@@ -30,10 +36,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: 'grey',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    backgroundColor: '#FF934E',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 20,
   },
   buttonText: {
     color: 'white',
@@ -42,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AiStarted;
+export default AiStartedTwo;
