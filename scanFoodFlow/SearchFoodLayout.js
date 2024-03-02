@@ -1,5 +1,5 @@
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Modal } from "react-native";
 import StyledText from "../components/globalComponents/StyledText";
 
 import SearchBar from "../components/scanFoodComponents/SearchBar"
@@ -7,40 +7,84 @@ import ScanButton from "../components/scanFoodComponents/ScanButton"
 import MealTypeButton from "../components/scanFoodComponents/MealTypeButton"
 import HistoryListView from "../components/scanFoodComponents/HistoryListView"
 import NoFoodView from "../components/scanFoodComponents/NoFoodView";
+import { useState } from "react";
+import SearchModal from "../components/scanFoodComponents/SearchModal";
 
 const SearchFoodLayout = () => {
+
+    const  [searchScreen, setSearchScreen] = useState(false)
+    const [selectedMeal, setSelectedMeal] = useState('');
+    const mealTypeArray = [
+        ['Breakfast', require('../assets/breakfast_icon.png')],
+        ['Lunch', require('../assets/lunch_icon.png')],
+        ['Dinner', require('../assets/dinner_icon.png')],
+        ['Snack', require('../assets/snack_icon.png')]
+    ]
+    
+    const handleMealTypeSelect = meal => {
+        setSelectedMeal(meal);
+    };
+
+
+    const setSearchBarActive = () => {
+        setSearchScreen(!searchScreen)
+    }
+
     return (
         <View style={styles.container}>
-            <SearchBar style={styles.search}/>
-            <View style={styles.scan}>
-                <ScanButton />
-                <ScanButton 
-                    isForCamera={false}
-                />
-            </View>
-            <View style={styles.meals}>
-                <StyledText style={styles.mealtext}>Select a meal</StyledText>
-                <View style={styles.mealTab}>
-                    <MealTypeButton source={require('../assets/breakfast_icon.png')} />
-                    <MealTypeButton source={require('../assets/lunch_icon.png')} />
-                    <MealTypeButton source={require('../assets/dinner_icon.png')} />
-                    <MealTypeButton source={require('../assets/snack_icon.png')} />
-                </View>
-            </View>
-            <View style={styles.history}>
-                <StyledText style={styles.historyText}>History</StyledText>
-                <TouchableOpacity>
-                    <HStack gap={5}>
-                        <ButtonIcon as={GripVerticalIcon} />
-                        <StyledText>Most recent</StyledText>
-                    </HStack>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.historyList}>
-                {/* <NoFoodView/> */}
-                <HistoryListView />
-            </View>
+        {
+            searchScreen ? (
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={searchScreen}
+                    onRequestClose={() => {
+                        setSearchScreen(!searchScreen);
+                    }}
+                >
+                    <SearchModal setSearchBarActive={setSearchBarActive}/>
+              </Modal>
+            ) : (
+                <>
+                    <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} />
+                    <View style={styles.scan}>
+                        <ScanButton />
+                        <ScanButton 
+                            isForCamera={false}
+                        />
+                    </View>
+                    <View style={styles.meals}>
+                        <StyledText style={styles.mealtext}>Select a meal</StyledText>
+                        <View style={styles.mealTab}>
+                        {mealTypeArray.map((meal, index) => (
+                            <MealTypeButton
+                                key={index}
+                                text={meal[0]}
+                                source={meal[1]}
+                                isSelected={meal[0] === selectedMeal}
+                                onSelect={() => handleMealTypeSelect(meal[0])}
+                            />
+                        ))}
+                        </View>
+                    </View>
+                    <View style={styles.history}>
+                        <StyledText style={styles.historyText}>History</StyledText>
+                        <TouchableOpacity>
+                            <HStack gap={5}>
+                                <ButtonIcon as={GripVerticalIcon} />
+                                <StyledText>Most recent</StyledText>
+                            </HStack>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.historyList}>
+                        {/* <NoFoodView/> */}
+                        <HistoryListView />
+                    </View>
+                    </>
+            )
+        }
         </View>
+
     )
 }
 

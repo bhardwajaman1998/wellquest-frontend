@@ -1,15 +1,21 @@
-import {Input, InputField, HStack} from "@gluestack-ui/themed"
+// import {RNFS} from 'react-native-fs';
 import React, { useState } from 'react';
-import { Select, CheckIcon } from "native-base";
 
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import StyledText from "../globalComponents/StyledText";
 import LogInputField from "./LogInputField";
 import { NativeBaseProvider } from "native-base";
 import NutritionalContent from "./NutritionalContent";
 import LogButtons from "./LogButtons";
 
+import { useRoute } from '@react-navigation/native';
+
+import { submitToGoogle, uploadImageAsync } from './services/services';
+
 const LogFood = () => {
+    const route = useRoute();
+    const scannedImage = route.params?.image;
+
     const [servingSize, setServingSize] = useState('');
     const [servingUnit, setServingUnit] = useState('ounce');
     const [numberOfServings, setNumberOfServings] = useState('');
@@ -23,6 +29,22 @@ const LogFood = () => {
 
 
 
+    const getImageData  = () => {
+      getNutritionalInfo()
+    }
+    
+    const getNutritionalInfo = async () => {
+      try {
+          // const imageUrl = await uploadImageAsync(scannedImage); // Call the function to upload image and get URL
+          // console.log('Image URL:', imageUrl);
+          await submitToGoogle(scannedImage); // Send the URL to the submitToGoogle function
+      } catch (error) {
+          console.error('Error getting image data:', error);
+          // Handle error
+      }
+  }
+
+
     return (
         <NativeBaseProvider>
             <View style={styles.container}>
@@ -34,9 +56,9 @@ const LogFood = () => {
                         borderBottomWidth: StyleSheet.hairlineWidth,
                     }}
                 />
-                <View style={styles.fieldContainer}>
+                <TouchableOpacity style={styles.fieldContainer} onPress={getImageData}>
                     <LogInputField style={styles.servingSize} title={'Serving size'}/>
-                </View>
+                </TouchableOpacity>
                 <LogInputField title={'Number of serving'}/>
                 <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray}/>
                 <LogInputField title={'Extra calories'}/>

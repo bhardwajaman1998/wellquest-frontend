@@ -1,18 +1,30 @@
 import { View, Image } from '@gluestack-ui/themed'
 import StyledText from '../globalComponents/StyledText'
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { useState } from "react";
 
-const MealTypeButton = ({isSelected = false, source}) => {
+const MealTypeButton = ({isSelected, text ,source, onSelect}) => {
+
+  const [selected, setSelected] = useState(isSelected);
+
+  const handlePress = () => {
+    setSelected(!selected);
+    onSelect(!selected);
+  };
+
     return (
-        <View style={isSelected ? styles.containerSelected : styles.container}>
+      
+      <View style={isSelected ? styles.containerSelected : styles.container}>
+          <TouchableOpacity onPress={onSelect} style={{gap: 15, alignItems: 'center'}}>
             <Image
                 style={styles.image}
-                size='xs'
+                size="xs"
                 source={source}
-                tintColor={isSelected ? ('rgb(255, 255, 255)') :  ('rgb(114, 101, 227)')}
+                tintColor={isSelected ? 'rgb(255, 255, 255)' : 'rgb(114, 101, 227)'}
             />
-            <StyledText style={isSelected ? styles.textSelected : styles.selected}>Lunch</StyledText>
-        </View>
+            <StyledText style={isSelected ? styles.textSelected : styles.text}>{text}</StyledText>
+            </TouchableOpacity>
+      </View>
     )
 }
 const styles = StyleSheet.create({
