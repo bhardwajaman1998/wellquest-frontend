@@ -9,7 +9,8 @@ export default function NutritionPlanCard() {
 
     const navigation=useNavigation();
     const handleSchedulePress = () => {
-        navigation.navigate('Find Coach'); // Navigate to the 'Find Coach' screen
+        // navigation.navigate('Find Coach'); // Navigate to the 'Find Coach' screen
+        navigation.navigate('SearchFoodStack', { screen: 'SearchFood' })
       };
   return (
     <SafeAreaView style={styles.container}>

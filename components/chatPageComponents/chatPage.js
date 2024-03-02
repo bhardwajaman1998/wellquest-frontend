@@ -14,12 +14,7 @@ const ChatPage = () => {
   // Mock data for coaches and AI assistance
   const coachesData = [
     { id: '1', name: 'John Doe', time: '10:00 AM', chat: 'Hello, how can I help you?' },
-    { id: '2', name: 'Jane Smith', time: '11:30 AM', chat: 'Sure, I can assist you with that.' },
-    { id: '3', name: 'Hunn Smith', time: '11:30 AM', chat: 'Sure, I can assist you with that.' },
-    { id: '4', name: 'Jzio Smith', time: '11:30 AM', chat: 'Sure, I can assist you with that.' },
-    { id: '5', name: 'Maya smith', time: '11:30 AM', chat: 'Sure, I can assist you with that.' },
-    { id: '6', name: 'John Doe', time: '10:00 AM', chat: 'Hello, how can I help you?' },
-    { id: '7', name: 'John Doe', time: '10:00 AM', chat: 'Hello, how can I help you?' },
+    { id: '2', name: 'My AI Assistance', chat: 'Welcome! How may I assist you?' }
   ];
 
   const aiAssistanceData = [
@@ -60,7 +55,7 @@ const ChatPage = () => {
 
   // Return the JSX layout of the component
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20, gap: 0 }}>
       <View style={styles.searchContainer}>
         <MaterialIcons name="search" size={24} color="black" style={styles.searchIcon} />
         <TextInput
@@ -76,31 +71,33 @@ const ChatPage = () => {
         renderItem={renderCoachItem}
         keyExtractor={item => item.id}
       />
-
-      <View style={styles.separator} />
-
-      <FlatList
-        data={aiAssistanceData}
-        renderItem={renderAIAssistanceItem}
-        keyExtractor={item => item.id}
-        style={{ marginBottom: 20 }}
-      />
       <TouchableOpacity style={{  backgroundColor: '#FF934E',
-    paddingVertical: 12,
-    paddingHorizontal: 60,
-    borderRadius: 20,} }
-      onPress={() =>
-        navigation.navigate('AiStarted', {name: 'AiStarted'})
-      }
-      >
+          paddingVertical: 12,
+          paddingHorizontal: 10,
+          borderRadius: 20,} }
+            onPress={() =>
+              navigation.navigate('AiStarted', {name: 'AiStarted'})
+            }
+        >
         <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>
       </TouchableOpacity>
-
-  
-
-
-
-
+      <View style={styles.separator} />
+        {/* <FlatList
+          data={aiAssistanceData}
+          renderItem={renderAIAssistanceItem}
+          keyExtractor={item => item.id}
+          style={{ marginBottom: 0 }}
+        /> */}
+        <TouchableOpacity style={{  backgroundColor: '#FF934E',
+          paddingVertical: 12,
+          paddingHorizontal: 10,
+          borderRadius: 20,} }
+            onPress={() =>
+              navigation.navigate('AiStarted', {name: 'AiStarted'})
+            }
+        >
+        <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>
+      </TouchableOpacity>
       {/* <TouchableOpacity onPress={() =>
         navigation.navigate('SignUp', {name: 'SignUp'})
       }></TouchableOpacity> */}
@@ -144,7 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#e0e0e0',
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     width: '100%',
   },
   searchIcon: {

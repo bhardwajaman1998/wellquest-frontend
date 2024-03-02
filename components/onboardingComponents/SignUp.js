@@ -44,9 +44,9 @@ const SignUp = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
     <View style={styles.container}>
-<<<<<<< HEAD:onboardingFlow/SignUp.js
+{/* <<<<<<< HEAD:onboardingFlow/SignUp.js
       
-=======
+======= */}
       <View style={styles.profileImage}>
         <Image
           source={require('../../assets/Logo.png')}
@@ -54,7 +54,7 @@ const SignUp = ({ navigation }) => {
           resizeMode="cover"
         />
       </View>
->>>>>>> 098589c3c4a00566311b4a37d42a81f6f8ce28c8:components/onboardingComponents/SignUp.js
+{/* >>>>>>> 098589c3c4a00566311b4a37d42a81f6f8ce28c8:components/onboardingComponents/SignUp.js */}
       <Text style={styles.title}>Sign up</Text>
       <View style={styles.inputContainer}>
       <Text>Email address</Text>
@@ -106,11 +106,11 @@ const SignUp = ({ navigation }) => {
         />
       </View>
 
-<<<<<<< HEAD:onboardingFlow/SignUp.js
+{/* <<<<<<< HEAD:onboardingFlow/SignUp.js
       <TouchableOpacity style={styles.signUpButton} onPress={() => handleSubmit()}>
-=======
+======= */}
       <TouchableOpacity style={styles.signUpButton}  onPress={() => navigation.navigate("Preferences", {screen: 'Preferences'})}>
->>>>>>> 098589c3c4a00566311b4a37d42a81f6f8ce28c8:components/onboardingComponents/SignUp.js
+{/* >>>>>>> 098589c3c4a00566311b4a37d42a81f6f8ce28c8:components/onboardingComponents/SignUp.js */}
         <Text style={styles.signUpButtonText}>Sign up</Text>
       </TouchableOpacity>
 

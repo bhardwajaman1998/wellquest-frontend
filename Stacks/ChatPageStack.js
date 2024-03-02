@@ -30,7 +30,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
              <Stack.Screen
@@ -45,7 +48,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -60,7 +66,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -75,7 +84,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -90,7 +102,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -105,7 +120,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -120,7 +138,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -135,7 +156,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -150,7 +174,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             <Stack.Screen
@@ -165,7 +192,10 @@ const ChatPageStack = () => {
                         color:'#fff'
                     }
                     , 
-                    headerShown: false
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
                 }}
             />
             
