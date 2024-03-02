@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 const Options = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -20,7 +21,7 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Tofu</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
         
         <View style={[styles.card, styles.cardMarginRight]}>
@@ -30,7 +31,7 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Roti</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
       </View>
       
@@ -42,7 +43,7 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Curd</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
         <View style={[styles.card, styles.cardMarginRight]}>
           <Image
@@ -51,7 +52,7 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Tofu</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
       </View>
       <View style={styles.cardContainer}>
@@ -62,7 +63,7 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Curd</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
         <View style={[styles.card, styles.cardMarginRight]}>
           <Image
@@ -71,12 +72,15 @@ const Options = () => {
             resizeMode="cover"
           />
           <Text style={styles.cardTitle}>Tofu</Text>
-          <Text style={styles.cardTitle}>Tofu with lettuce and tomato ch</Text>
+          <Text style={styles.cardTitle1}>Tofu with lettuce and tomato ch</Text>
         </View>
       </View>
       
-      <TouchableOpacity style={styles.nextButton}>
-        <Text style={styles.nextButtonText}>Next</Text>
+      <TouchableOpacity style={styles.nextButton}
+      onPress={() =>
+        navigation.navigate('ChatPage', {name: 'ChatPage'})
+      }>
+        <Text style={styles.nextButtonText}>CONFIRM</Text>
       </TouchableOpacity>
     </View>
   );
@@ -88,6 +92,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+  },
+  cardTitle1:{
+color:'grey',
   },
   header: {
     flexDirection: 'row',
@@ -121,15 +128,16 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     textAlign: 'center',
+    fontWeight: 'bold'
   },
   cardMarginRight: {
     marginRight: 20,
   },
   nextButton: {
-    backgroundColor: 'green',
-    paddingHorizontal: 40,
+    backgroundColor: '#FF934E',
     paddingVertical: 15,
-    borderRadius: 8,
+    paddingHorizontal: 60,
+    borderRadius: 20,
   },
   nextButtonText: {
     color: 'white',
