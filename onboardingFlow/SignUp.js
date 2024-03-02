@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';  
 import axios from 'axios'
 
@@ -10,6 +10,8 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState(false);
   const [showPassword, setShowpasswor] = useState(false);
+ 
+const navigation = useNavigation()
 
   function handleEmail(e){
     const emailVar = (e.nativeEvent.text);
@@ -36,10 +38,23 @@ const SignUp = ({ navigation }) => {
       email: email,
       password:password,
       };
-    axios
+      if(emailverify && passwordVerify){
+        axios
     .post("http://192.168.1.188:5000/register", userData)
-    .then((res)=>console.log(res.data))
+    .then(res=> {console.log(res.data)
+      if(res.data.status == "ok"){
+        Alert.alert("Registration Successful!")
+        navigation.navigate("Dashboard")
+      } else {
+        alert.alert(JSON.stringify(res.data))
+      }
+    }
+     )
     .catch(e =>console.log(e))
+      } else {
+        Alert.alert("Fill all details!!!")
+      }
+    
       }
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
