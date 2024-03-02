@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', 
   },
   logo: {
-    width: 400, 
-    height: 500,
+    width: "75%", 
+    height: "75%",
+    padding:"10%"
   },
   button: {
     marginTop: 20,
