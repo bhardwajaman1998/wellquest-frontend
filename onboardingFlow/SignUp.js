@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';  
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUp = ({ navigation }) => {
   //let us set the state for user inputs
