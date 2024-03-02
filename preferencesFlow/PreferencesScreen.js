@@ -33,6 +33,7 @@ const PreferencesScreen = () => {
   ];
 
   const [formData, setFormData] = useState({
+    cust_id:"65cc353cb9be345699d6a69a",
     gender: "",
     age: "",
     weight: "",
