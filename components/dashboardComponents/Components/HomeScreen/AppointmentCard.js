@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, navigation} fro
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import CustomCard from './CustomCard';
+import findCoach from '../../../../assets/find_coach.png';
 
 export default function AppointmentCard() {
   const navigation = useNavigation();
@@ -26,11 +27,11 @@ export default function AppointmentCard() {
             </TouchableOpacity>
         </View>
         {/* Appointment Card */}
-        <CustomCard
+        <CustomCard style={styles.buttonstyle}
           text="You don't have appointments."
-          buttonText="Schedule"
+          buttonText="Find Coach"
           onPress={handleSchedulePress}
-          iconName="user"
+          imageName={findCoach}
         />
 
 
@@ -55,6 +56,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
       seeAll: {
-        fontSize: 16,
+        fontSize: 15,
       },
+      buttonstyle:{
+        backgroundColor:'#FF934E',
+        marginLeft:20,
+      }
 });

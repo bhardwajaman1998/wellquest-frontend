@@ -11,6 +11,7 @@ import ScheduleScreen from "../components/dashboardComponents/Components/Schedul
 import ChatPage from "../dashboardFlow/ChatPage";
 import NotificationScreen from "../dashboardFlow/NotificationScreen";
 import AppointmentScreen from "../components/dashboardComponents/Components/Schedule/AppointmentScreen";
+import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 
 import {Stack} from './Stack';
 
@@ -26,7 +27,7 @@ const DashboardStack = () => {
                       backgroundColor: '#7265E3'
                     },
                     headerTitleStyle: {
-                      color: '#fff'
+                      color: '#7265E3'
                     },
                     headerShown:true,
                     headerLeft: () => (
@@ -55,7 +56,7 @@ const DashboardStack = () => {
                     backgroundColor: '#2c3e50'
                   },
                   headerTitleStyle: {
-                    color: '#fff'
+                    color: '#7265E3'
                   },
                   headerShown:false,
                   headerLeft: () => (
@@ -76,36 +77,34 @@ const DashboardStack = () => {
                   )
                 })}
             />
+
             <Stack.Screen
                 name="NotifyScreen"
                 component={NotificationScreen} 
             />
+
             <Stack.Screen
               name="AppointmentScreen"
               component={AppointmentScreen}
             />
+
             <Stack.Screen
                 name="Find Coach"
                 component={FindCoach}
                 options={({ navigation }) => ({
-                  title: 'Find Coach',
+                  title: 'Find my coach',
                   headerStyle: {
-                    backgroundColor: '#fff'
+                    backgroundColor: '#7265E3'
                   },
                   headerTintColor: '#fff',
                   headerLeft: () => (
-                    <Icon
-                      name="arrow-left"
-                      size={25}
-                      style={{ marginLeft: 10 }}
-                      onPress={() => navigation.goBack()}
-                    />
-                  ),
+                    <GlobalBackButton />
+                ),
                   headerRight: () => (
                     <Icon
                       name="bell"
                       size={25}
-                      style={{ marginRight: 10 }}
+                      style={{ marginRight: 10 ,color:'white'}}
                       onPress={() => {
                         // Add your functionality here
                       }}
@@ -113,22 +112,18 @@ const DashboardStack = () => {
                 )
               })}
             />
+
             <Stack.Screen
               name="Select Coach"
               component={CoachProfile}
               options={({ navigation }) => ({
-                title: '',
+                title: 'Profile',
                 headerStyle: {
-                  backgroundColor: '#fff'
+                  backgroundColor: '#7265E3'
                 },
                 headerTintColor: '#fff',
                 headerLeft: () => (
-                  <Icon
-                    name="arrow-left"
-                    size={25}
-                    style={{ marginLeft: 10 }}
-                    onPress={() => navigation.goBack()}
-                  />
+                  <GlobalBackButton />
                 )
             })}
             />

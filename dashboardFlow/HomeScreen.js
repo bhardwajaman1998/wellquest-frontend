@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         marginTop:20,
         marginHorizontal:20,
+        color:'#7265E3',
     }
 });
 

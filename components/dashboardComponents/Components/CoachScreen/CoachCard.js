@@ -30,11 +30,14 @@ const CoachCard  = ({coachImg,coachName, coachDesc,}) => {
 const styles=StyleSheet.create({
     container: {
         margin: 10,
+        height:'100%',
       },
       card: {
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
+        borderLeftColor:'#2A9D5C',
+        borderLeftWidth:4,
         borderColor: '#ccc',
         borderRadius: 10,
         padding: 10,

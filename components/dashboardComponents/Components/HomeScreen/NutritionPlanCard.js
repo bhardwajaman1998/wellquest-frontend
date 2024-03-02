@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Platform } from
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomCard from './CustomCard';
 import { useNavigation } from '@react-navigation/native';
+import aiIcon from "../../../../assets/ai_icon.png";
 
 export default function NutritionPlanCard() {
 
@@ -21,7 +22,7 @@ export default function NutritionPlanCard() {
                 text="You don't have a nutrition plan."
                 buttonText="Ask Me"
                 onPress={handleSchedulePress}
-                iconName="user"
+                imageName={aiIcon}
             />
     </SafeAreaView>
   );

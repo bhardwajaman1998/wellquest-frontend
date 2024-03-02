@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ClickButtton from '../../../dashboardComponents/Common/ClickButtton';
 import ScheduleScreen from '../Schedule/ScheduleScreen';
 import { useNavigation } from '@react-navigation/native';
-import profileIcon from "../../../../assets/profile.png";
+import profileIcon from "../../../../assets/Maskgroup.png";
 import scheduleIcon from "../../../../assets/find_coach.png";
 import messageIcon from "../../../../assets/Message_a_coach.png";
 

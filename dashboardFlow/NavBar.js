@@ -23,8 +23,7 @@ const screenOptions={
             right:0,
             elevation:0,
             height: Platform.OS === 'ios' ? 90 : 60,
-            backgroundColor:'#000',
-        
+            backgroundColor:'#7265E3',
     }
     
 }
