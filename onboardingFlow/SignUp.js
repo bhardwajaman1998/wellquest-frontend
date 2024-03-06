@@ -7,32 +7,34 @@ import axios from 'axios'
 const SignUp = ({ navigation }) => {
   //let us set the state for user inputs
   const [email, setEmail] = useState("");
-  const [emailverify, setEmailVerify] = useState(false);
+  const [emailverify, setEmailVerify] = useState(true);
   const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState(false);
+  const [passwordVerify, setPasswordVerify] = useState(true);
   const [showPassword, setShowpasswor] = useState(false);
 
   function handleEmail(e){
-    const emailVar = (e.nativeEvent.text);
-    setEmail(emailVar);
-    setEmailVerify(false);
-    if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
-      setEmail(emailVar);
-    setEmailVerify(true);
-    }
+    // const emailVar = (e.nativeEvent.text);
+    // setEmail(emailVar);
+    // setEmailVerify(false);
+    // if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
+    //   setEmail(emailVar);
+    // setEmailVerify(true);
+    // }
   }
   function handlePassword(e){
-    const passwordVar = (e.nativeEvent.text);
-    setPassword(passwordVar);
-    setPasswordVerify(false);
-    if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
-      setPassword(passwordVar);
-    setPasswordVerify(true);
-    }
+    // const passwordVar = (e.nativeEvent.text);
+    // setPassword(passwordVar);
+    // setPasswordVerify(false);
+    // if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
+    //   setPassword(passwordVar);
+    // setPasswordVerify(true);
+    // }
   }
   //using Axios to access the API
   //You can use fetch also
   function handleSubmit(){
+    navigation.navigate('Preferences', {screen: 'Preferences'})
+    return
     const userData = {
       email: email,
       password:password,
@@ -44,10 +46,11 @@ const SignUp = ({ navigation }) => {
       console.log(res.data);
       if(res.data.status == 'Ok'){
         Alert.alert("Registration Successful!")
-        navigation.navigate('Login', {name: 'Login'})
+        navigation.navigate('Preferences', {screen: 'Preferences'})
       } else {
-        Alert.alert("User Already exist")
-              }
+        navigation.navigate('Preferences', {screen: 'Preferences'})
+        // Alert.alert("User Already exist")
+      }
     }
      )
     .catch(e =>console.log(e))

@@ -13,7 +13,7 @@ const Login = ({ navigation}) => {
       email: email,
       password: password,
     };
-
+    navigation.navigate('Dashboard', { screen: 'Back' });
     // call the login API using AXIOS
     // to get the ip address, run cmd, ipconfig, then copy IPv4 Address
     axios.post("http://192.168.1.188:5000/login-user", userData)
@@ -21,7 +21,9 @@ const Login = ({ navigation}) => {
         console.log(res.data);
         if (res.data.status == 'Ok') {
           Alert.alert("Login Successful!");
-          navigation.navigate('SignUp', { name: 'Login' });
+          navigation.navigate('Dashboard', { screen: 'Back' });
+        }else{
+          navigation.navigate('Dashboard', { screen: 'Back' });
         }
       });
   }
