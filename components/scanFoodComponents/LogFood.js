@@ -1,20 +1,30 @@
 // import {RNFS} from 'react-native-fs';
 import React, { useState } from 'react';
+import { InputField, CheckIcon} from "@gluestack-ui/themed"
 
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import StyledText from "../globalComponents/StyledText";
 import LogInputField from "./LogInputField";
-import { NativeBaseProvider } from "native-base";
+import { IconButton, NativeBaseProvider } from "native-base";
 import NutritionalContent from "./NutritionalContent";
 import LogButtons from "./LogButtons";
+
+import { Input, Icon } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
+
 
 import { useRoute } from '@react-navigation/native';
 
 import { submitToGoogle, uploadImageAsync } from './services/services';
+import InputAndPickerView from './InputAndPickerView';
 
 const LogFood = () => {
     const route = useRoute();
     const scannedImage = route.params?.image;
+
+    const [isTitleEditing, setIsTitleEditing] = useState(false);
+
+    const [title, setTitle] = useState('Ground Chicken');
 
     const [servingSize, setServingSize] = useState('');
     const [servingUnit, setServingUnit] = useState('ounce');
@@ -23,10 +33,10 @@ const LogFood = () => {
     const [extraCalories, setExtraCalories] = useState('');
     const [service, setService] = React.useState("");
 
-
     const mealArray = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
     const unitArray = ['ounce', 'gram', 'milligram', 'kg', 'pound']
 
+    
 
 
     const getImageData  = () => {
@@ -44,21 +54,69 @@ const LogFood = () => {
       }
   }
 
+    const titleEditingToggle = () => {
+      setIsTitleEditing(true)
+    }
+    const onTitleChange = () => {
+      setIsTitleEditing(false); // Close title editing mode after changing the title
+    }
+
 
     return (
         <NativeBaseProvider>
             <View style={styles.container}>
                 <StyledText style={styles.screenTitle}>Log Food</StyledText>
-                <StyledText style={styles.foodName}>Ground Chicken</StyledText>
+                {isTitleEditing ? (
+                  <TouchableOpacity onPress={titleEditingToggle}>
+                    <Input 
+                      value={title}
+                      onChangeText={setTitle}
+                      width="100%" 
+                      borderRadius="10" 
+                      fontFamily={'poppins-regular'}
+                      fontSize="14" 
+                      backgroundColor={'rgb(250, 250, 250)'} 
+                      rightElement={
+                        <Icon 
+                          m="2" 
+                          ml="3" 
+                          size="6" 
+                          color="gray.400" 
+                          as={
+                            <MaterialIcons 
+                              name="check" 
+                            />
+                          }
+                          onPress={onTitleChange}
+                      />
+                      }
+                  />
+                </TouchableOpacity>
+                ) : (
+                <View style={{flexDirection: 'row', gap: 5, justifyContent: 'flex-start', alignItems: 'center'}}>
+                  <TouchableOpacity onPress={titleEditingToggle}>
+                    <Icon 
+                        m="2" 
+                        ml="0" 
+                        size="6" 
+                        color="gray.400" 
+                        as={
+                        <MaterialIcons 
+                          name="edit" 
+                        />
+                      }
+                    />
+                  </TouchableOpacity>
+                    <StyledText style={styles.foodName}>{title}</StyledText>
+                  </View>
+                )}
                 <View
                     style={{
                         borderBottomColor: 'black',
                         borderBottomWidth: StyleSheet.hairlineWidth,
                     }}
                 />
-                <TouchableOpacity style={styles.fieldContainer} onPress={getImageData}>
-                    <LogInputField style={styles.servingSize} title={'Serving size'}/>
-                </TouchableOpacity>
+                <InputAndPickerView title={'Serving size'} dropdownData={unitArray}/> 
                 <LogInputField title={'Number of serving'}/>
                 <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray}/>
                 <LogInputField title={'Extra calories'}/>
@@ -94,9 +152,9 @@ const styles = StyleSheet.create({
         fontSize: 20
       },
       fieldContainer: {
-        flexDirection: "column",
+        flexDirection: "row",
         width: '100%',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
       },
       dropDown: {
         padding: 10,

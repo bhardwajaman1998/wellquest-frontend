@@ -6,6 +6,8 @@ import StyledText from '../globalComponents/StyledText';
 import { useNavigation } from '@react-navigation/native'
 import { submitToGoogle } from './services/services';
 
+
+
 const CameraScreen = () => {
   const  navigation = useNavigation()
 
