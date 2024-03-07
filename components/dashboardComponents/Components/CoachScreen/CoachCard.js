@@ -30,7 +30,7 @@ const CoachCard  = ({coachImg,coachName, coachDesc,onPress}) => {
 const styles=StyleSheet.create({
     container: {
         margin: 10,
-        height:'100%',
+        // height:'100%',
       },
       card: {
         flexDirection: 'row',

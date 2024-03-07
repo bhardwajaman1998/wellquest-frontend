@@ -8,7 +8,8 @@ import axios from 'axios';
 
 const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
-    const [userName, setUserName]=useState(null);
+    const [userName, setUserName]=useState({ name: '' });
+    const [greeting, setGreeting] = useState('');
 
     useEffect(()=>{
         fetchUserData();
@@ -16,21 +17,38 @@ const HomeScreen= ({ route })=>{
 
     const fetchUserData = async ()=>{
         try{
-            const response = await  axios.get('http://localhost:3000/api/customer/get_user_data/');
+            const response = await  axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a');
             console.log(response);
-            setUserName(response.data.coaches);
+            setUserName(response.data);
+            updateGreeting();
         }
         catch(error){
             console.error('Error fetching the User name in dashboard: ',error);
         }
     }
 
+    const updateGreeting = () => {
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours();
+
+        if (currentHour >= 5 && currentHour < 12) {
+            setGreeting('Good Morning');
+        } else if (currentHour >= 12 && currentHour < 18) {
+            setGreeting('Good Afternoon');
+        } else if (currentHour >= 18 && currentHour < 22) {
+            setGreeting('Good Evening');
+        } else {
+            setGreeting('Good Night');
+        }
+        console.log(greeting);
+    };
+
     return(
         <SafeAreaView style={styles.safeArea}>
             <ScrollView style={styles.container}>
                 
-                    {/* <Text style={styles.userNameText}>Hello , {userName.name}</Text> */}
-                    <Text style={styles.userNameText}>Hello , Name</Text>
+                    <Text style={styles.userNameText}>{greeting} , {userName.name}</Text>
+                    {/* <Text style={styles.userNameText}>Hello , Name</Text> */}
 
                     <GoalCard />
 
