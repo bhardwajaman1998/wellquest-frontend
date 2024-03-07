@@ -6,7 +6,9 @@ import StyledText from '../globalComponents/StyledText';
 import { useNavigation } from '@react-navigation/native'
 import { submitToGoogle } from './services/services';
 
+import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
 
+const TensorCamera = cameraWithTensors(Camera)
 
 const CameraScreen = () => {
   const  navigation = useNavigation()
@@ -43,10 +45,10 @@ const CameraScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
+
   const openGallery = () => {
     pickImageFromGallery(); // Call pickImageFromGallery function to open the gallery
   };
-
 
   const getNutritionalInfo = async () => {
     try {
@@ -95,7 +97,7 @@ const useImage = () => {
           </View>
         </View>
       ) : (
-          <Camera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)}>
+          <TensorCamera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)} onReady={handleCameraStream}>
             <View style={styles.cameraContainer}>
               <View style={styles.rectangleContainer}>
                   <Image
@@ -123,7 +125,7 @@ const useImage = () => {
               <StyledText style={styles.buttonText}>Click</StyledText>
             </TouchableOpacity>
           </View>
-        </Camera>
+        </TensorCamera>
       )}
     </View>
   );
