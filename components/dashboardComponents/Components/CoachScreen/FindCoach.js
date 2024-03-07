@@ -1,17 +1,41 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import { SafeAreaView, StyleSheet , View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import CoachCard from './CoachCard';
 import profileIcon from "../../../../assets/Maskgroup.png";
 import CustomSearchBar from '../../Common/CustomSearchBar';
+import axios from 'axios';
+import { useRoute } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
 
 export default function FindCoach() {
     ///for search bar functionality 
+    const navigation = useNavigation();
     const [search, setSearch] = useState('');
+    const [coaches, setCoaches] = useState([]);
 
     const updateSearch = (search) => {
         setSearch(search);
+    };
+    useEffect(() => {
+        fetchCoachData();
+    }, []); 
+
+    const fetchCoachData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/customer/get_coaches');
+            console.log(response); 
+            console.log("data setting ",response.data.coaches);
+            setCoaches(response.data.coaches); // Update state with coaches array
+        } catch (error) {
+            console.error('Error fetching the coach data:', error);
+        }
+    };
+
+    const handleCoachPress = (coachId) => {
+        navigation.navigate('Select Coach', { coachId });
+        console.log('this coach Id is transferred',coachId);
     };
         
     return(
@@ -31,8 +55,17 @@ export default function FindCoach() {
 
                 <View style={styles.coachData}>
                     <Text style={styles.recommendText}>Recommended for you </Text>
-                    <CoachCard coachImg={profileIcon} coachName="John Doe" coachDesc="Fitness Trainer"></CoachCard>
-                    <CoachCard coachImg={profileIcon} coachName="Jemmy Del" coachDesc="Fitness coach"></CoachCard>
+                     {coaches.map((coach) => (    
+                        <CoachCard
+                            key={coach._id}
+                            coachImg={profileIcon}
+                            coachName={coach.name}
+                            coachDesc={coach.bio}
+                            onPress={() => handleCoachPress(coach._id)}
+                        />
+                        
+                    ))} 
+                  
                 </View>
             </View>
             {/* <NavBar/> */}

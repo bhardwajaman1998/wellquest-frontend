@@ -1,4 +1,3 @@
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Image } from '@gluestack-ui/themed'

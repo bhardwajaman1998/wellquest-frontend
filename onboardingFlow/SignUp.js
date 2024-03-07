@@ -41,7 +41,7 @@ const navigation = useNavigation()
       };
       if(emailverify && passwordVerify){
         axios
-    .post("http://192.168.1.188:5000/register", userData)
+    .post("http://localhost:3000/signup", userData)
     .then(res=> {console.log(res.data)
       if(res.data.status == "ok"){
         Alert.alert("Registration Successful!")
