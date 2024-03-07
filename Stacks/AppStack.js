@@ -14,17 +14,17 @@ const AppStack = () => {
   return (
   <NavigationContainer>
     <Stack.Navigator >
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Onboarding"
           component={OnboardingStack}
           options = {{headerShown: false}}
-        />
+        /> */}
         <Stack.Screen
           name="Preferences"
           component={PreferencesStack}
           options = {{headerShown: false}}
         /> 
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Dashboard"
           component={DashboardStack}
           options = {{headerShown: false}}
@@ -38,7 +38,7 @@ const AppStack = () => {
           name="SearchFoodStack"
           component={SearchFoodStack}
           options = {{headerShown: false}}
-        />
+        /> */}
     </Stack.Navigator>
   </NavigationContainer>
 
