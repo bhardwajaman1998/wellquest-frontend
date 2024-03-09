@@ -8,15 +8,30 @@ import { useNavigation } from '@react-navigation/native';
 import profileIcon from "../../../../assets/Maskgroup.png";
 import scheduleIcon from "../../../../assets/find_coach.png";
 import messageIcon from "../../../../assets/Message_a_coach.png";
+import { useEffect } from 'react';
+import axios from 'axios';
 
-export default function CoachProfile() {
+
+export default function CoachProfile({ route }) {
+
+    const { coachId } = route.params;
+    const [coachData, setCoachData] = useState(null);
 
     const navigation=useNavigation();
 
-    const handleCoachPress = () => {
-        // Navigate to the CoachProfile screen when a coach card is pressed
-        navigation.navigate('CoachProfile');
-      };
+    useEffect(() => {
+        fetchCoachData();
+    }, []);
+
+    const fetchCoachData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/customer/get_selected_coach?coach_id=${coachId}`);
+            console.log(response.data.coachData);
+            setCoachData(response.data.coachData);
+        } catch (error) {
+            console.error('Error fetching coach data:', error);
+        }
+    };
 
     const handleChat = () => {
         navigation.navigate('chat page');
@@ -50,6 +65,7 @@ export default function CoachProfile() {
 
     return(
         <SafeAreaView style={styles.container}>
+            {coachData && (
             <View style={styles.CoachShortBio}>
                 <View style={styles.CoachBio}>
                     <Image
@@ -57,10 +73,10 @@ export default function CoachProfile() {
                         style={styles.image}
                     />
                     <Text style={styles.CoachName}>
-                        John Doe
+                        {coachData.name}
                     </Text>
                     <Text style={styles.CoachCategory}>
-                        Expert Trainer
+                        {coachData.bio}
                     </Text>
                 </View>
                 
@@ -71,9 +87,9 @@ export default function CoachProfile() {
                         <Text style={[styles.cell, styles.headingCell]}>Completed Goals</Text>
                     </View>
                     <View style={styles.row}>
-                        <Text style={styles.cell}>5</Text>
-                        <Text style={styles.cell}>4</Text>
-                        <Text style={styles.cell}>20</Text>
+                        <Text style={styles.cell}>{coachData.num_of_clients}</Text>
+                        <Text style={styles.cell}>{coachData.exp}</Text>
+                        <Text style={styles.cell}>{coachData.completed_goals}</Text>
                     </View>
                 </View>
 
@@ -82,11 +98,14 @@ export default function CoachProfile() {
                 <ClickButtton btntext="Schedule" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
                 </View>
             </View>
-
+            )}
             <View style={styles.CoachInfo}>
+            {coachData && (
+                    <>
                 <Text style={styles.headingText}>Active in the following gyms</Text>
                 <View style={styles.coachLinks}>  
                 <FlatList
+                ///figure out how to add images in mongodb and add it then here update teh line below by --->{ data={coachData.gyms}}
                     data={imagePaths}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -97,23 +116,26 @@ export default function CoachProfile() {
                 <View>
                     <Text style={styles.headingSmall}>Knowledge Strength</Text>
                     <SectionList
-                        sections={[
-                            { title: 'Knowledge 1', data: ['Lorem ipsum dolor sit amet'] },
-                            { title: 'Knowledge 2', data: ['consectetur adipiscing elit'] },
-                            { title: 'Knowledge 3', data: ['Ullamcorper sed vulputate'] },
-                        ]}
-                        renderItem={({ item }) => <Text style={[styles.item, styles.sectionItem]}>{item}</Text>}
-                        renderSectionHeader={({ section }) => (
-                            <Text style={[styles.sectionHeader, styles.sectionItem]}>{section.title}</Text>
-                        )}
-                        keyExtractor={(item, index) => `basicListEntry-${index}`}
+                        sections={coachData.description_array.map((daySchedule, index) => ({
+                                    title: daySchedule[0], // Day
+                                    data: daySchedule.slice(1), // Time slots
+                                    key: index.toString()
+                                }))}
+                                renderItem={({ item }) => <Text style={[styles.item, styles.sectionItem]}>{item}</Text>}
+                                renderSectionHeader={({ section }) => (
+                                    <Text style={[styles.sectionHeader, styles.sectionItem]}>{section.title}</Text>
+                                )}
+                                keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
+                </>
+            )}
             </View>
-
             <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true}>
-                <ScheduleScreen onClose={handleCloseSchedulingModal} />
+                <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} />
             </Modal>
+
+        
         </SafeAreaView>
     );
 };

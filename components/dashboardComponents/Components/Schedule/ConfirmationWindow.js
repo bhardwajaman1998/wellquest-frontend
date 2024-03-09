@@ -1,33 +1,50 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import crossIcon from "../../../../assets/cross_icon.png";
 import confirmationIcon from "../../../../assets/Confirmation_positive_icon.png";
 
 const ConfirmationWindow = ({ onClose, onConfirm }) => {
+    const navigation = useNavigation();
+
+    const handleUpdate = () => {
+        onConfirm();
+        navigation.navigate('Dashboard'); 
+    };
+
     return (
-        <View style={styles.overlay}>
-            <Text style={styles.heading}>Confirmation</Text>
-            <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                <Image source={crossIcon} style={styles.closeIcon} />
-            </TouchableOpacity>
-            <Text style={styles.description}>Are you sure you want to schedule?</Text>
-            <TouchableOpacity style={styles.button} onPress={onConfirm}>
-                <Text style={styles.buttonText}>Confirm</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={styles.overlay}>
+                <Image source={confirmationIcon} style={styles.icon} />
+                <Text style={styles.heading}>Confirmation</Text>
+                <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+                    <Image source={crossIcon} style={styles.closeIcon} />
+                </TouchableOpacity>
+                <Text style={styles.description}>You have scheduled an appointment.</Text>
+                <TouchableOpacity style={styles.button} onPress={handleUpdate}>
+                    <Text style={styles.buttonText}>Check your dashboard</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     overlay: {
-        position: 'absolute',
-        top: '30%',
-        left: '10%',
-        right: '10%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFF',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
+    },
+    icon: {
+        width: 50,
+        height: 50,
     },
     heading: {
         fontSize: 20,

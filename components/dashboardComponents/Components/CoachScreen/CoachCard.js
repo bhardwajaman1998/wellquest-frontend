@@ -4,15 +4,15 @@ import React from 'react';
 import {Text,TouchableOpacity,Image, StyleSheet,View ,navigation} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
 
-const CoachCard  = ({coachImg,coachName, coachDesc,}) => {
+const CoachCard  = ({coachImg,coachName, coachDesc,onPress}) => {
     const navigation = useNavigation();
 
-    const handlePress = () => {
-      navigation.navigate('Select Coach'); 
-    };
+    // const handlePress = () => {
+    //   navigation.navigate('Select Coach'); 
+    // };
     
     return(
-        <TouchableOpacity style={styles.container} onPress={handlePress}>
+        <TouchableOpacity style={styles.container}  onPress={onPress}>
             <View style={styles.card}>
                 <Image
                 source={coachImg}
@@ -30,7 +30,7 @@ const CoachCard  = ({coachImg,coachName, coachDesc,}) => {
 const styles=StyleSheet.create({
     container: {
         margin: 10,
-        height:'100%',
+        // height:'100%',
       },
       card: {
         flexDirection: 'row',

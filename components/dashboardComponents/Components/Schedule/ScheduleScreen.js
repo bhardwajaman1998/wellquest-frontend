@@ -30,7 +30,7 @@ const ScheduleScreen = ({ onClose }) => {
 
   
     const handleTimeSlotSelection = (timeSlot) => {
-        setSelectedSlot(timeSlot);
+        setSelectedSlot(prevSlot => prevSlot === timeSlot ? null : timeSlot);
     };
 
     const handleCloseOverlay = () => {
@@ -54,7 +54,7 @@ const ScheduleScreen = ({ onClose }) => {
                         setSelected(day.dateString);
                     }}
                     markedDates={{
-                        [selected]: { selected: true, disableTouchEvent: true }
+                        [selected]: { selected: true }
                     }}
                     markingType={'multi-dot'}
                     theme={{
