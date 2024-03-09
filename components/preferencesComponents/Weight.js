@@ -146,32 +146,45 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
   const startWeightLbs = Math.round(startWeightKgs * 2.20462); // Convert start weight to lbs
   const endWeightLbs = Math.round(endWeightKgs * 2.20462); // Convert end weight to lbs
 
-  const weightKgs = [40, 50, 60, 70, 80, 90, 100, 110, 120];
-  const weightLbs = [100, 110, 120, 130, 140, 150, 160, 170, 180];
+  // const weightKgs = [40, 50, 60, 70, 80, 90, 100, 110, 120];
+  // const weightLbs = [100, 110, 120, 130, 140, 150, 160, 170, 180];
 
   const [selectedWeight, setSelectedWeight] = useState(String(startWeightKgs));
   const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
 
+  
   useEffect(() => {
     console.log(selectedWeightUnit);
     if (selectedWeightUnit === "Kg") {
-      setSelectedWeight(String(startWeightKgs))
+      setSelectedWeight(String(weightKgs))
     } else if (selectedWeightUnit === "Lb") {
-      setSelectedWeight(String(startWeightLbs))
+      setSelectedWeight(String(weightLbs))
     }
   }, [selectedWeightUnit, startWeightKgs, startWeightLbs]);
-
+  
   const [selectedIndex, setSelectedIndex] = useState(0);
+  
+  const weightKgs = [];
+  const weightLbs = [];
+  
+  const getWeightOptions = (unit) => {
+    const startWeight = unit === "Kg" ? startWeightKgs : startWeightLbs;
+    const endWeight = unit === "Kg" ? endWeightKgs : endWeightLbs;
+    
+    for (let weight = startWeight; weight <= endWeight; weight += 0.5) {
+      weightKgs.push(String(weight));
+    }
+    for (let weight = startWeightLbs; weight <= endWeightLbs; weight += 1) {
+      weightLbs.push(String(weight));
+    }
+    return [weightKgs, weightLbs];
+};
 
-  // const getWeightOptions = (unit) => {
-  //   const startWeight = unit === "Kg" ? startWeightKgs : startWeightLbs;
-  //   const endWeight = unit === "Kg" ? endWeightKgs : endWeightLbs;
-  //   const increment = unit === "Kg" ? 0.5 : 1; // Increment for Kg or Lb
-  //   for (let weight = startWeight; weight <= endWeight; weight += increment) {
-  //     setWeights.push(String(weight));
-  //   }
-  //   return setWeights;
-  // };
+// Example usage:
+const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
+console.log("Weight Options in Kilograms:", weightOptionsKgs);
+console.log("Weight Options in Pounds:", weightOptionsLbs);
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -183,15 +196,39 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
           labels={["Kg", "Lb"]}
           onChange={(selectedButton) => {
             setSelectedWeightUnit(selectedButton);
-
           }}
         />
         
         <View style={styles.pickerContainer}>
-          
+        {selectedWeightUnit === "Kg" && (
           <WheelPicker
             selectedIndex={selectedIndex}
-            options={selectedWeight}
+            options={weightKgs}
+            onChange={(index) => setSelectedWeight(index)}
+            itemTextStyle={{
+              color: "black",
+              fontSize: 40,
+            }}
+            containerStyle={{
+              width: "80%",
+              alignItems: "center",
+            }}
+            selectedIndicatorStyle={{
+              width: 100,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderRadius: 0,
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60}
+          /> 
+          )}
+          {selectedWeightUnit === "Lb" && (
+            <WheelPicker
+            selectedIndex={selectedIndex}
+            options={weightLbs}
             onChange={(index) => setSelectedWeight(index)}
             itemTextStyle={{
               color: "black",
@@ -212,6 +249,7 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
             }}
             itemHeight={60}
           />
+        )}
         
         </View>
       </View>
