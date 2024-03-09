@@ -133,58 +133,91 @@
 // export default Weight;
 
 
-import React, { useState } from "react";
+
+
+
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import ToggleButton from "./ToggleButton";
-import WeightWheelPicker from "./WeightWheelPicker";
+import WheelPicker from "react-native-wheely";
 
 const Weight = ({ backAction, nextCompName, onPressNext }) => {
-  const startWeight = 40;
-  const endWeight = 300;
+  const startWeightKgs = 30;
+  const endWeightKgs = 200;
+  const startWeightLbs = Math.round(startWeightKgs * 2.20462); // Convert start weight to lbs
+  const endWeightLbs = Math.round(endWeightKgs * 2.20462); // Convert end weight to lbs
+  const [weights, setWeights] = useState([]);
 
-  const getWeightOptions = () => {
-    return Array.from({ length: endWeight - startWeight + 1 }, (_, index) =>
-      String(index + startWeight)
-    );
+  const getWeightOptions = (unit) => {
+    const startWeight = unit === "Kg" ? startWeightKgs : startWeightLbs;
+    const endWeight = unit === "Kg" ? endWeightKgs : endWeightLbs;
+    const increment = unit === "Kg" ? 0.5 : 1; // Increment for Kg or Lb
+    const setWeights = [];
+    for (let weight = startWeight; weight <= endWeight; weight += increment) {
+      setWeights.push(String(weight));
+    }
+    return setWeights;
   };
+  
 
-  const [selectedWeight, setSelectedWeight] = useState(startWeight);
+
+  const [selectedWeight, setSelectedWeight] = useState(String(startWeightKgs));
   const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
+  
+  const initialSelectedIndex = getWeightOptions(selectedWeightUnit).indexOf(selectedWeight);
 
-  const initialSelectedIndex = selectedWeight
-    ? getWeightOptions().indexOf(selectedWeight)
-    : 0;
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  // Define the onUnitChange function
-  const onUnitChange = (unit) => {
-    setSelectedWeightUnit(unit);
-  };
+  useEffect(() => {
+    setWeights(getWeightOptions(selectedWeightUnit)); // Update weights array when unit changes
+    setSelectedWeight(getWeightOptions(selectedWeightUnit)[selectedIndex]); // Update selected weight
+  }, [selectedWeightUnit]);
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.heading}>What's your weight?</Text>
-        <Text style={styles.text}>This helps us create your personalized plan</Text>
+        <Text style={styles.text}>
+          This helps us create your personalized plan
+        </Text>
         <ToggleButton
           labels={["Kg", "Lb"]}
-          onPress={(unit) => {
-            setSelectedWeightUnit(unit);
+          onPress={() => {
+            setSelectedWeightUnit(selectedWeightUnit === "Kg" ? "Lb" : "Kg");
+            setSelectedWeight(getWeightOptions(selectedWeightUnit === "Kg" ? "Lb" : "Kg")[selectedIndex]);
           }}
-          // Pass the onUnitChange function to the ToggleButton component
-          onUnitChange={onUnitChange}
         />
 
-        <WeightWheelPicker
-          selectedWeight={selectedWeight}
-          selectedWeightUnit={selectedWeightUnit}
-          setSelectedWeight={setSelectedWeight}
-          setSelectedIndex={setSelectedIndex}
-          onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
-        />
+        <View style={styles.pickerContainer}>
+          <WheelPicker
+            selectedIndex={selectedIndex}
+            options={weights}
+            onChange={(index) => {
+              setSelectedWeight(getWeightOptions(selectedWeightUnit)[index]);
+              setSelectedIndex(index);
+            }}
+            itemTextStyle={{
+              color: "black",
+              fontSize: 40,
+            }}
+            containerStyle={{
+              width: "80%",
+              alignItems: "center",
+            }}
+            selectedIndicatorStyle={{
+              width: 100,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderRadius: 0,
+              borderTopColor: "#FF934E",
+              borderBottomColor: "#FF934E",
+              backgroundColor: "transparent",
+            }}
+            itemHeight={60}
+          />
+        </View>
       </View>
       <View style={styles.buttonsContainer}>
         <BackButton backAction={backAction} />
@@ -226,6 +259,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
   },
+  pickerContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    marginTop: "10%",
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  selectedWeight: {
+    fontSize: 20,
+    marginTop: 20,
+  },
 });
 
 export default Weight;
+
+
