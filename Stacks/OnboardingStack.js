@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Splash from '../onboardingFlow/Splash';
-import Landing from '../components/onboardingComponents/Landing';
-import Landing1 from '../components/onboardingComponents/Landing1';
-import Landing2 from '../components/onboardingComponents/Landing2';
-import Path from '../components/onboardingComponents/Path';
-import SignUp from '../components/onboardingComponents/SignUp';
-import Login from '../components/onboardingComponents/Login';
-import ForgotPassword from '../components/onboardingComponents/ForgotPassword';
+import Landing from '../onboardingFlow/Landing';
+import Landing1 from '../onboardingFlow/Landing1';
+import Landing2 from '../onboardingFlow/Landing2';
+import Path from '../onboardingFlow/Path';
+import SignUp from '../onboardingFlow/SignUp';
+import Login from '../onboardingFlow/Login';
+import ForgotPassword from '../onboardingFlow/ForgotPassword';
 
 import {Stack} from './Stack';
 

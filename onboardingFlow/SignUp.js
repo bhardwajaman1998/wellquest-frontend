@@ -1,59 +1,61 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Alert } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';  
-import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather'; 
+import { Alert } from 'react-native';
+import axios from 'axios'
 
 const SignUp = ({ navigation }) => {
   //let us set the state for user inputs
   const [email, setEmail] = useState("");
-  const [emailverify, setEmailVerify] = useState(false);
+  const [emailverify, setEmailVerify] = useState(true);
   const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState(false);
+  const [passwordVerify, setPasswordVerify] = useState(true);
   const [showPassword, setShowpasswor] = useState(false);
- 
-const navigation = useNavigation()
 
   function handleEmail(e){
-    const emailVar = (e.nativeEvent.text);
-    setEmail(emailVar);
-    setEmailVerify(false);
-    if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
-      setEmail(emailVar);
-    setEmailVerify(true);
-    }
+    // const emailVar = (e.nativeEvent.text);
+    // setEmail(emailVar);
+    // setEmailVerify(false);
+    // if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
+    //   setEmail(emailVar);
+    // setEmailVerify(true);
+    // }
   }
   function handlePassword(e){
-    const passwordVar = (e.nativeEvent.text);
-    setPassword(passwordVar);
-    setPasswordVerify(false);
-    if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
-      setPassword(passwordVar);
-    setPasswordVerify(true);
-    }
+    // const passwordVar = (e.nativeEvent.text);
+    // setPassword(passwordVar);
+    // setPasswordVerify(false);
+    // if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
+    //   setPassword(passwordVar);
+    // setPasswordVerify(true);
+    // }
   }
   //using Axios to access the API
   //You can use fetch also
   function handleSubmit(){
+    navigation.navigate('Preferences', {screen: 'Preferences'})
+    return
     const userData = {
       email: email,
       password:password,
       };
       if(emailverify && passwordVerify){
         axios
-    .post("http://localhost:3000/signup", userData)
-    .then(res=> {console.log(res.data)
-      if(res.data.status == "ok"){
+      .post("http://192.168.1.188:5000/register", userData)
+      .then(res=> {
+        console.log(res.data);
+        if(res.data.status == 'Ok'){
         Alert.alert("Registration Successful!")
-        navigation.navigate("Dashboard")
+        navigation.navigate('Preferences', {screen: 'Preferences'})
       } else {
-        alert.alert(JSON.stringify(res.data))
+        navigation.navigate('Preferences', {screen: 'Preferences'})
+        // Alert.alert("User Already exist")
       }
     }
      )
     .catch(e =>console.log(e))
       } else {
-        Alert.alert("Fill all details!!!")
+        Alert.alert("Fill all Mandatory Fields !!!")
       }
     
       }

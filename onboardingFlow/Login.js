@@ -1,9 +1,34 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert} from 'react-native';
 
 const Login = ({ navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // create login function
+  function handleSubmit() {
+    console.log(email, password);
+    const userData = {
+      email: email,
+      password: password,
+    };
+    navigation.navigate('Dashboard', { screen: 'Back' });
+    // call the login API using AXIOS
+    // to get the ip address, run cmd, ipconfig, then copy IPv4 Address
+    axios.post("http://192.168.1.188:5000/login-user", userData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status == 'Ok') {
+          Alert.alert("Login Successful!");
+          navigation.navigate('Dashboard', { screen: 'Back' });
+        }else{
+          navigation.navigate('Dashboard', { screen: 'Back' });
+        }
+      });
+  }
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
     <View style={styles.container}>
     
       <Text style={styles.title}>Log in</Text>
@@ -14,6 +39,7 @@ const Login = ({ navigation}) => {
           placeholder="Enter email"
           keyboardType="email-address"
           autoCapitalize="none"
+          onChange={e => setEmail(e.nativeEvent.text)}
         />
       </View>
 
@@ -23,10 +49,11 @@ const Login = ({ navigation}) => {
           style={styles.input}
           placeholder="Enter password"
           secureTextEntry
+          onChange={e => setPassword(e.nativeEvent.text)}
         />
       </View>
 
-      <TouchableOpacity style={styles.LoginButton}>
+      <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
         <Text style={styles.LoginButtonText}>Log in</Text>
       </TouchableOpacity>
 
