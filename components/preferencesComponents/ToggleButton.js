@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const ToggleButton = ({ labels, onChange, selectedWeightUnit }) => {
+const ToggleButton = ({ labels, onChange, selectedWeightUnit, selectedHeightUnit }) => {
   const [selectedButton, setSelectedButton] = useState(labels[0]);
 
   const renderButton = (label) => (
@@ -18,7 +18,11 @@ const ToggleButton = ({ labels, onChange, selectedWeightUnit }) => {
     const newState = label;
     setSelectedButton(newState);
     // console.log(label);
-    selectedWeightUnit = label;
+    if (label == "Kg" || label == "Lb"){
+      selectedWeightUnit = label;
+    }else if (label == "CM" || label == "Feet"){
+      selectedHeightUnit = label;
+    }
     onChange(newState); 
   }
 
