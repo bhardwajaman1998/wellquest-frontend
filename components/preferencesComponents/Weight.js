@@ -137,7 +137,7 @@ import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import ToggleButton from "./ToggleButton";
-// import WheelPicker from "react-native-wheely";
+import WheelPicker from "react-native-wheely";
 import CustomWheelPicker from "./CustomWheelPicker";
 
 const Weight = ({ backAction, nextCompName, onPressNext }) => {
@@ -151,13 +151,13 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
 
   const [selectedWeight, setSelectedWeight] = useState(String(startWeightKgs));
   const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
+
   useEffect(() => {
+    console.log(selectedWeightUnit);
     if (selectedWeightUnit === "Kg") {
       setSelectedWeight(String(startWeightKgs))
-      console.log(selectedWeight);
     } else if (selectedWeightUnit === "Lb") {
       setSelectedWeight(String(startWeightLbs))
-      console.log(selectedWeight);
     }
   }, [selectedWeightUnit, startWeightKgs, startWeightLbs]);
 
@@ -181,24 +181,17 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
         </Text>
         <ToggleButton
           labels={["Kg", "Lb"]}
-          onPress={() => {
-            // const newWeightUnit = selectedWeightUnit === "Kg" ? "Lb" : "Kg";
-            // console.log(selectedWeightUnit);
-            // setSelectedWeightUnit(newWeightUnit);
-            // setSelectedWeight(getWeightOptions(newWeightUnit));
+          onChange={(selectedButton) => {
+            setSelectedWeightUnit(selectedButton);
+
           }}
         />
         
         <View style={styles.pickerContainer}>
-          {selectedWeightUnit === "Kg" ? (
-            <CustomWheelPicker options={weightKgs} selectedIndex={selectedIndex} onChange={setSelectedIndex}  />
-          ) : (
-            <CustomWheelPicker options={weightLbs} selectedIndex={selectedIndex} onChange={setSelectedIndex} />
-          )
-          }
-          {/* <WheelPicker
+          
+          <WheelPicker
             selectedIndex={selectedIndex}
-            options={selectedWeight === "Kgs" ? weightKgs : weightLbs}
+            options={selectedWeight}
             onChange={(index) => setSelectedWeight(index)}
             itemTextStyle={{
               color: "black",
@@ -218,7 +211,7 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
               backgroundColor: "transparent",
             }}
             itemHeight={60}
-          /> */}
+          />
         
         </View>
       </View>

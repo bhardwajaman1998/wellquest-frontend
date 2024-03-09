@@ -1,7 +1,7 @@
 import React from 'react'
 import WheelPicker from "react-native-wheely";
 
-const CustomWheelPicker = ({options, selectedIndex, onChange}) => {
+const CustomWheelPicker = ({options, selectedIndex, onChange, setSelectedWeight}) => {
   return (
     <WheelPicker
             selectedIndex={selectedIndex}
