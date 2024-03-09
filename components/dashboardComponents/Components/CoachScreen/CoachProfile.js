@@ -132,8 +132,9 @@ export default function CoachProfile({ route }) {
             )}
             </View>
             <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true}>
-                <ScheduleScreen onClose={handleCloseSchedulingModal} />
+                <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} />
             </Modal>
+
         
         </SafeAreaView>
     );

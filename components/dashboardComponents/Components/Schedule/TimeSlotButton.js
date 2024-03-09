@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const TimeSlotButton = ({ timeSlot, onPress, selected }) => {
+    const [isSelected, setIsSelected] = useState(selected);
+
+    useEffect(() => {
+        setIsSelected(selected);
+    }, [selected]);
+
+    const handlePress = () => {
+        setIsSelected(!isSelected);
+        onPress(timeSlot);
+    };
+
     return (
         <TouchableOpacity
             style={[
                 styles.button,
-                selected ? styles.selected : null,
+                isSelected ? styles.selected : null,
             ]}
-            onPress={() => onPress(timeSlot)}
-            disabled={!timeSlot.available}
+            onPress={handlePress}
+            disabled={!timeSlot.available || isSelected}
         >
             <Text style={styles.buttonText}>{timeSlot.time}</Text>
         </TouchableOpacity>
@@ -18,19 +29,21 @@ const TimeSlotButton = ({ timeSlot, onPress, selected }) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#7265E3',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         borderRadius: 5,
         marginVertical: 5,
-        marginHorizontal:10,
+        marginHorizontal: 10,
         alignItems: 'center',
+        borderColor: '#000',
+        borderWidth: 2,
     },
     buttonText: {
-        color: '#FFFFFF',
+        color: '#000000',
         fontSize: 16,
     },
     selected: {
-        backgroundColor: '#FF934E',
+        backgroundColor: '#7265E3',
     },
 });
 
