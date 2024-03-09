@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const ToggleButton = ({ labels, onPress }) => {
+const ToggleButton = ({ labels, onPress, selectedWeightUnit }) => {
   const [selectedButton, setSelectedButton] = useState(labels[0]);
 
   const renderButton = (label) => (
@@ -16,6 +16,8 @@ const ToggleButton = ({ labels, onPress }) => {
 
   const handlePress = (label) => {
     setSelectedButton(label);
+    console.log(label);
+    selectedWeightUnit = label;
     onPress(label); 
   }
 

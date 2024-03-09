@@ -24,7 +24,7 @@
 
 //   const [selectedWeight, setSelectedWeight] = useState(String(startWeightKgs));
 //   const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
-  
+
 //   const initialSelectedIndex = getWeightOptions(selectedWeightUnit).indexOf(selectedWeight);
 
 //   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
@@ -132,49 +132,46 @@
 
 // export default Weight;
 
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import ToggleButton from "./ToggleButton";
-import WheelPicker from "react-native-wheely";
+// import WheelPicker from "react-native-wheely";
+import CustomWheelPicker from "./CustomWheelPicker";
 
 const Weight = ({ backAction, nextCompName, onPressNext }) => {
   const startWeightKgs = 30;
   const endWeightKgs = 200;
   const startWeightLbs = Math.round(startWeightKgs * 2.20462); // Convert start weight to lbs
   const endWeightLbs = Math.round(endWeightKgs * 2.20462); // Convert end weight to lbs
-  const [weights, setWeights] = useState([]);
 
-  const getWeightOptions = (unit) => {
-    const startWeight = unit === "Kg" ? startWeightKgs : startWeightLbs;
-    const endWeight = unit === "Kg" ? endWeightKgs : endWeightLbs;
-    const increment = unit === "Kg" ? 0.5 : 1; // Increment for Kg or Lb
-    const setWeights = [];
-    for (let weight = startWeight; weight <= endWeight; weight += increment) {
-      setWeights.push(String(weight));
-    }
-    return setWeights;
-  };
-  
-
+  const weightKgs = [40, 50, 60, 70, 80, 90, 100, 110, 120];
+  const weightLbs = [100, 110, 120, 130, 140, 150, 160, 170, 180];
 
   const [selectedWeight, setSelectedWeight] = useState(String(startWeightKgs));
   const [selectedWeightUnit, setSelectedWeightUnit] = useState("Kg");
-  
-  const initialSelectedIndex = getWeightOptions(selectedWeightUnit).indexOf(selectedWeight);
-
-  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-
   useEffect(() => {
-    setWeights(getWeightOptions(selectedWeightUnit)); // Update weights array when unit changes
-    setSelectedWeight(getWeightOptions(selectedWeightUnit)[selectedIndex]); // Update selected weight
-  }, [selectedWeightUnit]);
+    if (selectedWeightUnit === "Kg") {
+      setSelectedWeight(String(startWeightKgs))
+      console.log(selectedWeight);
+    } else if (selectedWeightUnit === "Lb") {
+      setSelectedWeight(String(startWeightLbs))
+      console.log(selectedWeight);
+    }
+  }, [selectedWeightUnit, startWeightKgs, startWeightLbs]);
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  // const getWeightOptions = (unit) => {
+  //   const startWeight = unit === "Kg" ? startWeightKgs : startWeightLbs;
+  //   const endWeight = unit === "Kg" ? endWeightKgs : endWeightLbs;
+  //   const increment = unit === "Kg" ? 0.5 : 1; // Increment for Kg or Lb
+  //   for (let weight = startWeight; weight <= endWeight; weight += increment) {
+  //     setWeights.push(String(weight));
+  //   }
+  //   return setWeights;
+  // };
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -185,19 +182,24 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
         <ToggleButton
           labels={["Kg", "Lb"]}
           onPress={() => {
-            setSelectedWeightUnit(selectedWeightUnit === "Kg" ? "Lb" : "Kg");
-            setSelectedWeight(getWeightOptions(selectedWeightUnit === "Kg" ? "Lb" : "Kg")[selectedIndex]);
+            // const newWeightUnit = selectedWeightUnit === "Kg" ? "Lb" : "Kg";
+            // console.log(selectedWeightUnit);
+            // setSelectedWeightUnit(newWeightUnit);
+            // setSelectedWeight(getWeightOptions(newWeightUnit));
           }}
         />
-
+        
         <View style={styles.pickerContainer}>
-          <WheelPicker
+          {selectedWeightUnit === "Kg" ? (
+            <CustomWheelPicker options={weightKgs} selectedIndex={selectedIndex} onChange={setSelectedIndex}  />
+          ) : (
+            <CustomWheelPicker options={weightLbs} selectedIndex={selectedIndex} onChange={setSelectedIndex} />
+          )
+          }
+          {/* <WheelPicker
             selectedIndex={selectedIndex}
-            options={weights}
-            onChange={(index) => {
-              setSelectedWeight(getWeightOptions(selectedWeightUnit)[index]);
-              setSelectedIndex(index);
-            }}
+            options={selectedWeight === "Kgs" ? weightKgs : weightLbs}
+            onChange={(index) => setSelectedWeight(index)}
             itemTextStyle={{
               color: "black",
               fontSize: 40,
@@ -216,7 +218,8 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
               backgroundColor: "transparent",
             }}
             itemHeight={60}
-          />
+          /> */}
+        
         </View>
       </View>
       <View style={styles.buttonsContainer}>
@@ -276,5 +279,3 @@ const styles = StyleSheet.create({
 });
 
 export default Weight;
-
-
