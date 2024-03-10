@@ -122,7 +122,7 @@
 
 // export default Height;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
@@ -131,21 +131,13 @@ import WheelPicker from "react-native-wheely";
 import { RulerPicker } from "react-native-ruler-picker";
 
 const Height = ({ backAction, nextCompName, onPressNext }) => {
-  const startHeight = 40;
-  const endHeight = 300;
+  const startHeightCMs = 120;
+  const endHeightCMs = 240;
+  const startHeightFeet = Math.round(startHeightCMs * 0.0328084); // Convert start weight to lbs
+  const endHeightFeet = Math.round(endHeightCMs * 0.0328084); // Convert end weight to lbs
 
-  const getHeightOptions = () => {
-    return Array.from({ length: endHeight - startHeight + 1 }, (_, index) =>
-      String(index + startHeight)
-    );
-  };
-
-  const [selectedHeight, setSelectedHeight] = useState(startHeight);
+  const [selectedHeight, setSelectedHeight] = useState(String(selectedIndex));
   const [selectedHeightUnit, setSelectedHeightUnit] = useState("CM");
-
-  const initialSelectedIndex = selectedHeight
-    ? getHeightOptions().indexOf(selectedHeight)
-    : 0;
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -163,40 +155,36 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
           }}
         />
         <View style={styles.pickerContainer}>
-          <RulerPicker
-            min={0}
-            max={240}
-            step={1}
-            fractionDigits={0}
-            initialValue={0}
-            onValueChange={(number) => console.log(number)}
-            onValueChangeEnd={(number) => console.log(number)}
-            unit="cm"
-          />
-          
-          {/* <WheelPicker
-            selectedIndex={selectedIndex}
-            options={getHeightOptions()}
-            onChange={(index) => setSelectedHeight(getHeightOptions()[index])}
-            itemTextStyle={{
-              color: "black",
-              fontSize: 40,
-            }}
-            containerStyle={{
-              width: "80%",
-              alignItems: "center",
-            }}
-            selectedIndicatorStyle={{
-              width: 100,
-              borderTopWidth: 3,
-              borderBottomWidth: 3,
-              borderRadius: 0,
-              borderTopColor: "#FF934E",
-              borderBottomColor: "#FF934E",
-              backgroundColor: "transparent",
-            }}
-            itemHeight={60}
-          /> */}
+          {selectedHeightUnit === "CM" && (
+            <RulerPicker
+              min={startHeightCMs}
+              max={endHeightCMs}
+              step={1}
+              fractionDigits={0}
+              initialValue={startHeightCMs}
+              onValueChange={(number) => {
+                setSelectedHeight(number);
+                console.log(number)
+              }}
+              onValueChangeEnd={(number) => console.log(number)}
+              unit="cm"
+            />
+          )}
+          {selectedHeightUnit === "Feet" && (
+            <RulerPicker
+              min={startHeightFeet}
+              max={endHeightFeet}
+              step={0.1}
+              fractionDigits={1}
+              initialValue={startHeightFeet}
+              onValueChange={(number) => {
+                setSelectedHeight(number);
+                console.log(number);
+              }}
+              onValueChangeEnd={(number) => console.log(number)}
+              unit="ft"
+            />
+          )}
         </View>
       </View>
       <View style={styles.buttonsContainer}>
