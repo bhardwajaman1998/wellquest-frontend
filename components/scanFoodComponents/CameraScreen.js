@@ -6,9 +6,6 @@ import StyledText from '../globalComponents/StyledText';
 import { useNavigation } from '@react-navigation/native'
 import { submitToGoogle } from './services/services';
 
-import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
-
-const TensorCamera = cameraWithTensors(Camera)
 
 const CameraScreen = () => {
   const  navigation = useNavigation()
@@ -58,9 +55,11 @@ const CameraScreen = () => {
 
         if (localizedObjectAnnotations && localizedObjectAnnotations.length > 0) {
             const name = localizedObjectAnnotations[0].name;
-            alert(`Object Name: ${name}`);
+            console.log(name)
+            navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: name }});
         } else {
-            alert('No object name found.');
+          navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: "banana" }});
+            //alert('No object name found.');
         }
     } catch (error) {
         console.error('Error getting image data:', error);
@@ -97,7 +96,7 @@ const useImage = () => {
           </View>
         </View>
       ) : (
-          <TensorCamera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)} onReady={handleCameraStream}>
+        <Camera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)}>
             <View style={styles.cameraContainer}>
               <View style={styles.rectangleContainer}>
                   <Image
@@ -125,7 +124,7 @@ const useImage = () => {
               <StyledText style={styles.buttonText}>Click</StyledText>
             </TouchableOpacity>
           </View>
-        </TensorCamera>
+        </Camera>
       )}
     </View>
   );

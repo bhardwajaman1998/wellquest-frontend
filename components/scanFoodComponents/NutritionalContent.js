@@ -3,7 +3,15 @@ import { StyleSheet } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import StyledText from '../globalComponents/StyledText';
 
-const NutritionalContent = ({isCircleView}) => {
+const NutritionalContent = ({isCircleView = false, label, value, unit = "gm", percent = 0, multiplier = 1, extraCalories = 0}) => {
+
+    const showMultipliedValues = (info) => {
+        if (isCircleView) {
+            return parseFloat((parseFloat(info) *  multiplier) + parseFloat(extraCalories)).toFixed(2);
+        }
+        return parseFloat((parseFloat(info) * parseFloat(multiplier))).toFixed(2);
+    }
+
     return (
         <View style={styles.container}>
             {isCircleView ? (
@@ -16,15 +24,15 @@ const NutritionalContent = ({isCircleView}) => {
                         {marginTop: 15, width: 75, borderRadius: 75}, // <-- Overwrites the preceding style property
                     ]}>
                     <View style={[styles.innerContainer, {borderRadius: 75}]}>
-                        <StyledText style={styles.buttonTitleText}>70</StyledText>
-                        <StyledText style={styles.buttonText}>Cal</StyledText>
+                        <StyledText style={styles.buttonTitleText}>{parseFloat(showMultipliedValues(value)).toFixed(0)}</StyledText>
+                        <StyledText style={styles.buttonText}>{unit}</StyledText>
                     </View>
                 </LinearGradient>
             ) : (
                 <View style={{justifyContent: 'space-around', alignItems: 'center', gap: 5, height: 75}}>
-                    <StyledText style={{color: 'grey'}}>63%</StyledText>
-                    <StyledText style={{fontFamily: 'poppins-semibold', fontSize: 16}}>12 gm</StyledText>
-                    <StyledText style={{color: 'grey'}}>Carbs</StyledText>
+                    <StyledText style={{color: 'grey'}}>{percent}%</StyledText>
+                    <StyledText style={{fontFamily: 'poppins-semibold', fontSize: 16}}>{parseFloat(showMultipliedValues(value)).toFixed(0)} {unit}</StyledText>
+                    <StyledText style={{color: 'grey'}}>{label}</StyledText>
                 </View>
             )}
 

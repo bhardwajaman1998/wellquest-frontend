@@ -1,65 +1,154 @@
-// import {RNFS} from 'react-native-fs';
-import React, { useState } from 'react';
-import { InputField, CheckIcon} from "@gluestack-ui/themed"
-
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Input, Icon, NativeBaseProvider } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 import StyledText from "../globalComponents/StyledText";
 import LogInputField from "./LogInputField";
-import { IconButton, NativeBaseProvider } from "native-base";
 import NutritionalContent from "./NutritionalContent";
 import LogButtons from "./LogButtons";
-
-import { Input, Icon } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
-
-
+import InputAndPickerView from './InputAndPickerView';
+import { getFoodData, getMealInfo } from './services/services';
 import { useRoute } from '@react-navigation/native';
 
-import { submitToGoogle, uploadImageAsync } from './services/services';
-import InputAndPickerView from './InputAndPickerView';
-
 const LogFood = () => {
+
     const route = useRoute();
-    const scannedImage = route.params?.image;
+    const { foodName } = route.params;
 
     const [isTitleEditing, setIsTitleEditing] = useState(false);
-
-    const [title, setTitle] = useState('Ground Chicken');
-
-    const [servingSize, setServingSize] = useState('');
-    const [servingUnit, setServingUnit] = useState('ounce');
+    const [isMealEdited, setMealEdited] = useState(false)
+    const [title, setTitle] = useState('Type meal name');
+    const [foodInfo, setFoodInfo] = useState(null);
+    const [servingSize, setServingSize] = useState('100');
+    const [servingUnit, setServingUnit] = useState('gram');
     const [numberOfServings, setNumberOfServings] = useState('');
     const [mealType, setMealType] = useState('breakfast');
-    const [extraCalories, setExtraCalories] = useState('');
-    const [service, setService] = React.useState("");
+    const [extraCalories, setExtraCalories] = useState(0);
+    const [carbs, setCarbs] = useState(10);
+    const [fats, setFats] = useState(10);
+    const [proteins, setProteins] = useState(10);
+    const [calories, setCalories] = useState(10);
 
-    const mealArray = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
-    const unitArray = ['ounce', 'gram', 'milligram', 'kg', 'pound']
+    const [multiplier, setMultiplier] = useState(1);
+    const mealArray = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+    const unitArray = ['ounce', 'gram', 'milligram', 'kg', 'pound'];
 
-    
+    useEffect(() => {
+        (async () => {
+            if (!foodName) return;
+            const foodData = await getFoodData(foodName);
+            if (foodData) {
+              setTitle(foodData.name);
+              const newFoodData = {
+                    name: foodData.name,
+                    calories: parseFloat(foodData.nutrients?.ENERC_KCAL || 0).toFixed(2),
+                    carbs: parseFloat(foodData.nutrients?.CHOCDF || 0).toFixed(2),
+                    fats: parseFloat(foodData.nutrients?.FAT || 0).toFixed(2),
+                    proteins: parseFloat(foodData.nutrients?.PROCNT || 0).toFixed(2)
+              };
+                setFoodInfo(newFoodData);
+                setCalories(parseFloat(foodData.nutrients?.ENERC_KCAL || 0).toFixed(2));
+                setCarbs(parseFloat(foodData.nutrients?.CHOCDF || 0).toFixed(2));
+                setFats(parseFloat(foodData.nutrients?.FAT || 0).toFixed(2));
+                setProteins(parseFloat(foodData.nutrients?.PROCNT || 0).toFixed(2));
+            }
+        })();
+    }, []);
 
+  const titleEditingToggle = () => {
+    setIsTitleEditing(true);
+    setMealEditedState(true)
+  };
 
-    const getImageData  = () => {
-      getNutritionalInfo()
-    }
-    
-    const getNutritionalInfo = async () => {
-      try {
-          // const imageUrl = await uploadImageAsync(scannedImage); // Call the function to upload image and get URL
-          // console.log('Image URL:', imageUrl);
-          await submitToGoogle(scannedImage); // Send the URL to the submitToGoogle function
-      } catch (error) {
-          console.error('Error getting image data:', error);
-          // Handle error
-      }
+  const setMealEditedState = (state) => {
+      setMealEdited(state);
   }
 
-    const titleEditingToggle = () => {
-      setIsTitleEditing(true)
+  const getPercent = (nutrient) => {
+      const value = ((nutrient * 3) / calories) * 100;
+      return value.toFixed(2)
+  };
+
+  const changeNumberOfServing = (number) => {
+    if (number > 0) {
+      setMultiplier(number)
+      setNumberOfServings(number)
+    }else{
+      setMultiplier(1)
+      setNumberOfServings(1)
     }
-    const onTitleChange = () => {
-      setIsTitleEditing(false); // Close title editing mode after changing the title
-    }
+  }
+
+  const onTitleChange = () => {
+    setIsTitleEditing(false);
+  };
+
+
+const changeMealType = (type) => {
+    setMealType(type);
+}
+
+const changeServingSize = (size) => {
+  setServingSize(size);
+  convertNutritionalData(servingUnit, parseFloat(size).toFixed(2));
+
+}
+const changeServingUnit = (unit) => {
+  setServingUnit(unit);
+  convertNutritionalData(unit, parseFloat(servingSize).toFixed(2));
+}
+const changeExtraCalories = (ecals) => {
+  setExtraCalories(ecals);
+}
+
+const goBack = () => {
+
+}
+
+const logFood = () => {
+  getInfo()
+}
+
+const getInfo = async () => {
+  const data = await getMealInfo(title, servingSize, servingUnit);
+  console.log(data)
+  const newFoodData = {
+    name: data.food_name,
+    calories: parseFloat(data.calories || 0).toFixed(2),
+    carbs: parseFloat(data.carbs || 0).toFixed(2),
+    fats: parseFloat(data.fats || 0).toFixed(2),
+    proteins: parseFloat(data.proteins || 0).toFixed(2)
+  };
+
+  console.log(newFoodData)
+
+  setFoodInfo(newFoodData)
+  setCalories(parseFloat(data.calories || 0).toFixed(2));
+  setCarbs(parseFloat(data.carbs || 0).toFixed(2));
+  setFats(parseFloat(data.fats || 0).toFixed(2));
+  setProteins(parseFloat(data.proteins || 0).toFixed(2));
+
+  setMealEditedState(false)
+}
+
+const convertNutritionalData = (unit , size ) => {
+
+  const unitConversionFactors = {
+      gram: 1,
+      milligram: 0.001,
+      ounce: 28.3495,
+      pound: 453.592,
+      kilogram: 1000
+  };
+
+  const servingSizeInGrams = size * unitConversionFactors[unit];
+      setCalories(parseFloat(((foodInfo.calories * servingSizeInGrams) / 100) + extraCalories).toFixed(2));
+      setFats(parseFloat((foodInfo.fats * servingSizeInGrams) / 100).toFixed(2)),
+      setCarbs(parseFloat((foodInfo.carbs * servingSizeInGrams) / 100).toFixed(2)),
+      setProteins(parseFloat((foodInfo.proteins * servingSizeInGrams) / 100).toFixed(2))
+};
+
+
 
 
     return (
@@ -110,67 +199,48 @@ const LogFood = () => {
                     <StyledText style={styles.foodName}>{title}</StyledText>
                   </View>
                 )}
-                <View
-                    style={{
-                        borderBottomColor: 'black',
-                        borderBottomWidth: StyleSheet.hairlineWidth,
-                    }}
-                />
-                <InputAndPickerView title={'Serving size'} dropdownData={unitArray}/> 
-                <LogInputField title={'Number of serving'}/>
-                <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray}/>
-                <LogInputField title={'Extra calories'}/>
-                <View style={{flexDirection: 'row', justifyContent:'space-between', alignContent: 'center'}}>
-                  <NutritionalContent isCircleView={true}/>
-                  <NutritionalContent/>
-                  <NutritionalContent/>
-                  <NutritionalContent/>
-                </View>
-                <View style={{flexDirection: 'row', justifyContent:'space-between', alignContent: 'center', gap: 40}}>
-                  <LogButtons isForCancel={true}/>
-                  <LogButtons/>
-                </View>
+                <View style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth }} />
+
+                  <InputAndPickerView title={'Serving size'} dropdownData={unitArray} size={servingSize} unit={servingUnit} changeSize={changeServingSize} changeUnit={changeServingUnit}/>
+                
+                  <LogInputField title={'Number of serving'} placeholder='example 1' useSetNumber={true} changeNumber={changeNumberOfServing}/>
+                
+                  <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray} serviceSelected={mealArray[0]} useMealType={changeMealType}/>
+
+                  <LogInputField title={'Extra calories'} placeholder='example 150'  useExtraCals={true} extraCals={changeExtraCalories}/>
+
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
+                      <NutritionalContent isCircleView={true} label={""} value={calories} unit={"kcal"} multiplier={multiplier} extraCalories={extraCalories}/>
+                      <NutritionalContent label={"Carbs"} value={carbs} percent={getPercent(carbs)} multiplier={multiplier}/>
+                      <NutritionalContent label={"Fats"} value={fats} percent={getPercent(fats)} multiplier={multiplier}/>
+                      <NutritionalContent label={"Protiens"} value={proteins} percent={getPercent(proteins)} multiplier={multiplier}/>
+                  </View>
+
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', gap: 40 }}>
+                      <LogButtons isForCancel={true} isEdited={false} cancelPress={goBack}/>
+                      <LogButtons isEdited={isMealEdited} logPress={logFood} mealInfoPress={getInfo} />
+                  </View>
             </View>
         </NativeBaseProvider>
-      )
-    };
-    
+    );
+};
+
 const styles = StyleSheet.create({
-      container: {
+    container: {
         backgroundColor: 'white',
         height: '100%',
         paddingHorizontal: 20,
         paddingVertical: 10,
         gap: 15
-      },
-      screenTitle:{
+    },
+    screenTitle: {
         fontFamily: 'poppins-bold',
         fontSize: 30
-      },
-      foodName:{
+    },
+    foodName: {
         fontFamily: 'poppins-bold',
         fontSize: 20
-      },
-      fieldContainer: {
-        flexDirection: "row",
-        width: '100%',
-        justifyContent: 'center',
-      },
-      dropDown: {
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: 'white',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 3,
-        },
-        shadowOpacity: 0.17,
-        shadowRadius: 4.65,
-        elevation: 3,
-        width: '80%'
-      }
-    });
+    }
+});
 
-export default LogFood
-
+export default LogFood;

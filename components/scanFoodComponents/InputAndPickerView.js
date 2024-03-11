@@ -4,8 +4,11 @@ import { Select,  } from "native-base";
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-const InputAndPickerView = ({title , dropdownData}) => {
-    const [service, setService] = React.useState("");
+const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, changeUnit}) => {
+
+    const setUnitFromPicker = (unit) => {
+        changeUnit(unit)
+    }
 
     return (
         <View style={styles.container}>
@@ -20,9 +23,8 @@ const InputAndPickerView = ({title , dropdownData}) => {
                     isDisabled={false}
                     isInvalid={false}
                     isReadOnly={false}
-                    
                 >
-                        <InputField textAlign="center" placeholder="Serving size" />
+                        <InputField textAlign="center" placeholder="Serving size" value={size} onChange={value => changeSize(value.nativeEvent.text)}/>
                 </Input>
                 </View>
                 <View
@@ -34,7 +36,7 @@ const InputAndPickerView = ({title , dropdownData}) => {
                 />
                 <View style={styles.picker}>
                 <Select
-                    selectedValue={service}
+                    selectedValue={unit}
                     borderColor="black"
                     borderWidth={0}
                     height={30}
@@ -45,7 +47,7 @@ const InputAndPickerView = ({title , dropdownData}) => {
                         endIcon: <CheckIcon size="xs" />
                     }}
                     mt={1}
-                    onValueChange={itemValue => setService(itemValue)}
+                    onValueChange={itemValue => setUnitFromPicker(itemValue)}
                 >
                     {dropdownData.map((item) => (
                         <Select.Item label={item} value={item} key={item} />
