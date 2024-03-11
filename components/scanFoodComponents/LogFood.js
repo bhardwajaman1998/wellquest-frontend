@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Input, Icon, NativeBaseProvider } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import StyledText from "../globalComponents/StyledText";
@@ -7,13 +7,18 @@ import LogInputField from "./LogInputField";
 import NutritionalContent from "./NutritionalContent";
 import LogButtons from "./LogButtons";
 import InputAndPickerView from './InputAndPickerView';
-import { getFoodData, getMealInfo } from './services/services';
+import { getFoodData, getMealInfo, logMeal } from './services/services';
 import { useRoute } from '@react-navigation/native';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const LogFood = () => {
+    const navigation = useNavigation();
 
     const route = useRoute();
     const { foodName } = route.params;
+
+    const [loading, setLoading] = useState(false);
 
     const [isTitleEditing, setIsTitleEditing] = useState(false);
     const [isMealEdited, setMealEdited] = useState(false)
@@ -36,6 +41,7 @@ const LogFood = () => {
     useEffect(() => {
         (async () => {
             if (!foodName) return;
+            setLoading(true)
             const foodData = await getFoodData(foodName);
             if (foodData) {
               setTitle(foodData.name);
@@ -52,6 +58,7 @@ const LogFood = () => {
                 setFats(parseFloat(foodData.nutrients?.FAT || 0).toFixed(2));
                 setProteins(parseFloat(foodData.nutrients?.PROCNT || 0).toFixed(2));
             }
+            setLoading(false)
         })();
     }, []);
 
@@ -102,34 +109,63 @@ const changeExtraCalories = (ecals) => {
 }
 
 const goBack = () => {
-
+  navigation.navigate('SearchFoodStack', {screen: 'SearchFood'});
 }
 
-const logFood = () => {
-  getInfo()
+const logFood = async () => {
+  setLoading(true)
+  try {
+      const data = await logMeal(foodInfo, servingSize, servingUnit, mealType);
+      Alert.alert(
+          'Success',
+          'Food has been logged successfully!',
+          [
+              { text: 'OK', onPress: () => goBack() }
+          ]
+      );
+      setLoading(false)
+  } catch (error) {
+      console.error('Error logging food:', error);
+      setLoading(false)
+
+  }
 }
 
 const getInfo = async () => {
-  const data = await getMealInfo(title, servingSize, servingUnit);
-  console.log(data)
-  const newFoodData = {
-    name: data.food_name,
-    calories: parseFloat(data.calories || 0).toFixed(2),
-    carbs: parseFloat(data.carbs || 0).toFixed(2),
-    fats: parseFloat(data.fats || 0).toFixed(2),
-    proteins: parseFloat(data.proteins || 0).toFixed(2)
-  };
+  setLoading(true)
+  try {
+      const data = await getMealInfo(title, servingSize, servingUnit);
+      const newFoodData = {
+          name: data.food_name,
+          calories: parseFloat(data.calories || 0).toFixed(2),
+          carbs: parseFloat(data.carbs || 0).toFixed(2),
+          fats: parseFloat(data.fats || 0).toFixed(2),
+          proteins: parseFloat(data.proteins || 0).toFixed(2)
+      };
 
-  console.log(newFoodData)
+      setFoodInfo(newFoodData);
 
-  setFoodInfo(newFoodData)
-  setCalories(parseFloat(data.calories || 0).toFixed(2));
-  setCarbs(parseFloat(data.carbs || 0).toFixed(2));
-  setFats(parseFloat(data.fats || 0).toFixed(2));
-  setProteins(parseFloat(data.proteins || 0).toFixed(2));
+      setCalories(parseFloat(data.calories || 0).toFixed(2));
+      setCarbs(parseFloat(data.carbs || 0).toFixed(2));
+      setFats(parseFloat(data.fats || 0).toFixed(2));
+      setProteins(parseFloat(data.proteins || 0).toFixed(2));
 
-  setMealEditedState(false)
-}
+      setMealEditedState(false);
+
+      setLoading(false)
+
+      Alert.alert(
+          'Success',
+          'Food information has been fetched successfully!',
+          [
+              { text: 'OK', onPress: () => console.log('OK Pressed') }
+          ]
+      );
+  } catch (error) {
+      console.error('Error fetching food information:', error);
+      setLoading(false)
+  }
+};
 
 const convertNutritionalData = (unit , size ) => {
 
@@ -148,12 +184,18 @@ const convertNutritionalData = (unit , size ) => {
       setProteins(parseFloat((foodInfo.proteins * servingSizeInGrams) / 100).toFixed(2))
 };
 
-
-
-
     return (
         <NativeBaseProvider>
-            <View style={styles.container}>
+            {loading ? (
+              <View style={{width: '100%', height:'90%', justifyContent: 'center', alignItems: 'center'}}>
+                <Image 
+                  source={require('../../assets/loadingGif.gif')}
+                  style={{"width":"30%", "height":'10%'}}
+                />
+               </View>
+              ) : (
+                <View style={styles.container}>
+
                 <StyledText style={styles.screenTitle}>Log Food</StyledText>
                 {isTitleEditing ? (
                   <TouchableOpacity onPress={titleEditingToggle}>
@@ -221,6 +263,8 @@ const convertNutritionalData = (unit , size ) => {
                       <LogButtons isEdited={isMealEdited} logPress={logFood} mealInfoPress={getInfo} />
                   </View>
             </View>
+          )
+        }
         </NativeBaseProvider>
     );
 };

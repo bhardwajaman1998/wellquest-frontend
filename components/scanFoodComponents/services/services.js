@@ -92,3 +92,41 @@ export const getMealInfo = async (foodName, servingSize, servingUnit) => {
     return null;
   }
 };
+
+export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
+  const data = {
+    cust_id: '65cc353cb9be345699d6a69a',
+    name: foodInfo.name,
+    serving_size: `${servingSize} ${servingUnit}`,
+    timeStamp: new Date(),
+    meal_type: mealType,
+    info: {
+      calories: foodInfo.calories,
+      carbs: foodInfo.carbs,
+      fats: foodInfo.fats,
+      proteins: foodInfo.proteins
+    }
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/api/customer/log_meal', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to log meal: ${errorMessage}`);
+    }
+
+    const responseData = await response.json();
+    
+    console.log('Meal logged successfully:', responseData.newFoodLog);
+    return responseData
+  } catch (error) {
+    console.error('Error logging meal:', error.message);
+  }
+};

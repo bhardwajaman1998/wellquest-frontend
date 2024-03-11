@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const LogButtons = ({isForCancel, isEdited, cancelPress, logPress, mealInfoPress}) => {
 
-    const navigation = useNavigation(); // Get navigation object
+    const navigation = useNavigation();
 
     const handleCancel = () => {
         cancelPress()
