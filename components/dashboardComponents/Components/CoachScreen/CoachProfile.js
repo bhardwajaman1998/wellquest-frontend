@@ -11,7 +11,7 @@ import messageIcon from "../../../../assets/Message_a_coach.png";
 import { useEffect } from 'react';
 import axios from 'axios';
 
-export default function CoachProfile({ route }) {
+const CoachProfile = ({ route }) => {
 
     const { coachId } = route.params;
     const [coachData, setCoachData] = useState(null);
@@ -64,6 +64,12 @@ export default function CoachProfile({ route }) {
     const handleCloseSchedulingModal = () => {
         setSchedulingModalVisible(false);
     };
+
+    const handleCloseSchedulingModalAfterScheduled = () => {
+        setSchedulingModalVisible(false);
+        navigation.navigate('Dashboard', {screen: 'Back'});
+    };
+
 
     return(
         <SafeAreaView style={styles.container}>
@@ -141,11 +147,13 @@ export default function CoachProfile({ route }) {
                 </>
             )}
             </View>
-            <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true}>
-                <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} coachData={coachData} />
-            </Modal>
-
-        
+            {isSchedulingModalVisible ? (
+                <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true} onClose={handleCloseSchedulingModal}>
+                    <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} coachData={coachData} closeAfterScheduled={handleCloseSchedulingModalAfterScheduled}/>
+                </Modal>
+            ) : (
+                <></>
+            )}
         </SafeAreaView>
     );
 };
@@ -264,3 +272,5 @@ const styles = StyleSheet.create({
         color:"#808080",
     }
 });
+
+export default CoachProfile

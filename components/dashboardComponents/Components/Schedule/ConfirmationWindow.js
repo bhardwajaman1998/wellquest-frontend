@@ -9,7 +9,6 @@ const ConfirmationWindow = ({ onClose, onConfirm }) => {
 
     const handleUpdate = () => {
         onConfirm();
-        navigation.navigate('Dashboard'); 
     };
 
     return (
@@ -17,10 +16,12 @@ const ConfirmationWindow = ({ onClose, onConfirm }) => {
             <View style={styles.overlay}>
                 <Image source={confirmationIcon} style={styles.icon} />
                 <Text style={styles.heading}>Confirmation</Text>
+                
                 <TouchableOpacity onPress={onClose} style={styles.closeButton}>
                     <Image source={crossIcon} style={styles.closeIcon} />
                 </TouchableOpacity>
                 <Text style={styles.description}>You have scheduled an appointment.</Text>
+                
                 <TouchableOpacity style={styles.button} onPress={handleUpdate}>
                     <Text style={styles.buttonText}>Check your dashboard</Text>
                 </TouchableOpacity>

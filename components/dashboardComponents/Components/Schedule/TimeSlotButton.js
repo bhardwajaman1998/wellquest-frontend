@@ -10,7 +10,7 @@ const TimeSlotButton = ({ timeSlots, onPress, selected }) => {
         <TouchableOpacity
             style={[
                 styles.button,
-                isSelected ? styles.selected : null,
+                selected ? styles.selected : null,
             ]}
             onPress={handlePress}
         >

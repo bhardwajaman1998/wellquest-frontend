@@ -10,7 +10,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 
-const ScheduleScreen = ({ onClose, coachId, coachData }) => {
+const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) => {
     const [selected, setSelected] = useState('');
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [showOverlay, setShowOverlay] = useState(false);
@@ -111,7 +111,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData }) => {
 
     const handleConfirmation = () => {
         setShowOverlay(false);
-        navigation.navigate('Home Screen');
+        closeAfterScheduled()
     };
 
 
