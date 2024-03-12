@@ -11,11 +11,12 @@ import messageIcon from "../../../../assets/Message_a_coach.png";
 import { useEffect } from 'react';
 import axios from 'axios';
 
-
 export default function CoachProfile({ route }) {
 
     const { coachId } = route.params;
     const [coachData, setCoachData] = useState(null);
+    const [isPersonalTrainer, setIsPersonalTrainer] = useState(false); 
+
 
     const navigation=useNavigation();
 
@@ -28,6 +29,8 @@ export default function CoachProfile({ route }) {
             const response = await axios.get(`http://localhost:3000/api/customer/get_selected_coach?coach_id=${coachId}`);
             console.log(response.data.coachData);
             setCoachData(response.data.coachData);
+            setIsPersonalTrainer(response.data.coachData.personal_trainer);
+            console.log("PERSONAL TRAINER IS ?? ",response.data.coachData.personal_trainer);
         } catch (error) {
             console.error('Error fetching coach data:', error);
         }
@@ -42,8 +45,7 @@ export default function CoachProfile({ route }) {
         require('../../../../assets/gym.jpg'),
         require('../../../../assets/gym2.jpeg'),
         require('../../../../assets/gym.jpg'),
-        require('../../../../assets/gym2.jpeg'),
-        require('../../../../assets/gym.jpg'),
+        
         
       ];
     
@@ -94,8 +96,14 @@ export default function CoachProfile({ route }) {
                 </View>
 
                 <View style={styles.social}>
-                <ClickButtton btntext="Message" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
-                <ClickButtton btntext="Schedule" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
+                        {isPersonalTrainer ? (
+                                <ClickButtton btntext="Connect" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
+                            ) : (
+                                <>
+                                    <ClickButtton btntext="Message" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
+                                    <ClickButtton btntext="Schedule" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
+                                </>
+                        )}
                 </View>
             </View>
             )}
@@ -113,8 +121,10 @@ export default function CoachProfile({ route }) {
                     renderItem={renderItem}
                 />
                 </View>
+                
+                
                 <View>
-                    <Text style={styles.headingSmall}>Knowledge Strength</Text>
+                    <Text style={styles.headingText}>Knowledge Strength</Text>
                     <SectionList
                         sections={coachData.description_array.map((daySchedule, index) => ({
                                     title: daySchedule[0], // Day
@@ -131,9 +141,11 @@ export default function CoachProfile({ route }) {
                 </>
             )}
             </View>
+            
             <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true}>
-                <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} />
+                <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} coachData={coachData} />
             </Modal>
+
 
         
         </SafeAreaView>
@@ -215,6 +227,7 @@ const styles = StyleSheet.create({
 
     },
     headingText:{
+        marginTop:20,
         fontSize:24,
         fontWeight:'bold',
     },
@@ -222,26 +235,28 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flexDirection: 'row',
         paddingHorizontal: 10,
-      },
-      cardImage: {
+    },
+    cardImage: {
         width: 100,
         height: 100,
-        marginHorizontal: 5,
+        // marginHorizontal: 35,
         borderRadius: 10,
-      },
-      headingSmall:{
+        aspectRatio:9/6,
+    },
+    
+    headingSmall:{
         fontSize:18,
         fontWeight:'bold',
         marginTop:20,
-      },
-      sectionHeader: {
+    },
+    sectionHeader: {
         fontSize: 14,
         fontWeight: 'bold',
         paddingVertical: 5,
         paddingHorizontal: 10,
         marginTop: 10,
-      },
-      item: {
+    },
+    item: {
         fontSize: 16,
         paddingVertical: 10, 
         paddingHorizontal: 15,

@@ -9,38 +9,42 @@ const AppointmentScreen = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
-        const data = await response.json();
-        setAppointments(data);
-      } catch (error) {
-        console.error('Error fetching appointments:', error);
-      }
-    };
-
     fetchData();
   }, []);
 
-  // the below function will filter the appointments based on current date with the data in db to show in upcoming and previous appointmnets.
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
+      const data = await response.json();
+      setAppointments(data);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
+
   const filterAppointments = () => {
     const today = new Date();
-    const filteredAppointments = appointments.filter(appointment => {
+    return appointments.filter(appointment => {
       const appointmentDate = new Date(appointment.date);
       if (showPrevious) {
-        //show the past appointments
         return appointmentDate < today;
       } else {
-        // Show appointments for today and future dates
         return appointmentDate >= today;
       }
     });
-    return filteredAppointments;
   };
 
   const handleToggle = (isSelected) => {
-    setShowPrevious(isSelected);
+    console.log("TEXTTTTTTT ",isSelected);
+    if (isSelected) {
+      
+      setShowPrevious(true); // Show previous appointments
+    } else {
+      setShowPrevious(false); // Show upcoming appointments
+    }
+    console.log("Chk state ",showPrevious);
   };
+  
 
   return (
     <View style={styles.container}>
@@ -54,9 +58,8 @@ const AppointmentScreen = () => {
         {filterAppointments().map((appointment, index) => (
           <AppointmentListItem
             key={index}
-            date={new Date(appointment.date).toISOString().split('T')[0]} // in the db its showing with timestamp so need to do like this so just to show the date only 
-            // time={appointment.time} 
-            time="09:00AM - 09:30AM" // for now its hardcoded need to update after updating the model of the appointment
+            date={new Date(appointment.date).toISOString().split('T')[0]}
+            time={appointment.timeSlot} 
             coachName={appointment.coach_name} 
             coachAvatar={profilePic}
           />
