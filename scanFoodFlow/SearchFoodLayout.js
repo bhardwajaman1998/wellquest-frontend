@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from 'react';
+
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity, Modal } from "react-native";
+import { StyleSheet, TouchableOpacity, Modal, Image } from "react-native";
 import StyledText from "../components/globalComponents/StyledText";
 
 import SearchBar from "../components/scanFoodComponents/SearchBar"
@@ -7,20 +9,22 @@ import ScanButton from "../components/scanFoodComponents/ScanButton"
 import MealTypeButton from "../components/scanFoodComponents/MealTypeButton"
 import HistoryListView from "../components/scanFoodComponents/HistoryListView"
 import NoFoodView from "../components/scanFoodComponents/NoFoodView";
-import { useState } from "react";
 import SearchModal from "../components/scanFoodComponents/SearchModal";
 
-const SearchFoodLayout = () => {
 
-    const  [searchScreen, setSearchScreen] = useState(false)
+const SearchFoodLayout = ({historyList}) => {
+    const [loading, setLoading] = useState(false)
+
+    const [searchScreen, setSearchScreen] = useState(false)
     const [selectedMeal, setSelectedMeal] = useState('');
+
     const mealTypeArray = [
         ['Breakfast', require('../assets/breakfast_icon.png')],
         ['Lunch', require('../assets/lunch_icon.png')],
         ['Dinner', require('../assets/dinner_icon.png')],
         ['Snack', require('../assets/snack_icon.png')]
     ]
-    
+
     const handleMealTypeSelect = meal => {
         setSelectedMeal(meal);
     };
@@ -46,7 +50,7 @@ const SearchFoodLayout = () => {
               </Modal>
             ) : (
                 <>
-                    <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} />
+                    <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} />
                     <View style={styles.scan}>
                         <ScanButton />
                         <ScanButton 
@@ -56,15 +60,15 @@ const SearchFoodLayout = () => {
                     <View style={styles.meals}>
                         <StyledText style={styles.mealtext}>Select a meal</StyledText>
                         <View style={styles.mealTab}>
-                        {mealTypeArray.map((meal, index) => (
-                            <MealTypeButton
-                                key={index}
-                                text={meal[0]}
-                                source={meal[1]}
-                                isSelected={meal[0] === selectedMeal}
-                                onSelect={() => handleMealTypeSelect(meal[0])}
-                            />
-                        ))}
+                            {mealTypeArray.map((meal, index) => (
+                                <MealTypeButton
+                                    key={index}
+                                    text={meal[0]}
+                                    source={meal[1]}
+                                    isSelected={meal[0] === selectedMeal}
+                                    onSelect={() => handleMealTypeSelect(meal[0])}
+                                />
+                            ))}
                         </View>
                     </View>
                     <View style={styles.history}>
@@ -76,11 +80,25 @@ const SearchFoodLayout = () => {
                             </HStack>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.historyList}>
-                        {/* <NoFoodView/> */}
-                        <HistoryListView />
-                    </View>
-                    </>
+                        {loading ? (
+                            <View style={styles.historyList}>
+                                <View style={{width: '100%', height:'90%', justifyContent: 'center', alignItems: 'center'}}>
+                                    <Image 
+                                    source={require('../assets/loadingGif.gif')}
+                                    style={{"width":"30%", "height":'10%'}}
+                                    />
+                                </View>
+                           </View>
+                        ) : (
+                            <View style={styles.historyList}>
+                                {historyList.length > 0 ? (
+                                    <HistoryListView data={historyList}/>
+                                ) : (
+                                    <NoFoodView/> 
+                                )}
+                            </View>
+                        )}                        
+                </>
             )
         }
         </View>

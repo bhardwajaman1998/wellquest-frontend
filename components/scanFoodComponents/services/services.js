@@ -43,7 +43,7 @@ export const submitToGoogle = async (image) => {
     }
   };
 
-export const getFoodData = async (foodName) => {
+export const getFoodData = async (foodName, getSearchResults = false) => {
     const APP_ID = '3a5c870c';
     const APP_KEY = 'de0879a02b8061603fd501ec2685772b';
     const INGR = encodeURIComponent(foodName);
@@ -52,6 +52,25 @@ export const getFoodData = async (foodName) => {
       const response = await fetch(`https://api.edamam.com/api/food-database/v2/parser?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${INGR}`);
       const data = await response.json();
       console.log(data)
+      if (getSearchResults) {
+        if (data.hints.length > 0){
+          const newFoodSearchArray = data.hints.map((hint) => {
+            return {
+              name: hint.food.label,
+              info: {
+                calories: parseFloat(hint.food.nutrients.ENERC_KCAL || 0).toFixed(2),
+                carbs: parseFloat(hint.food.nutrients.CHOCDF || 0).toFixed(2),
+                fats: parseFloat(hint.food.nutrients.FAT || 0).toFixed(2),
+                proteins: parseFloat(hint.food.nutrients.PROCNT || 0).toFixed(2)
+              }
+            };
+          }).slice(0, 4);
+          console.log(newFoodSearchArray)
+          return newFoodSearchArray;
+        }else{
+          return [];
+        }
+      }
       const foodData = {
         name: data.parsed[0]?.food?.label || '',
         nutrients: data.parsed[0]?.food?.nutrients || {} 
@@ -63,7 +82,7 @@ export const getFoodData = async (foodName) => {
     }
 };
 
-export const getMealInfo = async (foodName, servingSize, servingUnit) => {
+export const getMealInfo = async (foodName) => {
   try {
     const apiKey = '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';
     const prompt = `Give the information of calories, carbohydrates, fats, and proteins data based on the information below. return the calculated contents from its serving size and units.
@@ -125,6 +144,30 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
     const responseData = await response.json();
     
     console.log('Meal logged successfully:', responseData.newFoodLog);
+    return responseData
+  } catch (error) {
+    console.error('Error logging meal:', error.message);
+  }
+};
+
+export const historyMeals = async () => {
+  const cust_id = '65cc353cb9be345699d6a69a'
+  try {
+    const response = await fetch(`http://localhost:3000/api/customer/get_history_meals?cust_id=${cust_id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to get meals: ${errorMessage}`);
+    }
+
+    const responseData = await response.json();
+    
+    console.log('Meal fetched successfully:', responseData);
     return responseData
   } catch (error) {
     console.error('Error logging meal:', error.message);

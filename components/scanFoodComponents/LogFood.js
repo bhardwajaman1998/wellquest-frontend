@@ -16,7 +16,7 @@ const LogFood = () => {
     const navigation = useNavigation();
 
     const route = useRoute();
-    const { foodName } = route.params;
+    const { foodName, passedData, dataFromSearch} = route.params;
 
     const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,10 @@ const LogFood = () => {
     const unitArray = ['ounce', 'gram', 'milligram', 'kg', 'pound'];
 
     useEffect(() => {
-        (async () => {
+        if (dataFromSearch){
+          setData()
+        }else{
+          (async () => {
             if (!foodName) return;
             setLoading(true)
             const foodData = await getFoodData(foodName);
@@ -60,7 +63,28 @@ const LogFood = () => {
             }
             setLoading(false)
         })();
+        }
     }, []);
+
+    const setData = () =>{
+      if (passedData) {
+        setTitle(passedData.name);
+        const newFoodData = {
+              name: passedData.name,
+              calories: parseFloat(passedData.info?.calories || 0).toFixed(2),
+              carbs: parseFloat(passedData.info?.carbs || 0).toFixed(2),
+              fats: parseFloat(passedData.info?.fats || 0).toFixed(2),
+              proteins: parseFloat(passedData.info?.proteins || 0).toFixed(2)
+        };
+          setFoodInfo(newFoodData);
+          setCalories(parseFloat(passedData.info?.calories || 0).toFixed(2));
+          setCarbs(parseFloat(passedData.info?.carbs || 0).toFixed(2));
+          setFats(parseFloat(passedData.info?.fats || 0).toFixed(2));
+          setProteins(parseFloat(passedData.info?.proteins || 0).toFixed(2));
+      }
+    }
+
+
 
   const titleEditingToggle = () => {
     setIsTitleEditing(true);

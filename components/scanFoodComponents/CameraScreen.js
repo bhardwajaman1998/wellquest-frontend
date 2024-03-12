@@ -61,7 +61,14 @@ const CameraScreen = () => {
         if (localizedObjectAnnotations && localizedObjectAnnotations.length > 0) {
             const name = localizedObjectAnnotations[0].name;
             console.log(name)
-            navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: name }});
+            navigation.navigate('SearchFoodStack', {
+              screen: 'LogFood',
+              params: {
+                  foodName: name,
+                  passedData: [],
+                  dataFromSearch: false
+              }
+          });
         } else {
           navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: "banana" }});
         }

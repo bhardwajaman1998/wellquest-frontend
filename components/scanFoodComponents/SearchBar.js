@@ -6,43 +6,60 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 
-const SearchBar = ({navigation, setSearchBarActive}) => {
+const SearchBar = ({navigation, setSearchBarActive, isFromSearchScreen = false, handleQuery, foodSearchCallback}) => {
 
     const [searchQuery, setSearchQuery] = useState(""); // Add state to store selected filter
 
     const handleQueryChange = (query) => {
-        setSearchQuery(query.nativeEvent.text)
+        setSearchQuery(query)
+        handleQuery(query)
     }
 
     const searchPress = () => {
-        setSearchBarActive()
+        if (isFromSearchScreen) {
+            setSearchBarActive()
+        }
     }
+
+    const searchForFood = () => {
+       foodSearchCallback()
+    }
+
     return (
         <View style={styles.searchBar}>
             <TouchableOpacity onPress={searchPress}>
-                <Input 
-                    value={searchQuery}
-                    placeholder="Search for a food" 
-                    width="100%" 
-                    borderRadius="15" 
-                    fontFamily={'poppins-regular'}
-                    fontSize="14" 
-                    backgroundColor={'rgb(245, 245, 245)'} 
-                    InputLeftElement={
+            <Input 
+                value={searchQuery}
+                placeholder="Search for a food" 
+                width="100%" 
+                borderRadius="15" 
+                fontFamily={'poppins-regular'}
+                fontSize="14" 
+                backgroundColor={'rgb(245, 245, 245)'} 
+                InputLeftElement={
+                    <Icon 
+                        m="2" 
+                        ml="3" 
+                        size="6" 
+                        color="gray.400" 
+                        as={<MaterialIcons name="search" />}
+                    />
+                }
+                InputRightElement={
+                    isFromSearchScreen ? null : (
                         <Icon 
                             m="2" 
                             ml="3" 
                             size="6" 
                             color="gray.400" 
-                            as={
-                                <MaterialIcons 
-                                    name="search" 
-                                />
-                            }
+                            as={<MaterialIcons name="check" />}
+                            onPress={searchForFood}
                         />
-                    }
-                    onChange={handleQueryChange}
-                />
+                    )
+                }
+                onPressIn={searchPress}
+                onChangeText={handleQueryChange}
+            />
             </TouchableOpacity>
         </View>
     )
