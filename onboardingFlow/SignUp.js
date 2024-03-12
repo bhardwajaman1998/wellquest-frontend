@@ -41,10 +41,10 @@ const SignUp = ({ navigation }) => {
       };
       if(emailverify && passwordVerify){
         axios
-      .post("http://192.168.1.188:5000/register", userData)
-      .then(res=> {
-        console.log(res.data);
-        if(res.data.status == 'Ok'){
+    .post("http://localhost:3000/signup", userData)
+    .then(res=> {
+      console.log(res.data);
+      if(res.data.status == 'Ok'){
         Alert.alert("Registration Successful!")
         navigation.navigate('Preferences', {screen: 'Preferences'})
       } else {

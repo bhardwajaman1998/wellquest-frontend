@@ -3,19 +3,32 @@ import { HStack, Text, Image, View } from "@gluestack-ui/themed"
 import StyledText from "../globalComponents/StyledText";
 import { useNavigation } from '@react-navigation/native';
 
-const LogButtons = ({isForCancel}) => {
+const LogButtons = ({isForCancel, isEdited, cancelPress, logPress, mealInfoPress}) => {
 
-    const navigation = useNavigation(); // Get navigation object
+    const navigation = useNavigation();
 
-    const handlePress = () => {
+    const handleCancel = () => {
+        cancelPress()
+    }
 
+    const handleLog = () => {
+        logPress()
+    }
+    const getMealInfo = () => {
+        mealInfoPress()
     }
 
     return (
         <View style={styles.container} >
-            <TouchableOpacity onPress={handlePress} style={isForCancel ? (styles.buttonCancel) : (styles.buttonApply)}>
-                <StyledText style={isForCancel ? (styles.textCancel) : (styles.textApply)}>{isForCancel  ? 'CANCEL' : 'LOG'}</StyledText>
-            </TouchableOpacity>
+            {isEdited ? (
+                <TouchableOpacity onPress={isForCancel ? (handleCancel) : (getMealInfo)} style={isForCancel ? (styles.buttonCancel) : (styles.buttonApply)}>
+                    <StyledText style={isForCancel ? (styles.textCancel) : (styles.textApply)}>{isForCancel  ? 'CANCEL' : 'GET INFO'}</StyledText>
+                </TouchableOpacity>
+            ): (
+                <TouchableOpacity onPress={isForCancel ? (handleCancel) : (handleLog)} style={isForCancel ? (styles.buttonCancel) : (styles.buttonApply)}>
+                    <StyledText style={isForCancel ? (styles.textCancel) : (styles.textApply)}>{isForCancel  ? 'CANCEL' : 'LOG'}</StyledText>
+                </TouchableOpacity>
+            )}
         </View>
     )
 }

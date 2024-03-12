@@ -8,6 +8,11 @@ import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { useState } from 'react';
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
+console.disableYellowBox = true;
+
 const getFonts = () => Font.loadAsync({
   'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
   'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),

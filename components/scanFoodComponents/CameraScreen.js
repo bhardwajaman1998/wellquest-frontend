@@ -6,8 +6,11 @@ import StyledText from '../globalComponents/StyledText';
 import { useNavigation } from '@react-navigation/native'
 import { submitToGoogle } from './services/services';
 
+
 const CameraScreen = () => {
   const  navigation = useNavigation()
+
+  const [loading, setLoading] = useState(false);
 
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -41,27 +44,39 @@ const CameraScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
+
   const openGallery = () => {
     pickImageFromGallery(); // Call pickImageFromGallery function to open the gallery
   };
 
-
   const getNutritionalInfo = async () => {
+    setLoading(true)
     try {
         const response = await submitToGoogle(image);
         const objectResponse = response.responses[0];
         const localizedObjectAnnotations = objectResponse.localizedObjectAnnotations;
 
+        setLoading(false)
+
         if (localizedObjectAnnotations && localizedObjectAnnotations.length > 0) {
             const name = localizedObjectAnnotations[0].name;
-            alert(`Object Name: ${name}`);
+            console.log(name)
+            navigation.navigate('SearchFoodStack', {
+              screen: 'LogFood',
+              params: {
+                  foodName: name,
+                  passedData: [],
+                  dataFromSearch: false
+              }
+          });
         } else {
-            alert('No object name found.');
+          navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: "banana" }});
         }
     } catch (error) {
         console.error('Error getting image data:', error);
         // Handle error
         alert('Error getting image data. Please try again.');
+        setLoading(false)
     }
 }
 
@@ -80,48 +95,59 @@ const useImage = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
-      {image ? (
-        <View style={{ flex: 1 }}>
-          <Image source={{ uri: image }} style={{ flex: 1 }} resizeMode="contain" />
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity onPress={retakePicture} style={styles.button}>
-              <StyledText style={styles.buttonText}>Retake</StyledText>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={useImage} style={styles.button}>
-              <StyledText style={styles.buttonText}>Use</StyledText>
-            </TouchableOpacity>
-          </View>
-        </View>
-      ) : (
-          <Camera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)}>
-            <View style={styles.cameraContainer}>
-              <View style={styles.rectangleContainer}>
-                  <Image
-                    style={styles.image}
-                    size="lg"
-                    source={require('../../assets/cam_scanner.png')}
-                  />
-              </View>
+    {loading ? (
+      <View style={{width: '100%', height:'90%', justifyContent: 'center', alignItems: 'center'}}>
+        <Image 
+          source={require('../../assets/loadingGif.gif')}
+          style={{"width":"30%", "height":'10%'}}
+        />
+      </View>
+      ):(
+        <>
+        {image ? (
+          <View style={{ flex: 1 }}>
+            <Image source={{ uri: image }} style={{ flex: 1 }} resizeMode="contain" />
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity onPress={retakePicture} style={styles.button}>
+                <StyledText style={styles.buttonText}>Retake</StyledText>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={useImage} style={styles.button}>
+                <StyledText style={styles.buttonText}>Use</StyledText>
+              </TouchableOpacity>
             </View>
-          
-          <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.goBack()}
-            >
-              <StyledText style={styles.buttonText}>Go Back</StyledText>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={openGallery}
-            >
-              <StyledText style={styles.buttonText}>Gallery</StyledText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={takePicture}>
-              <StyledText style={styles.buttonText}>Click</StyledText>
-            </TouchableOpacity>
           </View>
-        </Camera>
+        ) : (
+          <Camera style={{ flex: 1, height: '100%' }} type={type} ref={ref => setCamera(ref)}>
+              <View style={styles.cameraContainer}>
+                <View style={styles.rectangleContainer}>
+                    <Image
+                      style={styles.image}
+                      size="lg"
+                      source={require('../../assets/cam_scanner.png')}
+                    />
+                </View>
+              </View>
+            
+            <View style={styles.buttonsContainer}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.goBack()}
+              >
+                <StyledText style={styles.buttonText}>Go Back</StyledText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={openGallery}
+              >
+                <StyledText style={styles.buttonText}>Gallery</StyledText>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={takePicture}>
+                <StyledText style={styles.buttonText}>Click</StyledText>
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        )}
+        </>
       )}
     </View>
   );

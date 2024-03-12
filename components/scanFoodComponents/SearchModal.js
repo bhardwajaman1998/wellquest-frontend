@@ -1,15 +1,32 @@
 import { View, Image } from '@gluestack-ui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar'
 import HistoryListView from './HistoryListView'
 import StyledText from '../globalComponents/StyledText'
 import { TouchableOpacity, StyleSheet } from 'react-native'
+import NoFoodView from './NoFoodView';
+import { getFoodData } from './services/services';
 
 const SearchModal = ({setSearchBarActive}) => {
+
+    const [searchData, setSearchData] = useState([])
+    const [searchQuery, setSearchQuery] = useState('')
+
+    const getSearchResults = async () => {
+        console.log(searchQuery)
+        const data = await getFoodData(searchQuery, true)
+        setSearchData(data)
+    }
+
+    const setQuery = (query) => {
+        setSearchQuery(query)
+    }
+
     const closeSearchModal = () => {
         setSearchBarActive()
     }
+
   return (
     <LinearGradient 
     colors={['rgba(255, 255, 255, 1)', 'rgba(114, 101, 227, 0.1)']}
@@ -24,10 +41,14 @@ const SearchModal = ({setSearchBarActive}) => {
                 tintColor= 'rgb(255, 147, 78)'
             />
         </TouchableOpacity>
-        <SearchBar style={styles.search}/>
+        <SearchBar style={styles.search} isFromSearchScreen={false} handleQuery={setQuery} foodSearchCallback={getSearchResults} />
         <StyledText style={styles.bestText}>Best matches</StyledText>
         <View style={styles.historyList}>
-            <HistoryListView />
+            {searchData.length > 0 ? (
+                <HistoryListView data={searchData} closeModal={closeSearchModal}/>
+                    ) : (
+                <NoFoodView title='Search your meal!' description='ex. Chicken salad, Hamburger'/> 
+            )}
         </View>
     </LinearGradient>
   )

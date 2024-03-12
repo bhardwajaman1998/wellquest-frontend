@@ -9,9 +9,9 @@ const ScanButton = ({isForCamera = true}) => {
 
     const handlePress = () => {
         if  (isForCamera) {
-            navigation.navigate('CameraScreen');
+            navigation.navigate('SearchFoodStack', {screen: 'CameraScreen'});
         }else{
-            navigation.navigate('CameraScreen');
+            navigation.navigate('SearchFoodStack', {screen: 'LogFood'});
         }
     }
 

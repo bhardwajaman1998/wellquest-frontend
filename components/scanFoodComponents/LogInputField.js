@@ -4,8 +4,31 @@ import { Select,  } from "native-base";
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 
-const LogInputField = ({title, isDropDown, dropdownData}) => {
-    const [service, setService] = React.useState("");
+const LogInputField = ({title, isDropDown, dropdownData, placeholder = "Please enter the value", serviceSelected, useSetNumber = false, changeNumber, extraCals , useExtraCals = false, useMealType}) => {
+    
+    const [service, setService] = React.useState(serviceSelected);
+    const [number, setNumber] = useState(0)
+
+    const serviceCallback  = (value) => {
+        setService(value)
+        useMealType(value)
+    }
+
+    const updateNumber = (value) => {
+        if (useSetNumber) {
+            const parsedValue = parseFloat(value).toFixed(2);
+            if (!isNaN(parsedValue)) { 
+                setNumber(parsedValue);
+                if (useSetNumber) {
+                    changeNumber(parsedValue);
+                }
+            }else{
+                changeNumber(1);
+            }
+    } else if (useExtraCals){
+        extraCals(parseFloat(value).toFixed(2))
+    }
+}
 
     return (
         <View style={styles.container}>
@@ -22,7 +45,7 @@ const LogInputField = ({title, isDropDown, dropdownData}) => {
                         _selectedItem={{
                             bg: "teal.600",
                             endIcon: <CheckIcon size="xs" />
-                        }} mt={1} onValueChange={itemValue => setService(itemValue)}>
+                        }} mt={1} onValueChange={itemValue => serviceCallback(itemValue)}>
                             {dropdownData.map((item) => (
                                 <Select.Item label={item} value={item} key={item} />
                             ))
@@ -37,8 +60,9 @@ const LogInputField = ({title, isDropDown, dropdownData}) => {
                         isDisabled={false}
                         isInvalid={false}
                         isReadOnly={false}
+                        onChange={value => updateNumber(value.nativeEvent.text)} 
                     >
-                        <InputField placeholder="" />
+                        <InputField placeholder={placeholder}/>
                     </Input>
                 )}
             </View>

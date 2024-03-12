@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 import StyledText from '../globalComponents/StyledText'
 
-const NoFoodView = () => {
+const NoFoodView = ({title = 'No food logged yet!', description = "Search or scan your first food to log"}) => {
     return (
         <View style={styles.container}>
             <Image
@@ -12,8 +12,8 @@ const NoFoodView = () => {
                 source={require('../../assets/icon-no-food.png')
                 }
             />
-            <StyledText style={{fontFamily: 'poppins-semibold', fontSize: 20, color:'rgb(255, 147, 78)' }}>No food logged yet!</StyledText>
-            <StyledText>Search or scan your first food to log</StyledText>
+            <StyledText style={{fontFamily: 'poppins-semibold', fontSize: 20, color:'rgb(255, 147, 78)' }}>{title}</StyledText>
+            <StyledText>{description}</StyledText>
         </View>
     )
 }
