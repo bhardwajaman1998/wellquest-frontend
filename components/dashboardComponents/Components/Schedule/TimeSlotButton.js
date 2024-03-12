@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const TimeSlotButton = ({ timeSlots, onPress, selected }) => {
@@ -10,7 +10,7 @@ const TimeSlotButton = ({ timeSlots, onPress, selected }) => {
         <TouchableOpacity
             style={[
                 styles.button,
-                selected ? styles.selected : null,
+                isSelected ? styles.selected : null,
             ]}
             onPress={handlePress}
         >
