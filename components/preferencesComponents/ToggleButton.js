@@ -16,7 +16,7 @@ const ToggleButton = ({ labels, onPress }) => {
 
   const handlePress = (label) => {
     setSelectedButton(label);
-    onPress(label); 
+    onPress(label === labels[1]); //changes done for appointment screen to show the respective data under labels 
   }
 
   return (

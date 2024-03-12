@@ -47,7 +47,7 @@ const DashboardStack = () => {
               
             />
            <Stack.Screen
-                name="Home Screen"
+                name="DashboardScreen"
                 component={HomeScreen}
                 options={({ navigation }) => ({
                   title: "WellQuest",

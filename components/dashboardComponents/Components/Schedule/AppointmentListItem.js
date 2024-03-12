@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import clockIcon from "../../.././../assets/clock.png";
 import dotIcon from "../../.././../assets/Ellipse.png";
 
 const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
+  const [showOptions, setShowOptions] = useState(false);
+
+  const toggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
+  const handleReschedule = () => {
+    // Handle reschedule action
+    setShowOptions(false);
+  };
+
+  const handleCancel = () => {
+    // Handle cancel action
+    setShowOptions(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.heading}>Appointment date</Text>
-        <TouchableOpacity style={styles.menuButton}>
+        <TouchableOpacity style={styles.menuButton} onPress={toggleOptions}>
           <Icon name="ellipsis-v" size={20} color="#2A9D5C" />
         </TouchableOpacity>
       </View>
@@ -24,6 +40,16 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
         <Image source={coachAvatar} style={styles.avatar} />
         <Text style={styles.coachName}>{coachName}</Text>
       </View>
+      {showOptions && (
+        <View style={styles.optionsContainer}>
+          <TouchableOpacity style={styles.optionButton} onPress={handleReschedule}>
+            <Text style={styles.optionText}>Reschedule</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.optionButton} onPress={handleCancel}>
+            <Text style={styles.optionText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -39,6 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderLeftColor: "#2A9D5C",
     borderLeftWidth: 5,
+    position: 'relative',
   },
   header: {
     flexDirection: 'row',
@@ -90,6 +117,24 @@ const styles = StyleSheet.create({
   },
   coachName: {
     fontSize: 16,
+  },
+  optionsContainer: {
+    position: 'absolute',
+    top: 40, 
+    right: 10,  
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'lightgray',
+    padding: 10,
+    zIndex: 1,
+  },
+  optionButton: {
+    paddingVertical: 5,
+  },
+  optionText: {
+    fontSize: 16,
+    color: '#2A9D5C',
   },
 });
 
