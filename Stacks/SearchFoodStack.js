@@ -4,6 +4,7 @@ import LogFood from "../components/scanFoodComponents/LogFood"
 import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 import {Stack} from './Stack';
 import CameraScreen from "../components/scanFoodComponents/CameraScreen";
+import NavigationBar from '../components/globalComponents/NavigationBar';
 
 const SearchFoodStack = () => {
   return (
@@ -11,35 +12,26 @@ const SearchFoodStack = () => {
             <Stack.Screen
                     name="SearchFood" // give it a unique name
                     component={SearchFoodScreen} // use that component here by replacing IndexScreen
-                    options={{
-                        title:"Search Food", 
-                        headerStyle:{
-                            backgroundColor:'#7265E3'
-                        },
-                        headerShown: true,
-                        headerTitleStyle:{
-                            color:'#fff'
-                        },
-                        headerLeft: () => (
-                            <GlobalBackButton />
+                    options={({ navigation }) => ({
+                        title: 'Search Food',
+                        header: () => (
+                          <NavigationBar
+                            title="Search Food"
+                          />
                         )
-                    }}
+                      })}
                 /> 
             <Stack.Screen
                     name="LogFood" 
                     component={LogFood}
-                    options={{
-                        title:"Log Food", 
-                        headerStyle:{
-                            backgroundColor:'#7265E3'
-                        },
-                        headerTitleStyle:{
-                            color:'#fff'
-                        },
-                        headerLeft: () => (
-                            <GlobalBackButton />
+                    options={({ navigation }) => ({
+                        title: 'Log Meal',
+                        header: () => (
+                          <NavigationBar
+                            title="Log Meal"
+                          />
                         )
-                    }}
+                      })}
             />   
             <Stack.Screen
                     name="CameraScreen" 
