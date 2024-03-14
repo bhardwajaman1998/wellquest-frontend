@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, Image } from 'react-native'
 import WaterDropIcon from '../../assets/water_drop_icon.png'
 import StepsIcon from '../../assets/steps_icon.png'
+import Calorie_History from './Calorie_History'
 
 const TabProgressScreen = () => {
   return (
@@ -16,8 +17,8 @@ const TabProgressScreen = () => {
                 }}
             />
             <View style={styles.dataContainer}>
-                <Text style={styles.containerHeading}>8L</Text>
-                <Text style={styles.ontainerSubHeading}>Water Intake</Text>
+                <Text style={styles.containerHeading}>2400</Text>
+                <Text style={styles.ontainerSubHeading}>Foot Steps</Text>
             </View>
           </View>
           <View style={styles.targetContainer}>
@@ -35,47 +36,33 @@ const TabProgressScreen = () => {
         </View>
 
       </View>
-      <BarChart
-                barWidth={22}
-                noOfSections={3}
-                barBorderRadius={4}
-                frontColor="lightgray"
-                data={barData}
-                yAxisThickness={0}
-                xAxisThickness={0}
-            />
+      <Calorie_History/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection : 'row',
+    flexDirection : 'column',
     backgroundColor: 'white',
     alignItems: 'top',
     height: '100%',
     padding: 10,
     borderRadius: 12,
-    width: '100%', // Take width of the parent
+    width: '100%',
 
   },
   targertBox:{
-    flex: 1,
-    padding: 20,
-    margin: 10,
-    height: 120,
+    padding: 10,
+    margin: 5,
+    height: 120, 
     backgroundColor: '#FF934E66',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-  justifyContent: 'space-between',
     borderRadius: 22,
     alignItems: 'center',
-    paddingVertical: 10,
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
-    borderRadius: 10,
-    margin: 10,
-
   },
+  
 
   targetContainer:{
     flexDirection : 'row',

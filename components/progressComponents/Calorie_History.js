@@ -1,4 +1,7 @@
 import React from 'react'
+import { View, StyleSheet } from 'react-native';
+import { BarChart } from 'react-native-gifted-charts';
+
 
 const Calorie_History = () => {
     const barData = [
@@ -12,7 +15,7 @@ const Calorie_History = () => {
     ];
   return (
     <View>
-      <View>
+      <View style={styles.container}>
             <BarChart
                 barWidth={22}
                 noOfSections={3}
@@ -21,10 +24,17 @@ const Calorie_History = () => {
                 data={barData}
                 yAxisThickness={0}
                 xAxisThickness={0}
+                labelSize={8}
             />
         </View>
     </View>
   )
 }
 
+const styles = StyleSheet.create({
+    container:{
+        margin: 20
+    }
+
+})
 export default Calorie_History
