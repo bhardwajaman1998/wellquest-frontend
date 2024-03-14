@@ -8,6 +8,7 @@ const SelectHeight = () => {
      const endHeight = 300;
   const navigation = useNavigation();
   const route = useRoute();
+  const { dataToSend } = route.params;
   const [selectedHeight, setSelectedHeight] = useState(140);
 
   const getHeightOptions = () => {
@@ -16,9 +17,9 @@ const SelectHeight = () => {
     );
   };
   const handleNext = () => {
+    dataToSend.height = selectedHeight;
     navigation.navigate('SelectWeight', {
-      goal: route.params.goal,
-      height: selectedHeight,
+      dataToSend
     });
   };
 

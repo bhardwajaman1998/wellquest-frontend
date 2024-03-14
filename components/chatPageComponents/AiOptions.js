@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const fetchMealSuggestions = async (preference, mealType) => {
+const fetchMealSuggestions = async (dataToSend) => {
   try {
     const apiKey = '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';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const prompt=`Here you play a role of providing a suggested meal As per the ${preference} that 
-    user chose and I want a meal suggestions for ${mealType}. You will provide 9 meals according
-    to the selected values . There should be meal tilte and a small description 
-    of the meals`
+    const prompt = `Fetch me 3 meal options for a person who is ${dataToSend.height} cm tall
+                    ${dataToSend.weight} kg, wants to ${dataToSend.goal} and his preference is ${dataToSend.preference}
+                    Fetch only 3 options in the exact JSON format given  below:
+                    {name, recipe, calories}
+    `;
 
     const requestBody = {
       model: 'gpt-3.5-turbo-0125',
@@ -20,61 +22,63 @@ const fetchMealSuggestions = async (preference, mealType) => {
           content: prompt,
         },
       ],
-      max_tokens: 1000, 
-     
+      max_tokens: 1000,
     };
 
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
+    const response = await axios.post(apiUrl, requestBody, {
+      headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
-      
+      },
     });
+    console.log(response)
 
-    if (!response.ok) {
+    if (response.status >= 200 && response.status < 300) {
+      const suggestions = response.data.choices[0].message.content;
+      return JSON.parse(suggestions);
+    } else {
       throw new Error('Failed to fetch meal suggestions');
     }
-
-    const responseData = await response.json();
-    console.log(responseData);
-    const suggestions = JSON.parse(nutritionalInfo.choices[0].message.content);
-    console.log(suggestions);
-    return suggestions;
-    
-  } 
-  catch (error) 
-  {
+  } catch (error) {
     console.error('Error fetching meal suggestions:', error);
     return [];
   }
 };
-export const meal = async (foodInfo) => {
+
+export const meal = (foodInfo) => {
   const data = {
     title: foodInfo.title,
-    description: foodInfo.description
-    }
+    description: foodInfo.description,
   };
+};
 
-const AiOptions = ({ route }) => {
-  const { preference, mealType } = route.params;
+
+const AiOptions = () => {
+
+  const route = useRoute();
+
+  const { dataToSend } = route.params;
   const [mealSuggestions, setMealSuggestions] = useState([]);
   
 
   useEffect(() => {
-    fetchMealSuggestions(preference, mealType)
+    console.log(dataToSend)
+    fetchMealSuggestions(dataToSend)
       .then((suggestions) => {
         console.log('Meal suggestions:', suggestions);
         setMealSuggestions(suggestions);
       })
       .catch((error) => console.error('Error:', error));
-  }, [preference, mealType]);
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Meal Suggestions </Text>
       {mealSuggestions.map((meal, index) => (
         <View key={index} style={styles.mealContainer}>
-          <Text style={styles.mealTitle}>{meal.title}</Text>
-          <Text style={styles.mealDescription}>{meal.description}</Text>
+          <Text style={styles.mealTitle}>{meal.name}</Text>
+          <Text style={styles.mealTitle}>{meal.calories}</Text>
+          <Text style={styles.mealDescription}>{meal.recipe}</Text>
         </View>
       ))}
     </View>

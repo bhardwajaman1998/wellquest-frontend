@@ -16,13 +16,13 @@ const SelectWeight = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
+  const { dataToSend } = route.params;
   const [selectedWeight, setSelectedWeight] = useState(30);
 
   const handleNext = () => {
+    dataToSend.weight = selectedWeight
     navigation.navigate('CalculateCalories', {
-      goal: route.params.goal,
-      height: route.params.height,
-      weight: selectedWeight,
+      dataToSend
     });
   };
 

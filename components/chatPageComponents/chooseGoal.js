@@ -6,7 +6,8 @@ const ChooseGoal = () => {
   const navigation = useNavigation();
 
   const handleGoalSelection = (goal) => {
-    navigation.navigate('SelectHeight', { goal });
+    const dataToSend = {goal: goal}
+    navigation.navigate('SelectHeight', { dataToSend });
   };
 
   return (

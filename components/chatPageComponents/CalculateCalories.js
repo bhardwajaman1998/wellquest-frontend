@@ -2,13 +2,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const CalculateCalories = ({ route, navigation }) => {
-  const { height, weight } = route.params;
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+const CalculateCalories = () => {
+
+  const navigation = useNavigation();
+
+  const route = useRoute();
+
+  const { dataToSend } = route.params;
 
   const [calculatedCalories, setCalculatedCalories] = useState(0);
   const [calculatedWeight, setCalculatedWeight] = useState(0);
   const [monthlyCalories, setMonthlyCalories] = useState(0);
   //const [CaloriesToLose, setCaloriesToLose] = useState(0);
+
+  const handleNext = () => {
+    dataToSend.caloriesRequired = calculatedCalories
+    navigation.navigate('SelectPreference', {
+      dataToSend
+    });
+  };
+
 
 
   useEffect(() => {
@@ -17,7 +32,7 @@ const CalculateCalories = ({ route, navigation }) => {
 
     const calculateCaloriesAndWeight = () => {
 
-    const { goal, height, weight } = route.params;
+    const { goal, height, weight } = dataToSend;
     const heightInches = height * 0.39;
 
     const weightPounds = weight * 2.20;
@@ -50,7 +65,6 @@ const CalculateCalories = ({ route, navigation }) => {
       monthlyCalories = 200;
     }
 
-    
     setCalculatedWeight(calculatedWeight);
     
   };
@@ -66,9 +80,7 @@ const CalculateCalories = ({ route, navigation }) => {
         <Text style={styles.title}>{`According to the milestones you should burn ${calculatedCalories} kcal to reach a weight of ${calculatedWeight} kg. You should burn ${monthlyCalories} kcal / month.`}</Text>
       </View>
      
-      <TouchableOpacity style={styles.nextButton} onPress={() =>
-        navigation.navigate('SelectPreference', { name: 'SelectPreference' })
-      }>
+      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </View>

@@ -1,12 +1,17 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const SelectPreference = () => {
   const navigation = useNavigation();
 
+  const route = useRoute();
+
+  const { dataToSend } = route.params;
+
   const handlePreferenceSelection = (preference) => {
-    navigation.navigate('PlanPage', { preference });
+    dataToSend.preference = preference
+    navigation.navigate('PlanPage', { dataToSend });
   };
 
   return (
