@@ -5,20 +5,20 @@ import { BarChart } from 'react-native-gifted-charts';
 
 const Calorie_History = () => {
     const barData = [
-        {value: 250, label: 'M'},
-        {value: 500, label: 'T', frontColor: '#177AD5'},
-        {value: 745, label: 'W', frontColor: '#177AD5'},
-        {value: 320, label: 'T'},
-        {value: 600, label: 'F', frontColor: '#177AD5'},
-        {value: 256, label: 'S'},
-        {value: 300, label: 'S'},
+        {value: 25, label: 'M'},
+        {value: 50, label: 'T', frontColor: '#177AD5'},
+        {value: 74, label: 'W', frontColor: '#177AD5'},
+        {value: 32, label: 'T'},
+        {value: 60, label: 'F', frontColor: '#177AD5'},
+        {value: 25, label: 'S'},
+        {value: 30, label: 'S'},
     ];
   return (
     <View style={styles.container}>
         <Text style={styles.calorieHeading}>Calorie History</Text>
             <View style={styles.chart}>
                 <BarChart
-                barWidth={22}
+                barWidth={20}
                 noOfSections={1}
                 barBorderRadius={12}
                 frontColor="lightgray"
@@ -26,7 +26,6 @@ const Calorie_History = () => {
                 yAxisThickness={0}
                 xAxisThickness={0}
                 labelSize={8}
-                showYAxis={false}
             />
             </View>
     </View>
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
     chart:{
-        marginTop: 15
+        marginTop: 10
     }
 
 })
