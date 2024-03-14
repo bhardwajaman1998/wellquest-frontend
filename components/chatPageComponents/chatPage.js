@@ -5,23 +5,14 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {ChatScreen} from '../chatPageComponents/chatScreen'
 
-// Define the ChatPage component
 const ChatPage = () => {
-  // Initialize navigation
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
-
-  // Mock data for coaches and AI assistance
   const coachesData = [
     { id: '1', name: 'John Doe', time: '10:00 AM', chat: 'Hello, how can I help you?' },
     { id: '2', name: 'My AI Assistance', chat: 'Welcome! How may I assist you?' }
   ];
 
-  const aiAssistanceData = [
-    { id: '1', name: 'My AI Assistance', chat: 'Welcome! How may I assist you?' }
-  ];
-
-  // Render item for coaches list
   const renderCoachItem = ({ item }) => (
     <TouchableOpacity onPress={navigateToChatScreen} style={styles.chatItem}>
       <Image source={require('../../assets/Profilee.png')} style={styles.avatar} />
@@ -31,8 +22,6 @@ const ChatPage = () => {
       </View>
     </TouchableOpacity>
   );
-
-  // Render item for AI assistance list
   const renderAIAssistanceItem = ({ item }) => (
     <View style={styles.chatItem}>
       <Image source={require('../../assets/profile.png')} style={styles.avatar} />
@@ -43,17 +32,10 @@ const ChatPage = () => {
     </View>
   );
 
-  // Function to navigate to the ChatScreen.js component
   const navigateToChatScreen = () => {
     navigation.navigate("ChatScreen",{screen:'ChatScreen'});
   };
 
-  // <TouchableOpacity style={styles.signUpButton}  onPress={() => 
-  // navigation.navigate("Preferences", {screen: 'Preferences'})}>
-  //       <Text style={styles.signUpButtonText}>Sign up</Text>
-  //     </TouchableOpacity>
-
-  // Return the JSX layout of the component
   return (
     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20, gap: 0 }}>
       <View style={styles.searchContainer}>
@@ -74,39 +56,20 @@ const ChatPage = () => {
       <TouchableOpacity style={{  backgroundColor: '#FF934E',
           paddingVertical: 12,
           paddingHorizontal: 10,
-          borderRadius: 20,} }
+          borderRadius: 20,
+          marginBottom:400,
+        marginLeft:50} }
             onPress={() =>
-              navigation.navigate('AiStarted', {name: 'AiStarted'})
+              navigation.navigate('GetStarted', {name: 'GetStarted'})
             }
         >
         <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
-        {/* <FlatList
-          data={aiAssistanceData}
-          renderItem={renderAIAssistanceItem}
-          keyExtractor={item => item.id}
-          style={{ marginBottom: 0 }}
-        /> */}
-        <TouchableOpacity style={{  backgroundColor: '#FF934E',
-          paddingVertical: 12,
-          paddingHorizontal: 10,
-          borderRadius: 20,} }
-            onPress={() =>
-              navigation.navigate('AiStarted', {name: 'AiStarted'})
-            }
-        >
-        <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>
-      </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() =>
-        navigation.navigate('SignUp', {name: 'SignUp'})
-      }></TouchableOpacity> */}
 
     </View>
   );
 };
-
-// Define styles for the component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -155,5 +118,4 @@ const styles = StyleSheet.create({
   }
 });
 
-// Export the component as the default export
 export default ChatPage;

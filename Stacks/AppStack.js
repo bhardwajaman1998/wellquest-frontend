@@ -15,7 +15,7 @@ const AppStack = () => {
   <NavigationContainer>
     <Stack.Navigator >
 
-          {/* <Stack.Screen
+        {/* <Stack.Screen
           name="Onboarding"
           component={OnboardingStack}
           options = {{headerShown: false}}

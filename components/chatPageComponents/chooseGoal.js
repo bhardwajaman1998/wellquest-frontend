@@ -4,12 +4,17 @@ import { useNavigation } from '@react-navigation/native';
 
 const ChooseGoal = () => {
   const navigation = useNavigation();
-  
+
+  const handleGoalSelection = (goal) => {
+    const dataToSend = {goal: goal}
+    navigation.navigate('SelectHeight', { dataToSend });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require('../../assets/Vector1.png')}
+          source={require('../../assets/Ai.png')}
           style={styles.image}
           resizeMode="contain"
         />
@@ -17,39 +22,30 @@ const ChooseGoal = () => {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Lose Weight button pressed")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleGoalSelection("Lose Weight")}>
           <Text style={styles.buttonText}>Lose Weight</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Gain Weight button pressed")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleGoalSelection("Gain Weight")}>
           <Text style={styles.buttonText}>Gain Weight</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Build Muscle button pressed")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleGoalSelection("Build Muscle")}>
           <Text style={styles.buttonText}>Build Muscle</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Get Fitter button pressed")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleGoalSelection("Get Fitter")}>
           <Text style={styles.buttonText}>Get Fitter</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Improve Endurance button pressed")}>
+        <TouchableOpacity style={styles.button} onPress={() => handleGoalSelection("Improve Endurance")}>
           <Text style={styles.buttonText}>Improve Endurance</Text>
         </TouchableOpacity>
-      </View>
 
-      <TouchableOpacity
-        style={styles.nextButton}
+        {/* <TouchableOpacity
+         style={styles.nextButton}
         onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
-      >
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.navigate('ChatPage', { name: 'ChatPage' })}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
-      </TouchableOpacity>
+       >
+         <Text style={styles.nextButtonText}>Next</Text>
+       </TouchableOpacity> */}
+       
+      </View>
     </View>
   );
 };
@@ -76,52 +72,28 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonsContainer: {
-    flexDirection: 'column', // Change to column for vertical placement
-    alignItems: 'center', // Align items at center horizontally
+    flexDirection: 'column',
+    alignItems: 'center',
     marginBottom: 30,
   },
   button: {
     backgroundColor: 'white',
-    width: 250, // Set a fixed width
-    height: 50, // Set a fixed height
+    width: 250,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    marginVertical: 10, // Separate buttons vertically
-    elevation: 4, // Add elevation for shadow effect on Android
-    shadowColor: '#000', // Add shadow color
-    shadowOffset: { width: 0, height: 4 }, // Add shadow offset
-    shadowOpacity: 0.4, // Add shadow opacity
-    shadowRadius: 4, // Add shadow radius
-    
-},
+    marginVertical: 10,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+  },
   buttonText: {
     color: '#7265E3',
     fontSize: 18,
   },
-  nextButton: {
-    backgroundColor: '#FF934E',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
-  },
-  nextButtonText: {
-    color: 'white',
-    fontSize: 20,
-  },
-  backButton:{
-    marginTop:10,
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
-    borderColor:'black'
-  },
-  backButtonText: {
-    color: 'black',
-    fontSize: 20,
-  },
 });
 
 export default ChooseGoal;
-

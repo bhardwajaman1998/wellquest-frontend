@@ -1,28 +1,83 @@
 import AiChatPage from "../components/chatPageComponents/chatPage";
 import ChatScreen from "../components/chatPageComponents/chatScreen";
 import ChooseGoal from "../components/chatPageComponents/chooseGoal";
-//import SelectHeight from "../components/chatPageComponents/selectHeight";
-//import SelectWeight from "../components/chatPageComponents/selectWeight";
 import PlanPage from "../components/chatPageComponents/planPage";
-//import Options from "../components/chatPageComponents/options";
 import GlobalBackButton from "../components/globalComponents/GlobalBackButton";
 import {Stack} from './Stack';
 import AiStarted from "../components/chatPageComponents/aiStarted";
 import AiStartedTwo from "../components/chatPageComponents/aiStartedtwo";
-//import ChooseGoal from "../components/chatPageComponents/chooseGoal";
+import AiOptions from "../components/chatPageComponents/AiOptions";
 import Options from "../components/chatPageComponents/options";
 import SelectHeight from "../components/chatPageComponents/selectHeight";
 import SelectPreference from "../components/chatPageComponents/selectPreference";
 import SelectWeight from "../components/chatPageComponents/selectWeight";
+import CalculateCalories from"../components/chatPageComponents/CalculateCalories";
+import GetStarted from"../components/chatPageComponents/getStarted";
+
 
 const ChatPageStack = () => {
   return (
         <Stack.Navigator>
+          
             <Stack.Screen
                 name="ChatPage" 
                 component={AiChatPage} 
                 options={{
                     title:"Chat Page", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                    , 
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
+                }}
+            />
+              <Stack.Screen
+                name="GetStarted" 
+                component={GetStarted} 
+                options={{
+                    title:"Get Started", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                    , 
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
+                }}
+            />
+            <Stack.Screen
+                name="AiOptions" 
+                component={AiOptions} 
+                options={{
+                    title:"Ai Options", 
+                    headerStyle:{
+                        backgroundColor:'#2c3e50'
+                    },
+                    headerTitleStyle:{
+                        color:'#fff'
+                    }
+                    , 
+                    headerShown: true,
+                    headerLeft: () => (
+                        <GlobalBackButton />
+                    )
+                }}
+            />
+            <Stack.Screen
+                name="CalculateCalories" 
+                component={CalculateCalories} 
+                options={{
+                    title:"Calculate Calories", 
                     headerStyle:{
                         backgroundColor:'#2c3e50'
                     },
