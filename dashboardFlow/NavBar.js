@@ -11,6 +11,8 @@ import progressIcon from "../assets/My_progress_nav.png";
 import messageIcon from "../assets/Messages_nav.png";
 import profileIcon from "../assets/Profile_nav.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
+import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
+import NavigationBar from '../components/globalComponents/NavigationBar';
 
 const Tab = createBottomTabNavigator();
 const screenOptions={
@@ -35,6 +37,24 @@ const NavBar =()=>{
                 name="Home" 
                 component={HomeScreen}
                 options={{
+                    headerShown:true,
+                    header: () => (
+                      <NavigationBar
+                        title="WellQuest"
+                        leftIcon={
+                          <Image
+                            source={require('../assets/logo-header.png')} // Replace with the path to your PNG file
+                            style={{ width: 45, height: 40, resizeMode: 'contain'}} // Adjust width and height as needed
+                          />
+                        }
+                        rightIcon={
+                          <Image
+                            source={require('../assets/notification-header.png')} // Replace with the path to your PNG file
+                            style={{ width: 45, height: 35, resizeMode: 'contain'}} // Adjust width and height as needed
+                          />
+                        }
+                      />
+                    ),
                     tabBarIcon:({focused})=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
@@ -49,9 +69,15 @@ const NavBar =()=>{
                 }}
                 />
             <Tab.Screen 
-                name="MyProgress" 
-                component={ProgressScreen}
+                name="TabProgress" 
+                component={TabProgressScreen}
                 options={{
+                    headerShown: true,
+                    header: () => (
+                        <NavigationBar
+                          title="Tab Progress"
+                        />
+                    ),
                     tabBarIcon:({focused})=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
@@ -59,7 +85,7 @@ const NavBar =()=>{
                                     source={progressIcon}
                                     style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:13,color:"#fff"}}>My Progress</Text>
+                                <Text style={{fontSize:13,color:"#fff"}}>Tab Progress</Text>
                             </View>
                         )
                     }
