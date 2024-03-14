@@ -17,8 +17,8 @@ const TabProgressScreen = () => {
                 }}
             />
             <View style={styles.dataContainer}>
-                <Text style={styles.containerHeading}>2400</Text>
-                <Text style={styles.ontainerSubHeading}>Foot Steps</Text>
+                <Text style={styles.containerHeading}>8L</Text>
+                <Text style={styles.ontainerSubHeading}>Water Intake</Text>
             </View>
           </View>
           <View style={styles.targetContainer}>
@@ -28,8 +28,8 @@ const TabProgressScreen = () => {
                 }}
             />
             <View style={styles.dataContainer}>
-                <Text style={styles.containerHeading}>8L</Text>
-                <Text style={styles.ontainerSubHeading}>Water Intake</Text>
+                <Text style={styles.containerHeading}>2400</Text>
+                <Text style={styles.ontainerSubHeading}>Foot Steps</Text> 
             </View>
           </View>
           
