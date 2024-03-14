@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper'
 import AiStarted from './aiStarted';
 import AiStartedTwo from './aiStartedtwo'; 
 
-const getStarted = () => {
+const GetStarted = () => {
   return(
   <Swiper style={styles.wrapper} showsButtons loop={false}>
     <View testID="Hello" style={styles.slide1}>
@@ -34,4 +34,4 @@ var styles = {
   },
   
 }
- export default getStarted;
+ export default GetStarted;

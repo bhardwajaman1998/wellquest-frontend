@@ -12,7 +12,7 @@ import SelectHeight from "../components/chatPageComponents/selectHeight";
 import SelectPreference from "../components/chatPageComponents/selectPreference";
 import SelectWeight from "../components/chatPageComponents/selectWeight";
 import CalculateCalories from"../components/chatPageComponents/CalculateCalories";
-import getStarted from"../components/chatPageComponents/getStarted";
+import GetStarted from"../components/chatPageComponents/getStarted";
 
 
 const ChatPageStack = () => {
@@ -38,8 +38,8 @@ const ChatPageStack = () => {
                 }}
             />
               <Stack.Screen
-                name="getStarted" 
-                component={getStarted} 
+                name="GetStarted" 
+                component={GetStarted} 
                 options={{
                     title:"Get Started", 
                     headerStyle:{

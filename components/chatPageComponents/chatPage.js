@@ -60,7 +60,7 @@ const ChatPage = () => {
           marginBottom:400,
         marginLeft:50} }
             onPress={() =>
-              navigation.navigate('getStarted', {name: 'getStarted'})
+              navigation.navigate('GetStarted', {name: 'GetStarted'})
             }
         >
         <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>

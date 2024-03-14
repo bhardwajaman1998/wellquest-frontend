@@ -24,7 +24,7 @@
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.17",
     "@react-navigation/stack": "^6.3.21",
-    "axios": "^1.6.5",
+    "axios": "^1.6.7",
     "eslint-plugin-react-native": "^4.1.0",
     "expo": "~50.0.2",
     "expo-app-loading": "^2.1.1",
