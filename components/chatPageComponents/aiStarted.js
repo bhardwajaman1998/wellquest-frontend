@@ -7,7 +7,7 @@ const AiStarted = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Vector1.png')} style={styles.image} />
+      <Image source={require('../../assets/Ai.png')} style={styles.image} />
       <Text style={styles.text}>Hi! I am your AI nutritional assistant</Text>
       <TouchableOpacity style={styles.button}
       onPress={() =>

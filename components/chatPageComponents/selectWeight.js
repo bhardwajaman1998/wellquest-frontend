@@ -1,54 +1,55 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 
-const SelectHeight = () => {
-  const navigation = useNavigation();
+const SelectWeight = () => {
 
   const startHeight = 30;
-  const endHeight = 200;
+   const endHeight = 200;
 
-  const getHeightOptions = () => {
-    return Array.from({ length: endHeight - startHeight + 1 }, (_, index) =>
-      String(index + startHeight)
-    );
+  const getWeightOptions = () => {
+     return Array.from({ length: endHeight - startHeight + 1 }, (_, index) =>
+       String(index + startHeight)
+     );
+   };
+
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [selectedWeight, setSelectedWeight] = useState(30);
+
+  const handleNext = () => {
+    navigation.navigate('CalculateCalories', {
+      goal: route.params.goal,
+      height: route.params.height,
+      weight: selectedWeight,
+    });
   };
-
-  const [selectedHeight, setSelectedHeight] = useState(startHeight);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require('../../assets/Vector1.png')}
+          source={require('../../assets/Ai.png')}
           style={styles.image}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Let's confirm your current weight </Text>
+        <Text style={styles.title}>Let's confirm your current weight</Text>
       </View>
       <View style={styles.pickerContainer}>
         <Picker
           style={{ width: 200, height: 150 }}
-          selectedValue={selectedHeight}
-          onValueChange={(itemValue, itemIndex) => setSelectedHeight(itemValue)}
+          selectedValue={selectedWeight}
+          onValueChange={(itemValue, itemIndex) => setSelectedWeight(itemValue)}
         >
-          {getHeightOptions().map((option) => (
-            <Picker.Item label={option} value={option} key={option} />
+          {getWeightOptions().map((option) => (
+             <Picker.Item label={option} value={option} key={option} />
           ))}
+          
         </Picker>
-        
       </View>
-      <TouchableOpacity style={styles.nextButton} onPress={() =>
-        navigation.navigate('SelectPreference', { name: 'SelectPreference' })
-      }>
+      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
-      >
-        <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
     </View>
   );
@@ -62,11 +63,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   header: {
-    paddingLeft:30,
-    paddingRight: 40,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: -60,
+    paddingLeft:50,
+    paddingRight:50,
   },
   image: {
     width: 100,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 70,
   },
   nextButton: {
-    margin:20,
+    margin: 20,
     backgroundColor: '#FF934E',
     paddingVertical: 15,
     paddingHorizontal: 60,
@@ -92,18 +93,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
-  backButton:{
-    marginTop:1,
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
-    borderColor:'black'
-  },
-  backButtonText: {
-    color: 'black',
-    fontSize: 20,
-  },
 });
 
-export default SelectHeight;
+export default SelectWeight;

@@ -5,13 +5,12 @@ const AiStartedTwo = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Vector1.png')} style={styles.image} />
+      <Image source={require('../../assets/Ai.png')} style={styles.image} />
       <Text style={styles.text}>I can generate a nutrition plan for you</Text>
       <TouchableOpacity style={styles.button}
       onPress={() =>
         navigation.navigate('ChooseGoal', {name: 'ChooseGoal'})
       }
-      
       >
         <Text style={styles.buttonText}>LETS'S GET STARTED</Text>
       </TouchableOpacity>
