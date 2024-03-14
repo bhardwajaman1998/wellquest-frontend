@@ -7,24 +7,17 @@ const AiStarted = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Ai.png')} style={styles.image} />
+      <Image source={require('../../assets/ai-greetings.png')} style={styles.image} />
       <Text style={styles.text}>Hi! I am your AI nutritional assistant</Text>
-      <TouchableOpacity style={styles.button}
-      onPress={() =>
-        navigation.navigate('AiStartedTwo', {name: 'AiStartedTwo'})
-      }
-      >
-        <Text style={styles.buttonText}>CONTINUE</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%'
   },
   image: {
     width: 200,
@@ -35,6 +28,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginBottom: 20,
+    marginHorizontal: 50,
+    textAlign: 'center'
   },
   button: {
     backgroundColor: '#FF934E',

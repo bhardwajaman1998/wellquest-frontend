@@ -7,22 +7,15 @@ const AiStartedTwo = () => {
     <View style={styles.container}>
       <Image source={require('../../assets/Ai.png')} style={styles.image} />
       <Text style={styles.text}>I can generate a nutrition plan for you</Text>
-      <TouchableOpacity style={styles.button}
-      onPress={() =>
-        navigation.navigate('ChooseGoal', {name: 'ChooseGoal'})
-      }
-      >
-        <Text style={styles.buttonText}>LETS'S GET STARTED</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%'
   },
   image: {
     width: 200,
@@ -33,6 +26,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginBottom: 20,
+    marginHorizontal: 50,
+    textAlign: 'center'
   },
   button: {
     backgroundColor: '#FF934E',

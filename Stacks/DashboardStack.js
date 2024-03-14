@@ -20,7 +20,7 @@ const DashboardStack = () => {
                 name="Back"
                 component={NavBar}
                 options={({ navigation }) => ({
-                    headerShown:true,
+                    headerShown:false,
                     header: () => (
                       <NavigationBar
                         title="WellQuest"
@@ -44,14 +44,24 @@ const DashboardStack = () => {
                 name="DashboardScreen"
                 component={HomeScreen}
                 options={({ navigation }) => ({
-                  title: "WellQuest",
-                  headerStyle: {
-                    backgroundColor: '#2c3e50'
-                  },
-                  headerTitleStyle: {
-                    color: '#7265E3'
-                  },
-                  headerShown:false,
+                  headerShown:true,
+                  header: () => (
+                    <NavigationBar
+                      title="WellQuest"
+                      leftIcon={
+                        <Image
+                          source={require('../assets/logo-header.png')} // Replace with the path to your PNG file
+                          style={{ width: 45, height: 40, resizeMode: 'contain'}} // Adjust width and height as needed
+                        />
+                      }
+                      rightIcon={
+                        <Image
+                          source={require('../assets/notification-header.png')} // Replace with the path to your PNG file
+                          style={{ width: 45, height: 35, resizeMode: 'contain'}} // Adjust width and height as needed
+                        />
+                      }
+                    />
+                  ),
                 })}
             />
 
@@ -98,7 +108,19 @@ const DashboardStack = () => {
             })}
             />
             {/* Coach full Profile Screen  */}
-            <Stack.Screen name="chat page" component={ChatPage} />
+            <Stack.Screen 
+              name="chat page"
+              component={ChatPage} 
+              options={({ navigation }) => ({
+                headerShown: false,
+                title: 'Schedule',
+                header: () => (
+                  <NavigationBar
+                    title="Chat"
+                  />
+                )
+              })}
+              />
             {/* to show the schdeule  screen  over coach profile*/}
             <Stack.Screen 
             name="Schedule" 

@@ -13,6 +13,7 @@ import SelectPreference from "../components/chatPageComponents/selectPreference"
 import SelectWeight from "../components/chatPageComponents/selectWeight";
 import CalculateCalories from"../components/chatPageComponents/CalculateCalories";
 import GetStarted from"../components/chatPageComponents/getStarted";
+import NavigationBar from '../components/globalComponents/NavigationBar';
 
 
 const ChatPageStack = () => {
@@ -22,236 +23,158 @@ const ChatPageStack = () => {
             <Stack.Screen
                 name="ChatPage" 
                 component={AiChatPage} 
-                options={{
-                    title:"Chat Page", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Chat Page',
+                    header: () => (
+                      <NavigationBar
+                        title="Chat Page"
+                      />
                     )
-                }}
+                  })}
             />
               <Stack.Screen
                 name="GetStarted" 
                 component={GetStarted} 
-                options={{
-                    title:"Get Started", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Get Started',
+                    header: () => (
+                      <NavigationBar
+                        title="Get Started"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="AiOptions" 
                 component={AiOptions} 
-                options={{
-                    title:"Ai Options", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'AI Options',
+                    header: () => (
+                      <NavigationBar
+                        title="AI Options"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="CalculateCalories" 
                 component={CalculateCalories} 
-                options={{
-                    title:"Calculate Calories", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Calculated Calories',
+                    header: () => (
+                      <NavigationBar
+                        title="Calculated Calories"
+                      />
                     )
-                }}
+                  })}
             />
              <Stack.Screen
                 name="ChatScreen" 
                 component={ChatScreen} 
-                options={{
-                    title:"Chat Screen", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Chat Screen',
+                    header: () => (
+                      <NavigationBar
+                        title="Chat Screen"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="AiStarted" 
                 component={AiStarted} 
-                options={{
-                    title:"Ai Started", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'AI Started',
+                    header: () => (
+                      <NavigationBar
+                        title="AI Started"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="AiStartedTwo" 
                 component={AiStartedTwo} 
-                options={{
-                    title:"Ai Started Two", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'AI Started 2',
+                    header: () => (
+                      <NavigationBar
+                        title="AI Started 2"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="ChooseGoal" 
                 component={ChooseGoal} 
-                options={{
-                    title:"Choose Goal", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Choose Goal',
+                    header: () => (
+                      <NavigationBar
+                        title="Choose Goal"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="Options" 
                 component={Options} 
-                options={{
-                    title:"Options", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Options',
+                    header: () => (
+                      <NavigationBar
+                        title="Options"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="PlanPage" 
                 component={PlanPage} 
-                options={{
-                    title:"Plan Page", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Plan page',
+                    header: () => (
+                      <NavigationBar
+                        title="Plan Page"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="SelectHeight" 
                 component={SelectHeight} 
-                options={{
-                    title:"Select Height", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Select Height',
+                    header: () => (
+                      <NavigationBar
+                        title="Select Height"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="SelectPreference" 
                 component={SelectPreference} 
-                options={{
-                    title:"Select Preference", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Select Preference',
+                    header: () => (
+                      <NavigationBar
+                        title="Select Preference"
+                      />
                     )
-                }}
+                  })}
             />
             <Stack.Screen
                 name="SelectWeight" 
                 component={SelectWeight} 
-                options={{
-                    title:"Select Weight", 
-                    headerStyle:{
-                        backgroundColor:'#2c3e50'
-                    },
-                    headerTitleStyle:{
-                        color:'#fff'
-                    }
-                    , 
-                    headerShown: true,
-                    headerLeft: () => (
-                        <GlobalBackButton />
+                options={({ navigation }) => ({
+                    title: 'Select Weight',
+                    header: () => (
+                      <NavigationBar
+                        title="Select Weight"
+                      />
                     )
-                }}
+                  })}
             />
             
             {/* <Stack.Screen
