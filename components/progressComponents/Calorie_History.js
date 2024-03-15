@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { BarChart } from "react-native-gifted-charts";
+import React from "react"
+import { View, Text, StyleSheet } from "react-native"
+import { BarChart } from "react-native-gifted-charts"
 
 const Calorie_History = () => {
   const barData = [
@@ -11,24 +11,23 @@ const Calorie_History = () => {
     { value: 1900, label: "F" },
     { value: 2300, label: "S" },
     { value: 2600, label: "S" },
-  ];
+  ]
 
   function changeColorIfNeeded(barData, threshold, thresholdColor) {
     return barData.map((item) => ({
       ...item,
       frontColor: item.value > threshold ? thresholdColor : item.frontColor,
-    }));
+    }))
   }
 
-  const thresholdValue = 2500;
-  const thresholdColor = "red";
+  const thresholdValue = 2500
+  const thresholdColor = "red"
 
   const updatedBarData = changeColorIfNeeded(
     barData,
     thresholdValue,
     thresholdColor
-  );
-  console.log(updatedBarData);
+  )
 
   return (
     <View style={styles.container}>
@@ -45,16 +44,16 @@ const Calorie_History = () => {
           yAxisThickness={0}
           xAxisThickness={0}
           labelSize={8}
-          height={150}
+          height={130}
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 20,
     margin: 10,
   },
   calorieHeading: {
@@ -62,10 +61,18 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   chart: {
-    marginTop: 20,
+    marginTop: 15,
+    paddingTop: 20,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    borderRadius: 15,
+    backgroundColor: "white", // Ensure shadow is visible
   },
-});
-export default Calorie_History;
+})
+export default Calorie_History
 
 // Bar Chart Props
 // https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/BarChart/BarChartProps.md
