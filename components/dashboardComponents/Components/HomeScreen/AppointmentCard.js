@@ -60,7 +60,7 @@ export default function AppointmentCard() {
         <CustomCard
           style={styles.buttonstyle}
           text="You don't have upcoming appointments."
-          buttonText="Find Coach"
+          buttonText="FIND COACH"
           onPress={handleSchedulePress}
           imageName={findCoach}
         />
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   buttonstyle: {
-    backgroundColor: '#FF934E',
     marginLeft: 20,
+  
   },
 });

@@ -14,7 +14,7 @@ const TimeSlotButton = ({ timeSlots, onPress, selected }) => {
             ]}
             onPress={handlePress}
         >
-            <Text style={styles.buttonText}>{timeSlots}</Text>
+            <Text style={[styles.buttonText, selected ? styles.selectedText : null]}>{timeSlots}</Text>
         </TouchableOpacity>
     );
 };
@@ -27,15 +27,19 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 10,
         alignItems: 'center',
-        borderColor: '#000',
+        borderColor: '#7265E3',
         borderWidth: 2,
     },
     buttonText: {
-        color: '#000000',
+        color: '#7265E3',
+        fontWeight: 'bold',
         fontSize: 16,
     },
     selected: {
         backgroundColor: '#7265E3',
+    },
+    selectedText: {
+        color: '#FFF',
     },
 });
 

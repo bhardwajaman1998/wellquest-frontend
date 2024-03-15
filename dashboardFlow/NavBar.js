@@ -11,7 +11,6 @@ import progressIcon from "../assets/My_progress_nav.png";
 import messageIcon from "../assets/Messages_nav.png";
 import profileIcon from "../assets/Profile_nav.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
-import NavigationBar from '../components/globalComponents/NavigationBar';
 
 const Tab = createBottomTabNavigator();
 const screenOptions={
@@ -24,7 +23,7 @@ const screenOptions={
             right:0,
             elevation:0,
             height: Platform.OS === 'ios' ? 90 : 60,
-            backgroundColor:'#7265E3',
+            backgroundColor:'#FFF',
     }
     
 }
@@ -36,32 +35,14 @@ const NavBar =()=>{
                 name="Home" 
                 component={HomeScreen}
                 options={{
-                    headerShown: true,
-                    header: () => (
-                        <NavigationBar
-                          title="WellQuest"
-                          leftIcon={
-                            <Image
-                              source={require('../assets/logo-header.png')} // Replace with the path to your PNG file
-                              style={{ width: 45, height: 40, resizeMode: 'contain'}} // Adjust width and height as needed
-                            />
-                          }
-                          rightIcon={
-                            <Image
-                              source={require('../assets/notification-header.png')} // Replace with the path to your PNG file
-                              style={{ width: 45, height: 35, resizeMode: 'contain'}} // Adjust width and height as needed
-                            />
-                          }
-                        />
-                      ),
                     tabBarIcon:({focused})=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
                                     source={homeIcon}
-                                    style={{ width: 24, height: 24,color:"#fff" }}
+                                    style={{ width: 24, height: 24,color:"#000" }}
                                 />
-                                <Text style={{fontSize:13,color:"#fff"}}>Home</Text>
+                                <Text style={{fontSize:13,color:"#000"}}>Home</Text>
                             </View>
                         )
                     },
@@ -78,7 +59,7 @@ const NavBar =()=>{
                                     source={progressIcon}
                                     style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:13,color:"#fff"}}>My Progress</Text>
+                                <Text style={{fontSize:13,color:"#000"}}>My Progress</Text>
                             </View>
                         )
                     }
@@ -121,7 +102,7 @@ const NavBar =()=>{
                                     source={messageIcon}
                                     style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:13,color:"#fff"}}>Messages</Text>
+                                <Text style={{fontSize:13,color:"#000"}}>Messages</Text>
                             </View>
                         )
                     }
@@ -137,7 +118,7 @@ const NavBar =()=>{
                                     source={profileIcon}
                                     style={{ width: 24, height: 24}}
                                 />
-                                <Text style={{fontSize:13,color:"#fff"}}>Profile</Text>
+                                <Text style={{fontSize:13,color:"#000"}}>Profile</Text>
                             </View>
                         )
                     },

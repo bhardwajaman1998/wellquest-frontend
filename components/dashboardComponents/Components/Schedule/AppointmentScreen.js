@@ -60,7 +60,6 @@ const AppointmentScreen = () => {
             key={index}
             date={new Date(appointment.date).toISOString().split('T')[0]}
             time={appointment.timeSlot} 
-
             coachName={appointment.coach_name} 
             coachAvatar={profilePic}
           />

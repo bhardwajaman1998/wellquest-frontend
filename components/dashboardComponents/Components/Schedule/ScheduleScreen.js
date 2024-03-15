@@ -119,18 +119,27 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
         <View style={styles.container}>
             <View style={styles.content}>
 
-                <Calendar
-                    onDayPress={handleDayPress} 
-                    markedDates={{
-                        [selected]: { selected: true }
-                    }}
-                    markingType={'multi-dot'}
-                    theme={{
-                        dotColor: '#7265E3',
-                        selectedDotColor: '#7265E3',
-                    }}
-                    style={styles.calendar}
-                />
+            <Calendar
+                onDayPress={handleDayPress} 
+                markingType={'dot'}
+                markedDates={{
+                    [selectedDate]: { selected: true, selectedColor: '#7265E3' }
+                }}
+                minDate={moment().format("YYYY-MM-DD")} // user will not be able to select the past days
+                style={styles.calendar}
+                theme={{
+                    backgroundColor: '#ffffff',
+                    calendarBackground: '#ffffff',
+                    textSectionTitleColor: '#000000', 
+                    selectedDayBackgroundColor: '#7265E3',
+                    selectedDayTextColor: '#000',
+                    todayTextColor: '#00adf5',
+                    dayTextColor: '#2d4150', 
+                    textDisabledColor: '#808080', 
+                }}
+            />
+
+
 
                 {!isDateSelected && <Text>Select the date to see available slots!</Text>}
 
@@ -187,6 +196,7 @@ const styles = StyleSheet.create({
     calendar: {
         width: '100%',
         marginBottom: 20,
+        
     },
     timeSlotContainer: {
         flexDirection: 'column',
@@ -204,13 +214,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     submitBtn: {
-        backgroundColor: '#FF934E',
+        backgroundColor: '#7265E3',
     },
     cancelBtn: {
-        backgroundColor: '#FF934E',
+        backgroundColor: '#FFF',
+        borderColor:'#000',
+        borderWidth:'1',
     },
     buttonText: {
-        color: '#FFFFFF',
+        color: '#000',
         fontSize: 16,
     },
 });

@@ -26,7 +26,7 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
       <View style={styles.header}>
         <Text style={styles.heading}>Appointment date</Text>
         <TouchableOpacity style={styles.menuButton} onPress={toggleOptions}>
-          <Icon name="ellipsis-v" size={20} color="#2A9D5C" />
+          <Icon name="ellipsis-v" size={20} color="#7265E3" />
         </TouchableOpacity>
       </View>
       <View style={styles.separator} />
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
     padding: 15,
     marginBottom: 15,
-    borderLeftColor: "#2A9D5C",
+    borderLeftColor: "#7265E3",
     borderLeftWidth: 5,
     position: 'relative',
   },
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 16,
-    color: '#2A9D5C',
+    color: '#000',
   },
 });
 

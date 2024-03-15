@@ -23,7 +23,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
       borderRadius: 25,
       borderWidth: 1,
       padding: 8,
-      backgroundColor:"#FF934E",
+      backgroundColor:"#7265E3",
     },
     image: {
       width: 30,
@@ -31,8 +31,10 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
       // margin: 10,
     },
     buttonText: {
-      fontSize: 20,
+      fontSize: 17,
       marginLeft: 10,
+      color:'#FFF',
+      fontWeight:'bold',
     },
   });
   export default ClickButtton;

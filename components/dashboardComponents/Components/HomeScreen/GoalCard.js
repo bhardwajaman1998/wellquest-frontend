@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, SafeAreaView, StyleSheet, Platform } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import axios from 'axios';
+import { lighten } from 'polished';
+
 
 const GoalCard = () => {
 
@@ -50,7 +52,7 @@ const GoalCard = () => {
                         radius={55}
                         borderWidth={8}
                         color="#FF934E"
-                        shadowColor="#d3d3d3"
+                        shadowColor={lighten(0.2,'#FF934E')}
                         bgColor="#fff"
                     >
                         <Text style={styles.centerText}>{`${remainingCalories} remaining`}</Text>

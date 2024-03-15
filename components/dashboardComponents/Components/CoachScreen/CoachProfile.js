@@ -104,11 +104,11 @@ const CoachProfile = ({ route }) => {
 
                 <View style={styles.social}>
                         {isPersonalTrainer ? (
-                                <ClickButtton btntext="Connect" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
+                                <ClickButtton btntext="CONNECT" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
                             ) : (
                                 <>
-                                    <ClickButtton btntext="Message" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
-                                    <ClickButtton btntext="Schedule" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
+                                    <ClickButtton btntext="MESSAGE" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
+                                    <ClickButtton btntext="SCHEDULE" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
                                 </>
                         )}
                 </View>
