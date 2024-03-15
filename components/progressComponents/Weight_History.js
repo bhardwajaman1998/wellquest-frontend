@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { LineChart } from "react-native-gifted-charts"
 
 const data = [
@@ -13,15 +13,44 @@ const data = [
 
 const Weight_History = () => {
   return (
-    <View>
-      <Text>Weight History</Text>
-      <View>
-        <LineChart data={data} />
+    <View style={styles.container}>
+      <Text style={styles.calorieHeading}>Weight History</Text>
+      <View style={styles.chart}>
+        <LineChart
+          data={data}
+          noOfSections={4}
+          stepValue={20}
+          overflowTop={10}
+          yAxisOffset={30}
+          yAxisThickness={0}
+          xAxisThickness={0}
+          height={120}
+        />
       </View>
     </View>
   )
 }
-
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    margin: 10,
+  },
+  calorieHeading: {
+    fontSize: 18,
+    textAlign: "left",
+  },
+  chart: {
+    marginTop: 15,
+    paddingTop: 20,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    borderRadius: 15,
+    backgroundColor: "white", // Ensure shadow is visible
+  },
+})
 export default Weight_History
 
 // Line Chart Props
