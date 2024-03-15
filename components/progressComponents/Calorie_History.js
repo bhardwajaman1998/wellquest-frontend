@@ -4,24 +4,42 @@ import { BarChart } from "react-native-gifted-charts";
 
 const Calorie_History = () => {
   const barData = [
-    { value: 25, label: "M" },
-    { value: 50, label: "T", frontColor: "#177AD5" },
-    { value: 74, label: "W", frontColor: "#177AD5" },
-    { value: 32, label: "T" },
-    { value: 60, label: "F", frontColor: "#177AD5" },
-    { value: 25, label: "S" },
-    { value: 30, label: "S" },
+    { value: 2500, label: "M" },
+    { value: 3000, label: "T" },
+    { value: 2700, label: "W" },
+    { value: 2000, label: "T" },
+    { value: 1900, label: "F" },
+    { value: 2300, label: "S" },
+    { value: 2600, label: "S" },
   ];
+
+  function changeColorIfNeeded(barData, threshold, thresholdColor) {
+    return barData.map((item) => ({
+      ...item,
+      frontColor: item.value > threshold ? thresholdColor : item.frontColor,
+    }));
+  }
+
+  const thresholdValue = 2500;
+  const thresholdColor = "red";
+
+  const updatedBarData = changeColorIfNeeded(
+    barData,
+    thresholdValue,
+    thresholdColor
+  );
+  console.log(updatedBarData);
+
   return (
     <View style={styles.container}>
       <Text style={styles.calorieHeading}>Calorie History</Text>
       <View style={styles.chart}>
         <BarChart
           barWidth={20}
-          noOfSections={3}
+          noOfSections={2}
           barBorderRadius={12}
           frontColor="lightgray"
-          data={barData}
+          data={updatedBarData}
           yAxisThickness={0}
           xAxisThickness={0}
           labelSize={8}
