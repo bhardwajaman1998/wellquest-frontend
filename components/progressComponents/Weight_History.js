@@ -24,7 +24,8 @@ const Weight_History = () => {
           yAxisOffset={30}
           yAxisThickness={0}
           xAxisThickness={0}
-          height={120}
+          height={100}
+          width={300}
         />
       </View>
     </View>
@@ -33,7 +34,6 @@ const Weight_History = () => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    margin: 10,
   },
   calorieHeading: {
     fontSize: 18,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     padding: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 4,
     borderRadius: 15,

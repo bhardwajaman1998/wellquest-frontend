@@ -53,10 +53,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     backgroundColor: "white",
-    alignItems: "top",
+    alignItems: "center",
     height: "100%",
-    padding: 10,
-    borderRadius: 12,
+    padding: 15,
     width: "100%",
   },
   targertBox: {
