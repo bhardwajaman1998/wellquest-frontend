@@ -36,13 +36,16 @@ const Calorie_History = () => {
       <View style={styles.chart}>
         <BarChart
           barWidth={20}
-          noOfSections={2}
+          noOfSections={5}
           barBorderRadius={12}
-          frontColor="lightgray"
+          frontColor="#7265E3"
+          yAxisOffset={500}
+          stepValue={500}
           data={updatedBarData}
           yAxisThickness={0}
           xAxisThickness={0}
           labelSize={8}
+          height={150}
         />
       </View>
     </View>
@@ -51,6 +54,7 @@ const Calorie_History = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     margin: 10,
   },
   calorieHeading: {
@@ -58,7 +62,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   chart: {
-    marginTop: 10,
+    marginTop: 20,
   },
 });
 export default Calorie_History;
+
+// Bar Chart Props
+// https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/BarChart/BarChartProps.md
