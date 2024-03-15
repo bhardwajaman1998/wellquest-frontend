@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation}) => {
   const [email, setEmail] = useState('');

@@ -7,6 +7,7 @@ import {Stack} from './Stack';
 import DashboardStack from "./DashboardStack";
 import ChatPageStack from "./ChatPageStack";
 import SearchFoodStack from "./SearchFoodStack";
+// import Splash from "../onboardingFlow/Splash";
 
 
 const AppStack = () => {
@@ -25,6 +26,11 @@ const AppStack = () => {
           component={PreferencesStack}
           options = {{headerShown: false}}
         />    */}
+        <Stack.Screen
+          name="Onboarding"
+          component={OnboardingStack}
+          options = {{headerShown: false}}
+        />
         <Stack.Screen
           name="Dashboard"
           component={DashboardStack}

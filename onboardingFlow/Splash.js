@@ -40,10 +40,15 @@ const Splash = ({navigation}) => {
         style={styles.logo}
         resizeMode="contain"
       />
-      
+      <TouchableOpacity onPress={() =>
+        navigation.navigate('Landing', {name: 'Landing'})
+      } style={styles.button} >
+        <Text style={styles.buttonText}>GET STARTED</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -59,10 +64,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#FF934E', 
+    backgroundColor: '#7265E3', 
     paddingVertical: 15,
     paddingHorizontal: 30,
-    borderRadius: 10,
+    borderRadius: 50,
     width: 322,
     height: 52,
   },
