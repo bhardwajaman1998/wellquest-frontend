@@ -32,9 +32,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     gap: 20,
-    height: '80%'
+    height: '80%',
+   // backgroundColor: '#7265E31A',
   },
   wrapper:{
+    //backgroundColor: '#7265E31A',
     
   },
   button: {

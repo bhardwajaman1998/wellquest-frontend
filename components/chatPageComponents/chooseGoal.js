@@ -38,12 +38,12 @@ const ChooseGoal = () => {
           <Text style={styles.buttonText}>Improve Endurance</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity
-         style={styles.nextButton}
+        <TouchableOpacity
+         style={styles.nextbutton}
         onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
        >
-         <Text style={styles.nextButtonText}>Next</Text>
-       </TouchableOpacity> */}
+         <Text style={styles.nextbuttonText}>Next</Text>
+       </TouchableOpacity>
        
       </View>
     </View>
@@ -93,6 +93,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#7265E3',
     fontSize: 18,
+  },
+  nextbutton: {
+    margin:55,
+    backgroundColor: '#7265E3',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 20,
+  },
+  nextbuttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
