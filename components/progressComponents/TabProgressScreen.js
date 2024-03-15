@@ -14,7 +14,12 @@ const TabProgressScreen = () => {
           <View style={styles.targetContainer}>
             <Image
               source={WaterDropIcon}
-              style={{ width: 16, height: 21, alignSelf: "center" }}
+              style={{
+                width: 16,
+                height: 21,
+                margin: 5,
+                alignSelf: "center",
+              }}
             />
             <View style={styles.dataContainer}>
               <Text style={styles.containerHeading}>8L</Text>
@@ -24,7 +29,12 @@ const TabProgressScreen = () => {
           <View style={styles.targetContainer}>
             <Image
               source={StepsIcon}
-              style={{ width: 20, height: 17, alignSelf: "center" }}
+              style={{
+                width: 20,
+                height: 17,
+                margin: 5,
+                alignSelf: "center",
+              }}
             />
             <View style={styles.dataContainer}>
               <Text style={styles.containerHeading}>2400</Text>
@@ -50,13 +60,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   targertBox: {
-    padding: 10,
+    padding: 15,
     margin: 5,
-    height: 120,
     backgroundColor: "#FF934E66",
     borderRadius: 22,
     alignItems: "center",
-    justifyContent: "space-between",
     paddingHorizontal: 20,
   },
 
@@ -64,10 +72,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     alignItems: "center",
+    justifyContent: "space-between",
     padding: 10,
+    marginTop: 10,
     margin: 5,
     borderRadius: 12,
-    width: "50%",
+    flex: 1,
   },
 
   targertHeading: {
@@ -79,6 +89,7 @@ const styles = StyleSheet.create({
   targetComponentsContainer: {
     display: "flex",
     flexDirection: "row",
+    width: "100%",
   },
   containerHeading: {
     fontSize: 14,
@@ -91,8 +102,8 @@ const styles = StyleSheet.create({
   dataContainer: {
     display: "flex",
     flexDirection: "column",
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
     width: "80%",
   },
 
