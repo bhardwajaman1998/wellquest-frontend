@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#7265E31A',
   },
   header: {
     flexDirection: 'row',
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 70,
   },
   nextButton: {
-    margin: 20,
+    margin: 70,
     backgroundColor: '#7265E3',
     paddingVertical: 15,
     paddingHorizontal: 60,
