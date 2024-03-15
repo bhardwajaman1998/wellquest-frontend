@@ -33,6 +33,7 @@ const Login = ({ navigation}) => {
     <View style={styles.container}>
     
       <Text style={styles.title}>Log in</Text>
+      <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
       <View style={styles.inputContainer}>
         <Text>Email address</Text>
         <TextInput
@@ -60,13 +61,13 @@ const Login = ({ navigation}) => {
 
       <View style={styles.socialIconsContainer}>
         <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/logo-facebook.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/logo-apple.png')} style={styles.socialIcon} />
+        <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
+        <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
       </View>
       <TouchableOpacity onPress={() =>
         navigation.navigate('SignUp', {name: 'SignUp'})
       }>
-      <Text style={styles.loginLink}>No account yet? Sign Up</Text>
+      <Text style={styles.loginLink}>No account yet? <Text style={styles.loginLinkText}>Sign Up</Text></Text>
       </TouchableOpacity>
     </View>
     </ScrollView>
@@ -92,10 +93,15 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
-    
+    textAlign: 'left',
+        
+  },
+  heading: {
+    fontSize: 15,
+    textAlign: 'left', 
   },
   inputContainer: {
     marginBottom: 15,
@@ -105,10 +111,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    backgroundColor: '#E7EBF1'
   },
   LoginButton: {
-    backgroundColor: '#FF934E',
+    backgroundColor: '#7265E3',
     padding: 15,
     borderRadius: 50,
     marginTop: 20,
@@ -131,10 +138,13 @@ const styles = StyleSheet.create({
     height: 20,
     resizeMode: 'contain',
       },
-  loginLink: {
-    marginTop: 20,
-    color: '#3498db',
-  },
+      loginLink: {
+        marginTop: 20,
+        color: '#808080',
+      },
+      loginLinkText: {
+        color: 'red', 
+      },
 });
 
 export default Login;
