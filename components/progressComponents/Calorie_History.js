@@ -54,7 +54,7 @@ const Calorie_History = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 10,
   },
   calorieHeading: {
     fontSize: 18,
