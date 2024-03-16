@@ -11,9 +11,9 @@ import { getFoodData, getMealInfo, logMeal } from './services/services';
 import { useRoute } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StackActions } from '@react-navigation/native';
 
-const LogFood = () => {
-    const navigation = useNavigation();
+const LogFood = ({navigation}) => {
 
     const route = useRoute();
     const { foodName, passedData, dataFromSearch} = route.params;
@@ -133,9 +133,8 @@ const changeExtraCalories = (ecals) => {
 }
 
 const goBack = () => {
-  navigation.navigate('SearchFoodStack', {screen: 'SearchFood'});
+  navigation.navigate("Dashboard", { screen: "Back" });
 }
-
 const logFood = async () => {
   setLoading(true)
   try {

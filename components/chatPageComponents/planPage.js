@@ -27,7 +27,7 @@ const PlanPage = () => {
       </View>
 
       <View style={styles.cardContainer}>
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('breakfast')}
+        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Breakfast')}
 >
           <Image
             source={require('../../assets/breakfast.png')}
@@ -38,7 +38,7 @@ const PlanPage = () => {
 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('lunch')}>
+        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Lunch')}>
           <Image
             source={require('../../assets/lunch.png')}
             style={styles.cardImage}
@@ -47,7 +47,7 @@ const PlanPage = () => {
           <Text style={styles.cardTitle}>Lunch</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('dinner')}>
+        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Dinner')}>
           <Image
             source={require('../../assets/dinner.png')}
             style={styles.cardImage}

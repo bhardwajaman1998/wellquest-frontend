@@ -6,9 +6,8 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import StyledText from '../globalComponents/StyledText';
 import { useNavigation } from '@react-navigation/native';
 
-const HistoryListView = ({data, closeModal}) => {
+const HistoryListView = ({navigation, data, closeModal}) => {
 
-    const navigation = useNavigation();
 
     const [selectedItemIndex, setSelectedItemIndex] = useState(null);
 

@@ -11,6 +11,10 @@ const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [userName, setUserName]=useState({ name: '' });
+    const [calorieLimit, setCalorieLimit] = useState(2500);
+    const [completedCalories, setCompletedCalories] = useState(0);
+    const [remainingCalories, setRemainingCalories] = useState(0);
+
     const [greeting, setGreeting] = useState('');
     const [update, setUpdate] = useState(false)
     const [appointments, setAppointments] = useState([]);
@@ -24,16 +28,36 @@ const HomeScreen= ({ route })=>{
     const fetchUserData = async () =>{
         try{
             const response = await  axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a');
-            console.log(response);
+            console.log(response.data);
             setUserName(response.data);
+            setCalorieLimit(response.data.dailyCalories)
             updateGreeting();
             setUpdate(true)
+            fetchCurrentCalIntake()
             fetchAptData()
         }
         catch(error){
             console.error('Error fetching the User name in dashboard: ',error);
         }
     }
+
+    const fetchCurrentCalIntake = async () => {
+        try{
+            const response= await axios.get('http://localhost:3000/api/customer/get_calories_consumed?cust_id=65cc353cb9be345699d6a69a');
+            const data = response.data;
+            setCompletedCalories(data.totalCaloriesConsumed);
+            calculateRemaining(data.totalCaloriesConsumed)
+        }
+        catch(error){
+            console.error("not able to fetch calorie card data in dashboard screen: ",error);
+        }
+    }
+
+    const calculateRemaining = (consumed) => {
+        const remainingCalories = parseFloat(calorieLimit).toFixed(2) - parseFloat(consumed).toFixed(2);
+        setRemainingCalories(parseFloat(remainingCalories).toFixed(0));
+    };
+
 
     const fetchAptData = async () => {
         try {
@@ -70,16 +94,20 @@ const HomeScreen= ({ route })=>{
     return(
         <SafeAreaView style={styles.safeArea}>
             <ScrollView style={styles.container}>
-                
+                <View style={styles.innerContainer}>
+
                     <Text style={styles.userNameText}>{greeting} , {userName.name}</Text>
 
-                    <GoalCard update={update}/>
+                    <GoalCard update={update} calorieLimit={calorieLimit} calConsumed={completedCalories} remianingCalories={remainingCalories}/>
 
                     <AppointmentCard  appointments={appointments}/>
                     
                     <NutritionPlanCard />
-                
-                </ScrollView>
+
+                    <View style={{height:30}}></View>
+
+                </View>
+            </ScrollView>
 
         </SafeAreaView>
     );
@@ -88,12 +116,15 @@ const HomeScreen= ({ route })=>{
 const styles = StyleSheet.create({
     safeArea: {
         // flex: 1,
-        backgroundColor: '#fff', 
+        backgroundColor: '#f0f0f0', 
     },
     container: {
         // flex: 1,
         backgroundColor: '#f0f0f0',
-        marginBottom: 50
+        marginBottom: 60
+    },
+    innerContainer: {
+        gap: 0
     },
     header: {
         paddingTop: 1000, 
@@ -102,7 +133,7 @@ const styles = StyleSheet.create({
     userNameText:{
         fontSize:24,
         fontWeight:'bold',
-        marginTop:20,
+        marginTop:30,
         marginHorizontal:20,
         color:'#7265E3',
     }

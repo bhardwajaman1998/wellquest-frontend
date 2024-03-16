@@ -3,9 +3,7 @@ import { HStack, Text, Image, View } from "@gluestack-ui/themed"
 import StyledText from "../globalComponents/StyledText";
 import { useNavigation } from '@react-navigation/native';
 
-const ScanButton = ({isForCamera = true}) => {
-
-    const navigation = useNavigation(); // Get navigation object
+const ScanButton = ({navigation, isForCamera = true}) => {
 
     const handlePress = () => {
         if  (isForCamera) {

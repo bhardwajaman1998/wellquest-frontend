@@ -7,8 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import { submitToGoogle } from './services/services';
 
 
-const CameraScreen = () => {
-  const  navigation = useNavigation()
+const CameraScreen = ({navigation}) => {
 
   const [loading, setLoading] = useState(false);
 
@@ -70,7 +69,7 @@ const CameraScreen = () => {
               }
           });
         } else {
-          navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: "banana" }});
+          navigation.navigate('SearchFoodStack', { screen: 'LogFood', params: { foodName: "Banana" }});
         }
     } catch (error) {
         console.error('Error getting image data:', error);

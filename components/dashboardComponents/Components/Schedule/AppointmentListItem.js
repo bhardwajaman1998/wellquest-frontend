@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity,Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import clockIcon from "../../.././../assets/clock.png";
 import dotIcon from "../../.././../assets/Ellipse.png";
@@ -56,16 +56,28 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    marginHorizontal: 0,
     backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: 'lightgray',
     padding: 15,
-    marginBottom: 15,
+    marginBottom: 0,
     borderLeftColor: "#7265E3",
     borderLeftWidth: 5,
     position: 'relative',
+    ...Platform.select({
+      ios: {
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.23,
+          shadowRadius: 2,
+      },
+      android: {
+          elevation: 4,
+      },
+  }),
+  borderRadius: 8,
   },
   header: {
     flexDirection: 'row',

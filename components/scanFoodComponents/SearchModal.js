@@ -8,7 +8,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native'
 import NoFoodView from './NoFoodView';
 import { getFoodData } from './services/services';
 
-const SearchModal = ({setSearchBarActive}) => {
+const SearchModal = ({navigation, setSearchBarActive}) => {
 
     const [searchData, setSearchData] = useState([])
     const [searchQuery, setSearchQuery] = useState('')
@@ -45,7 +45,7 @@ const SearchModal = ({setSearchBarActive}) => {
         <StyledText style={styles.bestText}>Best matches</StyledText>
         <View style={styles.historyList}>
             {searchData.length > 0 ? (
-                <HistoryListView data={searchData} closeModal={closeSearchModal}/>
+                <HistoryListView navigation={navigation} data={searchData} closeModal={closeSearchModal}/>
                     ) : (
                 <NoFoodView title='Search your meal!' description='ex. Chicken salad, Hamburger'/> 
             )}

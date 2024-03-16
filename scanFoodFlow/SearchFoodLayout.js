@@ -12,7 +12,7 @@ import NoFoodView from "../components/scanFoodComponents/NoFoodView";
 import SearchModal from "../components/scanFoodComponents/SearchModal";
 
 
-const SearchFoodLayout = ({historyList}) => {
+const SearchFoodLayout = ({navigation, historyList}) => {
     const [loading, setLoading] = useState(false)
 
     const [searchScreen, setSearchScreen] = useState(false)
@@ -47,14 +47,18 @@ const SearchFoodLayout = ({historyList}) => {
                         setSearchScreen(!searchScreen);
                     }}
                 >
-                    <SearchModal setSearchBarActive={setSearchBarActive}/>
+                    <SearchModal navigation={navigation} setSearchBarActive={setSearchBarActive}/>
               </Modal>
             ) : (
                 <>
                     <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} />
                     <View style={styles.scan}>
-                        <ScanButton />
+                        <ScanButton
+                            navigation={navigation}
+                        />
                         <ScanButton 
+                        text='Search'
+                            navigation={navigation} 
                             isForCamera={false}
                         />
                     </View>
@@ -93,7 +97,7 @@ const SearchFoodLayout = ({historyList}) => {
                         ) : (
                             <View style={styles.historyList}>
                                 {historyList.length > 0 ? (
-                                    <HistoryListView data={historyList}/>
+                                    <HistoryListView navigation={navigation} data={historyList}/>
                                 ) : (
                                     <NoFoodView/> 
                                 )}

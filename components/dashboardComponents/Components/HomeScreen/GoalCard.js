@@ -6,40 +6,10 @@ import axios from 'axios';
 import { lighten } from 'polished';
 
 
-const GoalCard = ({update}) => {
+const GoalCard = ({update, calorieLimit, calConsumed, remianingCalories}) => {
 
     const [userGoal,setUserGoal] = useState([]);
-    //to show the value of total calories and remaining calories in progress 
-    const [totalCaloriesGoal, setTotalCaloriesGoal] = useState(100000);
-    const [completedCalories, setCompletedCalories] = useState(1000);
-    const [remainingCalories, setRemainingCalories] = useState(0);
 
-    useEffect(()=>{
-        fetchUserGoalData();
-    },[update]);
-    const fetchUserGoalData=async()=>{
-        try{
-            const response= await axios.get('http://localhost:3000/api/customer/get_milestone?customerId=65cc353cb9be345699d6a69a');
-            console.log("Goal response:",response);
-            const data = response.data[0];
-            setUserGoal(data);
-            setTotalCaloriesGoal(data.cal_goal);
-            setCompletedCalories(1000);
-        }
-        catch(error){
-            console.error("not able to fetch calorie card data in dashboard screen: ",error);
-        }
-    }
-
-    useEffect(() => {
-        const remainingCalories = totalCaloriesGoal - completedCalories;
-        setRemainingCalories(remainingCalories);
-    }, [totalCaloriesGoal, completedCalories]);
-
-    // const totalCaloriesGoal = 100000;
-    // const completedCalories = 2000;
-    // const remainingCalories = totalCaloriesGoal - completedCalories;
-    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -48,24 +18,24 @@ const GoalCard = ({update}) => {
             <View style={styles.card}>
                 <View style={styles.progressContainer}>
                     <ProgressCircle
-                        percent={(completedCalories / totalCaloriesGoal) * 100}
+                        percent={(calConsumed / calorieLimit) * 100}
                         radius={55}
                         borderWidth={8}
                         color="#FF934E"
                         shadowColor={lighten(0.2,'#FF934E')}
                         bgColor="#fff"
                     >
-                        <Text style={styles.centerText}>{`${remainingCalories} remaining`}</Text>
+                        <Text style={styles.centerText}>{remianingCalories} remaining</Text>
                     </ProgressCircle>
                 </View>
                 <View style={styles.info}>
                     <View style={styles.group}>
-                        <Text style={styles.text}>Kcal intake goal</Text>
-                        <Text style={styles.boldText}>{`${totalCaloriesGoal} remaining`}</Text>
+                        <Text style={styles.text}>Intake goal</Text>
+                        <Text style={styles.boldText}>{parseFloat(calorieLimit).toFixed(0)} kcal</Text>
                     </View>
                     <View style={styles.group}>
-                        <Text style={styles.text}>Weight goal</Text>
-                        <Text style={styles.boldText}>{userGoal.weight_goal}</Text>
+                        <Text style={styles.text}>Consumed</Text>
+                        <Text style={styles.boldText}>{parseFloat(calConsumed).toFixed(0)} kcal</Text>
                     </View>
                 </View>
             </View>

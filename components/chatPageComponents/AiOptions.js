@@ -12,12 +12,8 @@ const fetchMealSuggestions = async (dataToSend) => {
     const apiKey = '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';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-    const prompt = `Fetch me 3 meal options for a person who is ${dataToSend.height} cm tall
-                    ${dataToSend.weight} kg, wants to ${dataToSend.goal} and his preference is ${dataToSend.preference}
-                    Fetch only 2 options in the exact JSON format given  below:
-                    {name, recipe, calories}
-    `;
-
+    const prompt = `Fetch me 2 meal options for a person who is ${dataToSend.height} cm tall ${dataToSend.weight} kg, wants to ${dataToSend.goal} and his preference is ${dataToSend.preference} Fetch only 2 options in the exact JSON format given  below: {name, recipe, calories}`;
+    console.log(prompt)
     const requestBody = {
       model: 'gpt-3.5-turbo-0125',
       messages: [
@@ -35,8 +31,7 @@ const fetchMealSuggestions = async (dataToSend) => {
         'Authorization': `Bearer ${apiKey}`,
       },
     });
-    console.log(response)
-
+    
     if (response.status >= 200 && response.status < 300) {
       const suggestions = response.data.choices[0].message.content;
       return JSON.parse(suggestions);
@@ -69,11 +64,29 @@ const AiOptions = () => {
     console.log(dataToSend)
     fetchMealSuggestions(dataToSend)
       .then((suggestions) => {
-        console.log('Meal suggestions:', suggestions);
-        setMealSuggestions(suggestions);
+        const suggestionsWithType = suggestions.map((item) => {
+          return { ...item, type: dataToSend.mealType };
+        });
+        setMealSuggestions(suggestionsWithType)
+        console.log('Meal suggestions:', suggestionsWithType);
       })
       .catch((error) => console.error('Error:', error));
   }, []);
+
+const saveMeal = async () => {
+    try {
+        const mealData = {
+            cust_id: 'your_customer_id',
+            meals: mealSuggestions
+        };
+
+        const response = await axios.post('http://localhost:3000/log_meal', mealData);
+
+        console.log('Response:', response.data);
+    } catch (error) {
+        console.error('Error logging meal:', error);
+    }
+};
 
   return (
     <View style={styles.container}>
@@ -86,7 +99,7 @@ const AiOptions = () => {
         </View>
       ))}
       <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('ChatPage')}>
-        <Text style={styles.nextButtonText}>CONTINUE</Text>
+        <Text style={styles.nextButtonText}>SAVE OPTIONS</Text>
       </TouchableOpacity>
     </View>
   );

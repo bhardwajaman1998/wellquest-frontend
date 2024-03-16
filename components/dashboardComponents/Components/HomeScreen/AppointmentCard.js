@@ -50,8 +50,8 @@ const AppointmentCard = ({appointments}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    margin: 20,
+    padding: 0,
+    marginHorizontal: 25,
   },
   header: {
     flexDirection: 'row',

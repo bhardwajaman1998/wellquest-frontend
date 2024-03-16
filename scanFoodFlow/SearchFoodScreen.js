@@ -6,12 +6,18 @@ import SearchFoodLayout from "./SearchFoodLayout";
 import { NativeBaseProvider } from "native-base";
 
 import { historyMeals } from "../components/scanFoodComponents/services/services";
+import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 const SearchFoodScreen = (params) => {
     const [loading, setLoading] = useState(false)
     const  [historyList, setHistoryList] = useState([])
+    const isFocused = useIsFocused();
+
+    const navigation = useNavigation();
 
     useEffect(() => {
+        if (isFocused) {
         (async () => {
             setLoading(true)
             const historyData = await historyMeals();
@@ -20,7 +26,7 @@ const SearchFoodScreen = (params) => {
             }
             setLoading(false)}
         )();
-    }, []);
+    }}, [isFocused]);
 
 
     return (
@@ -35,7 +41,7 @@ const SearchFoodScreen = (params) => {
                     </View>
                 </View>
             ) : (
-                <SearchFoodLayout historyList={historyList}/>
+                <SearchFoodLayout navigation={navigation} historyList={historyList}/>
             )} 
             
         </NativeBaseProvider>
