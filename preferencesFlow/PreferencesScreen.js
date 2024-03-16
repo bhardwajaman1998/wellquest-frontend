@@ -90,6 +90,7 @@ const PreferencesScreen = () => {
 
       const data = await response.json();
       console.log("Data posted successfully:", data);
+      setCardType(1);
     } catch (error) {
       console.error("Error posting data:", error.message);
     }

@@ -9,7 +9,7 @@ const Success = ({ formData, onPressNext }) => {
   const onPress = () => {
     onPressNext();
     console.log(JSON.stringify(formData));
-    // navigation.navigate("Dashboard", { screen: "Back" });
+    navigation.navigate("Dashboard", { screen: "Back" });
   };
   return (
     <View style={styles.container}>

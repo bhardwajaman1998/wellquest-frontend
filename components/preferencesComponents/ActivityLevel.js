@@ -8,11 +8,11 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
 
   const ActivityLevelOptions = [
-    { label: "Rookie", value: "Rookie" },
-    { label: "Beginner", value: "Beginner" },
-    { label: "Intermediate", value: "Intermediate" },
-    { label: "Advance", value: "Advance" },
-    { label: "True Beast", value: "True Beast" },
+    { label: "Sedentary", value: "Sedentary" },
+    { label: "Lightly Active", value: "Lightly Active" },
+    { label: "Moderately Active", value: "Moderately Active" },
+    { label: "Very Active", value: "Very Active" },
+    { label: "Extra Active", value: "Extra Active" },
   ];
 
   const handlePressNext = () => {

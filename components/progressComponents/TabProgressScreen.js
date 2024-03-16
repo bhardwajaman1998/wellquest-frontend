@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 const TabProgressScreen = () => {
   const navigation = useNavigation()
   const handlePress = () => {
-    navigation.navigate("PreferencesStack", {screen: 'Preferences'})
+    navigation.navigate("PreferencesStack")
   }
 
   return (
