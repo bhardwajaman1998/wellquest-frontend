@@ -1,139 +1,86 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather'; 
-import { Alert } from 'react-native';
-import axios from 'axios'
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({ navigation }) => {
-  //let us set the state for user inputs
-  const [email, setEmail] = useState("");
-  const [emailverify, setEmailVerify] = useState(true);
-  const [password, setPassword] = useState("");
-  const [passwordVerify, setPasswordVerify] = useState(true);
-  const [showPassword, setShowpasswor] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  function handleEmail(e){
-    // const emailVar = (e.nativeEvent.text);
-    // setEmail(emailVar);
-    // setEmailVerify(false);
-    // if(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(emailVar)){
-    //   setEmail(emailVar);
-    // setEmailVerify(true);
-    // }
-  }
-  function handlePassword(e){
-    // const passwordVar = (e.nativeEvent.text);
-    // setPassword(passwordVar);
-    // setPasswordVerify(false);
-    // if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(passwordVar)){
-    //   setPassword(passwordVar);
-    // setPasswordVerify(true);
-    // }
-  }
-  //using Axios to access the API
-  //You can use fetch also
-  function handleSubmit(){
-    navigation.navigate('Preferences', {screen: 'Preferences'})
-    return
+  function handleSubmit() {
+    console.log(email, password);
     const userData = {
       email: email,
-      password:password,
-      };
-      if(emailverify && passwordVerify){
-        axios
-    .post("http://localhost:3000/signup", userData)
-    .then(res=> {
-      console.log(res.data);
-      if(res.data.status == 'Ok'){
-        Alert.alert("Registration Successful!")
-        navigation.navigate('Preferences', {screen: 'Preferences'})
-      } else {
-        navigation.navigate('Preferences', {screen: 'Preferences'})
-        // Alert.alert("User Already exist")
-      }
-    }
-     )
-    .catch(e =>console.log(e))
-      } else {
-        Alert.alert("Fill all Mandatory Fields !!!")
-      }
-    
-      }
+      password: password,
+    };
+    navigation.navigate('Preferences', {screen: 'Preferences'});
+    // Call the sign-up API using AXIOS
+    // axios.post("http://192.168.1.188:5000/signup", userData)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.data.status === 'Ok') {
+    //       Alert.alert("Registration Successful!");
+    //       navigation.navigate('Preferences', {screen: 'Preferences'});
+    //     } else {
+    //       Alert.alert("User Already Exist");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error: ", error);
+    //   });
+  }
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
-    <View style={styles.container}>
-      
-      <Text style={styles.title}>Sign up</Text>
-      <Text style={styles.heading}>Unlock Your Personalized Fitness Plan. {'\n'}Sign Up Today!</Text>
-      <View style={styles.inputContainer}>
-      <Text>Email address</Text>
-  <TextInput
-    style={styles.input}
-    placeholder="Enter email"
-    keyboardType="email-address"
-    autoCapitalize="none"
-    onChangeText={(text) => handleEmail({nativeEvent: {text} })}
-  />
-  {email.length < 1 ? null : emailverify ? (
-    <Feather name="check-circle" color="green" size={20} />
-  ) : (
-    <Feather name="x-circle" color="red" size={20} />
-  )}
-</View>
-{email.length < 1 ? null : emailverify ? null : (
-  <Text style={{ marginLeft: 20, color: 'red' }}>
-    Email should be more than 1 character
-  </Text>
-)}
-      <View style={styles.inputContainer}>
-        <Text>New password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter password"
-          onChangeText={(text) => handlePassword({nativeEvent: {text} })}
-          secureTextEntry={showPassword}
-        />
-        <TouchableOpacity onPress={()=> setShowpasswor(!showPassword)}> 
-        {password.length<1?null : !showPassword?
-        <Feather name="eye-off" style={marginRight= -10} color={passwordVerify? "green" :"red"} size={20} />
-        :
-        <Feather name="eye" style={marginRight= -10} color={passwordVerify? "green" :"red"} size={20} />
-        }
+      <View style={styles.container}>
+        <Text style={styles.title}>Sign up</Text>
+        <Text style={styles.heading}>Unlock Your Personalized Fitness Plan. {'\n'}Sign Up Today!</Text>
+
+        <View style={styles.inputContainer}>
+          <Text>Email address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChangeText={setEmail}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter password"
+            secureTextEntry
+            onChangeText={setPassword}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text>Confirm password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm password"
+            secureTextEntry
+          />
+        </View>
+
+        <TouchableOpacity style={styles.signUpButton} onPress={handleSubmit}>
+          <Text style={styles.signUpButtonText}>Sign up</Text>
         </TouchableOpacity>
-      </View>
-      {password.length < 1 ? null : passwordVerify ? null : (
-  <Text style={{ marginLeft: 20, color: 'red' }}>
-    Password should contain upper-case and number
-  </Text>
-)}
-      <View style={styles.inputContainer}>
-        <Text>Confirm password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm password"
-          secureTextEntry
-        />
-      </View>
 
-      <TouchableOpacity style={styles.signUpButton} onPress={() => handleSubmit()}>
-        <Text style={styles.signUpButtonText}>Sign up</Text>
-      </TouchableOpacity>
-
-      <View style={styles.socialIconsContainer}>
-        <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/facebook.png')} style={styles.socialIcon}/>
-        <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+        <View style={styles.socialIconsContainer}>
+          <Image source={require('../assets/google.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/facebook.png')} style={styles.socialIcon}/>
+          <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+        </View>
+        <View style={styles.loginLinkContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login', {name: 'Login'})}>
+          <Text style={styles.loginLink}>Already have an account? <Text style={styles.loginLinkText}>Log in</Text></Text>
+        </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity onPress={() =>
-        navigation.navigate('Login', {name: 'Login'})
-      }>
-      <Text style={styles.loginLink}>
-      Already have an account? <Text style={styles.loginLinkText}>Log in</Text>
-    </Text>
-
-       
-      </TouchableOpacity>
-    </View>
     </ScrollView>
   );
 };
@@ -143,7 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    alignItems: 'center',
     width: '100%',
   },
   profileImageContainer: {
@@ -154,29 +100,33 @@ const styles = StyleSheet.create({
     width: 400,
     height: 220,
     width: '100%',
-    
+    // borderRadius: 50,
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10, 
     textAlign: 'left',
-        
+    marginLeft: 0, 
   },
   heading: {
     fontSize: 15,
-    textAlign: 'left', 
+    textAlign: 'left',
+    marginBottom: 20, 
+    marginLeft: 0, 
   },
   inputContainer: {
-    marginBottom: 15,
+    marginBottom: 20, 
     width: '100%',
-      },
+  },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#DCE0E6'
+    backgroundColor: '#E7EBF1',
+    marginTop: 5, 
+    width: '100%', 
   },
   signUpButton: {
     backgroundColor: '#7265E3',
@@ -185,6 +135,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: '50%',
     alignItems: 'center',
+    alignSelf: 'center', 
   },
   signUpButtonText: {
     color: '#fff',
@@ -196,13 +147,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '50%',
     marginTop: 20,
-    color:'#2A9D5C'
+    alignSelf: 'center',
   },
   socialIcon: {
     width: 20,
     height: 20,
     resizeMode: 'contain',
     color:'#2A9D5C'
+  },
+  loginLinkContainer: {
+    marginTop: 20,
+    alignItems: 'center', 
   },
   loginLink: {
     marginTop: 20,
