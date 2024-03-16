@@ -9,6 +9,7 @@ import Login from '../onboardingFlow/Login';
 import ForgotPassword from '../onboardingFlow/ForgotPassword';
 
 import {Stack} from './Stack';
+import LandingSwiper from '../onboardingFlow/LandingSwiper';
 
 const OnboardingStack = () => {
   return (
@@ -17,6 +18,10 @@ const OnboardingStack = () => {
         name="Splash"
         component={Splash}
         // options={{ title: 'Welcome' }}
+      />
+      <Stack.Screen
+        name="LandingSwiper"
+        component={LandingSwiper}
       />
       <Stack.Screen
         name="Landing"

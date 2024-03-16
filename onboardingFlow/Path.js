@@ -17,10 +17,10 @@ const Path = ({navigation}) => {
         <TouchableOpacity onPress={() =>
         navigation.navigate('Login', {name: 'Login'})
       } style={styles.buttonE}>
-          <Text style={styles.buttonText}>Enthusiast {'>'}</Text>
+          <Text style={styles.buttonText}>Enthusiast</Text>
         </TouchableOpacity>
         <TouchableOpacity  style={styles.buttonC}>
-          <Text style={styles.buttonText}>Coach {'>'}</Text>
+          <Text style={styles.buttonText}>Coach</Text>
         </TouchableOpacity>
       </View>
     </View>

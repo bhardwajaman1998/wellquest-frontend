@@ -22,12 +22,7 @@ const Splash = ({navigation}) => {
       useNativeDriver: true,
     }).start();
 
-    const timer = setTimeout(() => {
-      navigation.replace('Landing');
-    }, 5000);
-
     return () => {
-      clearTimeout(timer);
       scaleAnim.setValue(0);
       fadeAnim.setValue(0);
     };
@@ -41,7 +36,7 @@ const Splash = ({navigation}) => {
         resizeMode="contain"
       />
       <TouchableOpacity onPress={() =>
-        navigation.navigate('Landing', {name: 'Landing'})
+        navigation.navigate('LandingSwiper')
       } style={styles.button} >
         <Text style={styles.buttonText}>GET STARTED</Text>
       </TouchableOpacity>

@@ -4,13 +4,13 @@ import AppointmentListItem from './AppointmentListItem';
 import profilePic from "../../.././../assets/Maskgroup.png";
 import ToggleButton from '../../../preferencesComponents/ToggleButton';
 
-const AppointmentScreen = () => {
+const AppointmentScreen = ({update}) => {
   const [showPrevious, setShowPrevious] = useState(false);
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [update]);
 
   const fetchData = async () => {
     try {
@@ -37,12 +37,10 @@ const AppointmentScreen = () => {
   const handleToggle = (isSelected) => {
     console.log("TEXTTTTTTT ",isSelected);
     if (isSelected) {
-      
       setShowPrevious(true); // Show previous appointments
     } else {
       setShowPrevious(false); // Show upcoming appointments
     }
-    console.log("Chk state ",showPrevious);
   };
   
 
@@ -51,8 +49,10 @@ const AppointmentScreen = () => {
       <View style={styles.toggleButtonsContainer}>
         <ToggleButton 
           labels={["Upcoming", "Previous"]} 
-          onPress={handleToggle}
-        />
+          currentState={showPrevious}
+          isForAppointments={true}
+          onChange={handleToggle}
+        /> 
       </View>
       <ScrollView style={styles.appointmentListContainer}>
         {filterAppointments().map((appointment, index) => (

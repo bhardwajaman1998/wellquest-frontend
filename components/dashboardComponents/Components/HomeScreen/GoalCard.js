@@ -6,7 +6,7 @@ import axios from 'axios';
 import { lighten } from 'polished';
 
 
-const GoalCard = () => {
+const GoalCard = ({update}) => {
 
     const [userGoal,setUserGoal] = useState([]);
     //to show the value of total calories and remaining calories in progress 
@@ -16,7 +16,7 @@ const GoalCard = () => {
 
     useEffect(()=>{
         fetchUserGoalData();
-    },[]);
+    },[update]);
     const fetchUserGoalData=async()=>{
         try{
             const response= await axios.get('http://localhost:3000/api/customer/get_milestone?customerId=65cc353cb9be345699d6a69a');

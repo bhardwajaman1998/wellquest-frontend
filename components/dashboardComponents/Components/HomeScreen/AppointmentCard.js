@@ -6,30 +6,9 @@ import AppointmentListItem from '../Schedule/AppointmentListItem';
 import findCoach from '../../../../assets/find_coach.png';
 import profilePic from '../../../../assets/Maskgroup.png';
 
-export default function AppointmentCard() {
+const AppointmentCard = ({appointments}) => {
+  
   const navigation = useNavigation();
-  const [appointments, setAppointments] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
-      const data = await response.json();
-      // console.log("Response from server:", data);
-      // filtering the data to show future appointments only
-      const upcomingAppointments = data.filter(appointment => {
-        const appointmentDate = new Date(appointment.date);
-        const today = new Date();
-        return appointmentDate >= today;
-      });
-      setAppointments(upcomingAppointments);
-    } catch (error) {
-      console.error('Error fetching appointments:', error);
-    }
-  };
 
   const handleSchedulePress = () => {
     navigation.navigate('Find Coach'); 
@@ -91,3 +70,5 @@ const styles = StyleSheet.create({
   
   },
 });
+
+export default AppointmentCard;

@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 
 const LandingSwiper = ({ navigation }) => {
   return (
+    <View style={styles.container}>
     <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
       {/* Landing */}
       <View style={styles.slide}>
@@ -50,10 +51,23 @@ const LandingSwiper = ({ navigation }) => {
         </Text>
       </View>
     </Swiper>
+      <TouchableOpacity onPress={() =>
+        navigation.navigate('Path', {name: 'Path'})
+      } style={styles.button}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff', 
+    paddingBottom: 60
+  },
   wrapper: {},
   slide: {
     flex: 1,
@@ -66,6 +80,20 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     marginTop: '10%',
+  },  
+  button: {
+    backgroundColor: '#7265E3', 
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    height: 53,
+    width: 147,
+  },
+  buttonText: {
+    color: '#fff', 
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign:"center"
   },
   title: {
     marginVertical: 10,

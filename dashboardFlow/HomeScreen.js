@@ -4,28 +4,52 @@ import AppointmentCard from '../components/dashboardComponents/Components/HomeSc
 import NutritionPlanCard from '../components/dashboardComponents/Components/HomeScreen/NutritionPlanCard';
 import GoalCard from '../components/dashboardComponents/Components/HomeScreen/GoalCard';
 import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 
 const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
     const [userName, setUserName]=useState({ name: '' });
     const [greeting, setGreeting] = useState('');
+    const [update, setUpdate] = useState(false)
+    const [appointments, setAppointments] = useState([]);
 
     useEffect(()=>{
-        fetchUserData();
-    },[]);
+        if (isFocused) {
+            fetchUserData();
+        }
+    },[isFocused]);
 
-    const fetchUserData = async ()=>{
+    const fetchUserData = async () =>{
         try{
             const response = await  axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a');
             console.log(response);
             setUserName(response.data);
             updateGreeting();
+            setUpdate(true)
+            fetchAptData()
         }
         catch(error){
             console.error('Error fetching the User name in dashboard: ',error);
         }
     }
+
+    const fetchAptData = async () => {
+        try {
+          console.log('fetching appointments')
+          const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
+          const data = await response.json();
+          const upcomingAppointments = data.filter(appointment => {
+            const appointmentDate = new Date(appointment.date);
+            const today = new Date();
+            return appointmentDate >= today;
+          });
+          setAppointments(upcomingAppointments);
+        } catch (error) {
+          console.error('Error fetching appointments:', error);
+        }
+      };
 
     const updateGreeting = () => {
         const currentTime = new Date();
@@ -48,11 +72,10 @@ const HomeScreen= ({ route })=>{
             <ScrollView style={styles.container}>
                 
                     <Text style={styles.userNameText}>{greeting} , {userName.name}</Text>
-                    {/* <Text style={styles.userNameText}>Hello , Name</Text> */}
 
-                    <GoalCard />
+                    <GoalCard update={update}/>
 
-                    <AppointmentCard />
+                    <AppointmentCard  appointments={appointments}/>
                     
                     <NutritionPlanCard />
                 

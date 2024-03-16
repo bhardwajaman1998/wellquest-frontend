@@ -15,9 +15,10 @@ const Login = ({ navigation}) => {
       password: password,
     };
     navigation.navigate('Dashboard', { screen: 'Back' });
+    return
     // call the login API using AXIOS
     // to get the ip address, run cmd, ipconfig, then copy IPv4 Address
-    axios.post("http://192.168.1.188:5000/login-user", userData)
+    axios.post("http://localhost:3000//api/admin/login", userData)
       .then((res) => {
         console.log(res.data);
         if (res.data.status == 'Ok') {
