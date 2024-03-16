@@ -11,7 +11,8 @@ import ChatPage from "../dashboardFlow/ChatPage";
 import NotificationScreen from "../dashboardFlow/NotificationScreen";
 import AppointmentScreen from "../components/dashboardComponents/Components/Schedule/AppointmentScreen";
 import NavigationBar from '../components/globalComponents/NavigationBar';
-import {Stack} from './Stack';
+import { Stack } from './Stack';
+import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 
 const DashboardStack = () => {
   return (
@@ -107,6 +108,19 @@ const DashboardStack = () => {
                 )
             })}
             />
+
+             <Stack.Screen
+              name="Progress"
+              component={TabProgressScreen}
+              options={({ navigation }) => ({
+                header: () => (
+                  <NavigationBar
+                    title="Tab Progress"
+                  />
+                )
+            })}
+            />
+
             {/* Coach full Profile Screen  */}
             <Stack.Screen 
               name="chat page"

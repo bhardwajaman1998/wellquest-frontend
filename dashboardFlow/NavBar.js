@@ -11,6 +11,7 @@ import progressIcon from "../assets/My_progress_nav.png";
 import messageIcon from "../assets/Messages_nav.png";
 import profileIcon from "../assets/Profile_nav.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
+import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 import NavigationBar from '../components/globalComponents/NavigationBar';
 
 const Tab = createBottomTabNavigator();
@@ -68,9 +69,15 @@ const NavBar =()=>{
                 }}
                 />
             <Tab.Screen 
-                name="MyProgress" 
-                component={ProgressScreen}
+                name="TabProgress" 
+                component={TabProgressScreen}
                 options={{
+                    headerShown: true,
+                    header: () => (
+                        <NavigationBar
+                          title="Tab Progress"
+                        />
+                    ),
                     tabBarIcon:({focused})=>{
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
