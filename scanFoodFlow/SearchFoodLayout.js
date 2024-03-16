@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity, Modal, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Modal, Image, ScrollView } from "react-native";
 import StyledText from "../components/globalComponents/StyledText";
 
 import SearchBar from "../components/scanFoodComponents/SearchBar"
@@ -35,7 +35,8 @@ const SearchFoodLayout = ({historyList}) => {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView>
+            <View style={styles.container}>
         {
             searchScreen ? (
                 <Modal
@@ -102,6 +103,7 @@ const SearchFoodLayout = ({historyList}) => {
             )
         }
         </View>
+        </ScrollView>
 
     )
 }
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         height: '100%',
+        marginBottom: 200
     },
     search: {
         width: '100%'

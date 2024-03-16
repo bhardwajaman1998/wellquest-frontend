@@ -13,7 +13,7 @@ import profileIcon from "../assets/Profile_nav.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
 import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 import NavigationBar from '../components/globalComponents/NavigationBar';
-
+import SearchFoodStack from '../Stacks/SearchFoodStack';
 const Tab = createBottomTabNavigator();
 const screenOptions={
     tabBarShowLabel:false,
@@ -91,9 +91,10 @@ const NavBar =()=>{
                     }
                 }}/>
             <Tab.Screen 
-                name="Add" 
-                component={AddCount}
+                name="Search Food" 
+                component={SearchFoodStack}
                 options={{
+                    headerShown: false,
                     tabBarIcon:({focused})=>{
                         return(
                             <View
