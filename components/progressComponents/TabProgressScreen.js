@@ -4,10 +4,12 @@ import WaterDropIcon from "../../assets/water_drop_icon.png"
 import StepsIcon from "../../assets/steps_icon.png"
 import Calorie_History from "./Calorie_History"
 import Weight_History from "./Weight_History"
+import { useNavigation } from "@react-navigation/native"
 
 const TabProgressScreen = () => {
+  const navigation = useNavigation()
   const handlePress = () => {
-    console.log("Button Pressed")
+    navigation.navigate("PreferencesStack", {screen: 'Preferences'})
   }
 
   return (

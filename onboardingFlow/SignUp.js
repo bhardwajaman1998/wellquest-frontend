@@ -33,7 +33,7 @@ const SignUp = ({ navigation }) => {
   //using Axios to access the API
   //You can use fetch also
   function handleSubmit(){
-    navigation.navigate('Preferences', {screen: 'Preferences'})
+    navigation.navigate('PreferencesStack', {screen: 'Preferences'})
     return
     const userData = {
       email: email,

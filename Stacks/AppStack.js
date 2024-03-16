@@ -20,11 +20,12 @@ const AppStack = () => {
           component={OnboardingStack}
           options = {{headerShown: false}}
         />
+  */}
         <Stack.Screen
-          name="Preferences"
+          name="PreferencesStack"
           component={PreferencesStack}
           options = {{headerShown: false}}
-        />    */}
+        />  
         <Stack.Screen
           name="Dashboard"
           component={DashboardStack}
