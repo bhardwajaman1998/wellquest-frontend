@@ -5,11 +5,15 @@ import HomeScreen from './HomeScreen';
 import ProgressScreen from './ProgressScreen';
 import ProfileScreen from './ProfileScreen';
 import AddCount from './AddCount';
-import addIcon from "../assets/add_icon.png";
-import homeIcon from "../assets/home.png";
-import progressIcon from "../assets/My_progress_nav.png";
-import messageIcon from "../assets/Messages_nav.png";
-import profileIcon from "../assets/Profile_nav.png";
+import addIcon from "../assets/Plus_button_nav.png";
+import homeIconSelected from "../assets/home.png";
+import homeIcon from "../assets/home_nav_icon.png";
+import progressIcon from "../assets/progress.png";
+import progressSelected from "../assets/progress_selected.png";
+import messageIcon from "../assets/message.png";
+import messageSelected from "../assets/message_selected.png";
+import profileSelected from "../assets/person_filled.png";
+import profileIcon from "../assets/person.png";
 import ChatPageStack from '../Stacks/ChatPageStack';
 
 const Tab = createBottomTabNavigator();
@@ -36,11 +40,12 @@ const NavBar =()=>{
                 component={HomeScreen}
                 options={{
                     tabBarIcon:({focused})=>{
+                        const homeScreenIcon = focused ? homeIconSelected : homeIcon;
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={homeIcon}
-                                    style={{ width: 24, height: 24,color:"#000" }}
+                                    source={homeScreenIcon}
+                                    style={{ width: 25, height: 25 }}
                                 />
                                 <Text style={{fontSize:13,color:"#000"}}>Home</Text>
                             </View>
@@ -53,10 +58,11 @@ const NavBar =()=>{
                 component={ProgressScreen}
                 options={{
                     tabBarIcon:({focused})=>{
+                        const myProgressScreenIcon = focused ? progressSelected : progressIcon;
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={progressIcon}
+                                    source={myProgressScreenIcon}
                                     style={{ width: 24, height: 24}}
                                 />
                                 <Text style={{fontSize:13,color:"#000"}}>My Progress</Text>
@@ -96,10 +102,11 @@ const NavBar =()=>{
                 component={ChatPageStack}
                 options={{
                     tabBarIcon:({focused})=>{
+                        const messageScreenIcon = focused ? messageSelected : messageIcon;
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={messageIcon}
+                                    source={messageScreenIcon}
                                     style={{ width: 24, height: 24}}
                                 />
                                 <Text style={{fontSize:13,color:"#000"}}>Messages</Text>
@@ -112,10 +119,11 @@ const NavBar =()=>{
                 component={ProfileScreen}
                 options={{
                     tabBarIcon:({focused})=>{
+                        const profileScreenIcon = focused ? profileSelected : profileIcon;
                         return(
                             <View style={{alignItems:"center",justifyContent:"center"}}>
                                 <Image 
-                                    source={profileIcon}
+                                    source={profileScreenIcon}
                                     style={{ width: 24, height: 24}}
                                 />
                                 <Text style={{fontSize:13,color:"#000"}}>Profile</Text>
