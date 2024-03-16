@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    marginTop: "20%",
+    marginTop: "21%",
   },
   buttonsContainer: {
     flexDirection: "row",

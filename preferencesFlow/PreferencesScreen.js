@@ -33,7 +33,7 @@ const PreferencesScreen = () => {
   ];
 
   const [formData, setFormData] = useState({
-    cust_id:"65cc353cb9be345699d6a69a",
+    cust_id: "65cc353cb9be345699d6a69a",
     gender: "",
     age: "",
     weight: "",
@@ -64,6 +64,7 @@ const PreferencesScreen = () => {
   };
 
   const handleFinish = () => {
+    formData.cust_id = "65cc353cb9be345699d6a69a";
     console.log("Collected Data:", formData);
     postData(formData);
     // navigation.navigate("Success");
@@ -71,25 +72,28 @@ const PreferencesScreen = () => {
 
   const postData = async (formData) => {
     try {
-      const response = await fetch('http://localhost:3000/api/customer/store_preferences', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
+      const response = await fetch(
+        "http://localhost:3000/api/customer/store_preferences",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      console.log(response.status);
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-  
+
       const data = await response.json();
-      console.log('Data posted successfully:', data);
+      console.log("Data posted successfully:", data);
     } catch (error) {
-      console.error('Error posting data:', error.message);
+      console.error("Error posting data:", error.message);
     }
   };
-  
 
   return (
     <View style={styles.container}>
@@ -166,18 +170,17 @@ const PreferencesScreen = () => {
           backAction={backAction}
           nextCompName="Success"
           onPressNext={(selectedActivityLevel) => {
-            setFormData((prevData) => ({ ...prevData, activityLevel: selectedActivityLevel }));
+            setFormData((prevData) => ({
+              ...prevData,
+              activityLevel: selectedActivityLevel,
+            }));
             setActivityLevel(setActivityLevel);
             screenSelect("Success");
           }}
         />
       )}
       {cardType === 7 && (
-        <Success
-          formData={formData}
-          backAction={backAction}
-          onPressNext={handleFinish}
-        />
+        <Success formData={formData} onPressNext={handleFinish} />
       )}
     </View>
   );

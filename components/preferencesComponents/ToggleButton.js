@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const ToggleButton = ({ labels, onPress }) => {
+const ToggleButton = ({ labels, onChange, selectedWeightUnit, selectedHeightUnit }) => {
   const [selectedButton, setSelectedButton] = useState(labels[0]);
 
   const renderButton = (label) => (
@@ -15,8 +15,15 @@ const ToggleButton = ({ labels, onPress }) => {
   );
 
   const handlePress = (label) => {
-    setSelectedButton(label);
-    onPress(label === labels[1]); //changes done for appointment screen to show the respective data under labels 
+    const newState = label;
+    setSelectedButton(newState);
+    // console.log(label);
+    if (label == "Kg" || label == "Lb"){
+      selectedWeightUnit = label;
+    }else if (label == "CM" || label == "Feet"){
+      selectedHeightUnit = label;
+    }
+    onChange(newState); 
   }
 
   return (
@@ -51,3 +58,4 @@ const styles = StyleSheet.create({
 });
 
 export default ToggleButton;
+
