@@ -24,53 +24,54 @@ const Login = ({ navigation}) => {
         if (res.data.status == 'Ok') {
           Alert.alert("Login Successful!");
           navigation.navigate('Dashboard', { screen: 'Back' });
-        }else{
+        } else {
           navigation.navigate('Dashboard', { screen: 'Back' });
         }
       });
   }
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
-    <View style={styles.container}>
-    
-      <Text style={styles.title}>Log in</Text>
-      <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
-      <View style={styles.inputContainer}>
-        <Text>Email address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          onChange={e => setEmail(e.nativeEvent.text)}
-        />
-      </View>
+      <View style={styles.container}>
+        <Text style={styles.title}>Log in</Text>
+        <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
+        <View style={styles.inputContainer}>
+          <Text>Email address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChange={e => setEmail(e.nativeEvent.text)}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter password"
-          secureTextEntry
-          onChange={e => setPassword(e.nativeEvent.text)}
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter password"
+            secureTextEntry
+            onChange={e => setPassword(e.nativeEvent.text)}
+          />
+        </View>
 
-      <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
-        <Text style={styles.LoginButtonText}>Log in</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
+          <Text style={styles.LoginButtonText}>Log in</Text>
+        </TouchableOpacity>
 
-      <View style={styles.socialIconsContainer}>
-        <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+        <View style={styles.socialIconsContainer}>
+          <Image source={require('../assets/google.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+        </View>
+
+        <View style={styles.loginLinkContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp', {name: 'SignUp'})}>
+            <Text style={styles.loginLink}>No account yet? <Text style={styles.loginLinkText}>Sign Up</Text></Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity onPress={() =>
-        navigation.navigate('SignUp', {name: 'SignUp'})
-      }>
-      <Text style={styles.loginLink}>No account yet? <Text style={styles.loginLinkText}>Sign Up</Text></Text>
-      </TouchableOpacity>
-    </View>
     </ScrollView>
   );
 };
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    alignItems: 'center',
     width: '100%',
   },
   profileImageContainer: {
@@ -96,16 +96,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10, 
     textAlign: 'left',
-        
+    marginLeft: 0, 
   },
   heading: {
     fontSize: 15,
-    textAlign: 'left', 
+    textAlign: 'left',
+    marginBottom: 20, 
+    marginLeft: 0, 
   },
   inputContainer: {
-    marginBottom: 15,
+    marginBottom: 20, 
     width: '100%',
   },
   input: {
@@ -113,7 +115,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#E7EBF1'
+    backgroundColor: '#E7EBF1',
+    marginTop: 5, 
+    width: '100%', 
   },
   LoginButton: {
     backgroundColor: '#7265E3',
@@ -122,6 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: '50%',
     alignItems: 'center',
+    alignSelf: 'center', 
   },
   LoginButtonText: {
     color: '#fff',
@@ -133,19 +138,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '50%',
     marginTop: 20,
+    alignSelf: 'center', 
   },
   socialIcon: {
     width: 20,
     height: 20,
     resizeMode: 'contain',
-      },
-      loginLink: {
-        marginTop: 20,
-        color: '#808080',
-      },
-      loginLinkText: {
-        color: 'red', 
-      },
+  },
+  loginLinkContainer: {
+    marginTop: 20,
+    alignItems: 'center', 
+  },
+  loginLink: {
+    color: '#808080',
+    textAlign: 'center',
+  },
+  loginLinkText: {
+    color: 'red',
+  },
 });
 
 export default Login;

@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#fff',
-    },
+      marginTop: -50,
+          },
     logo: {
       width: 500, 
       height: 500,
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
           fontSize: 30,
           fontWeight: "bold",
           marginBottom:20,
+          marginTop: -100,
     },
     buttonContainer: {
       marginTop: 20,
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       width:180,
       height:52,
+      
     },
     buttonC: {
         backgroundColor: '#2A9D5C', 
@@ -73,7 +76,7 @@ const styles = StyleSheet.create({
       },
     buttonText: {
       color: '#fff', 
-      fontSize: 18,
+      fontSize: 15,
       fontWeight: 'bold',
     },
   });
