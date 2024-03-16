@@ -1,45 +1,44 @@
-//This card is shown in the Dashboard screen to show the calories intake
 import React, { useState, useEffect } from 'react';
 import { Text, View, SafeAreaView, StyleSheet, Platform } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import axios from 'axios';
 import { lighten } from 'polished';
 
-
 const GoalCard = () => {
-
-    const [userGoal,setUserGoal] = useState([]);
-    //to show the value of total calories and remaining calories in progress 
-    const [totalCaloriesGoal, setTotalCaloriesGoal] = useState(100000);
-    const [completedCalories, setCompletedCalories] = useState(1000);
+    const [totalCaloriesGoal, setTotalCaloriesGoal] = useState(0);
+    const [completedCalories, setCompletedCalories] = useState(0);
     const [remainingCalories, setRemainingCalories] = useState(0);
+    const [weightGoal, setWeightGoal] = useState(0);
 
-    useEffect(()=>{
-        fetchUserGoalData();
-    },[]);
-    const fetchUserGoalData=async()=>{
-        try{
-            const response= await axios.get('http://localhost:3000/api/customer/get_milestone?customerId=65cc353cb9be345699d6a69a');
-            console.log("Goal response:",response);
-            const data = response.data[0];
-            setUserGoal(data);
-            setTotalCaloriesGoal(data.cal_goal);
-            setCompletedCalories(1000);
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const [userDataResponse, milestoneResponse, caloriesConsumedResponse] = await Promise.all([
+                axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a'),
+                axios.get('http://localhost:3000/api/customer/get_milestone?customerId=65cc353cb9be345699d6a69a'),
+                axios.get('http://localhost:3000/api/customer/get_calories_consumed?cust_id=65cc353cb9be345699d6a69a')
+            ]);
+
+            const userData = userDataResponse.data;
+            const milestoneData = milestoneResponse.data[0];
+            const caloriesConsumedData = caloriesConsumedResponse.data;
+
+            setTotalCaloriesGoal(userData.dailyCalories);
+            setCompletedCalories(caloriesConsumedData.totalCaloriesConsumed);
+            setWeightGoal(milestoneData.weight_goal);
+        } catch (error) {
+            console.error("Unable to fetch data:", error);
         }
-        catch(error){
-            console.error("not able to fetch calorie card data in dashboard screen: ",error);
-        }
-    }
+    };
 
     useEffect(() => {
         const remainingCalories = totalCaloriesGoal - completedCalories;
         setRemainingCalories(remainingCalories);
     }, [totalCaloriesGoal, completedCalories]);
 
-    // const totalCaloriesGoal = 100000;
-    // const completedCalories = 2000;
-    // const remainingCalories = totalCaloriesGoal - completedCalories;
-    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -61,11 +60,11 @@ const GoalCard = () => {
                 <View style={styles.info}>
                     <View style={styles.group}>
                         <Text style={styles.text}>Kcal intake goal</Text>
-                        <Text style={styles.boldText}>{`${totalCaloriesGoal} remaining`}</Text>
+                        <Text style={styles.boldText}>{totalCaloriesGoal}</Text>
                     </View>
                     <View style={styles.group}>
                         <Text style={styles.text}>Weight goal</Text>
-                        <Text style={styles.boldText}>{userGoal.weight_goal}</Text>
+                        <Text style={styles.boldText}>{weightGoal}</Text>
                     </View>
                 </View>
             </View>
@@ -116,13 +115,13 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 25,
         justifyContent:'center',
-        },
+    },
     group: {
         marginBottom: 10,
         fontSize:20,
     },
     text:{
-      fontSize:18,
+        fontSize:18,
     },
     boldText: {
         fontWeight: 'bold',
