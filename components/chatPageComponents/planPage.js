@@ -58,7 +58,10 @@ const PlanPage = () => {
       </View>
 
       <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('AiOptions')}>
-        <Text style={styles.nextButtonText}>Next</Text>
+        <Text style={styles.nextButtonText}>I WILL TAKE IT</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.tryButton} onPress={() => navigation.navigate('AiOptions')}>
+        <Text style={styles.tryButtonText}>TRY AGAIN</Text>
       </TouchableOpacity>
     </View>
   );
@@ -70,6 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#7265E31A',
   },
   header: {
     flexDirection: 'row',
@@ -111,13 +115,25 @@ const styles = StyleSheet.create({
     color: '#7265E3',
   },
   nextButton: {
-    backgroundColor: '#FF934E',
+    margin:20,
+    backgroundColor: '#7265E3',
     paddingVertical: 15,
     paddingHorizontal: 60,
     borderRadius: 20,
   },
   nextButtonText: {
     color: 'white',
+    fontSize: 20,
+  },
+  tryButton: {
+    margin:20,
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 20,
+  },
+  tryButtonText: {
+    color: '#172935',
     fontSize: 20,
   },
 });

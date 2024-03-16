@@ -30,14 +30,17 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
+    //flexDirection: 'column',
     gap: 20,
-    height: '80%'
+    height: '100%',
+    backgroundColor: '#7265E31A',
   },
   wrapper:{
+    //backgroundColor: '#7265E31A',
     
   },
   button: {
+    marginBottom:200,
     backgroundColor: '#FF934E',
     paddingVertical: 15,
     paddingHorizontal: 60,

@@ -1,17 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-
 import { useNavigation, useRoute } from '@react-navigation/native';
-
 const CalculateCalories = () => {
-
   const navigation = useNavigation();
-
   const route = useRoute();
-
   const { dataToSend } = route.params;
-
   const [calculatedCalories, setCalculatedCalories] = useState(0);
   const [calculatedWeight, setCalculatedWeight] = useState(0);
   const [monthlyCalories, setMonthlyCalories] = useState(0);
@@ -23,29 +17,20 @@ const CalculateCalories = () => {
       dataToSend
     });
   };
-
-
-
   useEffect(() => {
     calculateCaloriesAndWeight();
   }, []);
 
     const calculateCaloriesAndWeight = () => {
-
     const { goal, height, weight } = dataToSend;
     const heightInches = height * 0.39;
-
-    const weightPounds = weight * 2.20;
-    
+    const weightPounds = weight * 2.20;  
     const maintenance = 10 * weightPounds + 6.25 * heightInches - 5;
     setCalculatedCalories(maintenance);
-
     const caloriesToLoseWeight = maintenance - 700; 
     setMonthlyCalories(caloriesToLoseWeight);
-
     const caloriesToGainWeight = maintenance + 500; 
     setMonthlyCalories(caloriesToGainWeight);
-
     let calculatedCalories = 0;
     let calculatedWeight = 0;
     let monthlyCalories = 0;
@@ -64,9 +49,7 @@ const CalculateCalories = () => {
       calculatedWeight = parseFloat(weight); 
       monthlyCalories = 200;
     }
-
-    setCalculatedWeight(calculatedWeight);
-    
+    setCalculatedWeight(calculatedWeight);   
   };
   
   return (
@@ -93,9 +76,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#7265E31A',
   },
   header: {
-    marginBottom: 20,
+   // marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: -60,
+    marginTop:-70,
+    paddingLeft:50,
+    paddingRight:50,
   },
   image: {
     width: 100,
@@ -105,10 +95,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   nextButton: {
-    margin: 20,
-    backgroundColor: '#FF934E',
+    margin: 60,
+    backgroundColor: '#7265E3',
     paddingVertical: 15,
     paddingHorizontal: 60,
     borderRadius: 20,

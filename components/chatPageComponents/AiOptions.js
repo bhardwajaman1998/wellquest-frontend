@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+//import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+//import { useNavigation, useRoute } from '@react-navigation/native';
+
 
 const fetchMealSuggestions = async (dataToSend) => {
+ 
   try {
     const apiKey = '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';
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     const prompt = `Fetch me 3 meal options for a person who is ${dataToSend.height} cm tall
                     ${dataToSend.weight} kg, wants to ${dataToSend.goal} and his preference is ${dataToSend.preference}
-                    Fetch only 3 options in the exact JSON format given  below:
+                    Fetch only 2 options in the exact JSON format given  below:
                     {name, recipe, calories}
     `;
 
@@ -56,7 +60,7 @@ export const meal = (foodInfo) => {
 const AiOptions = () => {
 
   const route = useRoute();
-
+  const navigation = useNavigation();
   const { dataToSend } = route.params;
   const [mealSuggestions, setMealSuggestions] = useState([]);
   
@@ -81,6 +85,9 @@ const AiOptions = () => {
           <Text style={styles.mealDescription}>{meal.recipe}</Text>
         </View>
       ))}
+      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('ChatPage')}>
+        <Text style={styles.nextButtonText}>CONTINUE</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -91,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#7265E31A',
   },
   title: {
     fontSize: 24,
@@ -98,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   mealContainer: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: 'white',
     padding: 20,
     marginBottom: 10,
     borderRadius: 8,
@@ -111,6 +119,17 @@ const styles = StyleSheet.create({
   },
   mealDescription: {
     fontSize: 16,
+  },
+  nextButton: {
+    margin:25,
+    backgroundColor: '#7265E3',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 20,
+  },
+  nextButtonText: {
+    color: 'white',
+    fontSize: 20,
   },
 });
 

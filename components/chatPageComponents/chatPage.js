@@ -1,4 +1,3 @@
-// Import necessary modules
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -37,9 +36,12 @@ const ChatPage = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20, gap: 0 }}>
+    
+
+
+    <View style={[styles.container,{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 20, gap: 0 }]}>
       <View style={styles.searchContainer}>
-        <MaterialIcons name="search" size={24} color="black" style={styles.searchIcon} />
+        <MaterialIcons name="search" size={24} backgroundColor="white" color="black" style={styles.searchIcon} />
         <TextInput
           style={styles.searchInput}
           onChangeText={(text) => setSearchQuery(text)}
@@ -54,16 +56,17 @@ const ChatPage = () => {
         keyExtractor={item => item.id}
       />
       <TouchableOpacity style={{  backgroundColor: '#FF934E',
-          paddingVertical: 12,
-          paddingHorizontal: 10,
+          paddingVertical: 10,
+          paddingHorizontal: 15,
           borderRadius: 20,
-          marginBottom:400,
-        marginLeft:50} }
+          marginBottom:450,
+        marginLeft:55
+      } }
             onPress={() =>
               navigation.navigate('GetStarted', {name: 'GetStarted'})
             }
         >
-        <Text style={{ color: 'white', fontSize: 18 }}>Start</Text>
+        <Text style={{ color: 'white', fontSize: 17 }}>Start</Text>
       </TouchableOpacity>
       <View style={styles.separator} />
 
@@ -74,7 +77,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#7265E31A',
+    
   },
   chat: {
     fontSize: 14,
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e0e0e0',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginBottom: 10,
     width: '100%',

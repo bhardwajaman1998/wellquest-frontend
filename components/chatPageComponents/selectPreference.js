@@ -37,7 +37,14 @@ const SelectPreference = () => {
         <TouchableOpacity style={styles.button} onPress={() => handlePreferenceSelection('vegan')}>
           <Text style={styles.buttonText}>Vegan</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+         style={styles.nextbutton}
+        onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
+       >
+         <Text style={styles.nextbuttonText}>Next</Text>
+       </TouchableOpacity>
       </View>
+      
     </View>
   );
 };
@@ -48,6 +55,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#7265E31A',
   },
   header: {
     flexDirection: 'row',
@@ -88,6 +96,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#7265E3',
     fontSize: 18,
+  },
+  nextbutton: {
+    margin:50,
+    backgroundColor: '#7265E3',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 20,
+  },
+  nextbuttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
