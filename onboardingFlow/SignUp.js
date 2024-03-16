@@ -64,6 +64,7 @@ const SignUp = ({ navigation }) => {
     <View style={styles.container}>
       
       <Text style={styles.title}>Sign up</Text>
+      <Text style={styles.heading}>Unlock Your Personalized Fitness Plan. {'\n'}Sign Up Today!</Text>
       <View style={styles.inputContainer}>
       <Text>Email address</Text>
   <TextInput
@@ -120,13 +121,17 @@ const SignUp = ({ navigation }) => {
 
       <View style={styles.socialIconsContainer}>
         <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/logo-facebook.png')} style={styles.socialIcon} />
-        <Image source={require('../assets/logo-apple.png')} style={styles.socialIcon} />
+        <Image source={require('../assets/facebook.png')} style={styles.socialIcon}/>
+        <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
       </View>
       <TouchableOpacity onPress={() =>
         navigation.navigate('Login', {name: 'Login'})
       }>
-      <Text style={styles.loginLink}>Already have an account? Log in</Text>
+      <Text style={styles.loginLink}>
+      Already have an account? <Text style={styles.loginLinkText}>Log in</Text>
+    </Text>
+
+       
       </TouchableOpacity>
     </View>
     </ScrollView>
@@ -152,10 +157,15 @@ const styles = StyleSheet.create({
     
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20
-    
+    marginBottom: 20,
+    textAlign: 'left',
+        
+  },
+  heading: {
+    fontSize: 15,
+    textAlign: 'left', 
   },
   inputContainer: {
     marginBottom: 15,
@@ -165,10 +175,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    backgroundColor: '#DCE0E6'
   },
   signUpButton: {
-    backgroundColor: '#FF934E',
+    backgroundColor: '#7265E3',
     padding: 15,
     borderRadius: 50,
     marginTop: 20,
@@ -185,15 +196,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '50%',
     marginTop: 20,
+    color:'#2A9D5C'
   },
   socialIcon: {
     width: 20,
     height: 20,
     resizeMode: 'contain',
+    color:'#2A9D5C'
   },
   loginLink: {
     marginTop: 20,
-    color: '#3498db',
+    color: '#808080',
+  },
+  loginLinkText: {
+    color: 'red', 
   },
 });
 

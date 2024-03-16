@@ -16,16 +16,16 @@ const Landing1 = ({navigation}) => {
       Scan your meal with our app; get instant calorie/nutrition details. 
       Like a pocket dietitian, ensuring healthier choices with every bite.</Text>
       <View style={styles.bottomContainer}>
-      <TouchableOpacity onPress={() =>
-        navigation.navigate('Landing2', {name: 'Landing2'})
-      } style={styles.button}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-        <View style={styles.eclipsesContainer}>
+      <View style={styles.eclipsesContainer}>
         <View style={styles.eclipse} />
           <View style={styles.eclipse1} />
           <View style={styles.eclipse2} />
         </View>
+        <TouchableOpacity onPress={() =>
+        navigation.navigate('Landing2', {name: 'Landing2'})
+      } style={styles.button}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     
   },
   text: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'left',
     color: '#333',
      fontWeight: "300",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#FF934E', 
+    backgroundColor: '#7265E3', 
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 50,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
     borderRadius: 25,
-    backgroundColor: '#333',
+    backgroundColor: '#D9D9D9',
     marginHorizontal: 10,
     marginVertical: 10
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
     borderRadius: 25,
-    backgroundColor: '#40CC7C',
+    backgroundColor: '#FF6200',
     marginHorizontal: 10,
     marginVertical: 10
   },
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
     borderRadius: 25,
-    backgroundColor: '#333',
+    backgroundColor: '#D9D9D9',
     marginHorizontal: 10,
     marginVertical: 10,
   },
