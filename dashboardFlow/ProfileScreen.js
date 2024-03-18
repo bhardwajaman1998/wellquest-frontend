@@ -20,17 +20,17 @@ const ProfileScreen = () => {
         <TouchableOpacity>
           <Text>Edit Profile</Text>
         </TouchableOpacity>
-        <View style={styles.line}></View>
+        <View style={styles.Hline}></View>
 
         <TouchableOpacity>
           <Text>Privacy Policy</Text>
         </TouchableOpacity>
-        <View style={styles.line}></View>
+        <View style={styles.Hline}></View>
 
         <TouchableOpacity>
           <Text>Settings</Text>
         </TouchableOpacity>
-        <View style={styles.line}></View>
+        <View style={styles.Hline}></View>
       </View>
     </View>
   )
@@ -78,7 +78,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  secondContainer: {},
+  secondContainer: {
+    marginHorizontal: 20,
+  },
+  Hline: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "black",
+    marginVertical: 10,
+  },
 })
 
 export default ProfileScreen
