@@ -33,7 +33,7 @@ const Login = ({ navigation}) => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
       <View style={styles.container}>
-        <Text style={styles.title}>Log in</Text>
+        <Text style={styles.title}>Login</Text>
         <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
         <View style={styles.inputContainer}>
           <Text>Email address</Text>
@@ -98,13 +98,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
-    marginLeft: 0, 
+    marginLeft: 0,
+    fontFamily: 'Helvetica Neue', 
   },
   heading: {
     fontSize: 15,
     textAlign: 'left',
     marginBottom: 20, 
-    marginLeft: 0, 
+    marginLeft: 0,
+    fontFamily: 'Helvetica Neue',
   },
   inputContainer: {
     marginBottom: 20, 
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
   socialIconsContainer: {
     flexDirection: 'row',
@@ -155,6 +158,7 @@ const styles = StyleSheet.create({
   },
   loginLinkText: {
     color: 'red',
+    fontFamily: 'Helvetica Neue',
   },
 });
 
