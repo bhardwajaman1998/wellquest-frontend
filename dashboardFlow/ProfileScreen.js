@@ -18,17 +18,17 @@ const ProfileScreen = () => {
       </View>
       <View style={styles.secondContainer}>
         <TouchableOpacity>
-          <Text>Edit Profile</Text>
+          <Text style={styles.optionsText}>Edit Profile</Text>
         </TouchableOpacity>
         <View style={styles.Hline}></View>
 
         <TouchableOpacity>
-          <Text>Privacy Policy</Text>
+          <Text style={styles.optionsText}>Privacy Policy</Text>
         </TouchableOpacity>
         <View style={styles.Hline}></View>
 
         <TouchableOpacity>
-          <Text>Settings</Text>
+          <Text style={styles.optionsText}>Settings</Text>
         </TouchableOpacity>
         <View style={styles.Hline}></View>
       </View>
@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "black",
     marginVertical: 20,
+  },
+  optionsText: {
+    fontSize: 16,
   },
 })
 
