@@ -1,12 +1,8 @@
 import React from "react"
-import { Text } from "react-native"
+import { Text, View } from "react-native"
 
 const ProfileScreen = () => {
-  return (
-    <View>
-      <h1>NOYAL PRofile</h1>
-    </View>
-  )
+  return <Text>NOYAL PRofile</Text>
 }
 
 export default ProfileScreen
