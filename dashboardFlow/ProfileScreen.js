@@ -9,6 +9,7 @@ const ProfileScreen = () => {
         <View style={styles.profileContainer}>
           <Image style={styles.profile} source={profile} />
         </View>
+        <View style={styles.line}></View>
         <View style={styles.userDetails}>
           <Text style={styles.userName}>Sophie Wong</Text>
           <Text>Joined</Text>
@@ -26,7 +27,9 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   firstContainer: {
-    justifyContent: "center",
+    marginLeft: 50,
+    marginRight: 50,
+    justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "row",
   },
@@ -45,8 +48,14 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
   },
+  line: {
+    width: 1,
+    height: "100%",
+    backgroundColor: "black",
+    marginHorizontal: 10,
+  },
   userDetails: {
-    marginLeft: 30,
+    // marginLeft: 30,
   },
   userName: {
     fontSize: 16,
