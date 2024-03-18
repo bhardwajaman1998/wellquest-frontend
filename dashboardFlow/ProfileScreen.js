@@ -36,6 +36,13 @@ const ProfileScreen = () => {
         </TouchableOpacity>
         <View style={styles.Hline}></View>
       </View>
+      <View style={styles.secondContainer}>
+        <View style={styles.Hline}></View>
+        <TouchableOpacity style={styles.options}>
+          <Text style={styles.signoutText}>Sign Out</Text>
+        </TouchableOpacity>
+        <View style={styles.Hline}></View>
+      </View>
     </View>
   )
 }
@@ -98,6 +105,11 @@ const styles = StyleSheet.create({
   },
   optionsText: {
     fontSize: 16,
+  },
+  signoutText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#FF6200",
   },
 })
 
