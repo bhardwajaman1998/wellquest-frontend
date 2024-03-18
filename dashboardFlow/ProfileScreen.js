@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   Hline: {
     width: "100%",
     height: 1,
-    backgroundColor: "black",
+    backgroundColor: "grey",
     marginVertical: 20,
   },
   optionsText: {
