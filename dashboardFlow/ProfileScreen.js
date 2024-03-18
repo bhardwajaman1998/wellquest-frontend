@@ -1,6 +1,7 @@
 import React from "react"
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import profile from "../assets/profile.jpg"
+import rightButton from "../assets/right_button.png"
 
 const ProfileScreen = () => {
   return (
@@ -17,18 +18,21 @@ const ProfileScreen = () => {
         </View>
       </View>
       <View style={styles.secondContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.options}>
           <Text style={styles.optionsText}>Edit Profile</Text>
+          <Image source={rightButton} />
         </TouchableOpacity>
         <View style={styles.Hline}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.options}>
           <Text style={styles.optionsText}>Privacy Policy</Text>
+          <Image source={rightButton} />
         </TouchableOpacity>
         <View style={styles.Hline}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.options}>
           <Text style={styles.optionsText}>Settings</Text>
+          <Image source={rightButton} />
         </TouchableOpacity>
         <View style={styles.Hline}></View>
       </View>
@@ -87,6 +91,10 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "grey",
     marginVertical: 20,
+  },
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   optionsText: {
     fontSize: 16,
