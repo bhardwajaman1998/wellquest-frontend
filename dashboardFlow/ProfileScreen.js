@@ -79,14 +79,14 @@ const styles = StyleSheet.create({
   },
 
   secondContainer: {
-    marginTop: 20,
-    marginHorizontal: 20,
+    marginTop: 60,
+    marginHorizontal: 40,
   },
   Hline: {
     width: "100%",
     height: 1,
     backgroundColor: "black",
-    marginVertical: 10,
+    marginVertical: 20,
   },
 })
 
