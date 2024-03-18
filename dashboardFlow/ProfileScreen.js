@@ -16,6 +16,11 @@ const ProfileScreen = () => {
           <Text>2 Months Ago</Text>
         </View>
       </View>
+      <View style={styles.secondContainer}>
+        <Text>Edit Profile</Text>
+        <Text>Privacy Policy</Text>
+        <Text>Settings</Text>
+      </View>
     </View>
   )
 }
@@ -61,6 +66,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+
+  secondContainer: {},
 })
 
 export default ProfileScreen
