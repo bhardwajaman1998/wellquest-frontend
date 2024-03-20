@@ -17,10 +17,10 @@ const Path = ({navigation}) => {
         <TouchableOpacity onPress={() =>
         navigation.navigate('Login', {name: 'Login'})
       } style={styles.buttonE}>
-          <Text style={styles.buttonText}>Enthusiast</Text>
+          <Text style={styles.buttonText}>CUSTOMER {'>'}</Text>
         </TouchableOpacity>
         <TouchableOpacity  style={styles.buttonC}>
-          <Text style={styles.buttonText}>Coach</Text>
+          <Text style={styles.buttonText}>COACH {'>'}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#fff',
       marginTop: -50,
+      fontFamily: 'Helvetica Neue',
           },
     logo: {
       width: 500, 
@@ -45,6 +46,7 @@ const styles = StyleSheet.create({
           fontWeight: "bold",
           marginBottom:20,
           marginTop: -100,
+          fontFamily: 'Helvetica Neue',
     },
     buttonContainer: {
       marginTop: 20,
@@ -78,6 +80,7 @@ const styles = StyleSheet.create({
       color: '#fff', 
       fontSize: 15,
       fontWeight: 'bold',
+      fontFamily: 'Helvetica Neue',
     },
   });
  

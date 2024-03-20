@@ -58,10 +58,10 @@ const SignUp = ({ navigation }) => {
         <Text style={styles.heading}>Unlock Your Personalized Fitness Plan. {'\n'}Sign Up Today!</Text>
 
         <View style={styles.inputContainer}>
-          <Text>Email address</Text>
+          <Text style={styles.heading2}>Email Address</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter email"
+            placeholder="Enter Your Email"
             keyboardType="email-address"
             autoCapitalize="none"
             onChangeText={setEmail}
@@ -69,20 +69,20 @@ const SignUp = ({ navigation }) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text>Password</Text>
+          <Text style={styles.heading2}>Create Password</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter password"
+            placeholder="Enter Password"
             secureTextEntry
             onChangeText={setPassword}
           />
         </View>
 
         <View style={styles.inputContainer}>
-          <Text>Confirm password</Text>
+          <Text style={styles.heading2}>Confirm Password</Text>
           <TextInput
             style={styles.input}
-            placeholder="Confirm password"
+            placeholder="Confirm Password"
             secureTextEntry
           />
         </View>
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     width: '100%',
+    fontFamily: 'Helvetica Neue',
   },
   profileImageContainer: {
     marginBottom: 20,
@@ -124,25 +125,31 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
-    marginLeft: 0, 
+    marginLeft: 0,
+    fontFamily: 'Helvetica Neue',
   },
   heading: {
     fontSize: 15,
     textAlign: 'left',
     marginBottom: 20, 
-    marginLeft: 0, 
+    marginLeft: 0,
+    fontFamily: 'Helvetica Neue',
   },
   inputContainer: {
     marginBottom: 20, 
     width: '100%',
   },
+  heading2:{
+    fontWeight:"bold",
+    fontSize:16,
+     },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#C1C7CD',
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#E7EBF1',
@@ -162,6 +169,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
   socialIconsContainer: {
     flexDirection: 'row',
@@ -185,8 +193,10 @@ const styles = StyleSheet.create({
     color: '#808080',
   },
   loginLinkText: {
-    color: 'red', 
+    color: 'red',
+    fontFamily: 'Helvetica Neue',
   },
+  
 });
 
 export default SignUp;

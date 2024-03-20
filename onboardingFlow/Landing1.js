@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff', 
+    backgroundColor: '#fff',
+    fontFamily: 'Helvetica Neue',
   },
   logo: {
     width: "100%", 
@@ -51,17 +52,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop:"-15%",
     paddingLeft: "5%",
-    paddingRight: "5%"
+    paddingRight: "5%",
+    fontFamily: 'Helvetica Neue',
     
   },
   text: {
     fontSize: 15,
     textAlign: 'left',
-    color: '#333',
+    color: '#7A7A7A',
      fontWeight: "300",
      paddingBottom: "50%",
      paddingLeft: "5%",
-    paddingRight: "5%"
+    paddingRight: "5%",
+    fontFamily: 'Helvetica Neue',
     
   },
   bottomContainer: {
@@ -86,7 +89,8 @@ const styles = StyleSheet.create({
     color: '#fff', 
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign:"center"
+    textAlign:"center",
+    fontFamily: 'Helvetica Neue',
   },
   eclipsesContainer: {
     flexDirection: 'row',

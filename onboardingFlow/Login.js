@@ -36,10 +36,10 @@ const Login = ({ navigation}) => {
         <Text style={styles.title}>Login</Text>
         <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
         <View style={styles.inputContainer}>
-          <Text>Email address</Text>
+          <Text style={styles.heading2}>Email Address</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter email"
+            placeholder="Enter Your Email"
             keyboardType="email-address"
             autoCapitalize="none"
             onChange={e => setEmail(e.nativeEvent.text)}
@@ -47,17 +47,17 @@ const Login = ({ navigation}) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text>Password</Text>
+          <Text style={styles.heading2}>Password</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter password"
+            placeholder="Enter Password"
             secureTextEntry
             onChange={e => setPassword(e.nativeEvent.text)}
           />
         </View>
 
         <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
-          <Text style={styles.LoginButtonText}>Log in</Text>
+          <Text style={styles.LoginButtonText}>LOGIN</Text>
         </TouchableOpacity>
 
         <View style={styles.socialIconsContainer}>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     width: '100%',
+    fontFamily: 'Helvetica Neue',
   },
   profileImageContainer: {
     marginBottom: 20,
@@ -94,12 +95,13 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
     marginLeft: 0,
-    fontFamily: 'Helvetica Neue', 
+    fontFamily: 'Helvetica Neue',
+    color:'#3E423A',
   },
   heading: {
     fontSize: 15,
@@ -107,6 +109,11 @@ const styles = StyleSheet.create({
     marginBottom: 20, 
     marginLeft: 0,
     fontFamily: 'Helvetica Neue',
+    color:'#7A7A7A',
+  },
+  heading2:{
+ fontWeight:"bold",
+ fontSize:16,
   },
   inputContainer: {
     marginBottom: 20, 

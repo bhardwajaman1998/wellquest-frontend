@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff', 
-    paddingBottom: 60
+    paddingBottom: 60,
+    fontFamily: 'Helvetica Neue',
   },
   wrapper: {},
   slide: {
@@ -93,7 +94,8 @@ const styles = StyleSheet.create({
     color: '#fff', 
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign:"center"
+    textAlign:"center",
+    fontFamily: 'Helvetica Neue',
   },
   title: {
     marginVertical: 10,
@@ -103,15 +105,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: '5%',
     paddingRight: '5%',
+    fontFamily: 'Helvetica Neue',
   },
   text: {
     fontSize: 15,
     textAlign: 'left',
-    color: '#333',
+    color: '#7A7A7A',
     fontWeight: '300',
     paddingBottom: '20%',
     paddingLeft: '5%',
     paddingRight: '5%',
+    fontFamily: 'Helvetica Neue',
   },
 });
 
