@@ -39,7 +39,7 @@ const AppointmentCard = ({appointments}) => {
         <CustomCard
           // style={styles.buttonstyle}
           text="You don't have upcoming appointments."
-          buttonText="FIND COACH"
+          buttonText="FIND COACH   "
           onPress={handleSchedulePress}
           imageName={findCoach}
           imgSize={15}

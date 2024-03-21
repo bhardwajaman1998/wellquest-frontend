@@ -35,8 +35,8 @@ const screenOptions={
     },
     tabBarBackground: () => (
         <Image
-            source={navBG} // Replace with the path to your image
-            style={{ flex: 1, resizeMode: 'cover' }} // Adjust styles as needed
+            source={navBG} 
+            style={{ flex: 1, resizeMode: 'cover' }} 
         />
     ),   
 }
@@ -54,14 +54,14 @@ const NavBar =()=>{
                         title="WellQuest"
                         leftIcon={
                           <Image
-                            source={require('../assets/logo-header.png')} // Replace with the path to your PNG file
-                            style={{ width: 45, height: 40, resizeMode: 'contain'}} // Adjust width and height as needed
+                            source={require('../assets/logo-header.png')} 
+                            style={{ width: 45, height: 40, resizeMode: 'contain'}} 
                           />
                         }
                         rightIcon={
                           <Image
-                            source={require('../assets/notification-header.png')} // Replace with the path to your PNG file
-                            style={{ width: 45, height: 35, resizeMode: 'contain'}} // Adjust width and height as needed
+                            source={require('../assets/notification-header.png')} 
+                            style={{ width: 45, height: 35, resizeMode: 'contain'}}
                           />
                         }
                       />

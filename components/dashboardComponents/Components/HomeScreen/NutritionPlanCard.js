@@ -20,7 +20,7 @@ export default function NutritionPlanCard() {
         {/* Nutrition Plan Card */}
             <CustomCard
                 text="You don't have a nutrition plan."
-                buttonText="ASK ME"
+                buttonText="ASK ME       "
                 onPress={handleSchedulePress}
                 imageName={botIcon}
                 imgSize={15}
