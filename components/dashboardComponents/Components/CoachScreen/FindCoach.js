@@ -55,6 +55,7 @@ export default function FindCoach() {
             <View style={styles.content}>
                 <View style={styles.searchSide}>        
                 <Text style={styles.header}>Find the best coaches for You..</Text>
+                
                 <CustomSearchBar
                 value={search}
                 onChangeText={updateSearch}
