@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Platform } from
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomCard from './CustomCard';
 import { useNavigation } from '@react-navigation/native';
-import botIcon from "../../../../assets/bot_icon.png";
+import botIcon from "../../../../assets/botIcon.png";
 
 export default function NutritionPlanCard() {
 

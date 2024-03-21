@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 import { useNavigation } from '@react-navigation/native';
 import CustomCard from './CustomCard';
 import AppointmentListItem from '../Schedule/AppointmentListItem'; 
-import findCoach from '../../../../assets/find_coach.png';
+import findCoach from '../../../../assets/findCoach.png';
 import profilePic from '../../../../assets/Maskgroup.png';
 
 const AppointmentCard = ({appointments}) => {
@@ -37,11 +37,12 @@ const AppointmentCard = ({appointments}) => {
         />
       ) : (
         <CustomCard
-          style={styles.buttonstyle}
+          // style={styles.buttonstyle}
           text="You don't have upcoming appointments."
           buttonText="FIND COACH"
           onPress={handleSchedulePress}
           imageName={findCoach}
+          imgSize={15}
         />
       )}
     </SafeAreaView>
@@ -51,11 +52,13 @@ const AppointmentCard = ({appointments}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    marginHorizontal: 25,
+    marginHorizontal: 5,
   },
   header: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginTop: 20,
+    marginLeft: 25,
+    marginBottom: 0, 
     justifyContent: 'space-between',
   },
   heading: {
@@ -64,11 +67,10 @@ const styles = StyleSheet.create({
   },
   seeAll: {
     fontSize: 15,
+    marginRight: 25,
+    marginBottom: 0,    
   },
-  buttonstyle: {
-    marginLeft: 20,
   
-  },
 });
 
 export default AppointmentCard;

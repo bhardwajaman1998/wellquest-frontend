@@ -18,6 +18,8 @@ import ChatPageStack from '../Stacks/ChatPageStack';
 import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 import NavigationBar from '../components/globalComponents/NavigationBar';
 import SearchFoodStack from '../Stacks/SearchFoodStack';
+import navBG from "../assets/bg.png";
+
 const Tab = createBottomTabNavigator();
 const screenOptions={
     tabBarShowLabel:false,
@@ -30,8 +32,13 @@ const screenOptions={
             elevation:0,
             height: Platform.OS === 'ios' ? 90 : 60,
             backgroundColor:'#FFF',
-    }
-    
+    },
+    tabBarBackground: () => (
+        <Image
+            source={navBG} // Replace with the path to your image
+            style={{ flex: 1, resizeMode: 'cover' }} // Adjust styles as needed
+        />
+    ),   
 }
 
 const NavBar =()=>{
@@ -117,7 +124,7 @@ const NavBar =()=>{
                             {/* <FontAwesome name='plus' size={24} color="#fff"/> */}
                                 <Image 
                                     source={addIcon}
-                                    style={{ width: 50, height: 50}}
+                                    style={{ width:64, height:64, marginBottom:30}}
                                 />
                             </View>
                         )
@@ -165,7 +172,7 @@ const NavBar =()=>{
 
 const Styles= StyleSheet.create({
     
-    NavStyles:{
+    NavStyle:{
         height:50,
         backgroundColor:"#D9D9D9",
     }
