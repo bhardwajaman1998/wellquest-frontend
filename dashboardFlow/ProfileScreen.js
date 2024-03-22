@@ -2,8 +2,13 @@ import React from "react"
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import profile from "../assets/profile.jpg"
 import rightButton from "../assets/right_button.png"
+import { useNavigation } from "@react-navigation/native"
 
 const ProfileScreen = () => {
+  const navigation = useNavigation()
+  const handlePreferences = () => {
+    navigation.navigate("PreferencesStack")
+  }
   return (
     <View style={styles.container}>
       <View style={styles.firstContainer}>
@@ -32,6 +37,12 @@ const ProfileScreen = () => {
 
         <TouchableOpacity style={styles.options}>
           <Text style={styles.optionsText}>Settings</Text>
+          <Image source={rightButton} />
+        </TouchableOpacity>
+        <View style={styles.Hline}></View>
+
+        <TouchableOpacity style={styles.options} onPress={handlePreferences}>
+          <Text style={styles.optionsText}>Preferences</Text>
           <Image source={rightButton} />
         </TouchableOpacity>
         <View style={styles.Hline}></View>
