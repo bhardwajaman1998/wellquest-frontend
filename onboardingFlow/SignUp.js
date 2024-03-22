@@ -60,7 +60,7 @@ const SignUp = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Email Address</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             placeholder="Enter Your Email"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -71,7 +71,7 @@ const SignUp = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Create Password</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             placeholder="Enter Password"
             secureTextEntry
             onChangeText={setPassword}
@@ -81,7 +81,7 @@ const SignUp = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Confirm Password</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             placeholder="Confirm Password"
             secureTextEntry
           />
@@ -112,10 +112,12 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
     width: '100%',
+    marginTop: 70,
     fontFamily: 'Helvetica Neue',
+    // marginBottom: 50,
   },
   profileImageContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
     width: '100%',
   },
   profileImage: {
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
   },
   inputContainer: {
-    marginBottom: 20, 
+    marginBottom: 10, 
     width: '100%',
   },
   heading2:{
@@ -158,9 +160,10 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     backgroundColor: '#7265E3',
-    padding: 15,
+    padding: 10,
     borderRadius: 50,
-    marginTop: 20,
+    marginTop: 30,
+    marginBottom: 30,
     width: '50%',
     alignItems: 'center',
     alignSelf: 'center', 
@@ -175,28 +178,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '50%',
-    marginTop: 20,
+    // marginBottom: 30,
+    marginTop:30,
     alignSelf: 'center',
   },
   socialIcon: {
     width: 20,
     height: 20,
+    // marginBottom:10,
     resizeMode: 'contain',
     color:'#2A9D5C'
   },
   loginLinkContainer: {
-    marginTop: 20,
+    marginTop: 30,
+    marginBottom:10,
     alignItems: 'center', 
   },
   loginLink: {
-    marginTop: 20,
+    marginBottom: 10,
     color: '#808080',
   },
   loginLinkText: {
     color: 'red',
     fontFamily: 'Helvetica Neue',
   },
-  
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+     },
 });
 
 export default SignUp;

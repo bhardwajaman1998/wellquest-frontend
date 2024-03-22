@@ -24,7 +24,7 @@ const Landing1 = ({navigation}) => {
         <TouchableOpacity onPress={() =>
         navigation.navigate('Landing2', {name: 'Landing2'})
       } style={styles.button}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>NEXT</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "100%", 
-    height: 400,
+    height: 420,
     marginTop:"10%"
      },
   title: {
@@ -96,24 +96,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   eclipse: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#D9D9D9',
     marginHorizontal: 10,
     marginVertical: 10
   },
   eclipse1: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#FF6200',
     marginHorizontal: 10,
     marginVertical: 10
   },
   eclipse2: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#D9D9D9',
     marginHorizontal: 10,

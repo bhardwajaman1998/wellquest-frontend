@@ -38,7 +38,7 @@ const Login = ({ navigation}) => {
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Email Address</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             placeholder="Enter Your Email"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -49,13 +49,15 @@ const Login = ({ navigation}) => {
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Password</Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, styles.shadow]}
             placeholder="Enter Password"
             secureTextEntry
             onChange={e => setPassword(e.nativeEvent.text)}
           />
         </View>
-
+        <View>
+          <Text style={styles.forgetPwd}>Forgot Password?</Text>
+        </View>
         <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
           <Text style={styles.LoginButtonText}>LOGIN</Text>
         </TouchableOpacity>
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     fontFamily: 'Helvetica Neue',
+    marginTop: 70,
   },
   profileImageContainer: {
     marginBottom: 20,
@@ -115,6 +118,13 @@ const styles = StyleSheet.create({
  fontWeight:"bold",
  fontSize:16,
   },
+  forgetPwd:{
+    fontSize:14,
+    color:"#808080",
+    fontFamily: 'Helvetica Neue',
+    textAlign:'right',
+    margin:'1%'
+  },
   inputContainer: {
     marginBottom: 20, 
     width: '100%',
@@ -130,9 +140,10 @@ const styles = StyleSheet.create({
   },
   LoginButton: {
     backgroundColor: '#7265E3',
-    padding: 15,
+    padding: 10,
     borderRadius: 50,
-    marginTop: 20,
+    marginTop: 50,
+    marginBottom: 30,
     width: '50%',
     alignItems: 'center',
     alignSelf: 'center', 
@@ -147,7 +158,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '50%',
-    marginTop: 20,
+    marginBottom: 10,
+    marginTop: 50,
     alignSelf: 'center', 
   },
   socialIcon: {
@@ -157,6 +169,7 @@ const styles = StyleSheet.create({
   },
   loginLinkContainer: {
     marginTop: 20,
+    marginBottom: 30,
     alignItems: 'center', 
   },
   loginLink: {
@@ -167,6 +180,16 @@ const styles = StyleSheet.create({
     color: 'red',
     fontFamily: 'Helvetica Neue',
   },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+     },
 });
 
 export default Login;

@@ -54,7 +54,7 @@ const LandingSwiper = ({ navigation }) => {
       <TouchableOpacity onPress={() =>
         navigation.navigate('Path', {name: 'Path'})
       } style={styles.button}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>SIGN UP</Text>
       </TouchableOpacity>
       </View>
   );
