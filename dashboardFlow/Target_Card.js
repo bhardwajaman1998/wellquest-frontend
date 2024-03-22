@@ -1,20 +1,13 @@
 import React from "react"
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native"
-import WaterDropIcon from "../../assets/water_drop_icon.png"
-import StepsIcon from "../../assets/steps_icon.png"
-import Calorie_History from "./Calorie_History"
-import Weight_History from "./Weight_History"
-import { useNavigation } from "@react-navigation/native"
+import WaterDropIcon from "../assets/water_drop_icon.png"
+import StepsIcon from "../assets/steps_icon.png"
 
-const TabProgressScreen = () => {
-  const navigation = useNavigation()
-  const handlePress = () => {
-    navigation.navigate("PreferencesStack")
-  }
+const Target_Card=()=>{
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.targertBox}>
+
+return(
+<View style={styles.targertBox}>
         <Text style={styles.targertHeading}>Today's Target</Text>
         <View style={styles.targetComponentsContainer}>
           <View style={styles.targetContainer}>
@@ -49,27 +42,13 @@ const TabProgressScreen = () => {
           </View>
         </View>
       </View>
-      <Weight_History />
-      <TouchableOpacity onPress={handlePress} style={styles.button}>
-        <Text style={styles.buttonText}>Want to change your Goal?</Text>
-      </TouchableOpacity>
-      <Calorie_History />
-    </View>
-  )
-}
+)
+            }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    backgroundColor: "white",
-    alignItems: "center",
-    height: "100%",
+targertBox: {
     padding: 15,
-    width: "100%",
-  },
-  targertBox: {
-    padding: 15,
-    margin: 5,
+    margin: 15,
     backgroundColor: "#FF934E66",
     borderRadius: 22,
     alignItems: "center",
@@ -118,22 +97,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
-
-  button: {
-    backgroundColor: "#7265E3",
-    margin: 5,
-    marginTop: 20,
-    borderRadius: 15,
-    width: "95%",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 18,
-    color: "#fff",
-    padding: 10,
-    width: "100%",
-    textAlign: "center",
-  },
 })
 
-export default TabProgressScreen;
+export default Target_Card;
