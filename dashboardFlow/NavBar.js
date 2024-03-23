@@ -18,7 +18,6 @@ import ChatPageStack from '../Stacks/ChatPageStack';
 import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 import NavigationBar from '../components/globalComponents/NavigationBar';
 import SearchFoodStack from '../Stacks/SearchFoodStack';
-import navBG from "../assets/bg.png";
 
 const Tab = createBottomTabNavigator();
 const screenOptions={

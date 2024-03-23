@@ -29,13 +29,14 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
           <Icon name="ellipsis-v" size={20} color="#7265E3" />
         </TouchableOpacity>
       </View>
-      <View style={styles.separator} />
+      
       <View style={styles.content}>
         <Image source={clockIcon} style={styles.clockIcon} />
         <Text style={styles.date}>{date}</Text>
         <Image source={dotIcon} style={styles.dotIcon} />
         <Text style={styles.timeSlot}>{time}</Text>
       </View>
+      <View style={styles.separator} />
       <View style={styles.coachInfo}>
         <Image source={coachAvatar} style={styles.avatar} />
         <Text style={styles.coachName}>{coachName}</Text>
@@ -56,7 +57,8 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 0,
+margin:20,
+    // marginHorizontal: 0,
     backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
@@ -129,6 +131,7 @@ const styles = StyleSheet.create({
   },
   coachName: {
     fontSize: 16,
+    fontWeight:'bold',
   },
   optionsContainer: {
     position: 'absolute',

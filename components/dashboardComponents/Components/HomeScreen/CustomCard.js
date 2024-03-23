@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor:'grey',
     borderWidth:1,
+    backgroundColor:'#FFF',
   },
   cardText: {
     fontSize: 16,

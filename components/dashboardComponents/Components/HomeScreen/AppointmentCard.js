@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   seeAll: {
     fontSize: 15,
     marginRight: 25,
-    marginBottom: 0,    
+    marginBottom: 0,  
+    color:'#FF6200',  
   },
   
 });
