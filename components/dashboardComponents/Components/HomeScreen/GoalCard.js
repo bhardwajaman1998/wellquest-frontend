@@ -6,7 +6,7 @@ import axios from 'axios';
 import { lighten } from 'polished';
 
 
-const GoalCard = ({update, calorieLimit, calConsumed, remianingCalories}) => {
+const GoalCard = ({update, calorieLimit, calConsumed, remaining}) => {
 
     const [userGoal,setUserGoal] = useState([]);
 
@@ -25,7 +25,7 @@ const GoalCard = ({update, calorieLimit, calConsumed, remianingCalories}) => {
                         shadowColor={lighten(0.2,'#FF934E')}
                         bgColor="#fff"
                     >
-                        <Text style={styles.centerText}>{remianingCalories} remaining</Text>
+                        <Text style={styles.centerText}>{remaining} remaining</Text>
                     </ProgressCircle>
                 </View>
                 <View style={styles.info}>

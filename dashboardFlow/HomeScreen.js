@@ -11,7 +11,7 @@ const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [userName, setUserName]=useState({ name: '' });
-    const [calorieLimit, setCalorieLimit] = useState(2500);
+    const [calorieLimit, setCalorieLimit] = useState(0);
     const [completedCalories, setCompletedCalories] = useState(0);
     const [remainingCalories, setRemainingCalories] = useState(0);
 
@@ -54,7 +54,11 @@ const HomeScreen= ({ route })=>{
     }
 
     const calculateRemaining = (consumed) => {
+        console.log(consumed)
         const remainingCalories = parseFloat(calorieLimit).toFixed(2) - parseFloat(consumed).toFixed(2);
+        console.log('--------')
+        console.log(remainingCalories)
+        console.log('--------')
         setRemainingCalories(parseFloat(remainingCalories).toFixed(0));
     };
 
@@ -98,7 +102,7 @@ const HomeScreen= ({ route })=>{
 
                     <Text style={styles.userNameText}>{greeting} , {userName.name}</Text>
 
-                    <GoalCard update={update} calorieLimit={calorieLimit} calConsumed={completedCalories} remianingCalories={remainingCalories}/>
+                    <GoalCard update={update} calorieLimit={calorieLimit} calConsumed={completedCalories} remaining={remainingCalories}/>
 
                     <AppointmentCard  appointments={appointments}/>
                     
