@@ -32,13 +32,7 @@ const screenOptions={
             elevation:0,
             height: Platform.OS === 'ios' ? 90 : 60,
             backgroundColor:'#FFF',
-    },
-    tabBarBackground: () => (
-        <Image
-            source={navBG} 
-            style={{ flex: 1, resizeMode: 'cover' }} 
-        />
-    ),   
+    }   
 }
 
 const NavBar =()=>{

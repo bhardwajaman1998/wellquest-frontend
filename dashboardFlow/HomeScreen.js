@@ -119,7 +119,7 @@ const HomeScreen= ({ route })=>{
 const styles = StyleSheet.create({
     safeArea: {
         // flex: 1,
-        backgroundColor: '#f0f0f0', 
+        backgroundColor: '#F6F2ED', 
     },
     container: {
         // flex: 1,
