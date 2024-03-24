@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor:'grey',
     borderWidth:1,
+    backgroundColor:'#FFF',
   },
   cardText: {
     fontSize: 16,
@@ -40,16 +41,16 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 18,
     backgroundColor: '#7265E3',
-    // overflow:'hidden',
+    justifyContent:'space-around',
   },
   buttonText: {
-    marginLeft: 0,
     fontSize: 14,
     color: '#FFF',
     fontWeight:'bold',
-    
+    marginLeft:0,
   },
   image: {
     marginLeft: 10,
+    // marginRight:10,
   },
 });

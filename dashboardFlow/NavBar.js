@@ -18,6 +18,7 @@ import ChatPageStack from '../Stacks/ChatPageStack';
 import TabProgressScreen from '../components/progressComponents/TabProgressScreen';
 import NavigationBar from '../components/globalComponents/NavigationBar';
 import SearchFoodStack from '../Stacks/SearchFoodStack';
+
 const Tab = createBottomTabNavigator();
 const screenOptions={
     tabBarShowLabel:false,
@@ -30,8 +31,7 @@ const screenOptions={
             elevation:0,
             height: Platform.OS === 'ios' ? 90 : 60,
             backgroundColor:'#FFF',
-    }
-    
+    }   
 }
 
 const NavBar =()=>{
@@ -47,14 +47,14 @@ const NavBar =()=>{
                         title="WellQuest"
                         leftIcon={
                           <Image
-                            source={require('../assets/logo-header.png')} // Replace with the path to your PNG file
-                            style={{ width: 45, height: 40, resizeMode: 'contain'}} // Adjust width and height as needed
+                            source={require('../assets/logo-header.png')} 
+                            style={{ width: 45, height: 40, resizeMode: 'contain'}} 
                           />
                         }
                         rightIcon={
                           <Image
-                            source={require('../assets/notification-header.png')} // Replace with the path to your PNG file
-                            style={{ width: 45, height: 35, resizeMode: 'contain'}} // Adjust width and height as needed
+                            source={require('../assets/notification-header.png')} 
+                            style={{ width: 45, height: 35, resizeMode: 'contain'}}
                           />
                         }
                       />
@@ -117,7 +117,7 @@ const NavBar =()=>{
                             {/* <FontAwesome name='plus' size={24} color="#fff"/> */}
                                 <Image 
                                     source={addIcon}
-                                    style={{ width: 50, height: 50}}
+                                    style={{ width:64, height:64, marginBottom:30}}
                                 />
                             </View>
                         )
@@ -165,7 +165,7 @@ const NavBar =()=>{
 
 const Styles= StyleSheet.create({
     
-    NavStyles:{
+    NavStyle:{
         height:50,
         backgroundColor:"#D9D9D9",
     }

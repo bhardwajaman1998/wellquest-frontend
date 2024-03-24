@@ -6,6 +6,7 @@ import GoalCard from '../components/dashboardComponents/Components/HomeScreen/Go
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
+import Target_Card from './Target_Card';
 
 const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
@@ -100,6 +101,8 @@ const HomeScreen= ({ route })=>{
 
                     <GoalCard update={update} calorieLimit={calorieLimit} calConsumed={completedCalories} remianingCalories={remainingCalories}/>
 
+                    <Target_Card/>
+                    
                     <AppointmentCard  appointments={appointments}/>
                     
                     <NutritionPlanCard />
@@ -116,7 +119,7 @@ const HomeScreen= ({ route })=>{
 const styles = StyleSheet.create({
     safeArea: {
         // flex: 1,
-        backgroundColor: '#f0f0f0', 
+        backgroundColor: '#F6F2ED', 
     },
     container: {
         // flex: 1,

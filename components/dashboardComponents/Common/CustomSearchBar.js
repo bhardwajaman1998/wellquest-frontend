@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   searchIcon: {
     marginTop: 10,
     alignItems:'center',
-    color:'black',
+    // color:'black',
   },
   input: {
     flex: 1,

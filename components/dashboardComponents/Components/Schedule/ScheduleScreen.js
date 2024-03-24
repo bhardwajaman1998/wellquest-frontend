@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Alert, FlatList, TouchableOpacity, Text, Image } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
-import TimeSlotButton from './TimeSlotButton'; // Import the custom button component
-import ConfirmationWindow from './ConfirmationWindow'; // Import the overlay component
+import TimeSlotButton from './TimeSlotButton'; 
+import ConfirmationWindow from './ConfirmationWindow';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -15,7 +15,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [showOverlay, setShowOverlay] = useState(false);
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-    const [isDateSelected, setIsDateSelected] = useState(false); // Track whether a date is selected
+    const [isDateSelected, setIsDateSelected] = useState(false); // to Track whether a date is selected
     const [selectedDate, setSelectedDate] = useState(null);
 
     const navigation = useNavigation();
@@ -39,7 +39,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
  
     const handleTimeSlotSelection = (timeSlot) => {
         setSelectedSlot(prevSlot => prevSlot === timeSlot ? null : timeSlot);
-        setIsDateSelected(true); // Date is selected, hide the text
+        setIsDateSelected(true); // Date is selected , hide the text
         setSelected(prevSlot => prevSlot === timeSlot ? null : timeSlot); // Update the selected state
     };
     

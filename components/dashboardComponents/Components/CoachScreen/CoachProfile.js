@@ -1,6 +1,6 @@
 //this is the page where you can view coach profile and schedule or message him 
 import React,{useState} from 'react';
-import { SafeAreaView, StyleSheet,Text,View,Image, SectionList, FlatList,Modal,Button,navigation,navigate } from 'react-native';
+import { SafeAreaView, ScrollView,StyleSheet,Text,View,Image, SectionList, FlatList,Modal,Button,navigation,navigate } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ClickButtton from '../../../dashboardComponents/Common/ClickButtton';
 import ScheduleScreen from '../Schedule/ScheduleScreen';
@@ -44,9 +44,8 @@ const CoachProfile = ({ route }) => {
 
     //START -- to show the images of the active links of gyms associated with the coach
     const imagePaths = [
-        require('../../../../assets/gym.jpg'),
-        require('../../../../assets/gym2.jpeg'),
-        require('../../../../assets/gym.jpg'),
+        require('../../../../assets/gym2.png'),
+        require('../../../../assets/gym3.png'),
         
         
       ];
@@ -74,6 +73,7 @@ const CoachProfile = ({ route }) => {
 
     return(
         <NativeBaseProvider style={styles.container}>
+            <ScrollView style={styles.scrollView}>
             {coachData && (
             <View style={styles.CoachShortBio}>
                 <View style={styles.CoachBio}>
@@ -148,6 +148,7 @@ const CoachProfile = ({ route }) => {
                 </>
             )}
             </View>
+            </ScrollView>
             {isSchedulingModalVisible ? (
                 <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true} onClose={handleCloseSchedulingModal}>
                     <ScheduleScreen onClose={handleCloseSchedulingModal} coachId={coachId} coachData={coachData} closeAfterScheduled={handleCloseSchedulingModalAfterScheduled}/>
@@ -221,6 +222,8 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginRight: 10,
         borderColor:'red',
+        marginHorizontal:10,
+        justifyContent:'space-between',
     },
     social:{
         // flex:1,
@@ -235,7 +238,7 @@ const styles = StyleSheet.create({
     },
     headingText:{
         marginTop:20,
-        fontSize:24,
+        fontSize:20,
         fontWeight:'bold',
     },
     coachLinks: {
@@ -244,11 +247,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     cardImage: {
-        width: 100,
-        height: 100,
-        // marginHorizontal: 35,
+        width: 100,  
+        height: 100, 
+        marginHorizontal: 5, 
         borderRadius: 10,
-        aspectRatio:9/6,
+        aspectRatio: 1,
     },
     
     headingSmall:{
