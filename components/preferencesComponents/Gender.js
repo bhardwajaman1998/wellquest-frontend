@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import GenderBox from "./GenderBox";
-import male from "./male.png";
-import female from "./female.png";
-import other from "./other.png";
-import maleSelected from "./maleSelected.png";
-import femaleSelected from "./femaleSelected.png";
-import otherSelected from "./otherSelected.png";
+import maleSelected from "./male.png";
+import femaleSelected from "./female.png";
+import otherSelected from "./other.png";
+import male from "./maleSelected.png";
+import female from "./femaleSelected.png";
+import other from "./otherSelected.png";
 import NextButton from "./NextButton";
 
 const Gender = ({ nextCompName, onPressNext, gender, setGender }) => {
@@ -98,14 +98,18 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 36,
+    fontSize: 30,
     fontWeight: "bold",
+    fontFamily: 'Helvetica Neue',
+    textAlign: 'center'
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "regular",
     marginTop: 12,
+    marginHorizontal: 10,
     textAlign: "center",
+    fontFamily: 'Helvetica Neue',
   },
   box: {
     marginTop: 50,

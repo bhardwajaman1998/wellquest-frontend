@@ -16,7 +16,7 @@ const AppStack = () => {
   <NavigationContainer>
     <Stack.Navigator >
 
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Onboarding"
           component={OnboardingStack}
           options = {{headerShown: false}}
@@ -24,11 +24,6 @@ const AppStack = () => {
         <Stack.Screen
           name="PreferencesStack"
           component={PreferencesStack}
-          options = {{headerShown: false}}
-        /> */}
-        <Stack.Screen
-          name="Onboarding"
-          component={OnboardingStack}
           options = {{headerShown: false}}
         />
         <Stack.Screen

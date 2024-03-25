@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    paddingHorizontal: 20,
   },
   finishButton: {
     position: "absolute",

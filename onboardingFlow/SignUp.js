@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView ,  KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
   function handleEmail(e){
@@ -52,10 +53,23 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
+    <KeyboardAvoidingView behavior='padding' enabled style={{height: '100%'}}>
+      <ScrollView style={{backgroundColor: '#7265E3'}} contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>       
+      <Image source={require('../assets/logo_white.png')} style={styles.mainLogo} />
       <View style={styles.container}>
         <Text style={styles.title}>Sign up</Text>
         <Text style={styles.heading}>Unlock Your Personalized Fitness Plan. {'\n'}Sign Up Today!</Text>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.heading2}>Full name</Text>
+          <TextInput
+            style={[styles.input, styles.shadow]}
+            placeholder="Enter your full name"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChangeText={setName}
+          />
+        </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.heading2}>Email Address</Text>
@@ -103,18 +117,41 @@ const SignUp = ({ navigation }) => {
         </View>
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    alignSelf: 'center',
+    backgroundColor: 'white',
     justifyContent: 'center',
     width: '100%',
-    marginTop: 70,
+    padding: 30,
+    marginBottom: 200,
     fontFamily: 'Helvetica Neue',
-    // marginBottom: 50,
+    justifyContent: 'center',
+    alignContent: 'center',
+    borderRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    // Shadow for iOS
+    shadowColor: 'black',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    // Elevation for Android
+    elevation: 9,
+  },
+  mainLogo: {
+    alignSelf: 'center',
+    width: '70%',
+    height: '20%',
+    resizeMode: "contain",
+    marginTop: 100,
+    marginBottom: 20
   },
   profileImageContainer: {
     marginBottom: 10,
@@ -127,44 +164,50 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 50,
+    fontSize: 48,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
     marginLeft: 0,
     fontFamily: 'Helvetica Neue',
+    color:'rgba(62, 66, 58, 1)',
   },
   heading: {
-    fontSize: 15,
+    fontSize: 14,
     textAlign: 'left',
     marginBottom: 20, 
     marginLeft: 0,
     fontFamily: 'Helvetica Neue',
+    color:'#9D9D9D',
   },
   inputContainer: {
     marginBottom: 10, 
+    marginTop: 10, 
     width: '100%',
   },
   heading2:{
-    fontWeight:"bold",
+    fontWeight:"semibold",
+    fontFamily: 'Helvetica Neue',
     fontSize:16,
-     },
+  },
   input: {
-    borderWidth: 1,
-    borderColor: '#C1C7CD',
+    borderWidth: 0,
+    borderColor: '#ccc',
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#E7EBF1',
-    marginTop: 5, 
+    backgroundColor: '#fffcfc',
+    marginTop: 10, 
     width: '100%', 
+    height: 45
   },
   signUpButton: {
     backgroundColor: '#7265E3',
     padding: 10,
     borderRadius: 50,
-    marginTop: 30,
-    marginBottom: 30,
-    width: '50%',
+    marginTop: 25,
+    marginBottom: 5,
+    height: 45,
+    width: '40%',
     alignItems: 'center',
     alignSelf: 'center', 
   },
@@ -178,9 +221,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '50%',
-    // marginBottom: 30,
-    marginTop:30,
-    alignSelf: 'center',
+    marginBottom: 10,
+    marginTop: 20,
+    alignSelf: 'center', 
   },
   socialIcon: {
     width: 20,
@@ -190,28 +233,26 @@ const styles = StyleSheet.create({
     color:'#2A9D5C'
   },
   loginLinkContainer: {
-    marginTop: 30,
-    marginBottom:10,
+    marginTop: 20,
+    marginBottom: 50,
     alignItems: 'center', 
   },
   loginLink: {
-    marginBottom: 10,
+    marginBottom: 0,
     color: '#808080',
   },
   loginLinkText: {
     color: 'red',
+    fontWeight: 'bold',
     fontFamily: 'Helvetica Neue',
   },
   shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
+    shadowColor: 'grey',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.4,
     shadowRadius: 3.84,
-    elevation: 5,
-     },
+    elevation: 8,
+    },
 });
 
 export default SignUp;

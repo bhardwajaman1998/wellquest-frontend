@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import successImg from "../../assets/success.png";
+import AnimatedView from "../globalComponents/AnimatedView";
 
 const Success = ({ formData, onPressNext }) => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const Success = ({ formData, onPressNext }) => {
     navigation.navigate("Dashboard", { screen: "Back" });
   };
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <Image style={styles.img} source={successImg} />
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.body}>
@@ -21,7 +22,7 @@ const Success = ({ formData, onPressNext }) => {
       <TouchableOpacity onPress={onPress} style={styles.button}>
         <Text style={styles.btnText}>Go To Home</Text>
       </TouchableOpacity>
-    </View>
+    </AnimatedView>
   );
 };
 
@@ -44,28 +45,34 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
   },
   title: {
-    fontSize: 28,
+    fontSize: 40,
     marginTop: 15,
+    fontFamily: 'Helvetica Neue',
+    fontWeight: 'bold'
   },
   body: {
     fontSize: 16,
     marginTop: 15,
     width: 200,
     textAlign: "center",
+    fontFamily: 'Helvetica Neue',
+    color: 'grey'
   },
   btnText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+    fontFamily: 'Helvetica Neue',
+
   },
   button: {
     position: "absolute",
     bottom: 80,
     height: 50,
-    width: "100%",
+    width: "80%",
     borderRadius: 25,
     paddingHorizontal: 20,
-    backgroundColor: "#FF934E",
+    backgroundColor: "#7265E3",
     justifyContent: "center",
     alignItems: "center",
   },

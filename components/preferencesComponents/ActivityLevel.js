@@ -3,9 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import WheelPicker from "react-native-wheely";
+import AnimatedView from "../globalComponents/AnimatedView";
 
 const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedActivityLevel, setSelectedActivityLevel] = useState(null);
+  const [selectedActivityLevel, setSelectedActivityLevel] = useState('Moderately Active');
 
   const ActivityLevelOptions = [
     { label: "Sedentary", value: "Sedentary" },
@@ -20,7 +21,7 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
   };  
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.heading}>Your regular physical activity level</Text>
         <Text style={styles.text}>
@@ -33,7 +34,7 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
                 ? ActivityLevelOptions.findIndex(
                     (option) => option.value === selectedActivityLevel
                   )
-                : 0
+                : 2
             }
             options={ActivityLevelOptions.map((option) => option.label)}
             onChange={(index) => {
@@ -42,14 +43,19 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
             }}
             itemTextStyle={{
               color: "black",
-              fontSize: 20,
+              fontSize: 32,
+              marginTop: 10,
+              marginBottom: 10,
+              alignSelf: 'center'
             }}
             containerStyle={{
-              width: "80%",
-              alignItems: "center",
+              marginTop: 30,
+              justifyContent: 'center',
+              alignContent: 'center'
             }}
             selectedIndicatorStyle={{
               width: 200,
+              alignSelf: 'center',
               borderTopWidth: 3,
               borderBottomWidth: 3,
               borderRadius: 0,
@@ -57,7 +63,7 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
             }}
-            itemHeight={60}
+            itemHeight={80}
           />
         </View>
       </View>
@@ -69,7 +75,7 @@ const ActivityLevel = ({ backAction, nextCompName, onPressNext }) => {
           disabled={!selectedActivityLevel}
         />
       </View>
-    </View>
+    </AnimatedView>
   );
 };
 
@@ -92,16 +98,20 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: 'center',
+    marginHorizontal: -20,
+    fontFamily: 'Helvetica Neue',
   },
   text: {
     fontSize: 16,
     marginBottom: 20,
+    fontFamily: 'Helvetica Neue',
   },
   pickerContainer: {
-    width: "80%",
+    width: "100%",
   },
   label: {
     fontSize: 18,

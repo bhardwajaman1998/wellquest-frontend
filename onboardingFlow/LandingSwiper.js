@@ -13,13 +13,15 @@ const LandingSwiper = ({ navigation }) => {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Maintain Your {'\n'}Calories And Stay {'\n'}Healthy!</Text>
-        <Text style={styles.text}>
-          Effortlessly maintain balanced calories, track
-          consumption, and meet health goals for
-          weight loss, muscle gain, or fitness with our
-          app.
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>Maintain Your Calories And Stay Healthy!</Text>
+          <Text style={styles.text}>
+            Effortlessly maintain balanced calories, track
+            consumption, and meet health goals for
+            weight loss, muscle gain, or fitness with our
+            app.
+          </Text>
+        </View>
       </View>
 
       {/* landing1 */}
@@ -29,11 +31,13 @@ const LandingSwiper = ({ navigation }) => {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Scan Your Food And Know It's Calories!</Text>
-        <Text style={styles.text}>
-          Scan your meal with our app; get instant calorie/nutrition details. 
-          Like a pocket dietitian, ensuring healthier choices with every bite.
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>Scan Your Food And Know It's Calories!</Text>
+          <Text style={styles.text}>
+            Scan your meal with our app; get instant calorie/nutrition details. 
+            Like a pocket dietitian, ensuring healthier choices with every bite.
+          </Text>
+        </View>
       </View>
 
       {/* lnding2 */}
@@ -43,12 +47,14 @@ const LandingSwiper = ({ navigation }) => {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Stay Connected With Your Trainer!</Text>
-        <Text style={styles.text}>
-          Our app offers personalized fitness guidance, 
-          connecting you with your trainer for custom plans 
-          and real-time progress updates, anytime, anywhere.
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>Stay Connected With Your personal Trainer!</Text>
+          <Text style={styles.text}>
+            Our app offers personalized fitness guidance, 
+            connecting you with your trainer for custom plans 
+            and real-time progress updates, anytime, anywhere.
+          </Text>
+        </View>
       </View>
     </Swiper>
       <TouchableOpacity onPress={() =>
@@ -72,6 +78,7 @@ const styles = StyleSheet.create({
   wrapper: {},
   slide: {
     flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
@@ -90,6 +97,9 @@ const styles = StyleSheet.create({
     height: 53,
     width: 147,
   },
+  textContainer: {
+    marginHorizontal: '5%'
+  },
   buttonText: {
     color: '#fff', 
     fontSize: 16,
@@ -103,8 +113,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#333',
     fontWeight: 'bold',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingLeft: '0%',
+    paddingRight: '0%',
     fontFamily: 'Helvetica Neue',
   },
   text: {
@@ -113,8 +123,8 @@ const styles = StyleSheet.create({
     color: '#7A7A7A',
     fontWeight: '300',
     paddingBottom: '20%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingLeft: '0%',
+    paddingRight: '0%',
     fontFamily: 'Helvetica Neue',
   },
 });

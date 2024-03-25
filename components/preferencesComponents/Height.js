@@ -127,8 +127,8 @@ import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import ToggleButton from "./ToggleButton";
-import WheelPicker from "react-native-wheely";
 import { RulerPicker } from "react-native-ruler-picker";
+import AnimatedView from "../globalComponents/AnimatedView";
 
 const Height = ({ backAction, nextCompName, onPressNext }) => {
   const startHeightCMs = 120;
@@ -142,7 +142,7 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.heading}>What's your height?</Text>
         <Text style={styles.text}>
@@ -197,7 +197,7 @@ const Height = ({ backAction, nextCompName, onPressNext }) => {
           selectedHeight={selectedHeight}
         />
       </View>
-    </View>
+    </AnimatedView>
   );
 };
 
@@ -220,13 +220,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
     marginBottom: 10,
+    fontFamily: 'Helvetica Neue',
+
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 20,
+    fontFamily: 'Helvetica Neue',
+
   },
   pickerContainer: {
     width: "80%",

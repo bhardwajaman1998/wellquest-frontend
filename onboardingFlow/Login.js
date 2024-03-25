@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert, KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation}) => {
@@ -16,8 +16,6 @@ const Login = ({ navigation}) => {
     };
     navigation.navigate('Dashboard', { screen: 'Back' });
     return
-    // call the login API using AXIOS
-    // to get the ip address, run cmd, ipconfig, then copy IPv4 Address
     axios.post("http://localhost:3000//api/admin/login", userData)
       .then((res) => {
         console.log(res.data);
@@ -31,8 +29,11 @@ const Login = ({ navigation}) => {
   }
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
-      <View style={styles.container}>
+    <KeyboardAvoidingView behavior='padding' enabled style={{height: '100%'}}>
+    <ScrollView style={{backgroundColor: '#7265E3'}} contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
+      <Image source={require('../assets/logo_white.png')} style={styles.mainLogo} />
+      <View 
+        style={styles.container}>
         <Text style={styles.title}>Login</Text>
         <Text style={styles.heading}>Log in to Access Your Personalized Fitness Plan.</Text>
         <View style={styles.inputContainer}>
@@ -55,7 +56,7 @@ const Login = ({ navigation}) => {
             onChange={e => setPassword(e.nativeEvent.text)}
           />
         </View>
-        <View>
+        <View style={styles.forgotPwdContainer}>
           <Text style={styles.forgetPwd}>Forgot Password?</Text>
         </View>
         <TouchableOpacity style={styles.LoginButton} onPress={() => handleSubmit()}>
@@ -75,17 +76,40 @@ const Login = ({ navigation}) => {
         </View>
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
+    alignSelf: 'center',
+    backgroundColor: 'white',
     justifyContent: 'center',
     width: '100%',
+    padding: 30,
     fontFamily: 'Helvetica Neue',
-    marginTop: 70,
+    justifyContent: 'center',
+    alignContent: 'center',
+    borderRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    // Shadow for iOS
+    shadowColor: 'black',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    // Elevation for Android
+    elevation: 9,
+  },
+  mainLogo: {
+    alignSelf: 'center',
+    width: '70%',
+    height: '20%',
+    resizeMode: "contain",
+    marginTop: 100,
+    marginBottom: 20
   },
   profileImageContainer: {
     marginBottom: 20,
@@ -98,25 +122,29 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 50,
+    fontSize: 48,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
     marginLeft: 0,
     fontFamily: 'Helvetica Neue',
-    color:'#3E423A',
+    color:'rgba(62, 66, 58, 1)',
   },
   heading: {
-    fontSize: 15,
+    fontSize: 14,
     textAlign: 'left',
     marginBottom: 20, 
     marginLeft: 0,
     fontFamily: 'Helvetica Neue',
-    color:'#7A7A7A',
+    color:'#9D9D9D',
   },
   heading2:{
- fontWeight:"bold",
- fontSize:16,
+    fontWeight:"semibold",
+    fontFamily: 'Helvetica Neue',
+    fontSize:16,
+  },
+  forgotPwdContainer: {
+    marginTop: -10
   },
   forgetPwd:{
     fontSize:14,
@@ -130,21 +158,23 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   input: {
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 10,
-    backgroundColor: '#E7EBF1',
-    marginTop: 5, 
+    backgroundColor: '#fffcfc',
+    marginTop: 10, 
     width: '100%', 
+    height: 45
   },
   LoginButton: {
     backgroundColor: '#7265E3',
     padding: 10,
     borderRadius: 50,
-    marginTop: 50,
-    marginBottom: 30,
-    width: '50%',
+    marginTop: 25,
+    marginBottom: 5,
+    height: 45,
+    width: '40%',
     alignItems: 'center',
     alignSelf: 'center', 
   },
@@ -159,7 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '50%',
     marginBottom: 10,
-    marginTop: 50,
+    marginTop: 20,
     alignSelf: 'center', 
   },
   socialIcon: {
@@ -169,7 +199,7 @@ const styles = StyleSheet.create({
   },
   loginLinkContainer: {
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 50,
     alignItems: 'center', 
   },
   loginLink: {
@@ -178,18 +208,16 @@ const styles = StyleSheet.create({
   },
   loginLinkText: {
     color: 'red',
+    fontWeight: 'bold',
     fontFamily: 'Helvetica Neue',
   },
   shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
+    shadowColor: 'grey',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.4,
     shadowRadius: 3.84,
-    elevation: 5,
-     },
+    elevation: 8,
+    },
 });
 
 export default Login;
