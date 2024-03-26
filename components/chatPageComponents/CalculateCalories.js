@@ -10,6 +10,7 @@ const CalculateCalories = () => {
   const [calculatedWeight, setCalculatedWeight] = useState(0);
   const [monthlyCalories, setMonthlyCalories] = useState(0);
   //const [CaloriesToLose, setCaloriesToLose] = useState(0);
+  const { goal, height, weight } = dataToSend;
 
   const handleNext = () => {
     dataToSend.caloriesRequired = calculatedCalories
@@ -18,39 +19,41 @@ const CalculateCalories = () => {
     });
   };
   useEffect(() => {
-    calculateCaloriesAndWeight();
+    calculateCalories();
   }, []);
 
-    const calculateCaloriesAndWeight = () => {
-    const { goal, height, weight } = dataToSend;
-    const heightInches = height * 0.39;
-    const weightPounds = weight * 2.20;  
-    const maintenance = 10 * weightPounds + 6.25 * heightInches - 5;
-    setCalculatedCalories(maintenance);
-    const caloriesToLoseWeight = maintenance - 700; 
-    setMonthlyCalories(caloriesToLoseWeight);
-    const caloriesToGainWeight = maintenance + 500; 
-    setMonthlyCalories(caloriesToGainWeight);
-    let calculatedCalories = 0;
-    let calculatedWeight = 0;
-    let monthlyCalories = 0;
+  const calculateCalories = () => {
+    let weight_kg = weight.includes('Lb') ? parseFloat(weight.split(' ')[0]) * 0.453592 : parseFloat(weight.split(' ')[0]);
+    let height_cm = height.includes('Feet') ? parseFloat(height.split(' ')[0]) * 30.48 : parseFloat(height.split(' ')[0]);
+
+    let bmr;
     if (goal === 'Lose Weight') {
-      calculatedCalories =setCalculatedCalories(maintenance);
-      calculatedWeight = parseFloat(weight) - 5; 
-      monthlyCalories = setMonthlyCalories(caloriesToLoseWeight);
-    } 
-    else if (goal === 'Gain Weight') {
-      calculatedCalories = setCalculatedCalories(maintenance);
-      calculatedWeight = parseFloat(weight) + 5; 
-      monthlyCalories = setMonthlyCalories(caloriesToGainWeight);
-    } 
-    else {
-      calculatedCalories = setCalculatedCalories(maintenance);
-      calculatedWeight = parseFloat(weight); 
-      monthlyCalories = 200;
+        bmr = 10 * weight_kg + 6.25 * height_cm - 5 * 25 - 161;
+    } else if (goal === 'Gain Weight') {
+        bmr = 10 * weight_kg + 6.25 * height_cm - 5 * 25 + 5;
+    } else {
+        bmr = 10 * weight_kg + 6.25 * height_cm - 5 * 25;
     }
-    setCalculatedWeight(calculatedWeight);   
-  };
+
+    // Adjust BMR based on activity level
+    let activityFactor;
+    switch (goal) {
+        case 'Build Muscle':
+            activityFactor = 1.3;
+            break;
+        case 'Get Fitter':
+            activityFactor = 1.5;
+            break;
+        case 'Improve Endurance':
+            activityFactor = 1.7;
+            break;
+        default:
+            activityFactor = 1.2;
+    }
+
+    const dailyCalories = bmr * activityFactor;
+    setCalculatedCalories(dailyCalories.toFixed(2));
+};
   
   return (
     <View style={styles.container}>
@@ -60,12 +63,23 @@ const CalculateCalories = () => {
           style={styles.image}
           resizeMode="contain"
         />
-        <Text style={styles.title}>{`According to the milestones you should burn ${calculatedCalories} kcal to reach a weight of ${calculatedWeight} kg. You should burn ${monthlyCalories} kcal / month.`}</Text>
+        <Text style={styles.title}>{`According to the milestones you should maintain ${calculatedCalories} kcal/day to reach your goal of ${goal}`}</Text>
       </View>
      
-      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 30, marginTop: 60, paddingBottom: 80}}>
+          <TouchableOpacity
+          style={styles.backbutton}
+          onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backbuttonText}>Go Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.nextbutton}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextbuttonText}>Next</Text>
+          </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -76,20 +90,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
   },
   header: {
    // marginBottom: 20,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: -60,
-    marginTop:-70,
-    paddingLeft:50,
-    paddingRight:50,
+    justifyContent: 'center',
+    paddingLeft:15,
+    paddingRight:15,
+    gap: 30
   },
   image: {
-    width: 100,
-    height: 250,
+    width: 200,
+    height: 200,
     marginRight: 10,
   },
   title: {
@@ -97,17 +111,36 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
-  nextButton: {
-    margin: 60,
+  nextbutton: {
     backgroundColor: '#7265E3',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  nextButtonText: {
+  nextbuttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
+  backbutton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backbuttonText: {
+    color: '#7265E3',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
+  }
 });
 
 export default CalculateCalories;

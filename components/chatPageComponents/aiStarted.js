@@ -24,13 +24,15 @@ const styles = StyleSheet.create({
     width: 200,
     height: 300,
     marginBottom: 20,
+    resizeMode: 'contain'
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 20,
     marginHorizontal: 50,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Helvetica Neue',
   },
   button: {
     backgroundColor: '#FF934E',

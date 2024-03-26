@@ -2,25 +2,32 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
-
+import Height from '../preferencesComponents/Height';
 const SelectHeight = () => {
   const startHeight = 140;
-     const endHeight = 300;
+  const endHeight = 300;
   const navigation = useNavigation();
   const route = useRoute();
   const { dataToSend } = route.params;
-  const [selectedHeight, setSelectedHeight] = useState(140);
+  const [selectedHeight, setSelectedHeight] = useState('');
 
   const getHeightOptions = () => {
     return Array.from({ length: endHeight - startHeight + 1 }, (_, index) =>
       String(index + startHeight)
     );
   };
+
+  const callHeight = (height, unit) =>{
+    setSelectedHeight(`${height} ${unit}`);
+  }
+
   const handleNext = () => {
-    dataToSend.height = selectedHeight;
-    navigation.navigate('SelectWeight', {
-      dataToSend
-    });
+    if (selectedHeight) {
+      dataToSend.height = selectedHeight;
+      navigation.navigate('SelectWeight', {
+        dataToSend
+      });
+    }
   };
 
   return (
@@ -33,7 +40,8 @@ const SelectHeight = () => {
         />
         <Text style={styles.title}>Let's confirm your height, edit if it's incorrect</Text>
       </View>
-      <View style={styles.pickerContainer}>
+      <Height isForAi={true} getHeight={callHeight}/>
+      {/* <View style={styles.pickerContainer}>
         <Picker
           style={{ width: 200, height: 150 }}
           selectedValue={selectedHeight}
@@ -44,10 +52,21 @@ const SelectHeight = () => {
             <Picker.Item label={option} value={option} key={option} />           
             ))}
         </Picker>
+      </View> */}
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 30, marginTop: 10, paddingBottom: 80}}>
+          <TouchableOpacity
+          style={styles.backbutton}
+          onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backbuttonText}>Go Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.nextbutton}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextbuttonText}>Next</Text>
+          </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -58,12 +77,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: -60,
+    marginTop: 20,
     paddingLeft:50,
     paddingRight:50,
   },
@@ -80,17 +99,36 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
     marginBottom: 70,
   },
-  nextButton: {
-    margin: 70,
+  nextbutton: {
     backgroundColor: '#7265E3',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  nextButtonText: {
+  nextbuttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
+  backbutton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backbuttonText: {
+    color: '#7265E3',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
+  }
 });
 
 export default SelectHeight;

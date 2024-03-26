@@ -31,25 +31,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     //flexDirection: 'column',
-    gap: 20,
+    gap: 30,
     height: '100%',
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
   },
   wrapper:{
     //backgroundColor: '#7265E31A',
     
   },
   button: {
-    marginBottom:200,
-    backgroundColor: '#FF934E',
+    marginBottom:150,
+    backgroundColor: '#7265E3',
     paddingVertical: 15,
     paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
   },
   buttonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
 })
  export default GetStarted;

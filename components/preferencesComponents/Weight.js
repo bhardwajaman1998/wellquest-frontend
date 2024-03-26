@@ -6,7 +6,7 @@ import ToggleButton from "./ToggleButton";
 import WheelPicker from "react-native-wheely";
 import AnimatedView from "../globalComponents/AnimatedView";
 
-const Weight = ({ backAction, nextCompName, onPressNext }) => {
+const Weight = ({ backAction, nextCompName, onPressNext, isForAi = false, getWeight  }) => {
   const startWeightKgs = 30;
   const endWeightKgs = 200;
   const startWeightLbs = Math.round(startWeightKgs * 2.20462); // Convert start weight to lbs
@@ -48,10 +48,16 @@ const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
   return (
     <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.heading}>What's your weight?</Text>
-        <Text style={styles.text}>
-          This helps us create your personalized plan
-        </Text>
+        {isForAi ? (
+          <></>
+        ) : (
+          <>
+            <Text style={styles.heading}>What's your weight?</Text>
+            <Text style={styles.text}>
+              This helps us create your personalized plan
+            </Text>
+          </>
+        )}
         <ToggleButton
           labels={["Kg", "Lb"]}
           onChange={(selectedButton) => {
@@ -64,8 +70,12 @@ const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
           <WheelPicker
             selectedIndex={selectedIndex}
             options={weightKgs}
-            onChange={(index) => setSelectedWeight(weightKgs[index])
-            }
+            onChange={(index) => {
+              setSelectedWeight(weightKgs[index])
+              if (isForAi) {
+                getWeight(weightKgs[index], 'Kg')
+              }
+            }}
             itemTextStyle={{
               color: "black", 
               fontFamily: 'Helvetica Neue',
@@ -97,7 +107,12 @@ const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
             <WheelPicker
             selectedIndex={selectedIndex}
             options={weightLbs}
-            onChange={(index) => setSelectedWeight(weightLbs[index])}
+            onChange={(index) => {
+              setSelectedWeight(weightLbs[index])
+              if (isForAi) {
+                getWeight(weightLbs[index], 'Lb')
+              }
+            }}
             itemTextStyle={{
               color: "black", 
               fontFamily: 'Helvetica Neue',
@@ -127,15 +142,19 @@ const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
         
         </View>
       </View>
-      <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction} />
-        <NextButton
-          nextCompName={nextCompName}
-          onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
-          selectedWeight={selectedWeight}
-          selectedWeightUnit={selectedWeightUnit}
-        />
-      </View>
+      {isForAi ? (
+        <></>
+      ) : (
+        <View style={styles.buttonsContainer}>
+          <BackButton backAction={backAction} />
+          <NextButton
+            nextCompName={nextCompName}
+            onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
+            selectedWeight={selectedWeight}
+            selectedWeightUnit={selectedWeightUnit}
+          />
+        </View>
+      )}
     </AnimatedView>
   );
 };
@@ -146,7 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: 36,
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FBF9F6",
     padding: 20,
   },
   innerContainer: {

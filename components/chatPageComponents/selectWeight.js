@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
+import Weight from '../preferencesComponents/Weight';
 
 const SelectWeight = () => {
 
@@ -17,14 +18,24 @@ const SelectWeight = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { dataToSend } = route.params;
-  const [selectedWeight, setSelectedWeight] = useState(30);
+  const [selectedWeight, setSelectedWeight] = useState('');
+
+  const callWeight = (weight, unit) =>{
+    setSelectedWeight(`${weight} ${unit}`);
+  }
+
 
   const handleNext = () => {
-    dataToSend.weight = selectedWeight
-    navigation.navigate('CalculateCalories', {
-      dataToSend
-    });
+    if (selectedWeight) {
+      dataToSend.weight = selectedWeight;
+      console.log(selectedWeight)
+      navigation.navigate('CalculateCalories', {
+        dataToSend
+      });
+    }
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -36,7 +47,9 @@ const SelectWeight = () => {
         />
         <Text style={styles.title}>Let's confirm your current weight</Text>
       </View>
-      <View style={styles.pickerContainer}>
+      <Weight isForAi={true} getWeight={callWeight}/>
+
+      {/* <View style={styles.pickerContainer}>
         <Picker
           style={{ width: 200, height: 150 }}
           selectedValue={selectedWeight}
@@ -47,10 +60,21 @@ const SelectWeight = () => {
           ))}
           
         </Picker>
+      </View> */}
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 30, marginTop: 10, paddingBottom: 80}}>
+          <TouchableOpacity
+          style={styles.backbutton}
+          onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backbuttonText}>Go Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.nextbutton}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextbuttonText}>Next</Text>
+          </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -61,12 +85,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: -60,
+    marginTop: 20,
     paddingLeft:50,
     paddingRight:50,
   },
@@ -83,17 +108,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 70,
   },
-  nextButton: {
-    margin: 70,
+  nextbutton: {
     backgroundColor: '#7265E3',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  nextButtonText: {
+  nextbuttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
+  backbutton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backbuttonText: {
+    color: '#7265E3',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
+  }
 });
 
 export default SelectWeight;

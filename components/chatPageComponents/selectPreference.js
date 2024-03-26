@@ -14,6 +14,10 @@ const SelectPreference = () => {
     navigation.navigate('PlanPage', { dataToSend });
   };
 
+  const handleNext = () => {
+
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -37,12 +41,20 @@ const SelectPreference = () => {
         <TouchableOpacity style={styles.button} onPress={() => handlePreferenceSelection('vegan')}>
           <Text style={styles.buttonText}>Vegan</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-         style={styles.nextbutton}
-        onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
-       >
-         <Text style={styles.nextbuttonText}>Next</Text>
-       </TouchableOpacity>
+        <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 30, marginTop: 60, paddingBottom: 80}}>
+          <TouchableOpacity
+          style={styles.backbutton}
+          onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backbuttonText}>Go Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.nextbutton}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextbuttonText}>Next</Text>
+          </TouchableOpacity>
+      </View>
       </View>
       
     </View>
@@ -55,24 +67,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-    
-    paddingLeft:40,
-    paddingRight:40,
-  },
+     marginTop: 60,
+     flexDirection: 'column',
+     alignItems: 'center',
+     justifyContent: 'center',
+     paddingLeft:15,
+     paddingRight:15,
+     gap: 30
+   },
   image: {
-    width: 100,
-    height: 100,
-    marginRight: 5,
+    width: 150,
+    height: 150,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20
   },
   buttonsContainer: {
     flexDirection: 'column',
@@ -81,34 +94,55 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'white',
+    borderColor: '#7265E3',
+    borderWidth: 1,
     width: 250,
-    height: 60,
+    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
-    marginVertical: 20,
-    elevation: 4,
+    borderRadius: 10,
+    marginVertical: 10,
+    elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   buttonText: {
     color: '#7265E3',
+    fontFamily: 'Helvetica Neue',
     fontSize: 18,
   },
   nextbutton: {
-    margin:50,
     backgroundColor: '#7265E3',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   nextbuttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
+  backbutton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    borderRadius: 25,
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  backbuttonText: {
+    color: '#7265E3',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
+  }
 });
 
 export default SelectPreference;

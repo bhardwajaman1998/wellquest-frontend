@@ -16,22 +16,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    //backgroundColor: '#7265E31A',
   },
   image: {
     width: 200,
     height: 300,
     marginBottom: 20,
+    resizeMode: 'contain'
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 20,
     marginHorizontal: 50,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Helvetica Neue',
   },
   button: {
-    backgroundColor: '#FF934E',
+    backgroundColor: '#7265E3',
     paddingVertical: 15,
     paddingHorizontal: 60,
     borderRadius: 20,

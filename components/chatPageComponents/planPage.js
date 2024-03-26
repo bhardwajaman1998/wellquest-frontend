@@ -15,6 +15,10 @@ const PlanPage = () => {
     navigation.navigate('AiOptions', { dataToSend });
   };
 
+  const handleNext = () => {
+
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -56,13 +60,29 @@ const PlanPage = () => {
           <Text style={styles.cardTitle}>Dinner</Text>
         </TouchableOpacity>
       </View>
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 10, marginTop: 30, paddingBottom: 80}}>
+          <TouchableOpacity
+          style={styles.backbutton}
+          onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.backbuttonText}>TRY AGAIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.nextbutton}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextbuttonText}>I''ll TAKE IT</Text>
+          </TouchableOpacity>
+      </View>
 
-      <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('AiOptions')}>
+
+
+      {/* <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('AiOptions')}>
         <Text style={styles.nextButtonText}>I WILL TAKE IT</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tryButton} onPress={() => navigation.navigate('AiOptions')}>
         <Text style={styles.tryButtonText}>TRY AGAIN</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -73,40 +93,53 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#7265E31A',
+    backgroundColor: '#FBF9F6',
+    gap: 30
   },
   header: {
-    flexDirection: 'row',
+    marginTop: 10,
+    flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 20,
-    paddingLeft:40,
-    paddingRight:40,
+    justifyContent: 'center',
+    paddingLeft:15,
+    paddingRight:15,
+    gap: 30
   },
-  image: {
-    width: 100,
-    height: 100,
-    marginRight: 5,
-  },
+ image: {
+   width: 150,
+   height: 150,
+ },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center'
   },
   cardContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 0,
+    marginTop: 30,
     width: '100%',
+    backgroundColor: '#FBF9F6'
   },
   card: {
     width: '30%',
     backgroundColor: 'white',
     borderRadius: 8,
-    overflow: 'hidden',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
   },
   cardImage: {
     width: '100%',
     height: 100,
+    resizeMode: 'contain'
   },
   cardTitle: {
     fontSize: 18,
@@ -114,28 +147,36 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#7265E3',
   },
-  nextButton: {
-    margin:20,
+  nextbutton: {
     backgroundColor: '#7265E3',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+    borderRadius: 25,
+    width: 170,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  nextButtonText: {
+  nextbuttonText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
   },
-  tryButton: {
-    margin:20,
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 15,
-    paddingHorizontal: 60,
-    borderRadius: 20,
+  backbutton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#7265E3',
+    borderRadius: 25,
+    width: 170,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  tryButtonText: {
-    color: '#172935',
-    fontSize: 20,
-  },
+  backbuttonText: {
+    color: '#7265E3',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica Neue',
+  }
 });
 
 export default PlanPage;
