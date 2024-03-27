@@ -41,7 +41,7 @@ const ChooseGoal = () => {
        <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 30, marginTop: 10}}>
           <TouchableOpacity
           style={styles.backbutton}
-          onPress={() => navigation.navigate('SelectHeight', { name: 'SelectHeight' })}
+          onPress={() => navigation.goBack()}
         >
           <Text style={styles.backbuttonText}>Go Back</Text>
         </TouchableOpacity>

@@ -25,6 +25,7 @@
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.17",
     "@react-navigation/stack": "^6.3.21",
+    "@rneui/themed": "^4.0.0-rc.8",
     "@shopify/flash-list": "^1.6.3",
     "axios": "^1.6.7",
     "eslint-plugin-react-native": "^4.1.0",

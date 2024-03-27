@@ -1,6 +1,10 @@
-import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+import { BottomSheet, Button, ListItem } from '@rneui/themed';
+import LoadingScreen from './LoadingScreen';
 
 const PlanPage = () => {
   const navigation = useNavigation();
@@ -9,17 +13,127 @@ const PlanPage = () => {
 
   const { dataToSend } = route.params;
 
-  const handleMealSelection = (mealType) => {
+  const [breakfast, setBreakfast] = useState()
+  const [lunch, setLunch] = useState()
+  const [dinner, setDinner] = useState()
 
-    dataToSend.mealType  = mealType;
-    navigation.navigate('AiOptions', { dataToSend });
+  const [mealSuggestions, setMealSuggestions] = useState([]);
+
+  const [selectedMeal, setSelectedMeal] = useState(null);
+
+  const [mealType, setMealType] = useState('Breakfast')
+
+  const [loading, setLoading] = useState(false)
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleMealSelection = () => {
+      saveMeal()
   };
 
-  const handleNext = () => {
+  const saveMeal = async () => {
+    try {
+        const mealData = {
+            cust_id: '65cc353cb9be345699d6a69a',
+            meals:{
+              breakfast: breakfast,
+              lunch: lunch,
+              dinner: dinner
+            }
+        };
+        const response = await axios.post('http://localhost:3000/api/customer/make_meal_plan', mealData);
+        if (response.status == 200){
+          goToInitialScreen()
+        }
+    } catch (error) {
+        console.error('Error logging meal:', error);
+    }
+};
 
+  useEffect(() => {
+    setLoading(false);
+    fetchMealSuggestions(dataToSend)
+        .then((suggestions) => {
+          // console.log(suggestions.length)
+          //   if (suggestions.length > 0) {
+          //       setLoading(false);
+          //       console.log(suggestions.breakfast)
+          //       setBreakfast(suggestions.breakfast);
+          //       setLunch(suggestions.lunch);
+          //       setDinner(suggestions.dinner);
+          //       setMealSuggestions(suggestions);
+          //   } else {
+          //       console.error('Error: Invalid meal suggestions format');
+          //   }
+        }
+        )
+        .catch((error) => console.error('Error fetching meal suggestions:', error));
+}, []);
+
+
+  const fetchMealSuggestions = async (dataToSend) => {
+ 
+    try {
+      const apiKey = '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';
+      const apiUrl = 'https://api.openai.com/v1/chat/completions';
+  
+      const prompt = `Fetch me 1 meal options for each breakfast lunch and dinner for a person who is ${dataToSend.height} tall, weighs ${dataToSend.weight} and whose goal is to ${dataToSend.goal} and his meal preference is ${dataToSend.preference} Fetch in the exact JSON format given:
+      {
+        breakfast: {name: recipe name, description: recipe, calories: calories},
+        lunch: {name: recipe name, description: recipe, calories: calories},
+        dinner: {name: recipe name, description: recipe, calories: calories}
+      }
+      `;
+      const requestBody = {
+        model: 'gpt-3.5-turbo-0125',
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        max_tokens: 1000,
+      };
+  
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      });
+      
+      const data = await response.data;
+
+      if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
+        return null;
+      }
+    
+      const content = data.choices[0].message.content;
+      const parsedContent = JSON.parse(content);
+      console.log('parsedContent', parsedContent);
+        // const nutritionalInfo = response.data.choices[0].message;
+        // // const jsonString = JSON.stringify(nutritionalInfo)
+        // // const jsonData = JSON.parse(jsonString);
+        
+        // const d = JSON.parse(JSON.stringify(nutritionalInfo))
+        // console.log(JSON.parse(d["content"]));
+        // const relevantData = JSON.parse(JSON.stringify(nutritionalInfo.choices[0].message.content));
+        // return relevantDa
+    } catch (error) {
+      console.error('Error fetching meal suggestions:', error);
+      return [];
+    }
+  };
+
+  const goToInitialScreen = () => {
+    navigation.navigate("Dashboard", { screen: "Back" })
   }
 
   return (
+    <>
+    {loading ? (
+      <LoadingScreen />
+    ) : (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
@@ -27,12 +141,17 @@ const PlanPage = () => {
           style={styles.image}
           resizeMode="contain"
         />
-        <Text style={styles.title}>Here is your plan according to your goals</Text>
+        <Text style={styles.title}>Here is your meal plan according to your goals</Text>
       </View>
 
       <View style={styles.cardContainer}>
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Breakfast')}
->
+        <TouchableOpacity style={styles.card}
+         onPress={() => {
+            setSelectedMeal(breakfast)
+            setMealType('Breakfast')
+            console.log(breakfast)
+            setIsVisible(true)
+          }}>
           <Image
             source={require('../../assets/breakfast.png')}
             style={styles.cardImage}
@@ -42,7 +161,12 @@ const PlanPage = () => {
 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Lunch')}>
+        <TouchableOpacity style={styles.card}
+         onPress={() => {
+            setSelectedMeal(lunch)
+            setMealType('Lunch')
+            setIsVisible(true)
+          }}>          
           <Image
             source={require('../../assets/lunch.png')}
             style={styles.cardImage}
@@ -51,7 +175,12 @@ const PlanPage = () => {
           <Text style={styles.cardTitle}>Lunch</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => handleMealSelection('Dinner')}>
+        <TouchableOpacity style={styles.card}
+         onPress={() => {
+            setSelectedMeal(dinner)
+            setMealType('Dinner')
+            setIsVisible(true)
+          }}>          
           <Image
             source={require('../../assets/dinner.png')}
             style={styles.cardImage}
@@ -63,27 +192,45 @@ const PlanPage = () => {
       <View style={{flexDirection: 'row', justifyContent: 'center', alignContent: 'center', width: '100%', gap: 10, marginTop: 30, paddingBottom: 80}}>
           <TouchableOpacity
           style={styles.backbutton}
-          onPress={() => navigation.goBack()}
-          >
+          onPress={goToInitialScreen}>
             <Text style={styles.backbuttonText}>TRY AGAIN</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.nextbutton}
-            onPress={handleNext}
+            onPress={handleMealSelection}
           >
             <Text style={styles.nextbuttonText}>I''ll TAKE IT</Text>
           </TouchableOpacity>
       </View>
-
-
-
-      {/* <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('AiOptions')}>
-        <Text style={styles.nextButtonText}>I WILL TAKE IT</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.tryButton} onPress={() => navigation.navigate('AiOptions')}>
-        <Text style={styles.tryButtonText}>TRY AGAIN</Text>
-      </TouchableOpacity> */}
+      {selectedMeal != null ? (
+          <BottomSheet modalProps={{}} isVisible={isVisible}>
+            <View style={styles.bottomViewContainer}>
+              <View style={styles.bottomTextContainer}>
+                <Text style={styles.bottomTitle}>{selectedMeal.name}</Text>
+                <View style={{gap: 5}}>
+                  <Text style={styles.bottomDescriptionTitle}>Type:</Text>
+                  <Text style={styles.bottomCalorie}>{mealType}</Text>
+                </View>
+                <View style={{gap: 5}}>
+                  <Text style={styles.bottomDescriptionTitle}>Description:</Text>
+                  <Text style={styles.bottomDescription}>{selectedMeal.description}</Text>
+                </View>
+                <View style={{gap: 5}}>
+                  <Text style={styles.bottomDescriptionTitle}>Kcal:</Text>
+                  <Text style={styles.bottomCalorie}>{selectedMeal.calories}</Text>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.bottomCancelConatiner} onPress={() => setIsVisible(false)}>
+                  <Text style={styles.bottomCancelText}>Got It!</Text>
+              </TouchableOpacity>
+            </View>
+          </BottomSheet>
+      ) : (
+        <></>
+      )}
     </View>
+    )}
+    </>
   );
 };
 
@@ -176,7 +323,56 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     fontFamily: 'Helvetica Neue',
-  }
+  },
+  bottomViewContainer:{
+    backgroundColor: 'white',
+    padding: 30,
+    borderTopEndRadius: 30,
+    borderTopStartRadius: 30
+  },
+  bottomTextContainer: {
+    gap: 20
+  },
+  bottomCancelConatiner:{
+    backgroundColor: 'blue',
+    margin: 30,
+    borderRadius: 20,
+    width: '50%',
+    height: 40,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomCancelText:{
+    fontSize: 20,
+    textAlign: 'left',
+    fontFamily: 'Helvetica Neue',
+    color: 'white'
+  },
+  bottomTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'Helvetica Neue',
+
+  },
+  bottomDescriptionTitle: {
+    fontSize: 18,
+    textAlign: 'left',
+    fontFamily: 'Helvetica Neue',
+  },
+  bottomDescription: {
+    fontSize: 16,
+    textAlign: 'left',
+    fontFamily: 'Helvetica Neue',
+    color: 'grey'
+  },
+  bottomCalorie: {
+    fontSize: 16,
+    textAlign: 'left',
+    fontFamily: 'Helvetica Neue',
+    color: 'grey'
+  },
 });
 
 export default PlanPage;

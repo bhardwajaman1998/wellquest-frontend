@@ -60,18 +60,18 @@ const AiOptions = () => {
   const [mealSuggestions, setMealSuggestions] = useState([]);
   
 
-  useEffect(() => {
-    console.log(dataToSend)
-    fetchMealSuggestions(dataToSend)
-      .then((suggestions) => {
-        const suggestionsWithType = suggestions.map((item) => {
-          return { ...item, type: dataToSend.mealType };
-        });
-        setMealSuggestions(suggestionsWithType)
-        console.log('Meal suggestions:', suggestionsWithType);
-      })
-      .catch((error) => console.error('Error:', error));
-  }, []);
+  // useEffect(() => {
+  //   console.log(dataToSend)
+  //   fetchMealSuggestions(dataToSend)
+  //     .then((suggestions) => {
+  //       const suggestionsWithType = suggestions.map((item) => {
+  //         return { ...item, type: dataToSend.mealType };
+  //       });
+  //       setMealSuggestions(suggestionsWithType)
+  //       console.log('Meal suggestions:', suggestionsWithType);
+  //     })
+  //     .catch((error) => console.error('Error:', error));
+  // }, []);
 
 const saveMeal = async () => {
     try {
