@@ -1,7 +1,7 @@
 // ScheduleScreen.js
 
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Alert, FlatList, TouchableOpacity, Text, Image } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, TouchableOpacity, Text, Image, TextStyle } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 import TimeSlotButton from './TimeSlotButton'; 
@@ -123,7 +123,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                 onDayPress={handleDayPress} 
                 markingType={'dot'}
                 markedDates={{
-                    [selectedDate]: { selected: true, selectedColor: '#7265E3' }
+                    [selectedDate]: { selected: true}
                 }}
                 minDate={moment().format("YYYY-MM-DD")} // user will not be able to select the past days
                 style={styles.calendar}
@@ -132,18 +132,24 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                     calendarBackground: '#ffffff',
                     textSectionTitleColor: '#000000', 
                     selectedDayBackgroundColor: '#7265E3',
-                    selectedDayTextColor: '#000',
-                    todayTextColor: '#00adf5',
-                    dayTextColor: '#2d4150', 
-                    textDisabledColor: '#808080', 
+                    selectedDayTextColor: '#fff',
+                    todayTextColor: 'blue',
+                    dayTextColor: 'black',
+                    textDisabledColor: 'grey', 
+                    textDayFontFamily: 'Helvetica Neue',
+                    textMonthFontFamily: 'Helvetica Neue',
+                    textDayHeaderFontFamily: 'Helvetica Neue',
+                    textDayFontWeight: 'bold',
+                    textMonthFontWeight: 'bold',
+                    textDayHeaderFontWeight: 'bold'
                 }}
             />
 
+                <View style={styles.shadowView}></View>
 
-
-                {!isDateSelected && <Text>Select the date to see available slots!</Text>}
-
-                <FlatList
+                {!isDateSelected && <Text style={{marginBottom:20}}>Select the date to see available slots!</Text>}
+                {isDateSelected && <>
+                    <FlatList
                     data={availableTimeSlots}
                     numColumns={1}
                     renderItem={({ item }) => (
@@ -156,7 +162,6 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={styles.timeSlotContainer}
                 />
-
                 {/* Schedule and Cancel Buttons */}
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
@@ -164,15 +169,16 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                         onPress={handleSchedule}
                         disabled={!selectedSlot}
                     >
-                        <Text style={styles.buttonText}>Schedule</Text>
+                        <Text style={styles.submitButtonText}>SCHEDULE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.button, styles.cancelBtn]}
                         onPress={onClose}
                     >
-                        <Text style={styles.buttonText}>Cancel</Text>
+                        <Text style={styles.buttonText}>CANCEL</Text>
                     </TouchableOpacity>
                 </View>
+                </>}
             </View>
 
             {showOverlay && <ConfirmationWindow onClose={handleCloseOverlay} onConfirm={handleConfirmation} />}
@@ -196,22 +202,44 @@ const styles = StyleSheet.create({
     calendar: {
         width: '100%',
         marginBottom: 20,
-        
     },
+    shadowView:{
+        height: 30,
+        width: '100%',
+        backgroundColor: '#fff',
+        borderBottomEndRadius: 20,
+        borderBottomStartRadius: 20, 
+        shadowColor: 'grey',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+        elevation: 5,
+        marginTop: -30,
+        marginBottom: 20
+      },
     timeSlotContainer: {
-        flexDirection: 'column',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        padding: 5,
     },
     buttonContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
+        gap: 10,
         marginVertical: 10,
     },
     button: {
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderRadius: 5,
+        borderRadius: 20,
         marginHorizontal: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '50%'
     },
     submitBtn: {
         backgroundColor: '#7265E3',
@@ -223,6 +251,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#000',
+        fontSize: 16,
+    },
+    submitButtonText: {
+        color: '#fff',
         fontSize: 16,
     },
 });
