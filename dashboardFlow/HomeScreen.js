@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text, StyleSheet, SafeAreaView, ScrollView, navigation} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
 import AppointmentCard from '../components/dashboardComponents/Components/HomeScreen/AppointmentCard';
 import NutritionPlanCard from '../components/dashboardComponents/Components/HomeScreen/NutritionPlanCard';
 import GoalCard from '../components/dashboardComponents/Components/HomeScreen/GoalCard';
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from '@react-navigation/native';
+import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import axios from 'axios';
 import Target_Card from './Target_Card';
 
@@ -19,6 +20,10 @@ const HomeScreen= ({ route })=>{
     const [greeting, setGreeting] = useState('');
     const [update, setUpdate] = useState(false)
     const [appointments, setAppointments] = useState([]);
+    const [selectedMeal, setSelectedMeal] = useState(null);
+    const [mealType, setMealType] = useState('Breakfast')
+    const [meals, setMeals] = useState(null)
+    const [isVisible, setBottomVisible] = useState(false);
 
     useEffect(()=>{
         if (isFocused) {
@@ -29,9 +34,12 @@ const HomeScreen= ({ route })=>{
     const fetchUserData = async () =>{
         try{
             const response = await  axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a');
-            console.log(response.data);
-            setUserName(response.data);
-            setCalorieLimit(response.data.dailyCalories)
+            console.log(response.data.customerData);
+            setUserName(response.data.customerData);
+            setCalorieLimit(response.data.customerData.dailyCalories)
+            if(response.data.newMealPlan){
+                setMeals(response.data.newMealPlan.meals)
+            }
             updateGreeting();
             setUpdate(true)
             fetchCurrentCalIntake()
@@ -92,6 +100,15 @@ const HomeScreen= ({ route })=>{
         console.log(greeting);
     };
 
+    const handleMealSelection = (meal, type) => {
+        setSelectedMeal(meal);
+        setMealType(type);
+    }
+
+    const handleBottomView = (visible) => {
+        setBottomVisible(visible);
+    }
+
     return(
         <SafeAreaView style={styles.safeArea}>
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false} bounces={false}>
@@ -105,11 +122,43 @@ const HomeScreen= ({ route })=>{
                     
                     <AppointmentCard  appointments={appointments}/>
                     
-                    <NutritionPlanCard />
+                    <NutritionPlanCard meals={meals} selectMeal={handleMealSelection} showBottomView={handleBottomView}/>
 
                     <View style={{height:30}}></View>
 
+                    {selectedMeal != null ? (
+                        <BottomSheet modalProps={{}} isVisible={isVisible}>
+                            <View style={styles.bottomViewContainer}>
+                            <View style={styles.bottomTextContainer}>
+                                <Text style={styles.bottomTitle}>{selectedMeal.name}</Text>
+                                <View style={{gap: 5}}>
+                                <Text style={styles.bottomDescriptionTitle}>Type:</Text>
+                                <Text style={styles.bottomCalorie}>{mealType}</Text>
+                                </View>
+                                <View style={{gap: 5}}>
+                                <Text style={styles.bottomDescriptionTitle}>Description:</Text>
+                                <Text style={styles.bottomDescription}>{selectedMeal.description}</Text>
+                                </View>
+                                <View style={{gap: 5}}>
+                                <Text style={styles.bottomDescriptionTitle}>Kcal:</Text>
+                                <Text style={styles.bottomCalorie}>{selectedMeal.calories}</Text>
+                                </View>
+                            </View>
+                            <TouchableOpacity style={styles.bottomCancelConatiner} onPress={() => {
+                                    setBottomVisible(false)
+                                    setSelectedMeal(null)
+                                }}
+                            >
+                                <Text style={styles.bottomCancelText}>Got It!</Text>
+                            </TouchableOpacity>
+                            </View>
+                        </BottomSheet>
+                    ) : (
+                        <></>
+                    )}
+
                 </View>
+                <View style={{height: 30}}></View>
             </ScrollView>
 
         </SafeAreaView>
@@ -124,7 +173,7 @@ const styles = StyleSheet.create({
     container: {
         // flex: 1,
         backgroundColor: 'rgba(246, 242, 237, 0.5)',
-        marginBottom: 60
+        marginBottom: 50
     },
     innerContainer: {
         gap: 0
@@ -140,7 +189,56 @@ const styles = StyleSheet.create({
         marginHorizontal:20,
         color:'#7265E3',
         fontFamily: 'Helvetica Neue',
-    }
+    },
+    bottomViewContainer:{
+        backgroundColor: 'white',
+        padding: 30,
+        borderTopEndRadius: 30,
+        borderTopStartRadius: 30
+      },
+      bottomTextContainer: {
+        gap: 20
+      },
+      bottomCancelConatiner:{
+        backgroundColor: 'blue',
+        margin: 30,
+        borderRadius: 20,
+        width: '50%',
+        height: 40,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      bottomCancelText:{
+        fontSize: 20,
+        textAlign: 'left',
+        fontFamily: 'Helvetica Neue',
+        color: 'white'
+      },
+      bottomTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontFamily: 'Helvetica Neue',
+    
+      },
+      bottomDescriptionTitle: {
+        fontSize: 18,
+        textAlign: 'left',
+        fontFamily: 'Helvetica Neue',
+      },
+      bottomDescription: {
+        fontSize: 16,
+        textAlign: 'left',
+        fontFamily: 'Helvetica Neue',
+        color: 'grey'
+      },
+      bottomCalorie: {
+        fontSize: 16,
+        textAlign: 'left',
+        fontFamily: 'Helvetica Neue',
+        color: 'grey'
+      },
 });
 
 export default HomeScreen;

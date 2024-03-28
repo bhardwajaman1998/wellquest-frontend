@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 30,
     marginLeft: 25,
-    marginBottom: 0, 
+    marginBottom: 10, 
     justifyContent: 'space-between',
   },
   heading: {

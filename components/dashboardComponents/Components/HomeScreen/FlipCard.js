@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginLeft:0,
   },
-  image: {
+  cardImage: {
     marginTop: 5,
-    width: 25,
-    height: 25,
+    width: 35,
+    height: 35,
     resizeMode: 'contain'
   },
 });

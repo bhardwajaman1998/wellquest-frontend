@@ -74,7 +74,7 @@ const GoalCard = ({update, calorieLimit, calConsumed, remianingCalories}) => {
                     <FlipCard isForIntake={true} titleText={`Daily caloric goal`} descriptionText={`Eat upto ${parseInt(calorieLimit)} calories`} rotate={rotate}/>
                 </Animated.View>
                 <Animated.View style={[styles.backCard,backAnimatedStyles]}>
-                    <FlipCard isForIntake={true} titleText={`Today's caloric intake`} descriptionText={`Today's eaten kcal ${parseInt(calConsumed)}`} rotate={rotate}/>
+                    <FlipCard isForIntake={false} titleText={`Today's caloric intake`} descriptionText={`Today's eaten kcal ${parseInt(calConsumed)}`} rotate={rotate}/>
                 </Animated.View>
                     {/* <View style={styles.group}>
                         <Text style={styles.text}>Intake goal</Text>
