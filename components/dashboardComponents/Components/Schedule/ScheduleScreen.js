@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderBottomEndRadius: 20,
         borderBottomStartRadius: 20, 
-        shadowColor: 'grey',
+        shadowColor: '#7265E3',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.4,
         shadowRadius: 3,

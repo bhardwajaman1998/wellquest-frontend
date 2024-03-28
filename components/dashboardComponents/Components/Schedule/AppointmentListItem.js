@@ -67,19 +67,15 @@ margin:20,
     marginBottom: 0,
     borderLeftColor: "#7265E3",
     borderLeftWidth: 5,
-    position: 'relative',
-    ...Platform.select({
-      ios: {
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.23,
-          shadowRadius: 2,
-      },
-      android: {
-          elevation: 4,
-      },
-  }),
-  borderRadius: 8,
+    elevation: 5, // For Android shadow
+    shadowColor: '#7265E3', // For iOS shadow
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.65,
+    shadowRadius: 3.84,
+    borderRadius: 8,
   },
   header: {
     flexDirection: 'row',

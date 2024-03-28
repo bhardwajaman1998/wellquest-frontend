@@ -94,10 +94,10 @@ const HomeScreen= ({ route })=>{
 
     return(
         <SafeAreaView style={styles.safeArea}>
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false} bounces={false}>
                 <View style={styles.innerContainer}>
 
-                    <Text style={styles.userNameText}>{greeting} , {userName.name}</Text>
+                    <Text style={styles.userNameText}>{greeting}, {userName.name.split(" ")[0]}</Text>
 
                     <GoalCard update={update} calorieLimit={calorieLimit} calConsumed={completedCalories} remianingCalories={remainingCalories}/>
 
@@ -119,11 +119,11 @@ const HomeScreen= ({ route })=>{
 const styles = StyleSheet.create({
     safeArea: {
         // flex: 1,
-        backgroundColor: '#F6F2ED', 
+        backgroundColor: 'rgba(246, 242, 237, 0.5)', 
     },
     container: {
         // flex: 1,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: 'rgba(246, 242, 237, 0.5)',
         marginBottom: 60
     },
     innerContainer: {
@@ -136,9 +136,10 @@ const styles = StyleSheet.create({
     userNameText:{
         fontSize:24,
         fontWeight:'bold',
-        marginTop:30,
+        marginTop:20,
         marginHorizontal:20,
         color:'#7265E3',
+        fontFamily: 'Helvetica Neue',
     }
 });
 

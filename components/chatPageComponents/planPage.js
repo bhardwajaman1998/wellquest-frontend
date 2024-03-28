@@ -13,9 +13,11 @@ const PlanPage = () => {
 
   const { dataToSend } = route.params;
 
-  const [breakfast, setBreakfast] = useState()
-  const [lunch, setLunch] = useState()
-  const [dinner, setDinner] = useState()
+  const [breakfast, setBreakfast] = useState({"calories": "500 calories", "description": "Whole grain toast topped with mashed avocado and fried eggs", "name": "Avocado Toast with Eggs"});
+
+  const [lunch, setLunch] = useState({"calories": "600 calories", "description": "Nutritious salad made with quinoa, roasted bell peppers, zucchini, and chickpeas", "name": "Quinoa Salad with Roasted Vegetables"});
+  
+  const [dinner, setDinner] = useState({"calories": "700 calories", "description": "Hearty chili made with beans, tomatoes, corn, and spices, topped with sliced avocado", "name": "Vegetarian Chili with Avocado"});
 
   const [mealSuggestions, setMealSuggestions] = useState([]);
 
@@ -50,25 +52,29 @@ const PlanPage = () => {
     }
 };
 
-  useEffect(() => {
-    setLoading(false);
-    fetchMealSuggestions(dataToSend)
-        .then((suggestions) => {
-          // console.log(suggestions.length)
-          //   if (suggestions.length > 0) {
-          //       setLoading(false);
-          //       console.log(suggestions.breakfast)
-          //       setBreakfast(suggestions.breakfast);
-          //       setLunch(suggestions.lunch);
-          //       setDinner(suggestions.dinner);
-          //       setMealSuggestions(suggestions);
-          //   } else {
-          //       console.error('Error: Invalid meal suggestions format');
-          //   }
-        }
-        )
-        .catch((error) => console.error('Error fetching meal suggestions:', error));
-}, []);
+//   useEffect(() => {
+//     setLoading(false);
+//     fetchMealSuggestions(dataToSend)
+//         .then((suggestions) => {
+//           console.log(suggestions)
+//             if (Array.isArray(suggestions) && suggestions.length > 0) {
+//                 setLoading(false);
+//                 suggestions.forEach(meal => {
+//                     if (meal.hasOwnProperty('breakfast')) {
+//                         setBreakfast(meal.breakfast);
+//                     } else if (meal.hasOwnProperty('lunch')) {
+//                         setLunch(meal.lunch);
+//                     } else if (meal.hasOwnProperty('dinner')) {
+//                         setDinner(meal.dinner);
+//                     }
+//                 });
+//                 setMealSuggestions(suggestions);
+//             } else {
+//                 console.error('Error: Invalid meal suggestions format');
+//             }
+//         })
+//         .catch((error) => console.error('Error fetching meal suggestions:', error));
+// }, []);
 
 
   const fetchMealSuggestions = async (dataToSend) => {
@@ -77,13 +83,12 @@ const PlanPage = () => {
       const apiKey = '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';
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
   
-      const prompt = `Fetch me 1 meal options for each breakfast lunch and dinner for a person who is ${dataToSend.height} tall, weighs ${dataToSend.weight} and whose goal is to ${dataToSend.goal} and his meal preference is ${dataToSend.preference} Fetch in the exact JSON format given:
-      {
-        breakfast: {name: recipe name, description: recipe, calories: calories},
+      const prompt = `Fetch me 1 meal options for each breakfast lunch and dinner for a person who is ${dataToSend.height} tall, weighs ${dataToSend.weight} and whose goal is to ${dataToSend.goal} and his meal preference is ${dataToSend.preference} Fetch in the exact JSON format given  below:
+      [breakfast: {name: recipe name, description: recipe, calories: calories},
         lunch: {name: recipe name, description: recipe, calories: calories},
         dinner: {name: recipe name, description: recipe, calories: calories}
-      }
-      `;
+      ]`;
+      console.log(prompt)
       const requestBody = {
         model: 'gpt-3.5-turbo-0125',
         messages: [
@@ -102,23 +107,13 @@ const PlanPage = () => {
         },
       });
       
-      const data = await response.data;
-
-      if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
-        return null;
+      if (response.status >= 200 && response.status < 300) {
+        const suggestions = response.data.choices[0].message.content;
+        console.log(JSON.parse(suggestions))
+        return JSON.parse(suggestions);
+      } else {
+        throw new Error('Failed to fetch meal suggestions');
       }
-    
-      const content = data.choices[0].message.content;
-      const parsedContent = JSON.parse(content);
-      console.log('parsedContent', parsedContent);
-        // const nutritionalInfo = response.data.choices[0].message;
-        // // const jsonString = JSON.stringify(nutritionalInfo)
-        // // const jsonData = JSON.parse(jsonString);
-        
-        // const d = JSON.parse(JSON.stringify(nutritionalInfo))
-        // console.log(JSON.parse(d["content"]));
-        // const relevantData = JSON.parse(JSON.stringify(nutritionalInfo.choices[0].message.content));
-        // return relevantDa
     } catch (error) {
       console.error('Error fetching meal suggestions:', error);
       return [];
@@ -149,7 +144,6 @@ const PlanPage = () => {
          onPress={() => {
             setSelectedMeal(breakfast)
             setMealType('Breakfast')
-            console.log(breakfast)
             setIsVisible(true)
           }}>
           <Image

@@ -1,33 +1,30 @@
 //This card is reuseable at DashBoard in appointment and nutrition cards when user is visting first time
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View,Image,Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function CustomCard({ text, buttonText, onPress, imageName, imgSize }) {
+import { Text, View, SafeAreaView, StyleSheet, Platform, Image } from 'react-native';
+
+export default function FlipCard({ isForIntake = false, titleText, descriptionText, rotate }) {
+
   return (
     <View style={styles.card}>
-      <Text style={styles.cardText}>{text}</Text>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Image style={styles.image} source={imageName} size={imgSize} />
-        <Text style={styles.buttonText}>{buttonText}</Text>
-      </TouchableOpacity>
+        <Image source={isForIntake ? (require('../../../../assets/intake-icon.png')) : (require('../../../../assets/consumption-icon.png'))} style={styles.cardImage} />
+        <Text style={styles.cardText}>{titleText}</Text>
+        <Text style={styles.cardTextDescription}>{descriptionText}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: 'auto',
+    width: 130,
     marginTop: 10,
-    marginLeft: 15,
-    marginRight: 15,
-    padding: 15,
-    borderLeftColor: '#7265E3',
-    borderLeftWidth: 5,
-    borderRadius: 10,
+    padding: 10,
+    borderRadius: 20,
     borderColor:'grey',
-    borderWidth:1,
+    borderWidth:0,
     backgroundColor:'#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 5, // For Android shadow
     shadowColor: '#7265E3', // For iOS shadow
     shadowOffset: {
@@ -38,7 +35,16 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   cardText: {
-    fontSize: 16,
+    fontSize: 14,
+    marginTop: 15,
+    textAlign: "center",
+    fontWeight: 'bold'
+  },
+  cardTextDescription:{
+    fontSize: 14,
+    marginTop: 10,
+    textAlign: "center",
+    color: 'grey'
   },
   button: {
     display:'flex',
@@ -58,10 +64,9 @@ const styles = StyleSheet.create({
     marginLeft:0,
   },
   image: {
-    marginLeft: 10,
-    resizeMode: 'contain',
+    marginTop: 5,
     width: 25,
-    height: 25
-    // marginRight:10,
+    height: 25,
+    resizeMode: 'contain'
   },
 });

@@ -33,11 +33,12 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         padding: 20,
+        marginHorizontal: 10,
     },
     header: {
-        marginTop: 20,
-        marginLeft: 25,
-        marginBottom: 0,
+        marginTop: 25,
+        marginLeft: 20,
+        marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },

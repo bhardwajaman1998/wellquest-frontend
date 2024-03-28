@@ -22,7 +22,7 @@ return(
             />
             <View style={styles.dataContainer}>
               <Text style={styles.containerHeading}>8L</Text>
-              <Text style={styles.ontainerSubHeading}>Water Intake</Text>
+              <Text style={styles.containerSubHeading}>Water Intake</Text>
             </View>
           </View>
           <View style={styles.targetContainer}>
@@ -37,7 +37,7 @@ return(
             />
             <View style={styles.dataContainer}>
               <Text style={styles.containerHeading}>2400</Text>
-              <Text style={styles.ontainerSubHeading}>Foot Steps</Text>
+              <Text style={styles.containerSubHeading}>Foot Steps</Text>
             </View>
           </View>
         </View>
@@ -48,8 +48,9 @@ return(
 const styles = StyleSheet.create({
 targertBox: {
     padding: 15,
-    margin: 15,
-    backgroundColor: "#FF934E66",
+    marginLeft: 15,
+    marginRight: 15,
+    backgroundColor: "rgba(114, 101, 227, 0.2)",
     borderRadius: 22,
     alignItems: "center",
   },
@@ -68,8 +69,11 @@ targertBox: {
 
   targertHeading: {
     fontSize: 18,
+    marginLeft: 10,
     textAlign: "left",
     alignSelf: "flex-start",
+    fontWeight:'bold',
+    fontFamily: 'Helvetica Neue',
   },
 
   targetComponentsContainer: {
@@ -78,12 +82,15 @@ targertBox: {
     width: "100%",
   },
   containerHeading: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: "left",
+    fontWeight:'bold',
+
   },
   containerSubHeading: {
-    fontSize: 10,
+    fontSize: 14,
     textAlign: "left",
+    color: 'grey'
   },
   dataContainer: {
     display: "flex",

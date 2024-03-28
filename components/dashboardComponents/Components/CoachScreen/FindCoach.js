@@ -54,14 +54,13 @@ export default function FindCoach() {
             
             <View style={styles.content}>
                 <View style={styles.searchSide}>        
-                <Text style={styles.header}>Find the best coaches for You..</Text>
-                
-                <CustomSearchBar
-                value={search}
-                onChangeText={updateSearch}
-                placeholder="Search for recommended coaches.."
-                />
-
+                    <Text style={styles.header}>Find the best coaches for You..</Text>
+                    
+                    <CustomSearchBar
+                        value={search}
+                        onChangeText={updateSearch}
+                        placeholder="ex. John Doe"
+                    />
                 </View>
 
                 <View style={styles.coachData}>
@@ -93,15 +92,19 @@ const styles = StyleSheet.create({
         // flex:1,
     },
     header:{
-        padding:5,
+        padding:0,
         flexDirection:'row',
         justifyContent:'space-between',
         margin:10,
-        fontSize:25,
+        marginTop: 30,
+        fontSize:16,
         fontWeight:'bold',
     },
     searchSide:{
         marginLeft:10,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        gap: -10
     },
     searchBarInputContainer: {
         backgroundColor: '#fff',
@@ -121,12 +124,13 @@ const styles = StyleSheet.create({
         margin:20,
     },
     recommendText:{
-        fontSize:20,
+        fontSize:16,
     },
     message: {
         textAlign: 'center',
-        fontSize: 20,
-        lineHeight:40,
+        fontSize: 16,
+        lineHeight:30,
         marginTop: 50,
+        marginHorizontal: 30
     }
 });

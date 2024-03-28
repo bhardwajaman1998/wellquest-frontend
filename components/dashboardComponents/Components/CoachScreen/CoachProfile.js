@@ -5,9 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ClickButtton from '../../../dashboardComponents/Common/ClickButtton';
 import ScheduleScreen from '../Schedule/ScheduleScreen';
 import { useNavigation } from '@react-navigation/native';
-import profileIcon from "../../../../assets/Maskgroup.png";
+import profileIcon from "../../../../assets/coach-icon.png";
 import scheduleIcon from "../../../../assets/find_coach.png";
-import messageIcon from "../../../../assets/Message_a_coach.png";
+import messageIcon from "../../../../assets/message-blue.png";
 import { useEffect } from 'react';
 import axios from 'axios';
 import { NativeBaseProvider } from 'native-base';
@@ -46,8 +46,6 @@ const CoachProfile = ({ route }) => {
     const imagePaths = [
         require('../../../../assets/gym2.png'),
         require('../../../../assets/gym3.png'),
-        
-        
       ];
     
       const renderItem = ({ item }) => (
@@ -73,7 +71,7 @@ const CoachProfile = ({ route }) => {
 
     return(
         <NativeBaseProvider style={styles.container}>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             {coachData && (
             <View style={styles.CoachShortBio}>
                 <View style={styles.CoachBio}>
@@ -107,8 +105,8 @@ const CoachProfile = ({ route }) => {
                                 <ClickButtton btntext="CONNECT" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
                             ) : (
                                 <>
-                                    <ClickButtton btntext="MESSAGE" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
-                                    <ClickButtton btntext="SCHEDULE" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
+                                    <ClickButtton btntext="Message" iconUrl={messageIcon} onPress={handleChat} style={styles.btnStyle} />
+                                    <ClickButtton btntext="Schedule" iconUrl={scheduleIcon} onPress={handleSchedule} style={styles.btnStyle} />
                                 </>
                         )}
                 </View>
@@ -119,14 +117,15 @@ const CoachProfile = ({ route }) => {
                     <>
                 <Text style={styles.headingText}>Active in the following gyms</Text>
                 <View style={styles.coachLinks}>  
-                <FlatList
-                ///figure out how to add images in mongodb and add it then here update teh line below by --->{ data={coachData.gyms}}
-                    data={imagePaths}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={renderItem}
-                />
+                    <FlatList
+                    ///figure out how to add images in mongodb and add it then here update teh line below by --->{ data={coachData.gyms}}
+                        data={imagePaths}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={renderItem}
+                        contentContainerStyle={{width: '100%', justifyContent: 'space-around',}}
+                    />
                 </View>
                 
                 
@@ -143,6 +142,7 @@ const CoachProfile = ({ route }) => {
                                     <Text style={[styles.sectionHeader, styles.sectionItem]}>{section.title}</Text>
                                 )}
                                 keyExtractor={(item, index) => index.toString()}
+                                contentContainerStyle = {{marginTop: 15}}
                     />
                 </View>
                 </>
@@ -166,24 +166,23 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
     },
     CoachShortBio:{
-        paddingRight:20,
+        paddingRight:0,
         marginTop:0,
         borderColor: 'black',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         backgroundColor: '#ffffff',
         elevation: 5, // For Android shadow
-        shadowColor: '#000000', // For iOS shadow
+        shadowColor: '#7265E3', // For iOS shadow
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.45,
         shadowRadius: 3.84,
     },
     CoachBio:{
-        // flex:1,
-        marginTop:10,
+        marginTop:30,
         alignItems:'center',
     },
     CoachName: {
@@ -192,24 +191,27 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     CoachCategory: {
-        fontSize: 16, 
-        marginTop: 5, 
+        fontSize: 12, 
+        marginTop: 0, 
+        color: 'grey'
     },
     CoachSuccess: {
-        marginTop: 10,
-        // borderWidth: 1,
-        width:'100%',
-        borderColor: 'black',
+        alignSelf: 'center',
+        marginTop: 20,
+        width:'85%',
         alignItems: 'center', 
-        paddingLeft:25,
+        justifyContent:'center'
     },
     row: {
         flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'space-betwen'
     },
     cell: {
-        fontSize: 18,
+        fontSize: 16,
         flex: 1,
-        padding: 10,
+        padding: 5,
         textAlign: 'center',
         fontWeight: 'bold',
     },
@@ -224,34 +226,40 @@ const styles = StyleSheet.create({
         borderColor:'red',
         marginHorizontal:10,
         justifyContent:'space-between',
+        resizeMode: 'contain'
     },
     social:{
-        // flex:1,
+        alignSelf: 'center',
+        width: '80%',
         flexDirection:'row',
-        justifyContent:'space-between',
-        marginLeft:20,
-        // alignItems:'flex-start',
+        justifyContent:'center',
+        alignContent: 'center',
+        margin: 20,
+        gap: 20
     },
     CoachInfo:{
         margin:20,
-
+        justifyContent: 'center',
     },
     headingText:{
-        marginTop:20,
+        marginTop:10,
+        marginBottom: 0,
         fontSize:20,
         fontWeight:'bold',
+        textAlign: 'center'
     },
     coachLinks: {
         marginTop: 10,
+        width: '100%',
         flexDirection: 'row',
         paddingHorizontal: 10,
     },
     cardImage: {
-        width: 100,  
+        width: 150,  
         height: 100, 
+        resizeMode: 'contain',
         marginHorizontal: 5, 
         borderRadius: 10,
-        aspectRatio: 1,
     },
     
     headingSmall:{
@@ -262,14 +270,15 @@ const styles = StyleSheet.create({
     sectionHeader: {
         fontSize: 14,
         fontWeight: 'bold',
-        paddingVertical: 5,
+        paddingVertical: 0,
         paddingHorizontal: 10,
-        marginTop: 10,
+        marginTop: 15,
     },
     item: {
-        fontSize: 16,
-        paddingVertical: 10, 
+        fontSize: 12,
+        paddingVertical: 5, 
         paddingHorizontal: 15,
+        color: 'grey'
     },
     btnStyle:{
         backgroundColor:"#8080808",
