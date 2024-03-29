@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView , Alert, KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { storeUser } from '../components/UserService';
 const Login = ({ navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,19 +14,25 @@ const Login = ({ navigation}) => {
       email: email,
       password: password,
     };
-    navigation.navigate('Dashboard', { screen: 'Back' });
-    return
-    axios.post("http://localhost:3000//api/admin/login", userData)
+    axios.post("http://localhost:3000/api/admin/login", userData)
       .then((res) => {
-        console.log(res.data);
-        if (res.data.status == 'Ok') {
-          Alert.alert("Login Successful!");
-          navigation.navigate('Dashboard', { screen: 'Back' });
+        if (res.status === 201) {
+          console.log(res.data);
+          const id = res.data.data.admin.cust_id.toString();
+          const token = res.data.data.token.toString();
+          if(storeUser(id, token)){
+            navigateToDashboard()
+          }else{
+            Alert.alert("Unable to navigate to dashboard");
+          }
         } else {
-          navigation.navigate('Dashboard', { screen: 'Back' });
+          Alert.alert("Error! not able to sign in");
         }
       });
   }
+  const navigateToDashboard = () => {
+    navigation.navigate('Dashboard', { screen: 'Back' });
+  };
 
   return (
     <KeyboardAvoidingView behavior='padding' enabled style={{height: '100%'}}>

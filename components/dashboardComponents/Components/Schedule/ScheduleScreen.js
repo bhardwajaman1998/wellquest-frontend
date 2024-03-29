@@ -8,6 +8,7 @@ import TimeSlotButton from './TimeSlotButton';
 import ConfirmationWindow from './ConfirmationWindow';
 import axios from 'axios';
 import moment from 'moment';
+import { getUserId } from "../../../UserService";
 
 
 const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) => {
@@ -73,6 +74,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
 
     const handleSchedule = async () => {
+        const userId = await getUserId()
         if (selectedSlot && selectedDate) { // Use selectedDate instead of day.dateString so the selected date from the calender can be fetched
             try {
                 // Fetching the  coach details
@@ -82,7 +84,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
                 
                 const appointmentData = {
-                    cust_id: '65cc353cb9be345699d6a69a', 
+                    cust_id: userId, 
                     coach_id: coachId,
                     date: selectedDate, 
                     timeSlot: selectedSlot

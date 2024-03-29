@@ -8,6 +8,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import axios from 'axios';
 import Target_Card from './Target_Card';
+import { getUserId } from '../components/UserService';
 
 const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
@@ -33,8 +34,8 @@ const HomeScreen= ({ route })=>{
 
     const fetchUserData = async () =>{
         try{
-            const response = await  axios.get('http://localhost:3000/api/customer/get_user_data?customerId=65cc353cb9be345699d6a69a');
-            console.log(response.data.customerData);
+            const userId = await getUserId();
+            const response = await  axios.get(`http://localhost:3000/api/customer/get_user_data?customerId=${userId}`);
             setUserName(response.data.customerData);
             setCalorieLimit(response.data.customerData.dailyCalories)
             if(response.data.newMealPlan){
@@ -52,7 +53,8 @@ const HomeScreen= ({ route })=>{
 
     const fetchCurrentCalIntake = async () => {
         try{
-            const response= await axios.get('http://localhost:3000/api/customer/get_calories_consumed?cust_id=65cc353cb9be345699d6a69a');
+            const userId = await getUserId();
+            const response= await axios.get(`http://localhost:3000/api/customer/get_calories_consumed?cust_id=${userId}`);
             const data = response.data;
             setCompletedCalories(data.totalCaloriesConsumed);
             calculateRemaining(data.totalCaloriesConsumed)
@@ -70,8 +72,9 @@ const HomeScreen= ({ route })=>{
 
     const fetchAptData = async () => {
         try {
+          const userId = await getUserId();
           console.log('fetching appointments')
-          const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
+          const response = await fetch(`http://localhost:3000/api/customer/get_scheduled_appointments?customerId=${userId}`);
           const data = await response.json();
           const upcomingAppointments = data.filter(appointment => {
             const appointmentDate = new Date(appointment.date);

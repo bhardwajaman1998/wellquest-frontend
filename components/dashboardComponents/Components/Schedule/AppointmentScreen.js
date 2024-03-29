@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import AppointmentListItem from './AppointmentListItem'; 
 import profilePic from "../../.././../assets/Maskgroup.png";
 import ToggleButton from '../../../preferencesComponents/ToggleButton';
+import { getUserId } from "../../../UserService";
 
 const AppointmentScreen = ({update}) => {
   const [showPrevious, setShowPrevious] = useState(false);
@@ -13,8 +14,9 @@ const AppointmentScreen = ({update}) => {
   }, [update]);
 
   const fetchData = async () => {
+    const userId = await getUserId()
     try {
-      const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
+      const response = await fetch(`http://localhost:3000/api/customer/get_scheduled_appointments?customerId=${userId}`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {

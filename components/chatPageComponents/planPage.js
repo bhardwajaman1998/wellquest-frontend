@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import LoadingScreen from './LoadingScreen';
+import { getUserId } from '../UserService';
 
 const PlanPage = () => {
   const navigation = useNavigation();
@@ -34,9 +35,10 @@ const PlanPage = () => {
   };
 
   const saveMeal = async () => {
+    const userId = await getUserId()
     try {
         const mealData = {
-            cust_id: '65cc353cb9be345699d6a69a',
+            cust_id: userId,
             meals:{
               breakfast: breakfast,
               lunch: lunch,

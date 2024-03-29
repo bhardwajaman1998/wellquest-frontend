@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView ,  KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { storeUser } from '../components/UserService';
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -29,28 +29,34 @@ const SignUp = ({ navigation }) => {
   //using Axios to access the API
   //You can use fetch also
   function handleSubmit(){
-    navigation.navigate('PreferencesStack', {screen: 'Preferences'})
-    return
+    // navigation.navigate('PreferencesStack', {screen: 'Preferences'})
     const userData = {
       email: email,
       password: password,
     };
-    navigation.navigate('Preferences', {screen: 'Preferences'});
-    // Call the sign-up API using AXIOS
-    // axios.post("http://192.168.1.188:5000/signup", userData)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     if (res.data.status === 'Ok') {
-    //       Alert.alert("Registration Successful!");
-    //       navigation.navigate('Preferences', {screen: 'Preferences'});
-    //     } else {
-    //       Alert.alert("User Already Exist");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error: ", error);
-    //   });
+    axios.post("http://localhost:3000/api/admin/signup", userData)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          const id = res.data.admin.cust_id
+          const token = res.data.generatedToken
+          if (storeUser(id, token)){
+            navigateToOnboarding();
+          }else{
+            Alert.alert("not able to navigate");
+          }
+        } else {
+          Alert.alert("User Already Exist");
+        }
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
   }
+
+  const navigateToOnboarding = () => {
+     navigation.navigate('Preferences', {screen: 'Preferences'});
+  };
 
   return (
     <KeyboardAvoidingView behavior='padding' enabled style={{height: '100%'}}>

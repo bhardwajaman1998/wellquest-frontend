@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
+import { getUserId } from '../../UserService';
 
 export const submitToGoogle = async (image) => {
     try {
@@ -113,8 +114,11 @@ export const getMealInfo = async (foodName) => {
 };
 
 export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
+
+  const userId = await getUserId();
+
   const data = {
-    cust_id: '65cc353cb9be345699d6a69a',
+    cust_id: userId,
     name: foodInfo.name,
     serving_size: `${servingSize} ${servingUnit}`,
     timeStamp: new Date(),
@@ -151,7 +155,10 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
 };
 
 export const historyMeals = async () => {
-  const cust_id = '65cc353cb9be345699d6a69a'
+
+  const userId = await getUserId();
+
+  const cust_id = userId
   try {
     const response = await fetch(`http://localhost:3000/api/customer/get_history_meals?cust_id=${cust_id}`, {
       method: 'GET',
