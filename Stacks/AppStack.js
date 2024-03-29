@@ -31,7 +31,7 @@ const AppStack = () => {
           component={DashboardStack}
           options = {{headerShown: false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="AiChat"
           component={ChatPageStack}
           options = {{headerShown: false}}
@@ -40,7 +40,7 @@ const AppStack = () => {
           name="SearchFoodStack"
           component={SearchFoodStack}
           options = {{headerShown: false}}
-        /> 
+        />  */}
     </Stack.Navigator>
   </NavigationContainer>
 
