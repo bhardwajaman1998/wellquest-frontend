@@ -34,17 +34,17 @@ const HistoryListView = ({navigation, data, closeModal}) => {
         <View style={styles.container}>
             {data.map((item, index) => (
                 <MealBox 
-                    key={index} 
-                    item={item} 
-                    isSelected={index === selectedItemIndex}
-                    onSelect={() => selectFood(index)}
+                key={index} 
+                item={item} 
+                isSelected={index === selectedItemIndex}
+                onSelect={() => selectFood(index)}
                 />
-            ))}
-            {selectedItemIndex !== null && (
-                <TouchableOpacity onPress={selectFoodItem} style={styles.buttonContainer}>
-                    <StyledText style={styles.buttonLog}>Log Item</StyledText>
-                </TouchableOpacity>
-            )}
+                ))}
+                {selectedItemIndex !== null && (
+                    <TouchableOpacity onPress={selectFoodItem} style={styles.buttonContainer}>
+                        <StyledText style={styles.buttonLog}>Log Item</StyledText>
+                    </TouchableOpacity>
+                )}
         </View>
     )
 }

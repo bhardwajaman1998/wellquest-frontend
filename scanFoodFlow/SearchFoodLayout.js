@@ -19,10 +19,10 @@ const SearchFoodLayout = ({navigation, historyList}) => {
     const [selectedMeal, setSelectedMeal] = useState('');
 
     const mealTypeArray = [
-        ['Breakfast', require('../assets/breakfast_icon.png')],
-        ['Lunch', require('../assets/lunch_icon.png')],
-        ['Dinner', require('../assets/dinner_icon.png')],
-        ['Snack', require('../assets/snack_icon.png')]
+        ['Breakfast', require('../assets/breakfast.png')],
+        ['Lunch', require('../assets/lunch.png')],
+        ['Dinner', require('../assets/dinner.png')],
+        ['Snack', require('../assets/snack.png')]
     ]
 
     const handleMealTypeSelect = meal => {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     mealTab: {
         flexDirection: 'row',
-        gap: 7,
+        gap: 8,
         marginHorizontal: 25,
     },
     mealtext: {
