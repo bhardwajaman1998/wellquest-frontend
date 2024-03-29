@@ -43,7 +43,7 @@ const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, chang
                     size={"lg"}
                     textAlign={'center'}
                     _selectedItem={{
-                        bg: "teal.600",
+                        bg: "#D7C5FF",
                         endIcon: <CheckIcon size="xs" />
                     }}
                     mt={1}
