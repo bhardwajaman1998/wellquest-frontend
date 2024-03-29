@@ -3898,9 +3898,9 @@
   integrity sha512-rQfMIGSR/1r/SyN87+VD8xHHzDYeHaJq6elOSCAD+0iLagXkSI2pfA0LmSXP21uw5i3em7GkkRjfJ8wpqWXZNw==
 
 "@react-native-picker/picker@^2.4.0", "@react-native-picker/picker@github:react-native-picker/picker":
-  version "2.6.1"
+  version "2.7.2"
   resolved "git+ssh://git@github.com/react-native-picker/picker.git"
-  integrity sha512-uLjn/X5aql52irs1QfPZMlJwDedtuEeBiAjA7qMCdhmt/guAYkxCdFBF6oaNDFp7L6weHHtrJWTeAHFWpETHSQ==
+  integrity sha512-a+UiyCu0XtXJK+VGIFggwA02PU3dgnvUPxlk2u99ZphTFp80Va8WH1OM9g2gyUXTVg9a5iybpDBa2+7fDfIMXA==
 
 "@react-native/assets-registry@~0.73.1", "@react-native/assets-registry@0.73.1":
   version "0.73.1"
