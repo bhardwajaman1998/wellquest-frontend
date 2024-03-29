@@ -247,21 +247,21 @@ const convertNutritionalData = (unit , size ) => {
                   />
                 </TouchableOpacity>
                 ) : (
-                <View style={{flexDirection: 'row', gap: 5, justifyContent: 'flex-start', alignItems: 'center'}}>
-                  <TouchableOpacity onPress={titleEditingToggle}>
-                    <Icon 
-                        m="2" 
-                        ml="0" 
-                        size="6" 
-                        color="gray.400" 
-                        as={
-                        <MaterialIcons 
-                          name="edit" 
-                        />
-                      }
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <StyledText style={styles.foodName}>{title}</StyledText>
+                    <TouchableOpacity onPress={titleEditingToggle}>
+                      <Icon 
+                          m="2" 
+                          ml="0" 
+                          size="6" 
+                          color="gray.400" 
+                          as={
+                            <MaterialIcons 
+                              name="edit" 
+                            />
+                          }
                     />
                   </TouchableOpacity>
-                    <StyledText style={styles.foodName}>{title}</StyledText>
                   </View>
                 )}
                 <View style={{ borderBottomColor: 'black', borderBottomWidth: 0.2 }} />
