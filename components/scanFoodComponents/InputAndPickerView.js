@@ -41,14 +41,15 @@ const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, chang
                     borderWidth={0}
                     height={26}
                     size={"lg"}
+                    width="full"
                     textAlign={'center'}
                     _selectedItem={{
                         bg: "#D7C5FF",
-                            borderRadius: 15,
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignItems: 'center', 
-                            endIcon: <CheckIcon size="xl" />
+                        borderRadius: 15,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center', 
+                        endIcon: <CheckIcon size="xl" />
                     }}
                     mt={1}
                     onValueChange={itemValue => setUnitFromPicker(itemValue)}

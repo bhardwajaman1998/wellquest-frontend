@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'white',
         shadowColor: '#000',
+        borderWidth: .5,
+        borderColor: "#7265E3",
         shadowOffset: {
           width: 0,
           height: 3,
