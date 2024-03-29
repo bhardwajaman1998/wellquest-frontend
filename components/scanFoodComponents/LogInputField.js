@@ -43,13 +43,18 @@ const LogInputField = ({title, isDropDown, dropdownData, placeholder = "Please e
                         height={26}
                         width="full"
                         _selectedItem={{
-                            bg: "teal.600",
-                            endIcon: <CheckIcon size="xs" />
+                            bg: "#D7C5FF",
+                            borderRadius: 15,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center', 
+                            endIcon: <CheckIcon size="xl" />
                         }} mt={1} onValueChange={itemValue => serviceCallback(itemValue)}>
                             {dropdownData.map((item) => (
                                 <Select.Item label={item} value={item} key={item} />
-                            ))
+                                ))
                             }
+                            
                     </Select>
                 ) : (
                     <Input
