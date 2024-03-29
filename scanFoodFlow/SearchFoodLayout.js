@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     scan: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        marginTop: 10,
         padding: 25,
         gap: 30,
         marginHorizontal: 15
@@ -140,13 +139,14 @@ const styles = StyleSheet.create({
     mealtext: {
         fontFamily: 'poppins-semibold',
         fontSize: 18,
-        marginLeft: 25
+        marginLeft: 25,
+        marginTop: -10
     },
     history: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '85%',
-        marginTop: 35
+        marginTop: 25
     },
     hStack: {
         flexDirection: "row",
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     meals: {
         width: '100%',
         marginTop: 10,
-        gap: 20,
+        gap: 10,
         justifyContent: 'center',
         marginHorizontal: 25
     },
