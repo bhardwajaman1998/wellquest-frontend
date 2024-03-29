@@ -41,6 +41,7 @@ const LogInputField = ({title, isDropDown, dropdownData, placeholder = "Please e
                         borderColor="transparent"
                         borderWidth={0}
                         height={26}
+                        size={"lg"}
                         width="full"
                         _selectedItem={{
                             bg: "#D7C5FF",

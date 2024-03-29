@@ -31,7 +31,7 @@ const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, chang
                     style={{
                         width: 0.4,
                         height: '100%',
-                        backgroundColor: 'gray',
+                        backgroundColor: '#7265E3',
                     }}
                 />
                 <View style={styles.picker}>
@@ -39,12 +39,16 @@ const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, chang
                     selectedValue={unit}
                     borderColor="black"
                     borderWidth={0}
-                    height={30}
+                    height={26}
                     size={"lg"}
                     textAlign={'center'}
                     _selectedItem={{
                         bg: "#D7C5FF",
-                        endIcon: <CheckIcon size="xs" />
+                            borderRadius: 15,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center', 
+                            endIcon: <CheckIcon size="xl" />
                     }}
                     mt={1}
                     onValueChange={itemValue => setUnitFromPicker(itemValue)}
@@ -73,10 +77,12 @@ const InputAndPickerView = ({title , dropdownData, size, unit, changeSize, chang
             width: '100%',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: 10,
+            padding: 8,
             borderRadius: 10,
             backgroundColor: 'white',
-            shadowColor: '#000',
+            shadowColor: "#000",
+            borderWidth: .5,
+            borderColor: "#7265E3",
             shadowOffset: {
               width: 0,
               height: 3,

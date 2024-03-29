@@ -264,7 +264,7 @@ const convertNutritionalData = (unit , size ) => {
                   </TouchableOpacity>
                   </View>
                 )}
-                <View style={{ borderBottomColor: 'black', borderBottomWidth: 0.2 }} />
+                  <View style={{ borderBottomColor: 'black', borderBottomWidth: 0.2,  marginTop: -10 }} />
 
                   <InputAndPickerView title={'Serving size'} dropdownData={unitArray} size={servingSize} unit={servingUnit} changeSize={changeServingSize} changeUnit={changeServingUnit}/>
                 
