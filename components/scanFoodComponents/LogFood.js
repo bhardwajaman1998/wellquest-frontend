@@ -219,7 +219,7 @@ const convertNutritionalData = (unit , size ) => {
               ) : (
                 <View style={styles.container}>
 
-                <StyledText style={styles.screenTitle}>Log Food</StyledText>
+                {/* <StyledText style={styles.screenTitle}>Log Food</StyledText> */}
                 {isTitleEditing ? (
                   <TouchableOpacity onPress={titleEditingToggle}>
                     <Input 
@@ -235,7 +235,7 @@ const convertNutritionalData = (unit , size ) => {
                           m="2" 
                           ml="3" 
                           size="6" 
-                          color="gray.400" 
+                          color="#D7C5FF" 
                           as={
                             <MaterialIcons 
                               name="check" 
@@ -247,32 +247,32 @@ const convertNutritionalData = (unit , size ) => {
                   />
                 </TouchableOpacity>
                 ) : (
-                <View style={{flexDirection: 'row', gap: 5, justifyContent: 'flex-start', alignItems: 'center'}}>
-                  <TouchableOpacity onPress={titleEditingToggle}>
-                    <Icon 
-                        m="2" 
-                        ml="0" 
-                        size="6" 
-                        color="gray.400" 
-                        as={
-                        <MaterialIcons 
-                          name="edit" 
-                        />
-                      }
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <StyledText style={styles.foodName}>{title}</StyledText>
+                    <TouchableOpacity onPress={titleEditingToggle}>
+                      <Icon 
+                          m="2" 
+                          ml="0" 
+                          size="6" 
+                          color="gray.400" 
+                          as={
+                            <MaterialIcons 
+                              name="edit" 
+                            />
+                          }
                     />
                   </TouchableOpacity>
-                    <StyledText style={styles.foodName}>{title}</StyledText>
                   </View>
                 )}
-                <View style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth }} />
+                  <View style={{ borderBottomColor: 'black', borderBottomWidth: 0.2,  marginTop: -10 }} />
 
                   <InputAndPickerView title={'Serving size'} dropdownData={unitArray} size={servingSize} unit={servingUnit} changeSize={changeServingSize} changeUnit={changeServingUnit}/>
                 
-                  <LogInputField title={'Number of serving'} placeholder='example 1' useSetNumber={true} changeNumber={changeNumberOfServing}/>
+                  <LogInputField title={'Number of serving'} placeholder='ex 1' useSetNumber={true} changeNumber={changeNumberOfServing}/>
                 
                   <LogInputField title={'Meal'} isDropDown={true} dropdownData={mealArray} serviceSelected={mealArray[0]} useMealType={changeMealType}/>
 
-                  <LogInputField title={'Extra calories'} placeholder='example 150'  useExtraCals={true} extraCals={changeExtraCalories}/>
+                  <LogInputField title={'Extra calories'} placeholder='ex 150'  useExtraCals={true} extraCals={changeExtraCalories}/>
 
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
                       <NutritionalContent isCircleView={true} label={""} value={calories} unit={"kcal"} multiplier={multiplier} extraCalories={extraCalories}/>
@@ -294,7 +294,7 @@ const convertNutritionalData = (unit , size ) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(246, 242, 237, 0.5)',
         height: '100%',
         paddingHorizontal: 20,
         paddingVertical: 10,

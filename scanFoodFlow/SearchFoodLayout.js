@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity, Modal, Image, ScrollView } from "react-native";
+import { StyleSheet, TouchableOpacity, Modal, Image, ScrollView, TextInput } from "react-native";
 import StyledText from "../components/globalComponents/StyledText";
 
 import SearchBar from "../components/scanFoodComponents/SearchBar"
@@ -19,10 +19,10 @@ const SearchFoodLayout = ({navigation, historyList}) => {
     const [selectedMeal, setSelectedMeal] = useState('');
 
     const mealTypeArray = [
-        ['Breakfast', require('../assets/breakfast_icon.png')],
-        ['Lunch', require('../assets/lunch_icon.png')],
-        ['Dinner', require('../assets/dinner_icon.png')],
-        ['Snack', require('../assets/snack_icon.png')]
+        ['Breakfast', require('../assets/breakfast.png')],
+        ['Lunch', require('../assets/lunch.png')],
+        ['Dinner', require('../assets/dinner.png')],
+        ['Snack', require('../assets/snack.png')]
     ]
 
     const handleMealTypeSelect = meal => {
@@ -51,7 +51,19 @@ const SearchFoodLayout = ({navigation, historyList}) => {
               </Modal>
             ) : (
                 <>
-                    <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} />
+                    {/* <SearchBar style={{...styles.search, backgroundColor: 'white'}} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} /> */}
+                    <TouchableOpacity setSearchBarActive={setSearchBarActive} style={styles.searchContainer}>
+                        <Image
+                            style={{marginRight: 10, marginLeft: 15, height: 25, width: 25}}
+                            source = {require('../assets/search_icon.png')}
+                        />
+                        <TextInput
+                        style={styles.searchInput}
+                        onChangeText={(text) => setSearchQuery(text)}
+                        placeholder="Search for a food"
+                        placeholderTextColor="grey"
+                        />
+                    </TouchableOpacity>
                     <View style={styles.scan}>
                         <ScanButton
                             navigation={navigation}
@@ -115,38 +127,65 @@ const SearchFoodLayout = ({navigation, historyList}) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(246, 242, 237, 0.5)',
         justifyContent: 'flex-start',
         alignItems: 'center',
         height: '100%',
         marginBottom: 200
     },
     search: {
-        width: '100%'
+        width: '100%', 
+        backgroundColor: 'white'
     },
-    scan: {
-        justifyContent: 'space-between',
+    searchContainer: {
         flexDirection: 'row',
-        marginTop: 10,
-        padding: 25,
-        gap: 30,
-        marginHorizontal: 15
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginTop: 15,
+        width: '88%',
+        height: 40,
+        shadowColor: "#7265E3",
+        borderWidth: 0,
+        borderColor: "#7265E3",
+        shadowOffset: {
+        width: 0,
+        height: 1, // Adjusted to remove upper shadow
+        },
+        shadowOpacity: 0.47,
+        shadowRadius: 1.65,
+        elevation: 5,
+      },
+    scan: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        width: "88%",
+        padding: 20,
+        marginVertical: 15,
+        // marginHorizontal : 20,
+        borderRadius: 20,
+        gap: 15,
+        backgroundColor: "rgba(114, 101, 227, 0.4)"
     },
     mealTab: {
         flexDirection: 'row',
-        gap: 7,
+        gap: 8,
         marginHorizontal: 25,
     },
     mealtext: {
         fontFamily: 'poppins-semibold',
         fontSize: 18,
-        marginLeft: 25
+        marginLeft: 25,
+        marginTop: -10
     },
     history: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '85%',
-        marginTop: 35
+        marginTop: 25
     },
     hStack: {
         flexDirection: "row",
@@ -160,7 +199,7 @@ const styles = StyleSheet.create({
     meals: {
         width: '100%',
         marginTop: 10,
-        gap: 20,
+        gap: 10,
         justifyContent: 'center',
         marginHorizontal: 25
     },
