@@ -51,19 +51,19 @@ const SearchFoodLayout = ({navigation, historyList}) => {
               </Modal>
             ) : (
                 <>
-                    {/* <SearchBar style={{...styles.search, backgroundColor: 'white'}} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} /> */}
-                    <TouchableOpacity setSearchBarActive={setSearchBarActive} style={styles.searchContainer}>
+                    <SearchBar style={{...styles.search, backgroundColor: 'white'}} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} />
+                    {/* <TouchableOpacity setSearchBarActive={setSearchBarActive} style={styles.searchContainer}>
                         <Image
                             style={{marginRight: 10, marginLeft: 15, height: 25, width: 25}}
                             source = {require('../assets/search_icon.png')}
                         />
                         <TextInput
-                        style={styles.searchInput}
-                        onChangeText={(text) => setSearchQuery(text)}
-                        placeholder="Search for a food"
-                        placeholderTextColor="grey"
+                            style={styles.searchInput}
+                            onChangeText={(text) => setSearchQuery(text)}
+                            placeholder="Search for a food"
+                            placeholderTextColor="grey"
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <View style={styles.scan}>
                         <ScanButton
                             navigation={navigation}

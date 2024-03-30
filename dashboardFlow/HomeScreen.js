@@ -40,6 +40,8 @@ const HomeScreen= ({ route })=>{
             setCalorieLimit(response.data.customerData.dailyCalories)
             if(response.data.newMealPlan){
                 setMeals(response.data.newMealPlan.meals)
+            }else{
+                setMeals(null)
             }
             updateGreeting();
             setUpdate(true)

@@ -58,14 +58,14 @@ const GoalCard = ({update, calorieLimit, calConsumed, remianingCalories}) => {
                         thickness={7}
                         unfilledColor='white'
                         color='#7265E3'
-                        textStyle={{fontSize: 18, textAlign: 'center', fontWeight: 'bold', color: (calConsumed / calorieLimit) >= 1 ? "red" : "#7265E3"}}
+                        textStyle={{fontSize: 20, textAlign: 'center', fontWeight: 'bold', color: (calConsumed / calorieLimit) >= 1 ? "red" : "#7265E3"}}
                         formatText={()=> {
                             if (calConsumed  === 0) {
                                 return "Log your meal!";
                             }else if ((calConsumed / calorieLimit)  >= 1){
                                 return "Calorie Limit Reached!"
                             }
-                            return `${remianingCalories} ${'kcal remaining'}`}
+                            return `${remianingCalories}${'\n'}${'kcal remaining'}`}
                         }
                     />
                 </View>

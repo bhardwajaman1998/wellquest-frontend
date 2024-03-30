@@ -85,7 +85,7 @@ export const getFoodData = async (foodName, getSearchResults = false) => {
 
 export const getMealInfo = async (foodName) => {
   try {
-    const apiKey = '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';
+    const apiKey = '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';
     const prompt = `Give the information of calories, carbohydrates, fats, and proteins data based on the information below. return the calculated contents from its serving size and units.
     Food name = ${foodName} 100 gram
       The data should be returned in the exact JSON format below and it should only contain numeric values for the information 

@@ -185,6 +185,7 @@ const getInfo = async () => {
           ]
       );
   } catch (error) {
+    setMealEditedState(false);
       console.error('Error fetching food information:', error);
       setLoading(false)
   }
