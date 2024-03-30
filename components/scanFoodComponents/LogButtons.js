@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "white",
     height: 45,
-    borderColor: "orange",
+    borderColor: "#7265E3",
     borderWidth: 2,
   },
   buttonApply: {
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 5,
     borderRadius: 15,
-    backgroundColor: "orange",
+    backgroundColor: "#7265E3",
     height: 45,
   },
   textCancel: {
     fontSize: 14,
     fontFamily: "poppins-semibold",
-    color: "orange",
+    color: "#7265E3",
   },
   textApply: {
     fontSize: 14,
