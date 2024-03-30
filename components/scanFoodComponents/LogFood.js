@@ -294,7 +294,7 @@ const convertNutritionalData = (unit , size ) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(246, 242, 237, 0.5)',
         height: '100%',
         paddingHorizontal: 20,
         paddingVertical: 10,

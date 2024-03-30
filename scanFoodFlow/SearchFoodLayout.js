@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { HStack, VStack, View, Text, ButtonIcon, GripVerticalIcon } from "@gluestack-ui/themed"
-import { StyleSheet, TouchableOpacity, Modal, Image, ScrollView } from "react-native";
+import { StyleSheet, TouchableOpacity, Modal, Image, ScrollView, TextInput } from "react-native";
 import StyledText from "../components/globalComponents/StyledText";
 
 import SearchBar from "../components/scanFoodComponents/SearchBar"
@@ -51,7 +51,19 @@ const SearchFoodLayout = ({navigation, historyList}) => {
               </Modal>
             ) : (
                 <>
-                    <SearchBar style={styles.search} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} />
+                    {/* <SearchBar style={{...styles.search, backgroundColor: 'white'}} setSearchBarActive={setSearchBarActive} isFromSearchScreen={true} /> */}
+                    <TouchableOpacity setSearchBarActive={setSearchBarActive} style={styles.searchContainer}>
+                        <Image
+                            style={{marginRight: 10, marginLeft: 15, height: 25, width: 25}}
+                            source = {require('../assets/search_icon.png')}
+                        />
+                        <TextInput
+                        style={styles.searchInput}
+                        onChangeText={(text) => setSearchQuery(text)}
+                        placeholder="Search for a food"
+                        placeholderTextColor="grey"
+                        />
+                    </TouchableOpacity>
                     <View style={styles.scan}>
                         <ScanButton
                             navigation={navigation}
@@ -122,9 +134,30 @@ const styles = StyleSheet.create({
         marginBottom: 200
     },
     search: {
-        width: '100%',
-        
+        width: '100%', 
+        backgroundColor: 'white'
     },
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 10,
+        marginTop: 15,
+        width: '88%',
+        height: 40,
+        shadowColor: "#7265E3",
+        borderWidth: 0,
+        borderColor: "#7265E3",
+        shadowOffset: {
+        width: 0,
+        height: 1, // Adjusted to remove upper shadow
+        },
+        shadowOpacity: 0.47,
+        shadowRadius: 1.65,
+        elevation: 5,
+      },
     scan: {
         justifyContent: 'center',
         flexDirection: 'row',
