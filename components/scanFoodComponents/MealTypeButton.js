@@ -66,15 +66,15 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 15,
     backgroundColor: "white",
-    shadowColor: "#000",
-    borderWidth: 0.5,
+    shadowColor: "#7265E3",
+    borderWidth: 0,
     borderColor: "#7265E3",
     shadowOffset: {
-      width: 3,
-      height: 8, // Adjusted to remove upper shadow
+      width: 0,
+      height: 3, // Adjusted to remove upper shadow
     },
-    shadowOpacity: 0.17,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.47,
+    shadowRadius: 2.65,
     elevation: 5,
     gap: 13,
     flex: 1,

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 15,
     backgroundColor: "white",
-    height: 35,
+    height: 45,
     borderColor: "orange",
     borderWidth: 2,
   },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 15,
     backgroundColor: "orange",
-    height: 35,
+    height: 45,
   },
   textCancel: {
     fontSize: 14,

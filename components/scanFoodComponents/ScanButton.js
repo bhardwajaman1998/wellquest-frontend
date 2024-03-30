@@ -26,7 +26,7 @@ const ScanButton = ({ navigation, isForCamera = true }) => {
             <Image
               size="xs"
               tintColor={"rgb(114, 101, 227)"}
-              marginTop={5}
+              marginTop={6}
               source={require("../../assets/camera-icon.png")}
             />
             <StyledText style={styles.buttonText}>Scan meal</StyledText>
@@ -54,6 +54,7 @@ const ScanButton = ({ navigation, isForCamera = true }) => {
 const styles = StyleSheet.create({
   container: {
     width: "50%",
+    alignItems: "center",
   },
   button: {
     flexDirection: "row",
@@ -65,15 +66,18 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "#7265E3",
     backgroundColor: "white",
-    shadowColor: "#000",
+    shadowColor: "grey",
+    borderWidth: 0,
+    borderColor: "#7265E3",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 2,
+      height: 5, // Adjusted to remove upper shadow
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-    elevation: 6,
+    shadowOpacity: 0.47,
+    shadowRadius: 2.65,
+    elevation: 5,
     height: 45,
+    width: 150,
   },
   buttonText: {
     fontSize: 13,

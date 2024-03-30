@@ -115,21 +115,27 @@ const SearchFoodLayout = ({navigation, historyList}) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(246, 242, 237, 0.5)',
         justifyContent: 'flex-start',
         alignItems: 'center',
         height: '100%',
         marginBottom: 200
     },
     search: {
-        width: '100%'
+        width: '100%',
+        
     },
     scan: {
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         flexDirection: 'row',
-        padding: 25,
-        gap: 30,
-        marginHorizontal: 15
+        alignSelf: 'center',
+        width: "88%",
+        padding: 20,
+        marginVertical: 15,
+        // marginHorizontal : 20,
+        borderRadius: 20,
+        gap: 15,
+        backgroundColor: "rgba(114, 101, 227, 0.4)"
     },
     mealTab: {
         flexDirection: 'row',
