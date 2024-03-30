@@ -16,7 +16,7 @@ const NutritionalContent = ({isCircleView = false, label, value, unit = "gm", pe
         <View style={styles.container}>
             {isCircleView ? (
                 <LinearGradient
-                    colors={['orange', 'lightblue']}
+                    colors={['#FF6200', '#7265E3']}
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 0}}
                     style={[
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         fontFamily: 'poppins-semibold',
         textAlign: 'center',
         margin: 0,
-        color: '#cc2b5e',
+        color: '#7265E3',
         backgroundColor: 'transparent',
       },
       buttonText: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         margin: 0,
-        color: '#cc2b5e',
+        color: '#7265E3',
         backgroundColor: 'transparent',
       },
   });
