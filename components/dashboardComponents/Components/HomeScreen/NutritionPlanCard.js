@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         marginBottom: 0,
         marginTop: 20,
-        width: '95%',
+        width: '90%',
         backgroundColor: '#FBF9F6'
       },
       card: {
@@ -119,9 +119,9 @@ const styles = StyleSheet.create({
         borderColor: '#7265E3',
         elevation: 2,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
+        shadowOffset: { width: 3, height: 5 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
       },
       cardImage: {
         width: '100%',

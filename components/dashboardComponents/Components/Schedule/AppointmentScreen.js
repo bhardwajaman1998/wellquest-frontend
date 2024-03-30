@@ -28,9 +28,16 @@ const AppointmentScreen = ({update}) => {
     const today = new Date();
     return appointments.filter(appointment => {
       const appointmentDate = new Date(appointment.date);
+      const isCancelled = appointment.cancelled
       if (showPrevious) {
+        if (isCancelled){
+          return true
+        }
         return appointmentDate < today;
       } else {
+        if (isCancelled){
+          return false
+        }
         return appointmentDate >= today;
       }
     });

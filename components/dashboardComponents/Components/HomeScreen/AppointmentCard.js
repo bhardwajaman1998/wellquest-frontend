@@ -6,7 +6,7 @@ import AppointmentListItem from '../Schedule/AppointmentListItem';
 import findCoach from '../../../../assets/findCoach.png';
 import profilePic from '../../../../assets/Maskgroup.png';
 
-const AppointmentCard = ({appointments}) => {
+const AppointmentCard = ({appointments, cancelApt}) => {
   
   const navigation = useNavigation();
 
@@ -34,6 +34,8 @@ const AppointmentCard = ({appointments}) => {
           time={appointments[0].timeSlot}
           coachName={appointments[0].coach_name}
           coachAvatar={profilePic}
+          id={appointments[0]._id}
+          cancelApt={cancelApt}
         />
       ) : (
         <CustomCard

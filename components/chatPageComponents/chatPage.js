@@ -24,7 +24,7 @@ const ChatPage = () => {
           {item.chat ? (
             <Text style={styles.chat}>{item.chat}</Text>
           ) : (
-            <TouchableOpacity style={styles.startButton}>
+            <TouchableOpacity onPress={navigateToChatScreen} style={styles.startButton}>
               <Text style={styles.startText}>Start</Text>
             </TouchableOpacity>
           )}
@@ -44,7 +44,6 @@ const ChatPage = () => {
   );
 
   const navigateToChatScreen = () => {
-    // navigation.navigate("ChatScreen",{screen:'ChatScreen'});
     navigation.navigate('AiChat', {screen: 'GetStarted'})
   };
 

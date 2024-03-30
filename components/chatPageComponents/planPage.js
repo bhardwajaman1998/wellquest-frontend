@@ -45,6 +45,7 @@ const PlanPage = () => {
               dinner: dinner
             }
         };
+        console.log(mealData)
         const response = await axios.post('http://localhost:3000/api/customer/make_meal_plan', mealData);
         if (response.status == 200){
           goToInitialScreen()

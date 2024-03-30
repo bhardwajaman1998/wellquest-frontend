@@ -36,10 +36,10 @@ const ChatPageStack = () => {
                 name="GetStarted" 
                 component={GetStarted} 
                 options={({ navigation }) => ({
-                    title: 'Get Started',
+                    title: 'My AI',
                     header: () => (
                       <NavigationBar
-                        title="Get Started"
+                        title="My AI"
                       />
                     )
                   })}

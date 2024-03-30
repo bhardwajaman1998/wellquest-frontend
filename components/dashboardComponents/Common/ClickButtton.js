@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
   const ClickButtton = ({ btntext, iconUrl, onPress }) => {
     return (
       <TouchableOpacity onPress={onPress} style={ btntext == "Message" ? (buttonStyles.buttonMessage) : (buttonStyles.button)}>
-        <Image source={iconUrl} style={buttonStyles.image} />
+        <Image source={iconUrl} style={ btntext == "Message" ? (buttonStyles.image) : (buttonStyles.scheduleImage)} />
         <Text style={ btntext == "Message" ? (buttonStyles.messageButtonText) : (buttonStyles.buttonText) }>
           {btntext}
         </Text>
@@ -39,9 +39,14 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
       height: 25,
       resizeMode: 'contain'
     },
+    scheduleImage: {
+      width: 35,
+      height: 25,
+      resizeMode: ''
+    },
     buttonText: {
       fontSize: 17,
-      marginLeft: 10,
+      marginLeft: 5,
       color:'#FFF',
       fontWeight:'bold',
     },

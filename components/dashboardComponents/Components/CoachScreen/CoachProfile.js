@@ -71,7 +71,7 @@ const CoachProfile = ({ route }) => {
 
     return(
         <NativeBaseProvider style={styles.container}>
-            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} bounces={false}>
             {coachData && (
             <View style={styles.CoachShortBio}>
                 <View style={styles.CoachBio}>
@@ -124,7 +124,7 @@ const CoachProfile = ({ route }) => {
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
-                        contentContainerStyle={{width: '100%', justifyContent: 'space-around',}}
+                        contentContainerStyle={{width: '100%', justifyContent: 'center', alignItems: 'center'}}
                     />
                 </View>
                 
@@ -142,12 +142,13 @@ const CoachProfile = ({ route }) => {
                                     <Text style={[styles.sectionHeader, styles.sectionItem]}>{section.title}</Text>
                                 )}
                                 keyExtractor={(item, index) => index.toString()}
-                                contentContainerStyle = {{marginTop: 15}}
+                                contentContainerStyle = {{marginTop: 5}}
                     />
                 </View>
                 </>
             )}
             </View>
+            <View style={{height: 30}}></View>
             </ScrollView>
             {isSchedulingModalVisible ? (
                 <Modal visible={isSchedulingModalVisible} animationType="slide" transparent={true} onClose={handleCloseSchedulingModal}>
@@ -255,20 +256,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     cardImage: {
-        width: 150,  
+        width: 120,  
         height: 100, 
-        resizeMode: 'contain',
+        resizeMode: 'center',
         marginHorizontal: 5, 
         borderRadius: 10,
     },
-    
     headingSmall:{
         fontSize:18,
         fontWeight:'bold',
         marginTop:20,
     },
     sectionHeader: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'bold',
         paddingVertical: 0,
         paddingHorizontal: 10,

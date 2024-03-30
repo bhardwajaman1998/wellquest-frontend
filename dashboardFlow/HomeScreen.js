@@ -77,15 +77,28 @@ const HomeScreen= ({ route })=>{
           const response = await fetch(`http://localhost:3000/api/customer/get_scheduled_appointments?customerId=${userId}`);
           const data = await response.json();
           const upcomingAppointments = data.filter(appointment => {
-            const appointmentDate = new Date(appointment.date);
-            const today = new Date();
-            return appointmentDate >= today;
+            if (!appointment.cancelled){
+                const appointmentDate = new Date(appointment.date);
+                const today = new Date();
+                return appointmentDate >= today;
+            }
           });
           setAppointments(upcomingAppointments);
         } catch (error) {
           console.error('Error fetching appointments:', error);
         }
-      };
+    };
+
+    const cancelApt = async (apt_id) => {
+        try {
+            const appointmentData = {apt_id: apt_id}
+            const response = await axios.post('http://localhost:3000/api/customer/cancel_appointment', appointmentData);
+            console.log(response.data)
+            fetchAptData()
+        } catch (error) {
+          console.error('Error fetching cancelled appointment:', error);
+        }
+    };
 
     const updateGreeting = () => {
         const currentTime = new Date();
@@ -123,7 +136,7 @@ const HomeScreen= ({ route })=>{
 
                     <Target_Card/>
                     
-                    <AppointmentCard  appointments={appointments}/>
+                    <AppointmentCard  appointments={appointments} cancelApt={cancelApt} />
                     
                     <NutritionPlanCard meals={meals} selectMeal={handleMealSelection} showBottomView={handleBottomView}/>
 

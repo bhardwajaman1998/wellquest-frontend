@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import clockIcon from "../../.././../assets/clock.png";
 import dotIcon from "../../.././../assets/Ellipse.png";
 
-const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
+const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt }) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const toggleOptions = () => {
@@ -18,6 +18,7 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
 
   const handleCancel = () => {
     // Handle cancel action
+    cancelApt(id);
     setShowOptions(false);
   };
 
