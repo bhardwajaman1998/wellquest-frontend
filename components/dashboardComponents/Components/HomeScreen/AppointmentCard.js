@@ -55,12 +55,13 @@ const styles = StyleSheet.create({
   container: {
     padding: 0,
     marginHorizontal: 5,
+    marginTop: -10
   },
   header: {
     flexDirection: 'row',
     marginTop: 30,
     marginLeft: 25,
-    marginBottom: 10, 
+    marginBottom: 0, 
     justifyContent: 'space-between',
   },
   heading: {

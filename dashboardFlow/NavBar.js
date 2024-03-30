@@ -149,6 +149,11 @@ const NavBar =()=>{
                 name="Profile" 
                 component={ProfileScreen}
                 options={{
+                    header: () => (
+                        <NavigationBar
+                          title="Profile"
+                        />
+                    ),
                     headerShown:true,
                     tabBarIcon:({focused})=>{
                         const profileScreenIcon = focused ? profileSelected : profileIcon;
@@ -162,7 +167,7 @@ const NavBar =()=>{
                             </View>
                         )
                     },
-                    headerShown: false,
+                    headerShown: true,
                     tabBarButton: props => <CustomTabBarButton {... props}/>,
                     tabBarLabel:'profile',
                 }}/>

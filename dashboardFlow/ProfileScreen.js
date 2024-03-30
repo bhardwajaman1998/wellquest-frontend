@@ -1,13 +1,40 @@
-import React from "react"
+import React,{useState,useEffect} from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import profile from "../assets/profile.jpg"
 import rightButton from "../assets/right_button.png"
 import { useNavigation } from "@react-navigation/native"
+import { getUserId } from '../components/UserService';
+import axios from 'axios';
 
 const ProfileScreen = () => {
   const navigation = useNavigation()
+  const isFocused = useIsFocused();
+  const [userData, setUserData] = useState();
+  const [userName, setUserName] = useState('');
+  useEffect(()=>{
+    if (isFocused) {
+        fetchUserData();
+    }
+},[isFocused]);
+
+  const fetchUserData = async () =>{
+    try{
+        const userId = await getUserId();
+        const response = await axios.get(`http://localhost:3000/api/customer/get_user_data?customerId=${userId}`);
+        console.log(response)
+        if (response.status == 200){
+          setUserData(response.data.customerData)
+          setUserName(response.data.customerData.name)
+        }
+    }
+    catch(error){
+        console.error('Error fetching the User name in dashboard: ',error);
+    }
+  }
+
   const handlePreferences = () => {
-    navigation.navigate("PreferencesStack")
+    navigation.navigate("PreferencesStack", {screen: 'Preferences'})
   }
   return (
     <View style={styles.container}>
@@ -17,7 +44,7 @@ const ProfileScreen = () => {
         </View>
         <View style={styles.Vline}></View>
         <View style={styles.userDetails}>
-          <Text style={styles.userName}>Sophie Wong</Text>
+          <Text style={styles.userName}>{userName}</Text>
           <Text>Joined</Text>
           <Text>2 Months Ago</Text>
         </View>
@@ -54,6 +81,7 @@ const ProfileScreen = () => {
         </TouchableOpacity>
         <View style={styles.Hline}></View>
       </View>
+      <View style={{height: 30}}></View>
     </View>
   )
 }
@@ -61,8 +89,9 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignContent: "center",
+    marginTop: 40
   },
   firstContainer: {
     marginLeft: 50,
