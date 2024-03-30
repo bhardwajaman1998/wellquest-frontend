@@ -35,11 +35,10 @@ const HistoryListView = ({navigation, data, closeModal}) => {
         <View style={styles.container}>
             {data.map((item, index) => (
                 <MealBox 
-                key={index} 
-                item={item} 
-                isSelected={index === selectedItemIndex}
-                onSelect={() => selectFood(index)}
-                
+                    key={index} 
+                    item={item} 
+                    isSelected={index === selectedItemIndex}
+                    onSelect={() => selectFood(index)}
                 />
                 ))}
                 {/* {selectedItemIndex !== null && (
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     container: {
         width: '85%',
         marginTop: 20,
-        gap: 20
+        gap: 20,
     },
     buttonContainer: {
         backgroundColor: 'rgb(114, 101, 227)',

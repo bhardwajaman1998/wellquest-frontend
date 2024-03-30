@@ -40,14 +40,14 @@ const SearchModal = ({ navigation, setSearchBarActive }) => {
       </TouchableOpacity>
       <SearchBar
         style={styles.search}
-        isFromSearchScreen={true}
+        isFromSearchScreen={false}
         handleQuery={setQuery}
         foodSearchCallback={getSearchResults}
         setSearchBarActive={setSearchBarActive}
       />
       <View style={styles.historyList}>
         {searchData.length > 0 ? (
-          <View>
+          <View style={{width: '100%', justifyContent: 'center', alignItems: 'center'}}>
             <StyledText style={styles.bestText}>Best matches</StyledText>
             <HistoryListView
               navigation={navigation}
