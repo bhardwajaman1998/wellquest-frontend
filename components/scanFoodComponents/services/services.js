@@ -26,7 +26,7 @@ export const submitToGoogle = async (image) => {
       });
       let response = await fetch(
         "https://vision.googleapis.com/v1/images:annotate?key=" +
-        'AIzaSyDEO1IL3do4vXJ7Z5LWlMZSZ6YEvtAgv6U',
+        'AIzaSyDZKCLOgN8en8fY_uRsoPBU5wlGTpB7MAI',
         {
           headers: {
             Accept: "application/json",
