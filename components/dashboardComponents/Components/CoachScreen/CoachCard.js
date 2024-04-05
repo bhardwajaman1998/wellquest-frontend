@@ -29,7 +29,7 @@ const CoachCard  = ({coachImg,coachName, coachDesc,onPress}) => {
 
 const styles=StyleSheet.create({
     container: {
-        marginTop: 30,
+        marginTop: 15,
         // height:'100%',
       },
       card: {
@@ -45,8 +45,8 @@ const styles=StyleSheet.create({
         elevation: 5, // For Android shadow
         shadowColor: '#7265E3', // For iOS shadow
         shadowOffset: {
-            width: 0,
-            height: 7,
+            width: 2,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
