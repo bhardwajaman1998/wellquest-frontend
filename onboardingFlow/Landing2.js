@@ -6,7 +6,7 @@ const Landing2 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/Landing2.png')} 
+        source={require('../assets/Landing2New.png')} 
         style={styles.logo}
         resizeMode="contain"
       />
