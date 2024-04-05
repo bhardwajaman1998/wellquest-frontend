@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper';
 const LandingSwiper = ({ navigation }) => {
   return (
     <View style={styles.container}>
-    <Swiper style={styles.wrapper} showsButtons={false} loop={false} activeDotColor='#FF6200' >
+    <Swiper style={styles.wrapper} showsButtons={false} loop={false} activeDotColor='#FF6200' dotStyle={styles.dot} activeDotStyle={styles.activeDot}>
       {/* Landing */}
       <View style={styles.slide}>
         <Image
@@ -76,6 +76,17 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
   },
   wrapper: {
+  },
+  dot: {
+    width: 15,  
+    height: 15, 
+    borderRadius: 10,
+    marginHorizontal: 5,
+  },
+  activeDot: {
+    width: 15,  
+    height: 15, 
+    borderRadius: 10,
   },
   slide: {
     flex: 1,
