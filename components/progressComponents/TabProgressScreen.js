@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingTop: 15,
     width: "100%",
+    backgroundColor: 'rgba(246, 242, 237, 0.5)',
   },
   button: {
     backgroundColor: "#7265E3",
