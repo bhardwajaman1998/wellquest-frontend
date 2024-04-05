@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: 250,
-    marginTop: '10%',
+    height: 340,
+    marginTop: '5%',
   },  
   button: {
     backgroundColor: '#7265E3', 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: 167,
   },
   textContainer: {
-    marginTop: 40,
+    marginTop: 20,
     marginHorizontal: '5%'
   },
   buttonText: {
