@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center', 
   },
   socialIcon: {
-    width: 20,
-    height: 20,
+    width: 50,
+    height: 50,
     resizeMode: 'contain',
   },
   loginLinkContainer: {
