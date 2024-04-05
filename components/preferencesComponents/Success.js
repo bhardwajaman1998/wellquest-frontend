@@ -20,7 +20,7 @@ const Success = ({ formData, onPressNext }) => {
         You are all set now, let’s reach your goals together with us.
       </Text>
       <TouchableOpacity onPress={onPress} style={styles.button}>
-        <Text style={styles.btnText}>Go To Home</Text>
+        <Text style={styles.btnText}>Get Started</Text>
       </TouchableOpacity>
     </AnimatedView>
   );
