@@ -5,11 +5,11 @@ import Swiper from 'react-native-swiper';
 const LandingSwiper = ({ navigation }) => {
   return (
     <View style={styles.container}>
-    <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
+    <Swiper style={styles.wrapper} showsButtons={false} loop={false} activeDotColor='#FF6200' >
       {/* Landing */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing.png')}
+          source={require('../assets/LandingTest.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     fontFamily: 'Helvetica Neue',
   },
-  wrapper: {},
+  wrapper: {
+  },
   slide: {
     flex: 1,
     width: '100%',
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: 300,
+    height: 370,
     marginTop: '10%',
   },  
   button: {
