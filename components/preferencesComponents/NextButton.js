@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     bottom: 30,
     right: 0,
     height: 50,
+    width: 130,
     paddingHorizontal: 20, 
     backgroundColor: '#FF934E',
     borderRadius: 25,
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',    
     justifyContent: 'space-between',
-    gap: 10
+    gap: 5
   },
   text: {
     color: 'white',

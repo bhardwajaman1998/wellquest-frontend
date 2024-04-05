@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import successImg from "../../assets/success.png";
+import successImg from "../../assets/successNew.png";
 import AnimatedView from "../globalComponents/AnimatedView";
 
 const Success = ({ formData, onPressNext }) => {
@@ -37,12 +37,15 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   img: {
-    marginTop: 40,
-    margin: 10,
-    height: 300,
-    width: 300,
-    borderRadius: 150,
-    backgroundColor: "grey",
+    // marginTop: 40,
+    // margin: 10,
+    // height: 300,
+    // width: 300,
+    // borderRadius: 150,
+    // backgroundColor: "grey",
+    width: '100%',
+    height: 250,
+    marginTop: '10%',
   },
   title: {
     fontSize: 40,

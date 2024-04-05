@@ -48,7 +48,7 @@ const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
         </View>
         <View style={styles.pickerContainer}>
           <WheelPicker
-          data={ageOptions}
+            data={ageOptions}
             selectedIndex={selectedAge - 1}
             options={ageOptions}
             onChange={(index) => setSelectedAge(Number(ageOptions[index]))}
