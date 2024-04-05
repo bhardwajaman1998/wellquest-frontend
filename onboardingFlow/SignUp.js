@@ -61,6 +61,7 @@ const SignUp = ({ navigation }) => {
   return (
     <KeyboardAvoidingView behavior='padding' enabled style={{height: '100%'}}>
       <ScrollView style={{backgroundColor: '#7265E3'}} contentContainerStyle={{flexGrow: 1}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>       
+      {/* <Image source={require('../assets/logo_white.png')} style={styles.mainLogo} /> */}
       <Image source={require('../assets/logo_white.png')} style={styles.mainLogo} />
       <View style={styles.container}>
         <Text style={styles.title}>Sign up</Text>
@@ -112,9 +113,9 @@ const SignUp = ({ navigation }) => {
         </TouchableOpacity>
 
         <View style={styles.socialIconsContainer}>
-          <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-          <Image source={require('../assets/facebook.png')} style={styles.socialIcon}/>
-          <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_google_svg.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_facebook_svg.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_apple_svg.png')} style={styles.socialIcon} />
         </View>
         <View style={styles.loginLinkContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('Login', {name: 'Login'})}>
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 48,
+    fontSize: 44,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
@@ -232,11 +233,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center', 
   },
   socialIcon: {
-    width: 20,
-    height: 20,
-    // marginBottom:10,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
-    color:'#2A9D5C'
   },
   loginLinkContainer: {
     marginTop: 20,
