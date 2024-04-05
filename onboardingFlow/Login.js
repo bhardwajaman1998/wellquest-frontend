@@ -10,11 +10,13 @@ const Login = ({ navigation}) => {
   // create login function
   function handleSubmit() {
     console.log(email, password);
+    console.log(process.env.API_URL);
+
     const userData = {
       email: email,
       password: password,
     };
-    axios.post("http://localhost:3000/api/admin/login", userData)
+    axios.post(`${process.env.API_URL}/admin/login`, userData)
       .then((res) => {
         if (res.status === 201) {
           console.log(res.data);

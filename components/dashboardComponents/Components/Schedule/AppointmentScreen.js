@@ -16,7 +16,7 @@ const AppointmentScreen = ({update}) => {
   const fetchData = async () => {
     const userId = await getUserId()
     try {
-      const response = await fetch(`http://localhost:3000/api/customer/get_scheduled_appointments?customerId=${userId}`);
+      const response = await fetch(`${process.env.API_URL}/customer/get_scheduled_appointments?customerId=${userId}`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {

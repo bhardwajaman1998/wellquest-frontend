@@ -35,7 +35,7 @@ const HomeScreen= ({ route })=>{
     const fetchUserData = async () =>{
         try{
             const userId = await getUserId();
-            const response = await  axios.get(`http://localhost:3000/api/customer/get_user_data?customerId=${userId}`);
+            const response = await  axios.get(`${process.env.API_URL}/customer/get_user_data?customerId=${userId}`);
             setUserName(response.data.customerData);
             setCalorieLimit(response.data.customerData.dailyCalories)
             if(response.data.newMealPlan){
@@ -56,7 +56,7 @@ const HomeScreen= ({ route })=>{
     const fetchCurrentCalIntake = async () => {
         try{
             const userId = await getUserId();
-            const response= await axios.get(`http://localhost:3000/api/customer/get_calories_consumed?cust_id=${userId}`);
+            const response= await axios.get(`${process.env.API_URL}/customer/get_calories_consumed?cust_id=${userId}`);
             const data = response.data;
             setCompletedCalories(data.totalCaloriesConsumed);
             calculateRemaining(data.totalCaloriesConsumed)
@@ -76,7 +76,7 @@ const HomeScreen= ({ route })=>{
         try {
           const userId = await getUserId();
           console.log('fetching appointments')
-          const response = await fetch(`http://localhost:3000/api/customer/get_scheduled_appointments?customerId=${userId}`);
+          const response = await fetch(`${process.env.API_URL}/customer/get_scheduled_appointments?customerId=${userId}`);
           const data = await response.json();
           const upcomingAppointments = data.filter(appointment => {
             if (!appointment.cancelled){
@@ -94,7 +94,7 @@ const HomeScreen= ({ route })=>{
     const cancelApt = async (apt_id) => {
         try {
             const appointmentData = {apt_id: apt_id}
-            const response = await axios.post('http://localhost:3000/api/customer/cancel_appointment', appointmentData);
+            const response = await axios.post(`${process.env.API_URL}/customer/cancel_appointment`, appointmentData);
             console.log(response.data)
             fetchAptData()
         } catch (error) {

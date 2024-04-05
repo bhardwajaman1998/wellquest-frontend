@@ -34,7 +34,7 @@ const SignUp = ({ navigation }) => {
       email: email,
       password: password,
     };
-    axios.post("http://localhost:3000/api/admin/signup", userData)
+    axios.post(`${process.env.API_URL}/admin/signup`, userData)
       .then((res) => {
         console.log(res);
         if (res.status === 201) {

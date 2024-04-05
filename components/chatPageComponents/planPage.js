@@ -46,7 +46,7 @@ const PlanPage = () => {
             }
         };
         console.log(mealData)
-        const response = await axios.post('http://localhost:3000/api/customer/make_meal_plan', mealData);
+        const response = await axios.post(`${process.env.API_URL}/customer/make_meal_plan`, mealData);
         if (response.status == 200){
           goToInitialScreen()
         }
@@ -83,7 +83,7 @@ const PlanPage = () => {
   const fetchMealSuggestions = async (dataToSend) => {
  
     try {
-      const apiKey = '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';
+      const apiKey = process.env.API_OPEN_AI_KEY
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
   
       const prompt = `Fetch me 1 meal options for each breakfast lunch and dinner for a person who is ${dataToSend.height} tall, weighs ${dataToSend.weight} and whose goal is to ${dataToSend.goal} and his meal preference is ${dataToSend.preference} Fetch in the exact JSON format given  below:

@@ -74,7 +74,7 @@ const PreferencesScreen = () => {
   const postData = async (formData) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/customer/store_preferences",
+        `${process.env.API_URL}/customer/store_preferences`,
         {
           method: "POST",
           headers: {

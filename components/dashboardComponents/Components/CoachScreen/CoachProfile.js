@@ -28,7 +28,7 @@ const CoachProfile = ({ route }) => {
 
     const fetchCoachData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/customer/get_selected_coach?coach_id=${coachId}`);
+            const response = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`);
             console.log(response.data.coachData);
             setCoachData(response.data.coachData);
             setIsPersonalTrainer(response.data.coachData.personal_trainer);

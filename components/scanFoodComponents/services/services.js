@@ -26,7 +26,7 @@ export const submitToGoogle = async (image) => {
       });
       let response = await fetch(
         "https://vision.googleapis.com/v1/images:annotate?key=" +
-        'AIzaSyDZKCLOgN8en8fY_uRsoPBU5wlGTpB7MAI',
+        `${process.env.API_GOOGLE_VISION_KEY}`,
         {
           headers: {
             Accept: "application/json",
@@ -46,7 +46,7 @@ export const submitToGoogle = async (image) => {
 
 export const getFoodData = async (foodName, getSearchResults = false) => {
     const APP_ID = '3a5c870c';
-    const APP_KEY = 'de0879a02b8061603fd501ec2685772b';
+    const APP_KEY = process.env.API_EDMAM_KEY;
     const INGR = encodeURIComponent(foodName);
   
     try {
@@ -85,7 +85,7 @@ export const getFoodData = async (foodName, getSearchResults = false) => {
 
 export const getMealInfo = async (foodName) => {
   try {
-    const apiKey = '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';
+    const apiKey = process.env.API_OPEN_AI_KEY;
     const prompt = `Give the information of calories, carbohydrates, fats, and proteins data based on the information below. return the calculated contents from its serving size and units.
     Food name = ${foodName} 100 gram
       The data should be returned in the exact JSON format below and it should only contain numeric values for the information 
@@ -97,7 +97,7 @@ export const getMealInfo = async (foodName) => {
       max_tokens: 1000,
     };
     
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
+    const response = await axios.post(`https://api.openai.com/v1/chat/completions`, requestBody, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
@@ -132,7 +132,7 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
   };
 
   try {
-    const response = await fetch('http://localhost:3000/api/customer/log_meal', {
+    const response = await fetch(`${process.env.API_URL}/customer/log_meal`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -160,7 +160,7 @@ export const historyMeals = async () => {
 
   const cust_id = userId
   try {
-    const response = await fetch(`http://localhost:3000/api/customer/get_history_meals?cust_id=${cust_id}`, {
+    const response = await fetch(`${process.env.API_URL}/customer/get_history_meals?cust_id=${cust_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

@@ -26,7 +26,7 @@ export default function FindCoach() {
 
     const fetchCoachData = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/customer/get_coaches');
+            const response = await axios.get(`${process.env.API_URL}/customer/get_coaches`);
             console.log(response); 
             console.log("data setting ",response.data.coaches);
             const allCoaches = response.data.coaches;
