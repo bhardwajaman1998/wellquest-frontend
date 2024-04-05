@@ -46,7 +46,7 @@ const Login = ({ navigation}) => {
           <Text style={styles.heading2}>Email Address</Text>
           <TextInput
             style={[styles.input, styles.shadow]}
-            placeholder="Enter Your Email"
+            placeholder="xyz@abc.com"
             keyboardType="email-address"
             autoCapitalize="none"
             onChange={e => setEmail(e.nativeEvent.text)}
@@ -57,7 +57,7 @@ const Login = ({ navigation}) => {
           <Text style={styles.heading2}>Password</Text>
           <TextInput
             style={[styles.input, styles.shadow]}
-            placeholder="Enter Password"
+            placeholder="***********"
             secureTextEntry
             onChange={e => setPassword(e.nativeEvent.text)}
           />
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     // borderRadius: 50,
   },
   title: {
-    fontSize: 48,
+    fontSize: 44,
     fontWeight: 'bold',
     marginBottom: 10, 
     textAlign: 'left',
