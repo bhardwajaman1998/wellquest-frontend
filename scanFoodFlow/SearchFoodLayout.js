@@ -111,7 +111,7 @@ const SearchFoodLayout = ({navigation, historyList}) => {
                                 {historyList.length > 0 ? (
                                     <HistoryListView navigation={navigation} data={historyList}/>
                                 ) : (
-                                    <NoFoodView/> 
+                                    <NoFoodView isFromHomeScreen={true}/> 
                                 )}
                             </View>
                         )}                        

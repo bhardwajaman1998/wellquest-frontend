@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue',
   },
   wrapper: {
+    marginTop: 50,
   },
   dot: {
     width: 15,  
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     width: 167,
   },
   textContainer: {
-    marginTop: 50,
+    marginTop: 40,
     marginHorizontal: '5%'
   },
   buttonText: {

@@ -6,9 +6,10 @@ import StyledText from "../globalComponents/StyledText"
 const NoFoodView = ({
   title = "No food logged yet!",
   description = "Search or scan your first food to log",
+  isFromHomeScreen = false
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={isFromHomeScreen ?  (styles.homeContainer) : (styles.container)}>
       <Image
         size="lg"
         tintColor={"rgb(255, 147, 78)"}
@@ -31,6 +32,14 @@ const styles = StyleSheet.create({
   container: {
     margin: 40,
     marginTop: 160,
+    padding: 10,
+    alignItems: "center",
+    textAlign: "center",
+    gap: 10,
+  },
+  homeContainer: {
+    margin: 40,
+    marginTop: 40,
     padding: 10,
     alignItems: "center",
     textAlign: "center",

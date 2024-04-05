@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     gap: 20
   },
   bottomCancelConatiner:{
-    backgroundColor: 'blue',
+    backgroundColor: '#7265E3',
     margin: 30,
     borderRadius: 20,
     width: '50%',

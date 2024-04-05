@@ -5,7 +5,6 @@ import StepsIcon from "../../assets/steps_icon.png"
 import Calorie_History from "./Calorie_History"
 import Weight_History from "./Weight_History"
 import { useNavigation } from "@react-navigation/native"
-import Target_Card from "../../dashboardFlow/Target_Card"
 
 const TabProgressScreen = () => {
   const navigation = useNavigation()
@@ -15,12 +14,11 @@ const TabProgressScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Target_Card/>
       <Weight_History />
+      <Calorie_History />
       <TouchableOpacity onPress={handlePress} style={styles.button}>
         <Text style={styles.buttonText}>Want to change your Goal?</Text>
       </TouchableOpacity>
-      <Calorie_History />
     </View>
   )
 }
