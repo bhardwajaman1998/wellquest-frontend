@@ -34,51 +34,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     width: "100%",
   },
-
-  targetContainer: {
-    flexDirection: "row",
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 10,
-    marginTop: 10,
-    margin: 5,
-    borderRadius: 12,
-    flex: 1,
-  },
-
-  targertHeading: {
-    fontSize: 18,
-    textAlign: "left",
-    alignSelf: "flex-start",
-  },
-
-  targetComponentsContainer: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-  },
-  containerHeading: {
-    fontSize: 14,
-    textAlign: "left",
-  },
-  containerSubHeading: {
-    fontSize: 10,
-    textAlign: "left",
-  },
-  dataContainer: {
-    display: "flex",
-    flexDirection: "column",
-    paddingLeft: 8,
-    paddingRight: 8,
-    width: "80%",
-  },
-
-  stepsContainer: {
-    display: "flex",
-    flexDirection: "row",
-  },
-
   button: {
     backgroundColor: "#7265E3",
     margin: 5,
