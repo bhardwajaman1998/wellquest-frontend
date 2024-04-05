@@ -15,41 +15,6 @@ const TabProgressScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.targertBox}>
-        <Text style={styles.targertHeading}>Today's Target</Text>
-        <View style={styles.targetComponentsContainer}>
-          <View style={styles.targetContainer}>
-            <Image
-              source={WaterDropIcon}
-              style={{
-                width: 16,
-                height: 21,
-                margin: 5,
-                alignSelf: "center",
-              }}
-            />
-            <View style={styles.dataContainer}>
-              <Text style={styles.containerHeading}>8L</Text>
-              <Text style={styles.ontainerSubHeading}>Water Intake</Text>
-            </View>
-          </View>
-          <View style={styles.targetContainer}>
-            <Image
-              source={StepsIcon}
-              style={{
-                width: 20,
-                height: 17,
-                margin: 5,
-                alignSelf: "center",
-              }}
-            />
-            <View style={styles.dataContainer}>
-              <Text style={styles.containerHeading}>2400</Text>
-              <Text style={styles.ontainerSubHeading}>Foot Steps</Text>
-            </View>
-          </View>
-        </View>
-      </View> */}
       <Target_Card/>
       <Weight_History />
       <TouchableOpacity onPress={handlePress} style={styles.button}>
@@ -68,13 +33,6 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingTop: 15,
     width: "100%",
-  },
-  targertBox: {
-    padding: 15,
-    margin: 5,
-    backgroundColor: "#FF934E66",
-    borderRadius: 22,
-    alignItems: "center",
   },
 
   targetContainer: {
