@@ -33,6 +33,8 @@ const SignUp = ({ navigation }) => {
     const userData = {
       email: email,
       password: password,
+      name: name,
+      dailyCalories: 2500
     };
     axios.post(`${process.env.API_URL}/admin/signup`, userData)
       .then((res) => {
@@ -55,7 +57,7 @@ const SignUp = ({ navigation }) => {
   }
 
   const navigateToOnboarding = () => {
-     navigation.navigate('Preferences', {screen: 'Preferences'});
+     navigation.navigate('PreferencesStack', {screen: 'Preferences'});
   };
 
   return (
