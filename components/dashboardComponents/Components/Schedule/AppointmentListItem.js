@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity,Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
-import clockIcon from "../../.././../assets/clock.png";
+import clockIcon from "../../.././../assets/clockNew.png";
 import dotIcon from "../../.././../assets/Ellipse.png";
 
-const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
+const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt }) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const toggleOptions = () => {
@@ -18,6 +18,7 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
 
   const handleCancel = () => {
     // Handle cancel action
+    cancelApt(id);
     setShowOptions(false);
   };
 
@@ -29,13 +30,14 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
           <Icon name="ellipsis-v" size={20} color="#7265E3" />
         </TouchableOpacity>
       </View>
-      <View style={styles.separator} />
+      
       <View style={styles.content}>
         <Image source={clockIcon} style={styles.clockIcon} />
         <Text style={styles.date}>{date}</Text>
         <Image source={dotIcon} style={styles.dotIcon} />
         <Text style={styles.timeSlot}>{time}</Text>
       </View>
+      <View style={styles.separator} />
       <View style={styles.coachInfo}>
         <Image source={coachAvatar} style={styles.avatar} />
         <Text style={styles.coachName}>{coachName}</Text>
@@ -45,6 +47,7 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
           <TouchableOpacity style={styles.optionButton} onPress={handleReschedule}>
             <Text style={styles.optionText}>Reschedule</Text>
           </TouchableOpacity>
+          <View style={[styles.separator, {marginVertical:0}]} />
           <TouchableOpacity style={styles.optionButton} onPress={handleCancel}>
             <Text style={styles.optionText}>Cancel</Text>
           </TouchableOpacity>
@@ -54,9 +57,11 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 0,
+    margin:20,
+    // marginHorizontal: 0,
     backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 1,
@@ -65,19 +70,15 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     borderLeftColor: "#7265E3",
     borderLeftWidth: 5,
-    position: 'relative',
-    ...Platform.select({
-      ios: {
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.23,
-          shadowRadius: 2,
-      },
-      android: {
-          elevation: 4,
-      },
-  }),
-  borderRadius: 8,
+    elevation: 5, // For Android shadow
+    shadowColor: '#7265E3', // For iOS shadow
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.65,
+    shadowRadius: 3.84,
+    borderRadius: 8,
   },
   header: {
     flexDirection: 'row',
@@ -101,16 +102,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   clockIcon: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
     marginRight: 5,
   },
   date: {
     marginRight: 5,
   },
   dotIcon: {
-    width: 5,
-    height: 5,
+    width: 10,
+    height: 10,
     marginRight: 5,
   },
   timeSlot: {
@@ -129,6 +130,7 @@ const styles = StyleSheet.create({
   },
   coachName: {
     fontSize: 16,
+    fontWeight:'bold',
   },
   optionsContainer: {
     position: 'absolute',

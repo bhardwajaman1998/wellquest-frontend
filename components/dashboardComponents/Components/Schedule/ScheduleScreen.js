@@ -1,13 +1,14 @@
 // ScheduleScreen.js
 
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Alert, FlatList, TouchableOpacity, Text, Image } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, TouchableOpacity, Text, Image, TextStyle } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
-import TimeSlotButton from './TimeSlotButton'; // Import the custom button component
-import ConfirmationWindow from './ConfirmationWindow'; // Import the overlay component
+import TimeSlotButton from './TimeSlotButton'; 
+import ConfirmationWindow from './ConfirmationWindow';
 import axios from 'axios';
 import moment from 'moment';
+import { getUserId } from "../../../UserService";
 
 
 const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) => {
@@ -15,7 +16,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [showOverlay, setShowOverlay] = useState(false);
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-    const [isDateSelected, setIsDateSelected] = useState(false); // Track whether a date is selected
+    const [isDateSelected, setIsDateSelected] = useState(false); // to Track whether a date is selected
     const [selectedDate, setSelectedDate] = useState(null);
 
     const navigation = useNavigation();
@@ -26,7 +27,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
     const fetchAvailableSlots = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/customer/get_selected_coach?coach_id=${coachId}`);
+            const response = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`);
             console.log("API Response:", response.data);
             const availableSlots = response.data.coachData.available_slots;
             console.log("Available Slots:", availableSlots);
@@ -39,7 +40,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
  
     const handleTimeSlotSelection = (timeSlot) => {
         setSelectedSlot(prevSlot => prevSlot === timeSlot ? null : timeSlot);
-        setIsDateSelected(true); // Date is selected, hide the text
+        setIsDateSelected(true); // Date is selected , hide the text
         setSelected(prevSlot => prevSlot === timeSlot ? null : timeSlot); // Update the selected state
     };
     
@@ -73,23 +74,24 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
 
     const handleSchedule = async () => {
+        const userId = await getUserId()
         if (selectedSlot && selectedDate) { // Use selectedDate instead of day.dateString so the selected date from the calender can be fetched
             try {
                 // Fetching the  coach details
-                const coachResponse = await axios.get(`http://localhost:3000/api/customer/get_selected_coach?coach_id=${coachId}`);
+                const coachResponse = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`);
                 const coachData = coachResponse.data.coachData;
                 const { coach_id, coach_name } = coachData;
 
                 
                 const appointmentData = {
-                    cust_id: '65cc353cb9be345699d6a69a', 
+                    cust_id: userId, 
                     coach_id: coachId,
                     date: selectedDate, 
                     timeSlot: selectedSlot
                 };
 
                 //POST request to schedule appointment
-                const response = await axios.post('http://localhost:3000/api/customer/schedule_appointment', appointmentData);
+                const response = await axios.post(`${process.env.API_URL}/customer/schedule_appointment`, appointmentData);
                 console.log("Appointment scheduled successfully:", response.data);
                 setShowOverlay(true); // Showing the  confirmation window
             } catch (error) {
@@ -123,7 +125,7 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                 onDayPress={handleDayPress} 
                 markingType={'dot'}
                 markedDates={{
-                    [selectedDate]: { selected: true, selectedColor: '#7265E3' }
+                    [selectedDate]: { selected: true}
                 }}
                 minDate={moment().format("YYYY-MM-DD")} // user will not be able to select the past days
                 style={styles.calendar}
@@ -132,18 +134,24 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                     calendarBackground: '#ffffff',
                     textSectionTitleColor: '#000000', 
                     selectedDayBackgroundColor: '#7265E3',
-                    selectedDayTextColor: '#000',
-                    todayTextColor: '#00adf5',
-                    dayTextColor: '#2d4150', 
-                    textDisabledColor: '#808080', 
+                    selectedDayTextColor: '#fff',
+                    todayTextColor: 'blue',
+                    dayTextColor: 'black',
+                    textDisabledColor: 'grey', 
+                    textDayFontFamily: 'Helvetica Neue',
+                    textMonthFontFamily: 'Helvetica Neue',
+                    textDayHeaderFontFamily: 'Helvetica Neue',
+                    textDayFontWeight: 'bold',
+                    textMonthFontWeight: 'bold',
+                    textDayHeaderFontWeight: 'bold'
                 }}
             />
 
+                <View style={styles.shadowView}></View>
 
-
-                {!isDateSelected && <Text>Select the date to see available slots!</Text>}
-
-                <FlatList
+                {!isDateSelected && <Text style={{marginBottom:20}}>Select the date to see available slots!</Text>}
+                {isDateSelected && <>
+                    <FlatList
                     data={availableTimeSlots}
                     numColumns={1}
                     renderItem={({ item }) => (
@@ -156,7 +164,6 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                     keyExtractor={(item, index) => index.toString()}
                     contentContainerStyle={styles.timeSlotContainer}
                 />
-
                 {/* Schedule and Cancel Buttons */}
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
@@ -164,15 +171,16 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                         onPress={handleSchedule}
                         disabled={!selectedSlot}
                     >
-                        <Text style={styles.buttonText}>Schedule</Text>
+                        <Text style={styles.submitButtonText}>SCHEDULE</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.button, styles.cancelBtn]}
                         onPress={onClose}
                     >
-                        <Text style={styles.buttonText}>Cancel</Text>
+                        <Text style={styles.buttonText}>CANCEL</Text>
                     </TouchableOpacity>
                 </View>
+                </>}
             </View>
 
             {showOverlay && <ConfirmationWindow onClose={handleCloseOverlay} onConfirm={handleConfirmation} />}
@@ -196,22 +204,44 @@ const styles = StyleSheet.create({
     calendar: {
         width: '100%',
         marginBottom: 20,
-        
     },
+    shadowView:{
+        height: 30,
+        width: '100%',
+        backgroundColor: '#fff',
+        borderBottomEndRadius: 20,
+        borderBottomStartRadius: 20, 
+        shadowColor: '#7265E3',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.4,
+        shadowRadius: 3,
+        elevation: 5,
+        marginTop: -30,
+        marginBottom: 20
+      },
     timeSlotContainer: {
-        flexDirection: 'column',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        padding: 5,
     },
     buttonContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
+        gap: 10,
         marginVertical: 10,
     },
     button: {
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderRadius: 5,
+        borderRadius: 20,
         marginHorizontal: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '50%'
     },
     submitBtn: {
         backgroundColor: '#7265E3',
@@ -223,6 +253,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#000',
+        fontSize: 16,
+    },
+    submitButtonText: {
+        color: '#fff',
         fontSize: 16,
     },
 });

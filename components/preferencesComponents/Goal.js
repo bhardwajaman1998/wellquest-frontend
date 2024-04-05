@@ -3,9 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import WheelPicker from "react-native-wheely";
+import AnimatedView from "../globalComponents/AnimatedView";
 
 const Goal = ({ backAction, nextCompName, onPressNext }) => {
-  const [selectedGoal, setSelectedGoal] = useState(null);
+  const [selectedGoal, setSelectedGoal] = useState('Lose Weight');
 
   const goalOptions = [
     { label: "Get Fitter", value: "Get Fitter" },
@@ -17,7 +18,7 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
 
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
         <Text style={styles.heading}>Whats your Goal?</Text>
         <Text style={styles.text}>
@@ -31,7 +32,7 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
                 ? goalOptions.findIndex(
                     (option) => option.value === selectedGoal
                   )
-                : 0
+                : 2
             }
             options={goalOptions.map((option) => option.label)}
             onChange={(index) => {
@@ -40,14 +41,19 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
             }}
             itemTextStyle={{
               color: "black",
-              fontSize: 20,
+              fontSize: 32,
+              marginTop: 10,
+              marginBottom: 10,
+              alignSelf: 'center'
             }}
             containerStyle={{
-              width: "80%",
-              alignItems: "center",
+              marginTop: 30,
+              justifyContent: 'center',
+              alignContent: 'center'
             }}
             selectedIndicatorStyle={{
               width: 200,
+              alignSelf: 'center',
               borderTopWidth: 3,
               borderBottomWidth: 3,
               borderRadius: 0,
@@ -55,7 +61,7 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
             }}
-            itemHeight={60}
+            itemHeight={80}
           />
         </View>
       </View>
@@ -68,7 +74,7 @@ const Goal = ({ backAction, nextCompName, onPressNext }) => {
           disabled={!selectedGoal} 
         />
       </View>
-    </View>
+    </AnimatedView>
   );
 };
 
@@ -91,13 +97,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 34,
     fontWeight: "bold",
     marginBottom: 10,
+    fontFamily: 'Helvetica Neue',
+
   },
   text: {
     fontSize: 16,
     marginBottom: 20,
+    fontFamily: 'Helvetica Neue',
+
   },
   pickerContainer: {
     width: "80%",

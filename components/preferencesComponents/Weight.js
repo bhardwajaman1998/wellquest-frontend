@@ -4,9 +4,9 @@ import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import ToggleButton from "./ToggleButton";
 import WheelPicker from "react-native-wheely";
-import CustomWheelPicker from "./CustomWheelPicker";
+import AnimatedView from "../globalComponents/AnimatedView";
 
-const Weight = ({ backAction, nextCompName, onPressNext }) => {
+const Weight = ({ backAction, nextCompName, onPressNext, isForAi = false, getWeight  }) => {
   const startWeightKgs = 30;
   const endWeightKgs = 200;
   const startWeightLbs = Math.round(startWeightKgs * 2.20462); // Convert start weight to lbs
@@ -24,7 +24,7 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
     }
   }, [selectedWeightUnit, startWeightKgs, startWeightLbs]);
   
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(5);
 
   const [ weightKgs, setWeightKgs] = useState([]);
   const [ weightLbs, setWeightLbs] = useState([]);
@@ -44,16 +44,20 @@ const Weight = ({ backAction, nextCompName, onPressNext }) => {
 };
 
 const [weightOptionsKgs, weightOptionsLbs] = getWeightOptions("Kg");
-console.log("Weight Options in Kilograms:", weightOptionsKgs);
-console.log("Weight Options in Pounds:", weightOptionsLbs);
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.heading}>What's your weight?</Text>
-        <Text style={styles.text}>
-          This helps us create your personalized plan
-        </Text>
+        {isForAi ? (
+          <></>
+        ) : (
+          <>
+            <Text style={styles.heading}>What's your weight?</Text>
+            <Text style={styles.text}>
+              This helps us create your personalized plan
+            </Text>
+          </>
+        )}
         <ToggleButton
           labels={["Kg", "Lb"]}
           onChange={(selectedButton) => {
@@ -66,42 +70,64 @@ console.log("Weight Options in Pounds:", weightOptionsLbs);
           <WheelPicker
             selectedIndex={selectedIndex}
             options={weightKgs}
-            onChange={(index) => setSelectedWeight(weightKgs[index])
-            }
+            onChange={(index) => {
+              setSelectedWeight(weightKgs[index])
+              if (isForAi) {
+                getWeight(weightKgs[index], 'Kg')
+              }
+            }}
             itemTextStyle={{
-              color: "black",
-              fontSize: 40,
+              color: "black", 
+              fontFamily: 'Helvetica Neue',
+              fontSize: 50,
+              marginTop: 10,
+              marginBottom: 10,
+              alignSelf: 'center'
             }}
             containerStyle={{
-              width: "80%",
-              alignItems: "center",
+              marginTop: 30,
+              justifyContent: 'center',
+              alignContent: 'center'
             }}
             selectedIndicatorStyle={{
               width: 100,
+              flex: 1,
               borderTopWidth: 3,
               borderBottomWidth: 3,
               borderRadius: 0,
               borderTopColor: "#FF934E",
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
+              alignSelf: 'center'
             }}
-            itemHeight={60}
+            itemHeight={85}
           /> 
           )}
           {selectedWeightUnit === "Lb" && (
             <WheelPicker
             selectedIndex={selectedIndex}
             options={weightLbs}
-            onChange={(index) => setSelectedWeight(weightLbs[index])}
+            onChange={(index) => {
+              setSelectedWeight(weightLbs[index])
+              if (isForAi) {
+                getWeight(weightLbs[index], 'Lb')
+              }
+            }}
             itemTextStyle={{
-              color: "black",
-              fontSize: 40,
+              color: "black", 
+              fontFamily: 'Helvetica Neue',
+              fontSize: 50,
+              marginTop: 10,
+              marginBottom: 10,
             }}
             containerStyle={{
-              width: "80%",
-              alignItems: "center",
+              marginTop: 30,
+              justifyContent: 'center',
+              alignContent: 'center'
             }}
             selectedIndicatorStyle={{
+              flex: 1,
+              alignSelf : 'center',
               width: 100,
               borderTopWidth: 3,
               borderBottomWidth: 3,
@@ -110,22 +136,26 @@ console.log("Weight Options in Pounds:", weightOptionsLbs);
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
             }}
-            itemHeight={60}
+            itemHeight={85}
           />
         )}
         
         </View>
       </View>
-      <View style={styles.buttonsContainer}>
-        <BackButton backAction={backAction} />
-        <NextButton
-          nextCompName={nextCompName}
-          onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
-          selectedWeight={selectedWeight}
-          selectedWeightUnit={selectedWeightUnit}
-        />
-      </View>
-    </View>
+      {isForAi ? (
+        <></>
+      ) : (
+        <View style={styles.buttonsContainer}>
+          <BackButton backAction={backAction} />
+          <NextButton
+            nextCompName={nextCompName}
+            onPressNext={() => onPressNext(selectedWeight, selectedWeightUnit)}
+            selectedWeight={selectedWeight}
+            selectedWeightUnit={selectedWeightUnit}
+          />
+        </View>
+      )}
+    </AnimatedView>
   );
 };
 
@@ -135,7 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: 36,
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FBF9F6",
     padding: 20,
   },
   innerContainer: {
@@ -148,19 +178,22 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   heading: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: 'center',
+    fontFamily: 'Helvetica Neue',
+
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 20,
   },
   pickerContainer: {
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    marginTop: "10%",
+    marginTop: "2%",
   },
   label: {
     fontSize: 18,

@@ -34,14 +34,14 @@ const SearchBar = ({navigation, setSearchBarActive, isFromSearchScreen = false, 
                 width="100%" 
                 borderRadius="15" 
                 fontFamily={'poppins-regular'}
-                fontSize="14" 
-                backgroundColor={'rgb(245, 245, 245)'} 
+                fontSize="15" 
+                backgroundColor={'white'} 
                 InputLeftElement={
                     <Icon 
                         m="2" 
                         ml="3" 
-                        size="6" 
-                        color="gray.400" 
+                        size="7" 
+                        color="gray.600" 
                         as={<MaterialIcons name="search" />}
                     />
                 }
@@ -50,8 +50,8 @@ const SearchBar = ({navigation, setSearchBarActive, isFromSearchScreen = false, 
                         <Icon 
                             m="2" 
                             ml="3" 
-                            size="6" 
-                            color="gray.400" 
+                            size="7" 
+                            color="gray.600" 
                             as={<MaterialIcons name="check" />}
                             onPress={searchForFood}
                         />
@@ -70,6 +70,16 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: 25,
         paddingHorizontal: 25,
+        shadowColor: "#7265E3",
+        borderWidth: 0,
+        borderColor: "#7265E3",
+        shadowOffset: {
+        width: 0,
+        height: 1, // Adjusted to remove upper shadow
+        },
+        shadowOpacity: 0.47,
+        shadowRadius: 1.65,
+        elevation: 5,
     }
   });
 

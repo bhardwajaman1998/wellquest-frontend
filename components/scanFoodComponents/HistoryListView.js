@@ -13,21 +13,22 @@ const HistoryListView = ({navigation, data, closeModal}) => {
 
     const selectFood = (index) => {
         setSelectedItemIndex((prevIndex) => (prevIndex === index ? null : index));
+        selectFoodItem(index);
     };
 
-    const selectFoodItem = () => {
+    const selectFoodItem = (index) => {
         if (closeModal){
             closeModal()
         }
         navigation.navigate('SearchFoodStack', {
             screen: 'LogFood',
             params: {
-                foodName: data[selectedItemIndex].name,
-                passedData: data[selectedItemIndex],
+                foodName: data[index].name,
+                passedData: data[index],
                 dataFromSearch: true
             }
         });
-        console.log('Item logged:', data[selectedItemIndex]);
+        console.log('Item logged:', data[index]);
     }
 
     return (
@@ -39,12 +40,12 @@ const HistoryListView = ({navigation, data, closeModal}) => {
                     isSelected={index === selectedItemIndex}
                     onSelect={() => selectFood(index)}
                 />
-            ))}
-            {selectedItemIndex !== null && (
-                <TouchableOpacity onPress={selectFoodItem} style={styles.buttonContainer}>
-                    <StyledText style={styles.buttonLog}>Log Item</StyledText>
-                </TouchableOpacity>
-            )}
+                ))}
+                {/* {selectedItemIndex !== null && (
+                    <TouchableOpacity onPress={selectFoodItem} style={styles.buttonContainer}>
+                        <StyledText style={styles.buttonLog}>Log Item</StyledText>
+                    </TouchableOpacity>
+                )} */}
         </View>
     )
 }
@@ -53,12 +54,12 @@ const styles = StyleSheet.create({
     container: {
         width: '85%',
         marginTop: 20,
-        gap: 20
+        gap: 20,
     },
     buttonContainer: {
         backgroundColor: 'rgb(114, 101, 227)',
         height: 40,
-        width: '40%',
+        width: '100%',
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     buttonLog: {
         color: 'white',
         fontFamily: 'poppins-semibold',
-        fontSize: 14
+        fontSize: 14,
     }
   });
 

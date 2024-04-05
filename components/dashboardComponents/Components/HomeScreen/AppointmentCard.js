@@ -3,10 +3,10 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 import { useNavigation } from '@react-navigation/native';
 import CustomCard from './CustomCard';
 import AppointmentListItem from '../Schedule/AppointmentListItem'; 
-import findCoach from '../../../../assets/find_coach.png';
+import findCoach from '../../../../assets/findCoach.png';
 import profilePic from '../../../../assets/Maskgroup.png';
 
-const AppointmentCard = ({appointments}) => {
+const AppointmentCard = ({appointments, cancelApt}) => {
   
   const navigation = useNavigation();
 
@@ -34,14 +34,17 @@ const AppointmentCard = ({appointments}) => {
           time={appointments[0].timeSlot}
           coachName={appointments[0].coach_name}
           coachAvatar={profilePic}
+          id={appointments[0]._id}
+          cancelApt={cancelApt}
         />
       ) : (
         <CustomCard
-          style={styles.buttonstyle}
+          // style={styles.buttonstyle}
           text="You don't have upcoming appointments."
-          buttonText="FIND COACH"
+          buttonText="FIND COACH   "
           onPress={handleSchedulePress}
           imageName={findCoach}
+          imgSize={15}
         />
       )}
     </SafeAreaView>
@@ -51,11 +54,14 @@ const AppointmentCard = ({appointments}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    marginHorizontal: 25,
+    marginHorizontal: 5,
+    marginTop: -10
   },
   header: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginTop: 30,
+    marginLeft: 25,
+    marginBottom: 0, 
     justifyContent: 'space-between',
   },
   heading: {
@@ -64,11 +70,11 @@ const styles = StyleSheet.create({
   },
   seeAll: {
     fontSize: 15,
+    marginRight: 25,
+    marginBottom: 0,  
+    color:'#FF6200',  
   },
-  buttonstyle: {
-    marginLeft: 20,
   
-  },
 });
 
 export default AppointmentCard;

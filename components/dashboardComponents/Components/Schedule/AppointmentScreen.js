@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import AppointmentListItem from './AppointmentListItem'; 
 import profilePic from "../../.././../assets/Maskgroup.png";
 import ToggleButton from '../../../preferencesComponents/ToggleButton';
+import { getUserId } from "../../../UserService";
 
 const AppointmentScreen = ({update}) => {
   const [showPrevious, setShowPrevious] = useState(false);
@@ -13,8 +14,9 @@ const AppointmentScreen = ({update}) => {
   }, [update]);
 
   const fetchData = async () => {
+    const userId = await getUserId()
     try {
-      const response = await fetch('http://localhost:3000/api/customer/get_scheduled_appointments?customerId=65cc353cb9be345699d6a69a');
+      const response = await fetch(`${process.env.API_URL}/customer/get_scheduled_appointments?customerId=${userId}`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {
@@ -26,9 +28,16 @@ const AppointmentScreen = ({update}) => {
     const today = new Date();
     return appointments.filter(appointment => {
       const appointmentDate = new Date(appointment.date);
+      const isCancelled = appointment.cancelled
       if (showPrevious) {
+        if (isCancelled){
+          return true
+        }
         return appointmentDate < today;
       } else {
+        if (isCancelled){
+          return false
+        }
         return appointmentDate >= today;
       }
     });
@@ -73,11 +82,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    padding: 0,
   },
   toggleButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 0,
+    marginTop: 10,
+    padding: 10
   },
   appointmentListContainer: {
     flex: 1,

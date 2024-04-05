@@ -5,8 +5,7 @@ import { View, Image, TouchableOpacity, Text, StyleSheet, Animated, Easing } fro
 const Splash = ({navigation}) => {
   //splash effect and animation
   const scaleAnim = useRef(new Animated.Value(0)).current;
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
+  
   useEffect(() => {
     // Scale animation
     Animated.timing(scaleAnim, {
@@ -15,18 +14,15 @@ const Splash = ({navigation}) => {
       useNativeDriver: true,
     }).start();
 
-    // Fade in animation
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
+    const timer = setTimeout(() => {
+      navigation.replace('LandingSwiper');
+    }, 5000);
 
     return () => {
       scaleAnim.setValue(0);
       fadeAnim.setValue(0);
     };
-  }, [scaleAnim, fadeAnim, navigation]);
+  }, [scaleAnim, navigation]);
 
   return (
     <View style={styles.container}>
@@ -35,11 +31,11 @@ const Splash = ({navigation}) => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <TouchableOpacity onPress={() =>
+      {/* <TouchableOpacity onPress={() =>
         navigation.navigate('LandingSwiper')
       } style={styles.button} >
         <Text style={styles.buttonText}>GET STARTED</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -72,6 +68,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
+    fontFamily: 'Helvetica Neue',
   },
   
 });

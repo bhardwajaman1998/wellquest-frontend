@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
+import { getUserId } from '../../UserService';
 
 export const submitToGoogle = async (image) => {
     try {
@@ -25,7 +26,7 @@ export const submitToGoogle = async (image) => {
       });
       let response = await fetch(
         "https://vision.googleapis.com/v1/images:annotate?key=" +
-        'AIzaSyDEO1IL3do4vXJ7Z5LWlMZSZ6YEvtAgv6U',
+        `${process.env.API_GOOGLE_VISION_KEY}`,
         {
           headers: {
             Accept: "application/json",
@@ -45,7 +46,7 @@ export const submitToGoogle = async (image) => {
 
 export const getFoodData = async (foodName, getSearchResults = false) => {
     const APP_ID = '3a5c870c';
-    const APP_KEY = 'de0879a02b8061603fd501ec2685772b';
+    const APP_KEY = process.env.API_EDMAM_KEY;
     const INGR = encodeURIComponent(foodName);
   
     try {
@@ -84,7 +85,7 @@ export const getFoodData = async (foodName, getSearchResults = false) => {
 
 export const getMealInfo = async (foodName) => {
   try {
-    const apiKey = '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';
+    const apiKey = process.env.API_OPEN_AI_KEY;
     const prompt = `Give the information of calories, carbohydrates, fats, and proteins data based on the information below. return the calculated contents from its serving size and units.
     Food name = ${foodName} 100 gram
       The data should be returned in the exact JSON format below and it should only contain numeric values for the information 
@@ -96,7 +97,7 @@ export const getMealInfo = async (foodName) => {
       max_tokens: 1000,
     };
     
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', requestBody, {
+    const response = await axios.post(`https://api.openai.com/v1/chat/completions`, requestBody, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
@@ -113,8 +114,11 @@ export const getMealInfo = async (foodName) => {
 };
 
 export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
+
+  const userId = await getUserId();
+
   const data = {
-    cust_id: '65cc353cb9be345699d6a69a',
+    cust_id: userId,
     name: foodInfo.name,
     serving_size: `${servingSize} ${servingUnit}`,
     timeStamp: new Date(),
@@ -128,7 +132,7 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
   };
 
   try {
-    const response = await fetch('http://localhost:3000/api/customer/log_meal', {
+    const response = await fetch(`${process.env.API_URL}/customer/log_meal`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -151,9 +155,12 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
 };
 
 export const historyMeals = async () => {
-  const cust_id = '65cc353cb9be345699d6a69a'
+
+  const userId = await getUserId();
+
+  const cust_id = userId
   try {
-    const response = await fetch(`http://localhost:3000/api/customer/get_history_meals?cust_id=${cust_id}`, {
+    const response = await fetch(`${process.env.API_URL}/customer/get_history_meals?cust_id=${cust_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

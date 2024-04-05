@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { ArrowRight } from 'lucide-react-native';
+import { Icon, ChevronRightIcon } from "@gluestack-ui/themed"
 
 const NextButton = ({ nextCompName, onPressNext, disabled }) => {
   
@@ -13,11 +14,11 @@ const NextButton = ({ nextCompName, onPressNext, disabled }) => {
   };
 
   return (
-    <View style={[styles.button, {backgroundColor: disabled ? 'grey' : '#FF934E'}]}>
+    <View style={[styles.button, {backgroundColor: disabled ? 'grey' : '#7265E3'}]}>
       <TouchableOpacity onPress={onPress} disabled={disabled}>
         <View style={styles.iconWrapper}>
           <Text style={styles.text}>Next</Text>
-          <ArrowRight style={styles.arrowRight} />
+          <Icon as={ChevronRightIcon} color={'white'} size='md' />
         </View>
       </TouchableOpacity>
     </View>
@@ -28,8 +29,9 @@ const styles = StyleSheet.create({
   button: {
     position: "absolute",
     bottom: 30,
-    right: 30,
+    right: 0,
     height: 50,
+    width: 130,
     paddingHorizontal: 20, 
     backgroundColor: '#FF934E',
     borderRadius: 25,
@@ -38,7 +40,9 @@ const styles = StyleSheet.create({
   },
   iconWrapper: {
     flexDirection: 'row',
-    alignItems: 'center'    
+    alignItems: 'center',    
+    justifyContent: 'space-between',
+    gap: 5
   },
   text: {
     color: 'white',

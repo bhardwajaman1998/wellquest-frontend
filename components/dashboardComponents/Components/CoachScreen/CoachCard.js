@@ -29,7 +29,7 @@ const CoachCard  = ({coachImg,coachName, coachDesc,onPress}) => {
 
 const styles=StyleSheet.create({
     container: {
-        margin: 10,
+        marginTop: 15,
         // height:'100%',
       },
       card: {
@@ -42,6 +42,14 @@ const styles=StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         backgroundColor: '#fff',
+        elevation: 5, // For Android shadow
+        shadowColor: '#7265E3', // For iOS shadow
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
       },
       image: {
         width: 50,
@@ -51,7 +59,7 @@ const styles=StyleSheet.create({
       },
       textContainer: {
         flex: 1,
-        marginLeft:20,
+        marginLeft:10,
         letterSpacing:15,
       },
       coachName: {
@@ -59,8 +67,9 @@ const styles=StyleSheet.create({
         fontWeight: 'bold',
       },
       coachDesc: {
-        fontSize: 16,
+        fontSize: 14,
         marginTop: 5,
+        color: 'grey'
       },
 });
 

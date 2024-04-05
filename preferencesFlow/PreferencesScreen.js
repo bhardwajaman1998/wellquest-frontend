@@ -10,7 +10,7 @@ import Success from "../components/preferencesComponents/Success";
 import { BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NextButton from "../components/preferencesComponents/NextButton";
-
+import { getUserId } from "../components/UserService";
 const PreferencesScreen = () => {
   const [cardType, setCardType] = useState(1);
   const [gender, setGender] = useState(null);
@@ -33,7 +33,7 @@ const PreferencesScreen = () => {
   ];
 
   const [formData, setFormData] = useState({
-    cust_id: "65cc353cb9be345699d6a69a",
+    cust_id: "",
     gender: "",
     age: "",
     weight: "",
@@ -63,8 +63,9 @@ const PreferencesScreen = () => {
     setCardType(index + 1);
   };
 
-  const handleFinish = () => {
-    formData.cust_id = "65cc353cb9be345699d6a69a";
+  const handleFinish = async () => {
+    const userId = await getUserId();
+    formData.cust_id = userId;
     console.log("Collected Data:", formData);
     postData(formData);
     // navigation.navigate("Success");
@@ -73,7 +74,7 @@ const PreferencesScreen = () => {
   const postData = async (formData) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/customer/store_preferences",
+        `${process.env.API_URL}/customer/store_preferences`,
         {
           method: "POST",
           headers: {
@@ -193,6 +194,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    paddingHorizontal: 20,
   },
   finishButton: {
     position: "absolute",

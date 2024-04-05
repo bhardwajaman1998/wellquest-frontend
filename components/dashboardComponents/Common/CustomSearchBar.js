@@ -26,17 +26,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderWidth: 1,
     borderColor: 'grey',
-    margin: 20,
+    margin: 10,
     backgroundColor:'#fff',
+    width: '90%'
   },
   searchIcon: {
     marginTop: 10,
     alignItems:'center',
-    color:'black',
+    resizeMode: 'contain'
+    // color:'black',
   },
   input: {
     flex: 1,
-    marginLeft:8,
+    marginLeft:15,
     fontSize: 16,
     color: '#333',
   },

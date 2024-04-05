@@ -4,7 +4,7 @@ import BackButton from "./BackButton";
 import NextButton from "./NextButton";
 import Toast from "react-native-toast-message";
 import WheelPicker from "react-native-wheely";
-import { Picker } from '@react-native-picker/picker';
+import AnimatedView from "../globalComponents/AnimatedView";
 
 const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
   const [selectedAge, setSelectedAge] = useState(19);
@@ -38,7 +38,7 @@ const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.headingContainer}>
           <Text style={styles.heading}>How old are you?</Text>
@@ -48,16 +48,19 @@ const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
         </View>
         <View style={styles.pickerContainer}>
           <WheelPicker
+            data={ageOptions}
             selectedIndex={selectedAge - 1}
             options={ageOptions}
             onChange={(index) => setSelectedAge(Number(ageOptions[index]))}
             itemTextStyle={{
               color: "black", 
-              fontSize: 40,
+              fontFamily: 'Helvetica Neue',
+              fontSize: 60,
+              marginTop: 10,
+              marginBottom: 10,
             }}
             containerStyle={{
-              width: "80%", 
-              alignItems: "center", 
+              marginTop: 30
             }}
             selectedIndicatorStyle={{
               width: 100,
@@ -68,18 +71,8 @@ const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
               borderBottomColor: "#FF934E",
               backgroundColor: "transparent",
             }}
-            itemHeight={60} 
+            itemHeight={85} 
           />
-          {/* <Picker
-            style={styles.picker}
-            selectedValue={selectedAge}
-            itemStyle={styles.itemStyle}
-            onValueChange={(index) => setSelectedAge(index)}
-          >
-            {ageOptions.map((value, index) => (
-              <Picker.Item label={value} value={index} key={index} />
-            ))}
-          </Picker> */}
         </View>
       </View>
       <View style={styles.buttonsContainer}>
@@ -92,7 +85,7 @@ const Age = ({ selectedGender, backAction, nextCompName, onPressNext }) => {
           style={{ backgroundColor: isAgeValid ? "#FF934E" : "grey" }}
         />
       </View>
-    </View>
+    </AnimatedView>
   );
 };
 
@@ -106,13 +99,16 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   heading: {
-    fontSize: 24,
+    fontSize: 34,
     fontWeight: "bold",
     marginBottom: 10,
+    fontFamily: 'Helvetica Neue',
+
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 20,
+    fontFamily: 'Helvetica Neue',
   },
   label: {
     fontSize: 18,
@@ -134,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    marginTop: "21%",
+    marginTop: "2%",
   },
   buttonsContainer: {
     flexDirection: "row",

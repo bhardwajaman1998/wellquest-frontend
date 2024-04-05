@@ -17,16 +17,25 @@ export default function CustomCard({ text, buttonText, onPress, imageName, imgSi
 
 const styles = StyleSheet.create({
   card: {
-    width: '87%',
-    marginTop: 20,
-    marginLeft: 25,
-    marginRight: 25,
+    width: 'auto',
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
     padding: 15,
     borderLeftColor: '#7265E3',
     borderLeftWidth: 5,
     borderRadius: 10,
     borderColor:'grey',
     borderWidth:1,
+    backgroundColor:'#FFF',
+    elevation: 5, // For Android shadow
+    shadowColor: '#7265E3', // For iOS shadow
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 0.65,
+    shadowRadius: 3.84,
   },
   cardText: {
     fontSize: 16,
@@ -40,16 +49,19 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 18,
     backgroundColor: '#7265E3',
-    // overflow:'hidden',
+    justifyContent:'space-around',
   },
   buttonText: {
-    marginLeft: 0,
     fontSize: 14,
     color: '#FFF',
     fontWeight:'bold',
-    
+    marginLeft:0,
   },
   image: {
     marginLeft: 10,
+    resizeMode: 'contain',
+    width: 25,
+    height: 25
+    // marginRight:10,
   },
 });

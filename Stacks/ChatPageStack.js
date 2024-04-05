@@ -36,10 +36,10 @@ const ChatPageStack = () => {
                 name="GetStarted" 
                 component={GetStarted} 
                 options={({ navigation }) => ({
-                    title: 'Get Started',
+                    title: 'My AI',
                     header: () => (
                       <NavigationBar
-                        title="Get Started"
+                        title="My AI"
                       />
                     )
                   })}
@@ -61,6 +61,7 @@ const ChatPageStack = () => {
                 component={CalculateCalories} 
                 options={({ navigation }) => ({
                     title: 'Calculated Calories',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Calculated Calories"
@@ -109,6 +110,7 @@ const ChatPageStack = () => {
                 component={ChooseGoal} 
                 options={({ navigation }) => ({
                     title: 'Choose Goal',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Choose Goal"
@@ -121,6 +123,7 @@ const ChatPageStack = () => {
                 component={Options} 
                 options={({ navigation }) => ({
                     title: 'Options',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Options"
@@ -133,6 +136,7 @@ const ChatPageStack = () => {
                 component={PlanPage} 
                 options={({ navigation }) => ({
                     title: 'Plan page',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Plan Page"
@@ -145,6 +149,7 @@ const ChatPageStack = () => {
                 component={SelectHeight} 
                 options={({ navigation }) => ({
                     title: 'Select Height',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Select Height"
@@ -157,6 +162,7 @@ const ChatPageStack = () => {
                 component={SelectPreference} 
                 options={({ navigation }) => ({
                     title: 'Select Preference',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Select Preference"
@@ -169,6 +175,7 @@ const ChatPageStack = () => {
                 component={SelectWeight} 
                 options={({ navigation }) => ({
                     title: 'Select Weight',
+                    headerShown: false,
                     header: () => (
                       <NavigationBar
                         title="Select Weight"

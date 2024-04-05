@@ -4,21 +4,21 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 const GenderBox = ({ initialImageSource, title, onClick, newImageSource, isSelected }) => {
   const [imageSource, setImageSource] = useState(initialImageSource);
   const [borderColor, setBorderColor] = useState("transparent");
-  const [textColor, setTextColor] = useState("#fff");
+  const [textColor, setTextColor] = useState("#7265E3");
   const [backgroundColor, setBackgroundColor] = useState("#7265E3")
 
 
   useEffect(()=> {
     if(isSelected) {
-      setBorderColor("#7265E3");
-      setTextColor("#7265E3");
-      setBackgroundColor("#fff");
-      setImageSource(newImageSource);
-    }
-    else {
       setBorderColor("transparent");
       setTextColor("#fff");
       setBackgroundColor("#7265E3");
+      setImageSource(newImageSource);
+    }
+    else {
+      setBorderColor("#7265E3");
+      setTextColor("#7265E3");
+      setBackgroundColor("#fff");
       setImageSource(initialImageSource);
     }
   }, [isSelected, initialImageSource, newImageSource])
@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     marginTop: 10,
     textAlign: "center",
+    fontFamily: 'Helvetica Neue',
+
   },
 });
 

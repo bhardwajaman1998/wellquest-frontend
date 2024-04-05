@@ -7,7 +7,7 @@ const Landing1 = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/Landing1.png')} 
+        source={require('../assets/Landing1New.png')} 
         style={styles.logo}
         resizeMode="contain"
       />
@@ -24,7 +24,7 @@ const Landing1 = ({navigation}) => {
         <TouchableOpacity onPress={() =>
         navigation.navigate('Landing2', {name: 'Landing2'})
       } style={styles.button}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+          <Text style={styles.buttonText}>NEXT</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -36,11 +36,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff', 
+    backgroundColor: '#fff',
+    fontFamily: 'Helvetica Neue',
   },
   logo: {
     width: "100%", 
-    height: 400,
+    height: 420,
     marginTop:"10%"
      },
   title: {
@@ -51,17 +52,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop:"-15%",
     paddingLeft: "5%",
-    paddingRight: "5%"
+    paddingRight: "5%",
+    fontFamily: 'Helvetica Neue',
     
   },
   text: {
     fontSize: 15,
     textAlign: 'left',
-    color: '#333',
+    color: '#7A7A7A',
      fontWeight: "300",
      paddingBottom: "50%",
      paddingLeft: "5%",
-    paddingRight: "5%"
+    paddingRight: "5%",
+    fontFamily: 'Helvetica Neue',
     
   },
   bottomContainer: {
@@ -86,30 +89,31 @@ const styles = StyleSheet.create({
     color: '#fff', 
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign:"center"
+    textAlign:"center",
+    fontFamily: 'Helvetica Neue',
   },
   eclipsesContainer: {
     flexDirection: 'row',
   },
   eclipse: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#D9D9D9',
     marginHorizontal: 10,
     marginVertical: 10
   },
   eclipse1: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#FF6200',
     marginHorizontal: 10,
     marginVertical: 10
   },
   eclipse2: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     borderRadius: 25,
     backgroundColor: '#D9D9D9',
     marginHorizontal: 10,
