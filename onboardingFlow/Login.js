@@ -70,9 +70,9 @@ const Login = ({ navigation}) => {
         </TouchableOpacity>
 
         <View style={styles.socialIconsContainer}>
-          <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-          <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
-          <Image source={require('../assets/apple.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_google_svg.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_facebook_svg.png')} style={styles.socialIcon} />
+          <Image source={require('../assets/social_apple_svg.png')} style={styles.socialIcon} />
         </View>
 
         <View style={styles.loginLinkContainer}>
@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center', 
   },
   socialIcon: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
   },
   loginLinkContainer: {
