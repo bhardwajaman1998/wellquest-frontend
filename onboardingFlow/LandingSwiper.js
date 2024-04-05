@@ -9,7 +9,7 @@ const LandingSwiper = ({ navigation }) => {
       {/* Landing */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/LandingTest.png')}
+          source={require('../assets/LandingNew.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -27,7 +27,7 @@ const LandingSwiper = ({ navigation }) => {
       {/* landing1 */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing1.png')}
+          source={require('../assets/Landing1New.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -43,7 +43,7 @@ const LandingSwiper = ({ navigation }) => {
       {/* lnding2 */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing2.png')}
+          source={require('../assets/Landing2New.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: 370,
+    height: 250,
     marginTop: '10%',
   },  
   button: {
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     width: 147,
   },
   textContainer: {
+    marginTop: 50,
     marginHorizontal: '5%'
   },
   buttonText: {
