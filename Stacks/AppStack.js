@@ -21,7 +21,7 @@ const AppStack = () => {
           component={OnboardingStack}
           options = {{headerShown: false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="PreferencesStack"
           component={PreferencesStack}
           options = {{headerShown: false}}

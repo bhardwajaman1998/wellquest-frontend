@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity,Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
-import clockIcon from "../../.././../assets/clock.png";
+import clockIcon from "../../.././../assets/clockNew.png";
 import dotIcon from "../../.././../assets/Ellipse.png";
 
 const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt }) => {
@@ -47,6 +47,7 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt
           <TouchableOpacity style={styles.optionButton} onPress={handleReschedule}>
             <Text style={styles.optionText}>Reschedule</Text>
           </TouchableOpacity>
+          <View style={[styles.separator, {marginVertical:0}]} />
           <TouchableOpacity style={styles.optionButton} onPress={handleCancel}>
             <Text style={styles.optionText}>Cancel</Text>
           </TouchableOpacity>
@@ -56,9 +57,10 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
-margin:20,
+    margin:20,
     // marginHorizontal: 0,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -100,16 +102,16 @@ margin:20,
     alignItems: 'center',
   },
   clockIcon: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
     marginRight: 5,
   },
   date: {
     marginRight: 5,
   },
   dotIcon: {
-    width: 5,
-    height: 5,
+    width: 10,
+    height: 10,
     marginRight: 5,
   },
   timeSlot: {

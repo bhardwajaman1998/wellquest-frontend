@@ -46,6 +46,11 @@ const CoachProfile = ({ route }) => {
     const imagePaths = [
         require('../../../../assets/gym2.png'),
         require('../../../../assets/gym3.png'),
+        // require('../../../../assets/gym1.png'),
+        require('../../../../assets/gym4.png'),
+        require('../../../../assets/gym5.png'),
+        require('../../../../assets/gym6.png'),
+        require('../../../../assets/gym7.png'),
       ];
     
       const renderItem = ({ item }) => (
@@ -120,10 +125,18 @@ const CoachProfile = ({ route }) => {
                     <FlatList
                     ///figure out how to add images in mongodb and add it then here update teh line below by --->{ data={coachData.gyms}}
                         data={imagePaths}
-                        horizontal
+                        horizontal={false}
+                        numColumns={2} 
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(item, index) => index.toString()}
-                        renderItem={renderItem}
+                        renderItem={({ item }) => (
+                            <View style={styles.imageContainer}>
+                                <Image
+                                    source={item}
+                                    style={styles.image}
+                                />
+                            </View>
+                        )}
                         contentContainerStyle={{width: '100%', justifyContent: 'center', alignItems: 'center'}}
                     />
                 </View>
@@ -219,15 +232,23 @@ const styles = StyleSheet.create({
     headingCell: {
         // backgroundColor: 'lightblue',
     },
+    imageContainer:{
+        aspectRatio: 3/2, 
+        borderRadius: 10,
+        marginRight: 10,
+        borderColor: 'red',
+        marginHorizontal: 10,
+    },
     image: {
-        width: 100,
+        width: 100, 
         height: 100,
         borderRadius: 25,
         marginRight: 10,
         borderColor:'red',
         marginHorizontal:10,
-        justifyContent:'space-between',
-        resizeMode: 'contain'
+        // justifyContent:'space-between',
+        resizeMode: 'contain',
+        aspectRatio: 3/2
     },
     social:{
         alignSelf: 'center',

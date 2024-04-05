@@ -33,20 +33,24 @@ const Weight_History = () => {
 }
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    padding: 15,
+    marginLeft: 15,
+    marginRight: 15,
+    width: '98%',
   },
   calorieHeading: {
     fontSize: 18,
     textAlign: "left",
+
   },
   chart: {
     marginTop: 15,
     paddingTop: 20,
     padding: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.5,
-    shadowRadius: 4,
+    shadowRadius: 2,
     borderRadius: 15,
     backgroundColor: "white", // Ensure shadow is visible
   },

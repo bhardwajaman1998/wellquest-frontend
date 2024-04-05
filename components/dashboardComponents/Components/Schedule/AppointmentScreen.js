@@ -82,11 +82,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    padding: 0,
   },
   toggleButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 0,
+    marginTop: 10,
+    padding: 10
   },
   appointmentListContainer: {
     flex: 1,

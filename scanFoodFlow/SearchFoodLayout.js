@@ -111,7 +111,7 @@ const SearchFoodLayout = ({navigation, historyList}) => {
                                 {historyList.length > 0 ? (
                                     <HistoryListView navigation={navigation} data={historyList}/>
                                 ) : (
-                                    <NoFoodView/> 
+                                    <NoFoodView isFromHomeScreen={true}/> 
                                 )}
                             </View>
                         )}                        
@@ -134,8 +134,6 @@ const styles = StyleSheet.create({
         marginBottom: 200
     },
     search: {
-        width: '100%', 
-        backgroundColor: 'white'
     },
     searchContainer: {
         flexDirection: 'row',
@@ -145,13 +143,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         marginTop: 15,
-        width: '88%',
+        width: '91%',
         height: 40,
         shadowColor: "#7265E3",
         borderWidth: 0,
         borderColor: "#7265E3",
         shadowOffset: {
-        width: 0,
         height: 1, // Adjusted to remove upper shadow
         },
         shadowOpacity: 0.47,
@@ -162,7 +159,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         alignSelf: 'center',
-        width: "88%",
+        width: "91%",
         padding: 20,
         marginVertical: 15,
         // marginHorizontal : 20,
@@ -170,21 +167,28 @@ const styles = StyleSheet.create({
         gap: 15,
         backgroundColor: "rgba(114, 101, 227, 0.4)"
     },
+    meals: {
+        width: '100%',
+        marginTop: 10,
+        gap: 10,
+        justifyContent: 'center',
+        marginHorizontal: 25
+    },
     mealTab: {
         flexDirection: 'row',
         gap: 8,
-        marginHorizontal: 25,
+        marginHorizontal: 20,
     },
     mealtext: {
         fontFamily: 'poppins-semibold',
         fontSize: 18,
-        marginLeft: 25,
+        marginLeft: 22,
         marginTop: -10
     },
     history: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '85%',
+        width: '89%',
         marginTop: 25
     },
     hStack: {
@@ -196,18 +200,11 @@ const styles = StyleSheet.create({
         fontFamily: 'poppins-semibold',
         fontSize: 18,
     },
-    meals: {
-        width: '100%',
-        marginTop: 10,
-        gap: 10,
-        justifyContent: 'center',
-        marginHorizontal: 25
-    },
     historyList: {
         width: '100%',
         alignItems: 'center',
     }
-  });
+  });  
 
 export default SearchFoodLayout
 

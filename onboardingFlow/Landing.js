@@ -6,7 +6,7 @@ const Landing = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../assets/Landing.png')}
+        source={require('../assets/LandingNew.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    backgroundColor: '#7265E3',
+    backgroundColor: '#FF6200',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 50,

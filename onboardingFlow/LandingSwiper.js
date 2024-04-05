@@ -5,11 +5,11 @@ import Swiper from 'react-native-swiper';
 const LandingSwiper = ({ navigation }) => {
   return (
     <View style={styles.container}>
-    <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
+    <Swiper style={styles.wrapper} showsButtons={false} loop={false} activeDotColor='#FF6200' dotStyle={styles.dot} activeDotStyle={styles.activeDot}>
       {/* Landing */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing.png')}
+          source={require('../assets/LandingNew.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -27,7 +27,7 @@ const LandingSwiper = ({ navigation }) => {
       {/* landing1 */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing1.png')}
+          source={require('../assets/Landing1New.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -43,7 +43,7 @@ const LandingSwiper = ({ navigation }) => {
       {/* lnding2 */}
       <View style={styles.slide}>
         <Image
-          source={require('../assets/Landing2.png')}
+          source={require('../assets/Landing2New.png')}
           style={styles.logo}
           resizeMode="contain"
         />
@@ -75,7 +75,20 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     fontFamily: 'Helvetica Neue',
   },
-  wrapper: {},
+  wrapper: {
+    marginTop: 50,
+  },
+  dot: {
+    width: 15,  
+    height: 15, 
+    borderRadius: 10,
+    marginHorizontal: 5,
+  },
+  activeDot: {
+    width: 15,  
+    height: 15, 
+    borderRadius: 10,
+  },
   slide: {
     flex: 1,
     width: '100%',
@@ -86,8 +99,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: 300,
-    marginTop: '10%',
+    height: 340,
+    marginTop: '5%',
   },  
   button: {
     backgroundColor: '#7265E3', 
@@ -95,9 +108,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 50,
     height: 53,
-    width: 147,
+    width: 167,
   },
   textContainer: {
+    marginTop: 20,
     marginHorizontal: '5%'
   },
   buttonText: {

@@ -21,7 +21,7 @@ return(
               }}
             />
             <View style={styles.dataContainer}>
-              <Text style={styles.containerHeading}>8L</Text>
+              <Text style={styles.containerHeading}>4L</Text>
               <Text style={styles.containerSubHeading}>Water Intake</Text>
             </View>
           </View>
