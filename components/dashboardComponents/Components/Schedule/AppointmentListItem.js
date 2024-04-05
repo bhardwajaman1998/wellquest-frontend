@@ -56,9 +56,10 @@ const AppointmentListItem = ({ date, time, coachName, coachAvatar, id, cancelApt
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
-margin:20,
+    margin:20,
     // marginHorizontal: 0,
     backgroundColor: 'white',
     borderRadius: 10,
