@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
         padding:0,
         flexDirection:'row',
         justifyContent:'space-between',
-        margin:10,
+        marginHorizontal: 10,
+        marginVertical: 15,
         marginTop: 30,
         fontSize:16,
         fontWeight:'bold',
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     },
     recommendText:{
         fontSize:16,
+        marginTop: -15,
     },
     message: {
         textAlign: 'center',
