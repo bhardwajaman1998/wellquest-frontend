@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SearchBar } from 'react-native-elements';
 import CoachCard from './CoachCard';
 import profileIcon from "../../../../assets/Maskgroup.png";
+import profileIcon2 from "../../../../assets/coach-alice.png";
+
 import CustomSearchBar from '../../Common/CustomSearchBar';
 import axios from 'axios';
 import { useRoute } from "@react-navigation/native"
@@ -69,10 +71,10 @@ export default function FindCoach() {
                     ) : (
                         <>
                             <Text style={styles.recommendText}>Recommended for you </Text>
-                            {coaches.map((coach) => (    
+                            {coaches.map((coach, index) => (    
                                 <CoachCard
                                     key={coach._id}
-                                    coachImg={profileIcon}
+                                    coachImg={index > 0 ? (profileIcon2) : (profileIcon)}
                                     coachName={coach.name}
                                     coachDesc={coach.bio}
                                     onPress={() => handleCoachPress(coach._id)}

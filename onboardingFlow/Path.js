@@ -6,7 +6,7 @@ const Path = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/path.png")}
+        source={require("../assets/Path.png")}
         style={styles.logo}
         resizeMode="contain"
       />
