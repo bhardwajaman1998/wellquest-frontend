@@ -6,6 +6,7 @@ import ClickButtton from '../../../dashboardComponents/Common/ClickButtton';
 import ScheduleScreen from '../Schedule/ScheduleScreen';
 import { useNavigation } from '@react-navigation/native';
 import profileIcon from "../../../../assets/coach-icon.png";
+import profileIcon2 from "../../../../assets/coach-alice.png";
 import scheduleIcon from "../../../../assets/find_coach.png";
 import messageIcon from "../../../../assets/message-blue.png";
 import { useEffect } from 'react';
@@ -81,7 +82,7 @@ const CoachProfile = ({ route }) => {
             <View style={styles.CoachShortBio}>
                 <View style={styles.CoachBio}>
                     <Image
-                        source={profileIcon}
+                        source={coachData.name == "John Doe" ? (profileIcon) : (profileIcon2)}
                         style={styles.image}
                     />
                     <Text style={styles.CoachName}>
@@ -242,7 +243,8 @@ const styles = StyleSheet.create({
     image: {
         width: 100, 
         height: 100,
-        borderRadius: 25,
+        borderRadius: 50,
+        borderWidth: 0,
         marginRight: 10,
         borderColor:'red',
         marginHorizontal:10,

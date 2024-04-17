@@ -34,9 +34,9 @@ const SearchFoodScreen = (params) => {
             {loading ? (
                 <View>
                     <View style={{width: '100%', height:'90%', justifyContent: 'center', alignItems: 'center'}}>
-                        <Image 
+                        <Image
                             source={require('../assets/loadingGif.gif')}
-                            style={{"width":"30%", "height":'10%'}}
+                            style={{"width":"20%", "height":'10%', padding: 10}}
                         />
                     </View>
                 </View>

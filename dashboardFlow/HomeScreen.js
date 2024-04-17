@@ -35,7 +35,12 @@ const HomeScreen= ({ route })=>{
     const fetchUserData = async () =>{
         try{
             const userId = await getUserId();
+            console.log(userId)
             const response = await  axios.get(`${process.env.API_URL}/customer/get_user_data?customerId=${userId}`);
+            console.log('==================')
+            console.log(response.data)
+            console.log('==================')
+
             setUserName(response.data.customerData);
             setCalorieLimit(response.data.customerData.dailyCalories)
             if(response.data.newMealPlan){
