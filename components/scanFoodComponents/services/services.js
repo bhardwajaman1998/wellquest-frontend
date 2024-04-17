@@ -1,6 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
-import { getUserId } from '../../UserService';
+import { getUserId, getUserToken } from '../../UserService';
 
 export const submitToGoogle = async (image) => {
     try {
@@ -116,6 +116,7 @@ export const getMealInfo = async (foodName) => {
 export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
 
   const userId = await getUserId();
+  const token = await getUserToken();
 
   const data = {
     cust_id: userId,
@@ -135,7 +136,8 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
     const response = await fetch(`${process.env.API_URL}/customer/log_meal`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(data)
     });
@@ -157,13 +159,15 @@ export const logMeal = async (foodInfo, servingSize, servingUnit, mealType) => {
 export const historyMeals = async () => {
 
   const userId = await getUserId();
+  const token = await getUserToken();
 
   const cust_id = userId
   try {
     const response = await fetch(`${process.env.API_URL}/customer/get_history_meals?cust_id=${cust_id}`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
     });
 

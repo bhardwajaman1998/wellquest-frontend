@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import profile from "../assets/profile.jpg"
 import rightButton from "../assets/right_button.png"
 import { useNavigation } from "@react-navigation/native"
-import { getUserId } from '../components/UserService';
+import { getUserId, getUserToken } from '../components/UserService';
 import axios from 'axios';
 
 const ProfileScreen = () => {
@@ -21,7 +21,12 @@ const ProfileScreen = () => {
   const fetchUserData = async () =>{
     try{
         const userId = await getUserId();
-        const response = await axios.get(`http://localhost:3000/api/customer/get_user_data?customerId=${userId}`);
+        const token = await getUserToken();
+        const response = await axios.get(`http://localhost:3000/api/customer/get_user_data?customerId=${userId}`, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
         console.log(response)
         if (response.status == 200){
           setUserData(response.data.customerData)

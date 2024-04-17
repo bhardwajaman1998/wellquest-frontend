@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import LoadingScreen from './LoadingScreen';
-import { getUserId } from '../UserService';
+import { getUserId, getUserToken } from '../UserService';
 
 const PlanPage = () => {
   const navigation = useNavigation();
@@ -36,6 +36,7 @@ const PlanPage = () => {
 
   const saveMeal = async () => {
     const userId = await getUserId()
+    const token = await getUserToken();
     try {
         const mealData = {
             cust_id: userId,
@@ -46,7 +47,11 @@ const PlanPage = () => {
             }
         };
         console.log(mealData)
-        const response = await axios.post(`${process.env.API_URL}/customer/make_meal_plan`, mealData);
+        const response = await axios.post(`${process.env.API_URL}/customer/make_meal_plan`, mealData, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
         if (response.status == 200){
           goToInitialScreen()
         }

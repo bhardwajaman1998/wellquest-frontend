@@ -10,7 +10,7 @@ import Success from "../components/preferencesComponents/Success";
 import { BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import NextButton from "../components/preferencesComponents/NextButton";
-import { getUserId } from "../components/UserService";
+import { getUserId, getUserToken } from "../components/UserService";
 const PreferencesScreen = () => {
   const [cardType, setCardType] = useState(1);
   const [gender, setGender] = useState(null);
@@ -73,12 +73,14 @@ const PreferencesScreen = () => {
 
   const postData = async (formData) => {
     try {
+      const token = await getUserToken();
       const response = await fetch(
         `${process.env.API_URL}/customer/store_preferences`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           },
           body: JSON.stringify(formData),
         }
