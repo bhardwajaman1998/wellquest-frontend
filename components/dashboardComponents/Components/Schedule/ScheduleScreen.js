@@ -8,7 +8,7 @@ import TimeSlotButton from './TimeSlotButton';
 import ConfirmationWindow from './ConfirmationWindow';
 import axios from 'axios';
 import moment from 'moment';
-import { getUserId } from "../../../UserService";
+import { getUserId, getUserToken } from "../../../UserService";
 
 
 const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) => {
@@ -27,7 +27,12 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
     const fetchAvailableSlots = async () => {
         try {
-            const response = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`);
+            const token = await getUserToken();
+            const response = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log("API Response:", response.data);
             const availableSlots = response.data.coachData.available_slots;
             console.log("Available Slots:", availableSlots);
@@ -75,10 +80,15 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
 
     const handleSchedule = async () => {
         const userId = await getUserId()
+        const token = await getUserToken();
         if (selectedSlot && selectedDate) { // Use selectedDate instead of day.dateString so the selected date from the calender can be fetched
             try {
                 // Fetching the  coach details
-                const coachResponse = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`);
+                const coachResponse = await axios.get(`${process.env.API_URL}/customer/get_selected_coach?coach_id=${coachId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 const coachData = coachResponse.data.coachData;
                 const { coach_id, coach_name } = coachData;
 
@@ -91,7 +101,11 @@ const ScheduleScreen = ({ onClose, coachId, coachData, closeAfterScheduled }) =>
                 };
 
                 //POST request to schedule appointment
-                const response = await axios.post(`${process.env.API_URL}/customer/schedule_appointment`, appointmentData);
+                const response = await axios.post(`${process.env.API_URL}/customer/schedule_appointment`, appointmentData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log("Appointment scheduled successfully:", response.data);
                 setShowOverlay(true); // Showing the  confirmation window
             } catch (error) {

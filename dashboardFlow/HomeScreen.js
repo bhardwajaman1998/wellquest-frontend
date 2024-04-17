@@ -8,7 +8,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { BottomSheet, Button, ListItem } from '@rneui/themed';
 import axios from 'axios';
 import Target_Card from './Target_Card';
-import { getUserId } from '../components/UserService';
+import { getUserId, getUserToken } from '../components/UserService';
 
 const HomeScreen= ({ route })=>{
     const navigation = useNavigation();
@@ -35,8 +35,13 @@ const HomeScreen= ({ route })=>{
     const fetchUserData = async () =>{
         try{
             const userId = await getUserId();
+            const token = await getUserToken();
             console.log(userId)
-            const response = await  axios.get(`${process.env.API_URL}/customer/get_user_data?customerId=${userId}`);
+            const response = await axios.get(`${process.env.API_URL}/customer/get_user_data?customerId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log('==================')
             console.log(response.data)
             console.log('==================')
@@ -61,7 +66,12 @@ const HomeScreen= ({ route })=>{
     const fetchCurrentCalIntake = async () => {
         try{
             const userId = await getUserId();
-            const response= await axios.get(`${process.env.API_URL}/customer/get_calories_consumed?cust_id=${userId}`);
+            const token = await getUserToken();
+            const response= await axios.get(`${process.env.API_URL}/customer/get_calories_consumed?cust_id=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const data = response.data;
             setCompletedCalories(data.totalCaloriesConsumed);
             calculateRemaining(data.totalCaloriesConsumed)
@@ -80,8 +90,12 @@ const HomeScreen= ({ route })=>{
     const fetchAptData = async () => {
         try {
           const userId = await getUserId();
-          console.log('fetching appointments')
-          const response = await fetch(`${process.env.API_URL}/customer/get_scheduled_appointments?customerId=${userId}`);
+          const token = await getUserToken();
+          const response = await fetch(`${process.env.API_URL}/customer/get_scheduled_appointments?customerId=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
           const data = await response.json();
           const upcomingAppointments = data.filter(appointment => {
             if (!appointment.cancelled){
@@ -99,7 +113,12 @@ const HomeScreen= ({ route })=>{
     const cancelApt = async (apt_id) => {
         try {
             const appointmentData = {apt_id: apt_id}
-            const response = await axios.post(`${process.env.API_URL}/customer/cancel_appointment`, appointmentData);
+            const token = await getUserToken();
+            const response = await axios.post(`${process.env.API_URL}/customer/cancel_appointment`, appointmentData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log(response.data)
             fetchAptData()
         } catch (error) {

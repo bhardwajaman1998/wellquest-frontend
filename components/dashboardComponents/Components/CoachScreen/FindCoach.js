@@ -10,6 +10,7 @@ import CustomSearchBar from '../../Common/CustomSearchBar';
 import axios from 'axios';
 import { useRoute } from "@react-navigation/native"
 import { useNavigation } from "@react-navigation/native";
+import { getUserToken } from '../../../UserService';
 
 export default function FindCoach() {
     ///for search bar functionality 
@@ -28,7 +29,12 @@ export default function FindCoach() {
 
     const fetchCoachData = async () => {
         try {
-            const response = await axios.get(`${process.env.API_URL}/customer/get_coaches`);
+            const token = await getUserToken();
+            const response = await axios.get(`${process.env.API_URL}/customer/get_coaches`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log(response); 
             console.log("data setting ",response.data.coaches);
             const allCoaches = response.data.coaches;
